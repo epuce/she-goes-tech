@@ -20,7 +20,7 @@
 * Add the ssh key
     * run "ssh-keygen -t rsa -b 4096 -C "your_email@example.com" [link](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     * press enter on all the questions
-    * run "eval $(ssh-agent -s)"
+    * run "eval "$(ssh-agent -s)""
     * run "ssh-add ~/.ssh/id_rsa"
     * copy all the content printed out "cat ~/.ssh/id_rsa.pub"
     * add the kay in github [link](https://github.com/settings/keys)
