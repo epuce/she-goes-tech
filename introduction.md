@@ -16,9 +16,18 @@
 ### Download visual studio code: [link](https://code.visualstudio.com/download)
 ### Create a github profile: [link](https://github.com/signup)
 * Download git: [link](https://git-scm.com/downloads)
+
+* Add the ssh key
+    * run "ssh-keygen -t rsa -b 4096 -C "your_email@example.com" [link](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+    * press enter on all the questions
+    * run "eval $(ssh-agent -s)"
+    * run "ssh-add ~/.ssh/id_rsa"
+    * copy all the content printed out "cat ~/.ssh/id_rsa.pub"
+    * add the kay in github [link](https://github.com/settings/keys)
+
 * Checkout the project that was created: 
 ```bash
-git checkout https://github.com/epuce/girls-go-tech.git
+git clone git@github.com/epuce/girls-go-tech.git
 ```
 
 * Create your own branch were all your work will be stored
