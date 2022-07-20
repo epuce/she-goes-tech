@@ -137,7 +137,8 @@ person.name = "Alex"
 
 4. While **var** and **let** can be declared without being initialized, **const** must be initialized during declaration.
 
-### Checkup
+## Checkup
+### add a new file named task-2.js where all these actions will be performed
 1. Create a variable and assign a **string** to it
 2. Create a variable and assign a **number** to it
 3. Create a variable and assign a **boolean** to it
@@ -147,7 +148,7 @@ person.name = "Alex"
 7. Create a variable with **null** value
 8. Create a variable with **NaN** value
 
-
+After finishing push the file task-2.js to your github branch
 
 ```JavaScript
 // How to test
