@@ -1,5 +1,6 @@
 # JavaScript Data types
     JavaScript is the brain behind most of web page actions, usability, visual transformation, interaction
+* JavaScript files and with the extension `.js`
 ## JS console
     Browsers DevTools part that allows to communicate with the browser, web page, debug or test your code 
     
@@ -223,3 +224,12 @@ false || false // No (false)
 !false // Yes (true)
 !(10 > 0 && 10 < 15) //No (false); the inner is true && true === true and then we reverse the true result and get false in the end
 ```
+
+## Checkup
+### add a new file named task-3.js where all these actions will be performed
+- Write a `if/else` condition where if variable `money` is bigger than 0 we print out `You have *money*$` else print out `You have no money`
+- write a `switch` where the passed parameter is `animal` and based on the value we return `*animal name* say *animal noise*`
+- Write a condition that uses the AND symbol
+- Write a condition that uses the OR symbol
+
+After finishing push the file task-3.js to your github branch
