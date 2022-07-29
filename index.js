@@ -1,0 +1,1 @@
+// alert ('load external file index.js')
