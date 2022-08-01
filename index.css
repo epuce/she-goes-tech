@@ -61,3 +61,7 @@ button.edit-btn{
 button.delete-btn{
     background: #FF0000;
 }
+
+* {
+    color: blue;
+}
