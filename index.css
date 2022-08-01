@@ -31,3 +31,33 @@ table {
     font-family: sans-serif;
     font-size: 16px;
 }
+
+.cell-heading.underline{
+    text-decoration: underline;
+}
+
+.underline{
+    text-decoration: overline;
+}
+
+td:first-child{
+    font-weight: bold;
+}
+
+tr:nth-child(odd) td{
+    background:rgba (100, 100, 100, 1);
+}
+
+button {
+    border: 1px #AA0000;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+button.edit-btn{
+    background: #FF0000;
+}
+
+button.delete-btn{
+    background: #FF0000;
+}
