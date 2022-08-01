@@ -112,7 +112,7 @@
         align-self: special-value;
     }
 ```
-![grid support for browsers](img/W02L03-grid-support.png)
+![grid support for browsers](img/grid-support.png)
 ### Media queries
 
 ```css
@@ -150,7 +150,7 @@ body {
 }
 /* ----------------------------------- */
 ```
-![media queries support for browsers](img/W02L03-media_queries-support.png)
+![media queries support for browsers](img/media_queries-support.png)
 
 ### Flex checkup
 1. Create a block that distributes 5 images equally spaced;
@@ -163,9 +163,7 @@ body {
 
 1. Create a grid element that looks like this:
 
-![grid task](img/W02L03-grid-task.png)
-
-[solution](local-env-setup/src/grid.html)
+![grid task](img/grid-task.png)
 
 ### Media query checkup
 1. Create a media query that changes changes the default font size if the screen is smaller than 1024px;
