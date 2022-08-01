@@ -153,6 +153,7 @@ body {
 ![media queries support for browsers](img/media_queries-support.png)
 
 ### Flex checkup
+### add a new file named task-6.html and task-6.css where all these actions will be performed
 1. Create a block that distributes 5 images equally spaced;
 2. Set that if there is no space for the images they jump to a new row;
 3. Create another block with different images and align them vertically so that the space between them it distributed equally
@@ -163,9 +164,11 @@ body {
 
 1. Create a grid element that looks like this:
 
+### add a new file named task-7.html and task-7.css where all these actions will be performed
+
 ![grid task](img/grid-task.png)
 
-### Media query checkup
+### Media query checkup (optional)
 1. Create a media query that changes changes the default font size if the screen is smaller than 1024px;
 2. Create a media query that shows a hidden element it he screen is between 320px and 1024px;
 3. Create a media query that aligns items vertically when in portrait (that means that the default state is that they are aligned horizontally)
