@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav bar</title>
+</head>
+<body>
+    <div class="popup-wrapper js-popup">
+        <div class="popup">
+            <p>
+                Thank you for subscribing: #YourName#
+            </p>
+
+            <button class="js-close-popup" onclick="">
+                Close
+            </button>
+            <button class="js-close-popup">
+                Close nr2
+            </button>
+        </div>
+    </div>
+
+    <nav id="nav-bar">
+        <a href="#" class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyebtd1EtHzb3yStiqATU1n3Zu6V393BhXjg&usqp=CAU">
+        </a>
+
+        <ul class="menu">
+            Menu
+
+            <div class="menu-list">
+                <li class="menu-item">Home</li>
+                <li class="menu-item">About</li>
+                <li class="menu-item">FAQ</li>
+            </div>
+        </ul>
+    </nav>
+
+    <button class="js-open-popup">Open popup</button>
+    <!-- TODO example should improve -->
+    <div class="flex-wrapper">     
+        <!--
+            To select this in css use: .flex-item:nth-child(1)
+        -->
+        <div class="flex-item">1</div>
+
+        <!-- .flex-item:nth-child(2) -->
+        <div class="flex-item">2</div>
+
+        <!-- .flex-item:nth-child(3) -->
+        <div class="flex-item">3</div>
+
+        <!-- .flex-item:nth-child(4) -->
+        <div class="flex-item">4</div>
+    </div>
+
+    <div class="grid-wrapper">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div 
+            class="grid-item" 
+            style="grid-row-start: 2; grid-row-end: 4;">
+            3
+        </div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+    </div>
+
+    <div class="spacer">SPACER</div>
+    
+    <link rel="stylesheet" href="nav-bar.css">
+    <script src="nav-bar.js"></script>
+</body>
+</html>

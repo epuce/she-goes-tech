@@ -1,0 +1,163 @@
+
+body {
+    --nav-bar-height: 80px;
+
+    margin: 0;
+    padding-top: var(--nav-bar-height);
+}
+
+.spacer {
+    padding-top: 3000px;
+}
+
+#nav-bar {
+    height: var(--nav-bar-height);
+    width: 80%;
+    background: #99BBBB;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    /* float: left; */
+    height: 100%;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.menu {
+    /* float: right; */
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* position: relative; */
+}
+
+.menu:hover .menu-list {
+    display: block;
+}
+
+.menu .menu-item {
+    list-style: none;
+}
+
+.menu .menu-list {
+    padding: 0 10px 5px 10px;
+    position: absolute;
+    right: 10%;
+    top: var(--nav-bar-height);
+    display: none;
+    background: #99BBBB;
+}
+
+.popup-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0, 0.2);
+    z-index: 9999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    width: 40%;
+    height: 30%;
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.flex-item {
+    width: 100px;
+    height: 100px;
+    background: rgba(100, 50, 50, 0.3);
+}
+
+.flex-item:nth-child(4) {
+    order: 2;
+}
+
+.flex-item:nth-child(3) {
+    order: 1;
+}
+
+.flex-item:nth-child(2) {
+    order: 4;
+}
+
+/* TODO */
+.flex-item:nth-child(1) {
+    order: 3;
+}
+
+.flex-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 80vh;
+}
+
+.grid-item {
+    background: rgba(30, 100, 30, 0.3);
+}
+
+.grid-item:nth-child(1) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.grid-item:nth-child(3) {
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.grid-item:nth-child(4) {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.grid-wrapper {
+    display: grid;
+    height: 1000px;
+    grid-template-columns: 100px 50% auto;
+    grid-template-rows: 100px 20% auto;
+    gap: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        color: #FF0000;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        font-size: 32px;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    body {
+        font-weight: bold;
+    }
+}
