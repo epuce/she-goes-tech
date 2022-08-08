@@ -87,7 +87,9 @@ myData({name: 'Ed', surname: 'Pūce', isActive:true});
 // Pūce
 // true
 ```
+### Checkup
 
+### add a new file named task-9.js where all these actions will be performed
 
 1. Declare a function that can be called even if it's defined after it is called
 2. define a function that can be called only after it has been declared
