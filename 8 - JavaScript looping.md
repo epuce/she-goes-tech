@@ -80,4 +80,4 @@ console.log(sqrtArray)
 1. create a loop that prints every second number starting from 10 and ending with 20
 2. loop thru an array of 5 values and print out it's content
 3. modify array of 5 numbers by multiplying the numbers by itself
-4. Create a loop that will add 5 values to an empty array on each loop
+4. Create a loop that will add 5 values to an empty array
