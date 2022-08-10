@@ -3,9 +3,12 @@
 
   }
 
-
-
 .img-item {
     width: 150px;
     height: 150px;
+}
+
+.text {
+  font-size: 1.5em;
+  
 }
