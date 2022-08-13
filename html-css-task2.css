@@ -1,0 +1,51 @@
+.h3 {
+  
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  
+}
+
+.h4 { 
+   
+font-size: 1.17em;
+margin-block-start: 1em;
+margin-block-end: 1em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+
+}
+
+.h5 {
+    font-size: 1.17em;
+margin-block-start: 1em;
+margin-block-end: 1em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
+
+}
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+   }
+
+th {
+    border: 1px solid black;
+    background: rgb(179, 171, 171);
+}   
+
+td {
+    border: 1px solid black;
+}   
+   
+.h6 {
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;}
+
+.btn {
+    display: flex;
+  justify-content: center;
+}
