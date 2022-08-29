@@ -1,0 +1,86 @@
+th, td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #AA0000;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.cell-heading {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.underline {
+    text-decoration: overline;
+}
+
+.cell-heading.underline {
+    text-decoration: underline;
+}
+
+td:first-child {
+    font-weight: bold;
+}
+
+tr:nth-child(odd) td {
+    background: rgba(100, 100, 100, 0.1)
+}
+
+button {
+    border: 1px dashed #FFFFFF;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button.edit-btn {
+    background: #22BB22;
+}
+
+button.delete-btn {
+    background: #BB2222;
+}
+
+* {
+    color: #2222DD;
+}
+
+th * {
+    background: rgba(0,0,0,0.1);
+}
+
+[type="button"] {
+    border: 2px solid #1122FF
+}
+
+[title] {
+    cursor: pointer;
+}
+
+a {
+    color: gold;
+}
+
+.box-model {
+    /* blue */
+    width: 100px;
+    height: 100px;
+
+    /* green */
+    padding: 10px;
+
+    height: 50px;
+    width: 100px;
+    display: inline-block;
+    border: 5px solid black;
+    border-bottom-width: 15px;
+    padding: 10px;
+    margin: 20px;
+}
