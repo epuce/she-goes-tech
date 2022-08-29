@@ -149,12 +149,11 @@ document.addEventListener("keyup", function(){});
 
 ### Checkup
 
-### add a new file named task-11.js where all these actions will be performed
+### add a new file named task-10.js where all these actions will be performed
 
 1. Retrieve the domain name (hostname)
 2. Save and then retrieve some data with localStorage
     1. A simple data type, like string, boolean, number, rtc.
     2. A complex data type, like object or array
-3. Add some cookies
-4. Create an HTML list, loop thru the list elements and add a class to each of the list elements
-5. Create some HTML and add three different event listeners to created HTML
+3. Create an HTML list, loop thru the list elements and add a class to each of the list elements
+4. Create some HTML and add three different event listeners to created HTML
