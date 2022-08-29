@@ -25,7 +25,19 @@
     <table id="user-table">
     </table>
 </body>
+<style>
+    input,
+    input:focus {
+        outline: transparent;
+    }
+    
+    .validation-error {
+        border-color: #DD0000;
+    }
+</style>
 <script>
+    var usernameInputElement = document.getElementById('username-input');
+
     function getUserList() {
         try {
             var userList = JSON.parse(localStorage.userList);
@@ -56,16 +68,45 @@
         userTable.innerHTML = tableContent;
     }
 
-    document.getElementById('save-user').addEventListener('click', function() {
-        var username = document.getElementById('username-input').value
+    function isFormValid() {        
+        if (usernameInputElement.value.length > 0) {
+            return true;
+        } else {
+            usernameInputElement.classList.add('validation-error')
+            return false;
+        }
+    }
+
+    function handleFormSave() {
+        var username = usernameInputElement.value
         var userList = getUserList();
 
-        userList.push(username);
+        console.log(isFormValid())
 
-        localStorage.userList = JSON.stringify(userList);
+        if (isFormValid()) {
+            userList.push(username);
+            usernameInputElement.value = '';
 
-        applyActiveUserName()
-        renderUserList()
+            localStorage.userList = JSON.stringify(userList);
+
+            applyActiveUserName()
+            renderUserList()
+        }
+    }
+
+    usernameInputElement.addEventListener('keydown', function(event) {
+        console.log(event.keyCode)
+        if (event.keyCode === 13) {
+            event.preventDefault();
+
+            handleFormSave()
+        } else {
+            usernameInputElement.classList.remove('validation-error')
+        }
+    })
+
+    document.getElementById('save-user').addEventListener('click', function() {
+        handleFormSave();
     })
 
     applyActiveUserName()
