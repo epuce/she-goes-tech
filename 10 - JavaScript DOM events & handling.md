@@ -153,7 +153,7 @@ document.addEventListener("keyup", function(){});
 
 1. Retrieve the domain name (hostname)
 2. Save and then retrieve some data with localStorage
-    1. A simple data type, like string, boolean, number, rtc.
+    1. A simple data type, like string, boolean, number, etc.
     2. A complex data type, like object or array
 3. Create an HTML list, loop thru the list elements and add a class to each of the list elements
 4. Create some HTML and add three different event listeners to created HTML
