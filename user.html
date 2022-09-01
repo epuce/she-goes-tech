@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user</title>
+</head>
+<body>
+    <span>You are logged in as:</span><span id="active-user"></span> 
+    <form>
+        <div>
+            <label>
+                Username:
+
+                <input id="username-input">
+            </label>
+        </div>
+        <button id="save-user" type="button">
+            Store user name
+        </button>
+    </form>
+
+    <table id = "user-table"></table>
+</body>
+<script>
+    function getUserList() {
+        try {
+            var userList = JSON.parse(localStorage.userList);
+         } catch {
+            var userList = [];
+        }    
+      
+        return userList;
+    }
+     function applyActiveUserName(){
+       
+        var userList = getUserList();
+
+         document.getElementById('active-user').innerText = userList[userList.lenght - 1] ||""
+    }
+
+    function renderUserList() {
+        var userTable = document.getElementById('user-table');
+        var userList = getUserList();
+        var tableContent = '';
+
+        userList.forEach(function(username, index) {
+            var row = '<tr><td>'+ index +'</td><td>' + username + '</td></tr>'
+
+            tableContent = tableContent + row;
+        })
+
+        userTable.innerHTML = tableContent;
+    }
+    document.getElementById('save-user').addEventListener('click',function(){
+        var username = document.getElementById('username-input').value
+        
+        var userList =getUserList();
+        
+        userList.push(username);
+
+        localStorage.userList = JSON.stringify(userList);
+        applyActiveUserName()
+        renderUserList()
+    
+    })
+    applyActiveUserName()
+    renderUserList()
+    
+</script>
+</html>
