@@ -124,28 +124,11 @@ for (var i = 0; i < allElements.length; i++) {
     allElements[i].addEventListener('click', function() {})
 }
 ```
-
-```JavaScript
-// Request to the server
-$.ajax({
-  method: "GET",
-  url: "https://reqres.in/api/users"
-})
-.done(function( response ) {
-    $('body').append('<ul class="new-list"></ul>')
-
-    response.data.forEach(function(val) {
-        $('.new-list').append('<li>'+val.email+'</li>')
-    })
-});
-```
-* good API for playing around - [link](https://reqres.in)
-* public API - [link](https://github.com/public-apis/public-apis)
   
 ### All jQuery options: [cheat-sheet](https://oscarotero.com/jquery/)
 
 ### Checkup
 1. Add an click event to a button that toggles it's class (add some style to the class)
 2. Create an HTML element, append a new one to it and one before
-3. Add a button to an element that when clicked scrolls 50% of the element height;
-4. Create an ajax request that prints response data to the page (style it, make it look nice)
+3. Create a button that when clicked will scroll the page by 50%
+4. Create a checkbox that when checked shows an other element and when unchecked hides the element

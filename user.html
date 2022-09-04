@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
 </head>
+
 <body>
     <span>You are logged in as: </span><span id="active-user"></span>
     <form>
@@ -24,11 +26,10 @@
                 <input id="email-input" type="email">
             </label>
             <div class="email-validation-error"></div>
+            <button id="save-user" type="button">
+                Store user name
+            </button>
         </div>
-
-        <button id="save-user" type="button">
-            Store user name
-        </button>
     </form>
 
     <table id="user-table">
@@ -39,7 +40,7 @@
     input:focus {
         outline: transparent;
     }
-    
+
     .validation-error {
         border-color: #DD0000;
     }
@@ -56,13 +57,18 @@
     var emailInputElement = document.getElementById('email-input');
 
     function User(name, email) {
-        this.name = name;
-        this.email = email;
+        console.log("test")
+        if (typeof name === 'string') {
+            this.name = name;
+        } else {
+            this.name = ''
+        }
+        this.email = email || '';
 
         // TODO: create an lastName field
         // Add the same validation as for username
 
-        this.isInvalidName = function() {
+        this.isInvalidName = function () {
             if (this.name.length === 0) {
                 return 'Required'
             } else if (this.name.length < 4) {
@@ -72,13 +78,27 @@
             }
         }
 
-        this.isInvalidEmail = function() {
+        this.isInvalidEmail = function () {
             var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        
+
             if (emailRegEx.test(this.email)) {
                 return false;
             } else {
                 return 'Invalid email format'
+            }
+        }
+    }
+
+    function Admin(name, email) {
+        User.apply(this, arguments)
+
+        this.isAdmin = true;
+
+        this.isInvalidName = () => {
+            if (this.name.length === 0) {
+                return 'Required'
+            } else {
+                returnfalse
             }
         }
     }
@@ -93,6 +113,8 @@
         return userList;
     }
 
+
+
     function applyActiveUserName() {
         var userList = getUserList();
 
@@ -104,7 +126,7 @@
         var userList = getUserList();
         var tableContent = '';
 
-        userList.forEach(function(userData, index) {
+        userList.forEach(function (userData, index) {
             var user = new User(userData.name, userData.email)
             var row = `
                 <tr class="list-item">
@@ -147,7 +169,7 @@
         })
     }
 
-    function isFormValid() {        
+    function isFormValid() {
         if (usernameInputElement.value.length > 0) {
             return true;
         } else {
@@ -171,14 +193,14 @@
         } else {
             nameValidationError.innerText = '';
         }
-        
+
         if (user.isInvalidEmail()) {
             emailValidationError.innerText = user.isInvalidEmail();
 
             shouldSaveUser = false;
         } else {
             emailValidationError.innerText = '';
-        } 
+        }
 
         if (shouldSaveUser) {
             var saveButton = document.getElementById('save-user')
@@ -198,7 +220,7 @@
         }
     }
 
-    usernameInputElement.addEventListener('keydown', function(event) {
+    usernameInputElement.addEventListener('keydown', function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
 
@@ -208,11 +230,12 @@
         }
     })
 
-    document.getElementById('save-user').addEventListener('click', function() {
+    document.getElementById('save-user').addEventListener('click', function () {
         handleFormSave();
     })
 
     applyActiveUserName()
     renderUserList()
 </script>
+
 </html>
