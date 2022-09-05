@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user</title>
+    <title>User</title>
 </head>
 <body>
     <span>You are logged in as:</span><span id="active-user"></span> 
@@ -15,6 +15,7 @@
 
                 <input id="username-input">
             </label>
+            <div class="name-validation-error"></div>
         </div>
         <button id="save-user" type="button">
             Store user name
@@ -22,6 +23,19 @@
     </form>
 
     <table id = "user-table"></table>
+    <table>
+        <tbody>
+            <tr class="'list-item">
+                <td>item </td>
+            </tr>
+            <tr class="list-item">
+                <td>item 2</td>                
+            </tr>
+            <tr class="list-item">
+                <td>item 3</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 <style>
     input,
@@ -51,20 +65,41 @@
          document.getElementById('active-user').innerText = userList[userList.length - 1] ||""
     }
 
+    console.log(document.getElementsByClassName('js-edit'))
+
     function renderUserList() {
         var userTable = document.getElementById('user-table');
         var userList = getUserList();
         var tableContent = '';
 
         userList.forEach(function(username, index) {
-            var row = '<tr><td>'+ index +'</td><td>' + username + '</td></tr>'
+            var row = `<tr class="list- item">
+                <td>`+ index +`</td>
+                <td>` + username + `</td>
+                <td>
+                    <button data-id="`+ index +`"class="js-edit">Edit</button>
+                </td>
+
+                </tr>`
 
             tableContent = tableContent + row;
         })
 
         userTable.innerHTML = tableContent;
+
+        Object.values(document.getElementsByClassName('js-edit')).forEach((element) => {
+            element.addEventListener('click',() => {
+                var userList = getUserList();
+
+                usernameInputElement.value = userList[element.dataset.id]   
+
+                document.getElementById('save-user').setAttribute('data-id', element.dataset.id)
+                
+            })
+        })
     }
 
+   
     function isFormValid() {
         if (usernameInputElement.value.length > 0) {
             return true;
@@ -78,11 +113,17 @@ function handleFormSave() {
     var username = usernameInputElement.value
     var userList = getUserList();
 
-    console.log("trigger save")
-
     if (isFormValid()) {
-        userList.push(username);
+        var saveButton = document.getElementById('save-user')
+
+        if (saveButton.dataset.id) {
+            userList[saveButton.dataset.id] = username
+        } else {
+            userList.push(username);
+
+        }
         usernameInputElement.value = '';
+        saveButton.removeAttribute('data-id')
 
         localStorage.userList = JSON.stringify(userList);
 
