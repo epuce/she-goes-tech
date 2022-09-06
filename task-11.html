@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label>
+            TODO:
+            <input id="todo-input">
+        </label>
+        <button id="save-todo" type = "button">
+            Save
+        </button>
+    </form>
+    <table id ="todo-list"></table>
+</body>
+<script>
+    var todoItem = document.getElementById('todo-input');
+    var saveTodo = document.getElementById('save-todo');
+
+    function getList() {
+        try {
+            var list = JSON.parse(localStorage.todoList);
+         } catch {
+            var list = [];
+        }    
+        return list;
+
+    }
+
+    function saveList(list) {
+        localStorage.todoList = JSON.stringify(list);
+    }
+    function renderList() {
+        var listTable = document.getElementById('todo-list');
+        var listContent = '';
+
+        var list = getList();
+        list.forEach((value,index) => {
+            var row = `
+                <tr>
+                    <td>` + value + `</td>
+                    <td>
+                    <button class="js-modify-todo" data-todo-index="` +index+`">Modify</button>
+                    <button class="js-mark-as-done" data-todo-index="` +index+`">Mark as done</button>
+                    </td>
+                </tr> ` 
+            listContent = listContent + row;
+        })
+
+        listTable.innerHTML = list.Content
+
+        Object.values(document.getElementsByClassName('js-modify-todo')).forEach((elem) =>{
+            elem.addEventListener('click',()=>{
+                var list= getList()
+                var index = elem.dataset['todoIndex'];
+                var itemToModify = list[index]
+
+                todoItem.value = itemToModify
+                saveTodo.setAttribute('data-todo-index', index);
+            })
+        })
+
+        Object.values(document.getElementsByClassName('js-mark-as-done')).forEach((elem) =>{
+            elem.addEventListener('click',()=>{
+                var list= getList()
+                var index = elem.dataset['todoIndex'];
+                
+                list.splice(index,1)
+
+                saveList(list);
+                renderList();
+            })
+        })
+    }
+
+    saveTodo.addEventListener('click',()=> {
+       
+        var list = getList();
+
+        var index =saveTodo.dataset.todoIndex;
+        if (index) {
+            list[index] = todoItem.value
+        } else {
+            list.push(todoItem.value);
+        }
+
+        saveTodo.removeAttribute('data-todo-index')    
+        saveList(list);
+        renderList();
+    })
+    renderList();
+</script>
+</html>
