@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -53,11 +54,11 @@
     }
 </style>
 <script>
-    var usernameInputElement = document.getElementById('username-input');
-    var emailInputElement = document.getElementById('email-input');
+    // jQuery selectors
+    var $usernameInput = $('#username-input');
+    var $emailInput = $('#email-input');
 
     function User(name, email) {
-        console.log("test")
         if (typeof name === 'string') {
             this.name = name;
         } else {
@@ -98,7 +99,7 @@
             if (this.name.length === 0) {
                 return 'Required'
             } else {
-                returnfalse
+                return false
             }
         }
     }
@@ -113,26 +114,30 @@
         return userList;
     }
 
-
-
     function applyActiveUserName() {
         var userList = getUserList();
+        var user = userList[userList.length - 1];
+        var name = ''
 
-        document.getElementById('active-user').innerText = userList[userList.length - 1] || ""
+        if (user) {
+            name = user.name
+        }
+
+        document.getElementById('active-user').innerText = name;
     }
 
     function renderUserList() {
-        var userTable = document.getElementById('user-table');
+        var $userTable = $('#user-table');
         var userList = getUserList();
         var tableContent = '';
 
         userList.forEach(function (userData, index) {
-            var user = new User(userData.name, userData.email)
+            // var user = new User(userData.name, userData.email)
             var row = `
                 <tr class="list-item">
                     <td>` + index + `</td>
-                    <td>` + user.name + `</td>
-                    <td>` + user.email + `</td>
+                    <td>` + userData.name + `</td>
+                    <td>` + userData.email + `</td>
                     <td>
                         <button data-id="` + index + `" class="js-edit">Edit</button>
                         <button data-id="` + index + `" class="js-delete">Delete</button>
@@ -143,75 +148,65 @@
             tableContent = tableContent + row;
         })
 
-        userTable.innerHTML = tableContent;
+        $userTable.html(tableContent);
 
-        Object.values(document.getElementsByClassName('js-edit')).forEach((element) => {
-            element.addEventListener('click', () => {
-                var userList = getUserList();
+        $('.js-edit').on('click', function() {
+            var userList = getUserList();
+            var user = userList[$(this).data('id')] // userList[element.dataset.id]
 
-                usernameInputElement.value = userList[element.dataset.id]
+            $usernameInput.val(user.name)
+            $emailInput.val(user.email)
 
-                document.getElementById('save-user').setAttribute('data-id', element.dataset.id)
-            })
+            $('#save-user').data('id', $(this).data('id'))
         })
 
-        Object.values(document.getElementsByClassName('js-delete')).forEach((element) => {
-            element.addEventListener('click', () => {
-                var userList = getUserList();
+        $('.js-delete').on('click', function() {
+            var userList = getUserList();
 
-                userList.splice(element.dataset.id, 1)
+            userList.splice($(this).data('id'), 1)
 
-                localStorage.userList = JSON.stringify(userList)
+            localStorage.userList = JSON.stringify(userList)
 
-                // renderUserList()
-                // applyActiveUserName()
-            })
+            renderUserList()
+            applyActiveUserName()
         })
-    }
-
-    function isFormValid() {
-        if (usernameInputElement.value.length > 0) {
-            return true;
-        } else {
-            usernameInputElement.classList.add('validation-error')
-            return false;
-        }
     }
 
     function handleFormSave() {
         var userList = getUserList();
-        var nameValidationError = document.getElementsByClassName('name-validation-error')[0];
-        var emailValidationError = document.getElementsByClassName('email-validation-error')[0];
-        var user = new User(usernameInputElement.value, emailInputElement.value)
+        var $nameValidationError = $('.name-validation-error');
+        var $emailValidationError = $('.email-validation-error');
+        var user = new User($usernameInput.val(), $emailInput.val())
         var shouldSaveUser = true;
 
         if (user.isInvalidName()) {
             var errorText = user.isInvalidName();
-            nameValidationError.innerText = errorText;
+            $nameValidationError.text(errorText);
 
             shouldSaveUser = false;
         } else {
-            nameValidationError.innerText = '';
+            $nameValidationError.text('');
         }
 
         if (user.isInvalidEmail()) {
-            emailValidationError.innerText = user.isInvalidEmail();
+            $emailValidationError.text(user.isInvalidEmail())
 
             shouldSaveUser = false;
         } else {
-            emailValidationError.innerText = '';
+            $emailValidationError.text('')
         }
 
         if (shouldSaveUser) {
-            var saveButton = document.getElementById('save-user')
+            var $saveButton = $('#save-user')
 
-            if (saveButton.dataset.id) {
-                userList[saveButton.dataset.id] = user
+            if (typeof $saveButton.data('id') === 'number') {
+                userList[$saveButton.data('id')] = user
             } else {
                 userList.push(user);
             }
-            usernameInputElement.value = '';
-            saveButton.removeAttribute('data-id')
+            $emailInput.val('')
+            $usernameInput.val('')
+            $saveButton.data('id', '');
 
             localStorage.userList = JSON.stringify(userList);
 
@@ -220,17 +215,17 @@
         }
     }
 
-    usernameInputElement.addEventListener('keydown', function (event) {
+    $usernameInput.on('keydown', function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
 
             handleFormSave()
         } else {
-            usernameInputElement.classList.remove('validation-error')
+            // usernameInputElement.classList.remove('validation-error')
         }
     })
 
-    document.getElementById('save-user').addEventListener('click', function () {
+    $('#save-user').on('click', function () {
         handleFormSave();
     })
 
