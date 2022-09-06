@@ -67,9 +67,9 @@
 
     console.log(document.getElementsByClassName('js-edit'))
 
-    function renderUserList() {
+     renderUserList() {
         var userTable = document.getElementById('user-table');
-        var userList = getUserList();
+        var userList = getUserLifunctiost();
         var tableContent = '';
 
         userList.forEach(function(username, index) {
@@ -78,10 +78,11 @@
                 <td>` + username + `</td>
                 <td>
                     <button data-id="`+ index +`"class="js-edit">Edit</button>
+                    <button data-id="` + index+`" class="js-delete">Delete</button>
                 </td>
 
                 </tr>`
-
+            
             tableContent = tableContent + row;
         })
 
@@ -95,6 +96,19 @@
 
                 document.getElementById('save-user').setAttribute('data-id', element.dataset.id)
                 
+            })
+        })
+
+        Object.values (document.getElementsByClassName('js-delete')).forEach((element)=> {
+            element.addEventListener('click',()=> {
+                var userList = getUserList();
+
+                userList.splice(element.dataset.id, 1)
+
+                localStorage.userList = JSON.stringify(userList)
+
+                renderUserList()
+                applyActiveUserName()
             })
         })
     }
