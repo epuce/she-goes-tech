@@ -34,10 +34,9 @@
 
     <button class="js-toggle-elem">hide something</button>
     <span class="js-toggle-me">hide me</span>
-    <div>
-        <button class="js-change-colour">colour</button>
-    </div>
-    <button ></button>
+       <button class="js-change-color">Click me to change my color.</button>
+   
+
 </body>
 <style>
     
@@ -49,13 +48,22 @@
         display: block;
     }
 
-    .btn-colour {
+    .btn-color {
         background: red;
     }
 
    
 </style>
 <script>
+    document.getElementById("myBtn").onclick = function() {myFunction()};
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+$('.js-change-color').on('click',function(){ 
+        $(this).toggleClass('btn-color')
+
+  
     $('.js-toggle-elem').on('click',() => {
         var $toggleMe = $('.js-toggle-me')
 
