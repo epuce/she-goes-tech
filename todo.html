@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <label>
+        TODO:
+        <input id="todo-input" type="text">
+    </label>
+    <button id="todo-save">
+        Save
+    </button>
+
+    <template class = "js-todo-row">
+        <tr>
+            <td class="js-cell-index"></td>
+            <td class="js-cell-todo"></td>
+            <td>
+                <button class="js-todo-delete">Delete</button>
+            </td>
+        </tr>
+    </template>
+
+    <table id="todo-list"></table>
+
+    <button class="change-style">Click me1</button>
+    <button class="change-style">Click me2</button>
+
+    <button class="js-toggle-elem">hide something</button>
+    <span class="js-toggle-me">hide me</span>
+    <div>
+        <button class="js-change-colour">colour</button>
+    </div>
+    <button ></button>
+</body>
+<style>
+    
+    .btn-warning {
+        background: yellow;
+    }
+
+    span {
+        display: block;
+    }
+
+    .btn-colour {
+        background: red;
+    }
+
+   
+</style>
+<script>
+    $('.js-toggle-elem').on('click',() => {
+        var $toggleMe = $('.js-toggle-me')
+
+        $toggleMe.toggle()
+ 
+        //if($toggleMe.is(':visible')){
+        //    $toggleMe.hide()
+        //} else {
+        // $togglrMe
+        })
+         
+
+    $('.change-style').on('click',function(){ 
+        $(this).toggleClass('btn-warning')
+       // var $this = $(this);
+       // if ($this.hasClass('btn-warning')) {
+       //     $this.removeClass('btn-warning')
+       // } else {
+       //     $this.addClass('btn-warning')
+       // }
+    })
+   var $todoInput = $('#todo-input') //document.getElementById('todo-input')
+   var $todoSave = $('#todo-save') 
+
+   function getTodoList(){
+    try {
+        var list =JSON.parse(localStorage.todoList)
+    } catch {
+        var list = [];
+    }
+    return list;
+   }
+
+   function saveTodoList(list) {
+    localStorage.todoList =JSON.stringify(list)
+    renderTodoList()
+   } 
+
+   function renderTodoList(){
+    var list = getTodoList();
+    var $todoList = $('#todo-list') ;
+
+    $todoList.html('');
+
+    list.forEach((todo, id) => {
+        var $todoRowTemplate = $($('.js-todo-row').html());
+
+        //innerText = todo
+        $todoRowTemplate.find('.js-cell-todo').text(todo)
+        
+        //element.innerHtml = '<tr>etc.</tr>'
+        $todoList.append($todoRowTemplate)
+        
+        //document.getElementsByClassName('.js-todo-delete')
+        $todoRowTemplate.find('.js-todo-delete').on('click',function(){
+           var list = getTodoList();
+           
+           list.splice(id, 1);
+
+           //add the deleting logic
+           saveTodoList(list)
+            
+        })
+
+    })
+   }
+   
+   //.addEventListener
+   $todoSave.on('click', function() {
+    var todo = $todoInput.val() //element.value
+    var list = getTodoList();
+
+    list.push(todo)
+
+    saveTodoList(list)
+   })
+
+   renderTodoList()
+</script>
+</html>
