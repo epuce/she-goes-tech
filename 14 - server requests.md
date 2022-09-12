@@ -109,7 +109,13 @@ $.ajax({
 ---
 ### [full list](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
+### add a new file named task-14.html where all these actions will be performed
 
+1. Create a picture gallery by loading the data from: https://fakerapi.it/api/v1/persons
+2. Add needed css to style the layout as in the expected result
 
+### Expected result
+
+![](img/task-14.png) 
 
 

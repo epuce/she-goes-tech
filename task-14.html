@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <template class="js-template">
+        <div class="card">
+            <img class="js-img">
+
+            <div class="title js-title"></div>
+            <div class="description js-description"></div>
+        </div>
+    </template>
+
+    <div class="gallery js-gallery"></div>
+</body>
+<style>
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 16px;
+    }
+
+    .card {
+        width: 200px;
+    }
+
+    img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .title {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .description {
+        font-size: 10px;
+    }
+</style>
+<script>
+    fetch('https://fakerapi.it/api/v1/persons')
+        .then(response => response.json())
+        .then((response) => {
+            console.log(response.data)
+
+            response.data.forEach((row) => {
+                $rowTemplate = $($('.js-template').html());
+
+
+                $rowTemplate.find('.js-title').text(row.firstname + ' ' + row.lastname)
+                $rowTemplate.find('.js-description').text(row.email)
+                $rowTemplate.find('.js-img').attr('src', row.image)
+
+                $('.js-gallery').append($rowTemplate);
+            })
+        })
+</script>
+</html>
