@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <template class="js-row-template">
+        <tr>
+            <td>
+                <img class="avatar-img js-img">
+            </td>
+            <td class="js-name"></td>
+        </tr>
+    </template>
+    <table>
+
+    </table>
+
+</body>
+<style>
+    .avatar-img {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+    }
+</style>
+<script>
+    fetch('https://reqres.in/api/users ').then(function(response1){
+         return(response1. json())    
+    }).then(function(response2){
+        console.log(response2)
+        response2.data.forEach((user) => {
+            $template = $($('.js-row-template').html())
+
+            $template.find('.js-img').attr('src',user.avatar)
+          
+            $template.find('.js-name').text(user.first_name + " " + user.last_name)
+            $('table').append($template) 
+        })
+    })
+
+    var data= JSON.stringify({
+        name: "Vika",
+        job: "doctor"
+    })
+
+    fetch('https://reqres.in/api/users ', {
+        method: "POST",
+        body: data
+    })
+    .then((response1) => {return response1.json()})
+    .then((response2) => {console.log(response2) })
+
+    fetch('https://reqres.in/api/users/4 ', {
+        method: "PUT",
+        body: data
+    })
+    .then((response1) => {return response1.json()})
+    .then((response2) => {console.log(response2) })
+
+    fetch('https://reqres.in/api/users/2 ', {
+        method: "DELETE",
+        body: data
+    })
+    .then((response1) => {return response1.json()})
+    .then((response2) => {console.log(response2) })
+</script>
+</html>

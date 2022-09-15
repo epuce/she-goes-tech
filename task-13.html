@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <button class="js-toggle-class">
+        Click me
+    </button>
+    <button class="js-toggle-class">
+        Click me
+    </button>
+    <button class="js-toggle-class">
+        Click me
+    </button>
+    <button class="js-scroll">scroll50%</button>
+
+    <input type="checkbox">
+
+    <div id="add-content">content</div>
+
+   
+    
+</body>
+<style>
+.btn-error{
+    border: 1px solid #FF0000;
+} 
+
+#add-content{padding-top: 3000px;}
+
+
+</style>
+<script>
+   // document.getElementsByClassName('js-toggle-class')[0].addEventListener('click',function(){
+     //   document.getElementsByClassName('js-toggle-class')[0].classList
+    //})
+    $('.js-toggle-class').on('click', function() {
+        $(this).toggleClass('btn-error')
+    })
+
+    $('#add-content').append($('<span>append</span>'))
+    $('#add-content').append('some text')
+    
+    $('<div>before</div>').insertBefore($('#add-content'))
+
+    $
+
+    $('.js-scroll').on('click', function(){
+        var halfWindowHeight = $('body').height()/2
+        $(window).scrollTop(halfWindowHeight)
+    })
+
+    $('input[type="checkbox"]').on('change',function(){
+      $('#add-content').toggle($(this).is(':checked'))
+
+    })
+
+
+</script>
+
+</html>
