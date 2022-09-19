@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="user-select">
+        <div class="user-select__header">
+            <h3>
+                Add users
+            </h3>
+            <div>
+                <input 
+                    v-on:keyup="filterList"
+                    v-model="inputValue"
+                    placeholder="Write something to narrow down"
+                    class="user-select__input">
+            </div>
+        </div>
+        <div v-for="user in usersFilter">
+            <user-row 
+                :name="user.name"
+                :avatar="user.avatar"
+                :is-selected="user.isSelected">
+            </user-row>
+        </div>
+        <div class="user-select__footer"></div>
+    </div>
+</body>
+<style>
+    .user {
+        position: relative;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    .user-select__header {
+        padding: 16px;
+    }
+    .user-select__input {
+        border: none;
+        width: 100%;
+    }
+    .user-select__input:focus {
+        outline: none;
+    }
+    .user_avatar {
+        margin: 8px 8px 8px 16px;
+        border: 2px solid #FFF;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+    }
+    .user--selected {
+        background-color: #EBF5FA;
+        border-left: 2px solid blue;
+    }
+    .user--selected .user_avatar {
+        margin-left: 14px;
+    }
+    .user_icon {
+        position: absolute;
+        right: 20px;
+        color: blue;
+    }
+</style>
+<script>
+    Vue.component('user-row', {
+        props: {
+            name: {
+                type: String,
+                required: true,
+            },
+            avatar: {
+                type: String,
+                required: true,
+            },
+            isSelected: {
+                type: Boolean,
+                required: true,
+            } 
+        },
+        methods: {
+            onClick: function() {
+                this.isSelected = !this.isSelected
+            }
+        },
+        template: `
+            <div v-on:click="onClick" class="user" :class="{'user--selected': isSelected}">
+                <img class="user_avatar" :src="avatar">
+                <span class="user_name">{{name}}</span>
+                <i v-if="isSelected" class="user_icon fa fa-solid fa-check"></i>
+            </div>
+        `
+    })
+
+    new Vue({
+        el: "#user-select",
+        data: {
+            inputValue: '',
+            usersFilter: [],
+            users: [
+                {
+                    name: 'Jack Sparrow',
+                    avatar: 'https://i1.sndcdn.com/artworks-1kK2LeUMqtUH5SIx-IIYPDA-t500x500.jpg',
+                    isSelected: false,
+                },
+                {
+                    name: 'Bugs Bunny',
+                    avatar: 'https://lezebre.lu/images/detailed/16/22058-bugs-bunny.png',
+                    isSelected: false,
+                },
+                {
+                    name: 'James Bond',
+                    avatar: 'https://image.cnbcfm.com/api/v1/image/106930629-1629399630371-gettyimages-494691340-87856868.jpeg?v=1629399760',
+                    isSelected: true,
+                }
+            ]
+        },
+        methods: {
+            filterList: function() {
+                console.log(this.inputValue)
+                this.usersFilter = this.users.filter((user) => {
+                    return user.name.toLowerCase().includes(this.inputValue)
+                })
+                console.log(this.usersFilter)
+            }
+        },
+        created: function() {
+            this.usersFilter = this.users;
+        }
+    })
+</script>
+</html>
