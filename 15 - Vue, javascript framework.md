@@ -84,3 +84,6 @@ new Vue({
 
 # React vs Vue vs Angular
 ![React vs Vue vs Angular](img/js-framework-usage.png)
+
+## Create a re-usable vue component that's displayed in the next image
+![vue user select](img/vue-user-select.png)
