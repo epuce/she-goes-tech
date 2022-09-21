@@ -18,16 +18,19 @@
             <div>
                 <input 
                     v-on:keyup="filterList"
-                    v-model="inputValue"
+                    v-model="inputValue" 
                     placeholder="Write something to narrow down"
                     class="user-select__input">
             </div>
         </div>
-        <div v-for="user in usersFilter">
+        <div v-for="user in users">
             <user-row 
+                v-show="user.isShown"
+                @user-select="onUserSelect"
                 :name="user.name"
                 :avatar="user.avatar"
-                :is-selected="user.isSelected">
+                :is-selected="user.isSelected"
+                :id="user.id">
             </user-row>
         </div>
         <div class="user-select__footer"></div>
@@ -84,15 +87,14 @@
             isSelected: {
                 type: Boolean,
                 required: true,
-            } 
-        },
-        methods: {
-            onClick: function() {
-                this.isSelected = !this.isSelected
+            },
+            id: {
+                type: Number,
+                required: true,
             }
         },
         template: `
-            <div v-on:click="onClick" class="user" :class="{'user--selected': isSelected}">
+            <div v-on:click="$emit('user-select', id)" class="user" :class="{'user--selected': isSelected}">
                 <img class="user_avatar" :src="avatar">
                 <span class="user_name">{{name}}</span>
                 <i v-if="isSelected" class="user_icon fa fa-solid fa-check"></i>
@@ -104,36 +106,68 @@
         el: "#user-select",
         data: {
             inputValue: '',
-            usersFilter: [],
-            users: [
-                {
-                    name: 'Jack Sparrow',
-                    avatar: 'https://i1.sndcdn.com/artworks-1kK2LeUMqtUH5SIx-IIYPDA-t500x500.jpg',
-                    isSelected: false,
-                },
-                {
-                    name: 'Bugs Bunny',
-                    avatar: 'https://lezebre.lu/images/detailed/16/22058-bugs-bunny.png',
-                    isSelected: false,
-                },
-                {
-                    name: 'James Bond',
-                    avatar: 'https://image.cnbcfm.com/api/v1/image/106930629-1629399630371-gettyimages-494691340-87856868.jpeg?v=1629399760',
-                    isSelected: true,
-                }
-            ]
+            users: []
         },
         methods: {
             filterList: function() {
-                console.log(this.inputValue)
-                this.usersFilter = this.users.filter((user) => {
-                    return user.name.toLowerCase().includes(this.inputValue)
+                this.users = this.users.map((user) => {
+                    if (
+                        user.name.toLowerCase().includes(this.inputValue.toLowerCase())
+                    ) {
+                        user.isShown = true
+                    } else {
+                        user.isShown = false
+                    }
+
+                    return user;
                 })
-                console.log(this.usersFilter)
+            },
+            getSelectedUsers: function() {
+                try {
+                    return JSON.parse(localStorage.selectedUsers)
+                } catch {
+                    return [];
+                }
+            },
+            onUserSelect: function(id) {
+                this.users = this.users.map((user) => {
+                    if (user.id === id) {
+                        user.isSelected = !user.isSelected
+                    }
+
+                    return user
+                })
+
+                var selectedUsers = this.getSelectedUsers()
+
+                if (selectedUsers.includes(id)) {
+                    var index = selectedUsers.indexOf(id);
+                    selectedUsers.splice(index, 1);
+                } else {
+                    selectedUsers.push(id)
+                }
+
+                localStorage.selectedUsers = JSON.stringify(selectedUsers)
             }
         },
         created: function() {
-            this.usersFilter = this.users;
+            var thisIsVue = this;
+
+            fetch('https://reqres.in/api/users')
+            .then(function(response1) { return response1.json() })
+            .then(function(response2) {
+                var selectedUsers = thisIsVue.getSelectedUsers()
+
+                thisIsVue.users = response2.data.map((user) => {
+                    return {
+                        name: user.first_name + ' ' + user.last_name,
+                        avatar: user.avatar,
+                        isSelected: selectedUsers.includes(user.id),
+                        isShown: true,
+                        id: user.id,
+                    }
+                })
+            })
         }
     })
 </script>
