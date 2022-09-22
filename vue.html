@@ -26,10 +26,12 @@
 
             <span v-if="showToggleElement">I will be toggled</span>
         </div>
+        <input v-model="todoInput">
         <ul>
             <li v-for="item in todoList">
-                <input type="checkbox": checked="item.isDone"
-                v-on:change="onIsDoneChange">
+                <input type="checkbox"
+                :checked="item.isDone"
+                v-on:change="onIsDoneChange(item)">
                 <span :class="{'todo-done': item.isDone}">{{item.title}}</span>
             </li>
         </ul>
