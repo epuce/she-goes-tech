@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<body>
+    <div id="app">
+        <h1>This is static</h1>
+        <h1>{{ heading }}</h1>
+
+        <input v-model="inputValue">
+
+        {{inputValue}}
+
+        <div>
+            <button v-on:click="onButtonClick">click me</menu></button>
+            You have clicked {{ clickCount}} {{ clickCount ===1 ? 'time' : 'times'}}
+        </div>
+
+        <div>
+            <button v-on:click="onToggleElement">Toggle</button>
+
+            <span v-if="showToggleElement">I will be toggled</span>
+        </div>
+        <ul>
+            <li v-for="item in todoList">
+                <input type="checkbox": checked="item.isDone"
+                v-on:change="onIsDoneChange">
+                <span :class="{'todo-done': item.isDone}">{{item.title}}</span>
+            </li>
+        </ul>
+        
+        </div>
+</body>
+<style>
+    .todo-done {
+        text-decoration: overline;
+        opacity: 0.8;
+    }
+</style>
+<script>
+    new Vue({
+        el:'#app',
+        data : {
+            heading: 'Yay, Vue is working',
+            inputValue: '',
+            clickCount: 0,
+            showToggleElement: true,
+            todoList: [
+                {
+                   title: 'Clean the house',
+                   isDone: false,
+                },
+                {
+                    title: 'Wash the car',
+                    isDone: false,
+                },
+                {
+                    title: 'Read a book',
+                    isDone: false,
+                }
+            ],
+        },
+        methods: {
+            onButtonClick: function(){
+                this.clickCount = this.clickCount + 1
+                console.log('click works')
+            },
+            onToggleElement: function() {
+                this.showToggleElement = !this.showToggleElement;
+             //   if (this.showToggleElement){
+             //       this.showToggleElement = false;
+             //   } else {
+             //       this.showToggleElement = true;
+             //   }
+            }
+
+        },
+    })
+    Vue.component('my-btn', {
+        props:{
+            text: {
+                type: String,
+                required: false,
+                deafult:''
+            }
+        },
+        template:`
+        <span>
+           <button>Some text</button>
+        </span>  ` 
+    })
+
+
+</script>
+</html>
