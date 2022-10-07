@@ -26,7 +26,7 @@
 
             <span v-if="showToggleElement">I will be toggled</span>
         </div>
-        <input v-model="todoInput">
+        <input v-model="todoInput" v-on:keyup.enter>
         <ul>
             <li v-for="item in todoList">
                 <input type="checkbox"
@@ -40,8 +40,8 @@
 </body>
 <style>
     .todo-done {
-        text-decoration: overline;
-        opacity: 0.8;
+        text-decoration: line-through;
+        opacity: 0.3;
     }
 </style>
 <script>
@@ -68,10 +68,7 @@
             ],
         },
         methods: {
-            onButtonClick: function(){
-                this.clickCount = this.clickCount + 1
-                console.log('click works')
-            },
+            
             onToggleElement: function() {
                 this.showToggleElement = !this.showToggleElement;
              //   if (this.showToggleElement){
@@ -79,6 +76,9 @@
              //   } else {
              //       this.showToggleElement = true;
              //   }
+            },
+            onIsDoneChange: function(item) {
+                item.isDone = !item.isDone
             }
 
         },
