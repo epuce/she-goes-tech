@@ -100,8 +100,8 @@ td {
 
     function User(name,email,special,period){
        console.log("test");
-       this.special =special ? 'Yes': 'No';
-       this.period = special ? period :'';
+       this.special =special ;
+       this.period = period;
        if(typeof name==='string'){
            this.name = name;
        } else {
@@ -161,7 +161,7 @@ td {
         var tableContent = '';
 
         userList.forEach(function(userData, index) {
-            var user = new User(userData.name, userData.email);
+            var user = new User(userData.name, userData.email, userData.special, userData.period);
             var row = `<tr class="list- item">
                 <td>`+ index +`</td>
                 <td>` + user.name + `</td>
@@ -222,7 +222,7 @@ td {
         var nameValidationError = document.getElementsByClassName('name-validation-error')[0];
         var emailValidationError = document.getElementsByClassName('email-validation-error')[0];
         var user = new User(usernameInputElement.value, emailInputElement.value, 
-        checkboxElement.checked,selectElement.value);
+        checkboxElement.checked ? 'Yes': 'No',checkboxElement.checked ? selectElement.value:'');
         var shouldSaveUser = true;
 
         if (user.isInvalidName()) {
