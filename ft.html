@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final task</title>
+</head>
+<body>
+    <div id="the-form">
+        <form>
+            <div>
+                <label for="username-input">Username</label></div>
+                <input id="username-input" />
+                <div class="name-validation-error"></div>
+            
+            <div>
+                <label for="email-input">Email</label></div>
+                <input id="email-input" type="email">
+                <div class="email-validation-error"></div>
+            
+        </form>
+
+        <input type="checkbox" id="checkbox">
+        <span>Send me special deals</span>
+
+        <div>I'm willing to receive them every:</div>
+        <select id="select">
+            <option value="Hour">Hour</option>
+            <option value="Day">Day</option>
+            <option value="Week">Week</option>
+            <option value="Month">Month</option>
+        </select>
+        <div>
+            <button id="save-user"  type="button">
+                Subscribe
+            </button>
+        </div>
+    </div>
+    <div id="show-form-button">
+        <button onclick="showForm()">Show Form</button>
+    </div>
+    <div id="the-table">
+        Active user: <div id="active-user"></div>
+        <table>
+            <thead>
+                <th>id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Special offers</th>
+                <th>Period</th>
+                <th></th>
+            </thead>
+            <tbody id="user-table"></tbody>
+        </table>
+    </div>
+    
+
+<style>
+    .validation-error{
+        border-color: red;
+    }
+    .name-validation-error,
+    .email-validation-error {
+        color: #DD0000;
+        font-size: 8px;
+        height: 8px;
+    }
+    #the-form {
+        display: none;
+        width: 20%;
+    }
+    #show-form-button {
+        display: inline-block;
+        width: 10%;
+    }
+    #the-table {
+        display: inline-block;
+        width: 50%;
+        border: 1px solid black;
+        
+    }
+
+th {
+    border: 1px solid black;
+    background: rgb(179, 171, 171);
+}   
+
+td {
+    border: 1px solid black;
+}   
+    
+
+</style>
+<script>
+    var usernameInputElement = document.getElementById('username-input');
+    var emailInputElement = document.getElementById('email-input');
+    var checkboxElement = document.getElementById('checkbox');
+    var selectElement = document.getElementById('select');
+
+    function User(name,email,special,period){
+       console.log("test");
+       this.special =special ? 'Yes': 'No';
+       this.period = special ? period :'';
+       if(typeof name==='string'){
+           this.name = name;
+       } else {
+           this.name = ''
+       }
+       this.email = email||'';
+        this.isInvalidName = function () {
+           if (this.name.length ===0){
+              return 'Required'
+           } else if (this.name.length < 4) {
+               return 'Min length 4'
+           } else {
+               return false;
+           }
+       };
+        this.isInvalidEmail = function() {
+           var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (emailRegEx.test(this.email)) {
+               return false;
+           } else {
+                return 'Invalid email format'
+           }
+       }
+    }
+
+    function Admin(name, email) {
+        User.apply(this, arguments);
+
+        this.isAdmin = true;
+
+        this.isInvalidName = () => {
+            if (this.name.length === 0) {
+                return 'Required'
+            } else {
+                return false
+            }
+        }
+    }
+
+    function getUserList() {
+        try {
+            var userList = JSON.parse(localStorage.userList);
+         } catch {
+            var userList = [];
+        }
+        return userList;
+    }
+
+    function applyActiveUserName(){
+        var userList = getUserList();
+        document.getElementById('active-user').innerText = userList[userList.length - 1].name ||""
+    }
+
+    function renderUserList() {
+        var userTable = document.getElementById('user-table');
+        var userList = getUserList();
+        var tableContent = '';
+
+        userList.forEach(function(userData, index) {
+            var user = new User(userData.name, userData.email);
+            var row = `<tr class="list- item">
+                <td>`+ index +`</td>
+                <td>` + user.name + `</td>
+                <td>` + user.email + `</td>
+                <td>` + user.special + `</td>
+                <td>` + user.period + `</td>
+                <td> 
+                    <button data-id="`+ index +`"class="js-edit">Edit</button>
+                    <button data-id="` + index+`" class="js-delete">Delete</button>
+                </td>
+
+                </tr>`;
+            
+            tableContent = tableContent + row;
+        });
+    
+        userTable.innerHTML = tableContent;
+
+        Object.values(document.getElementsByClassName('js-edit')).forEach((element) => {
+            element.addEventListener('click',() => {
+                var userList = getUserList();
+
+                usernameInputElement.value = userList[element.dataset.id].name;
+                emailInputElement.value = userList[element.dataset.id].email;
+
+                document.getElementById('save-user').setAttribute('data-id', element.dataset.id)
+
+                showForm();
+            })
+        });
+
+        Object.values (document.getElementsByClassName('js-delete')).forEach((element)=> {
+            element.addEventListener('click',()=> {
+                var userList = getUserList();
+
+                userList.splice(element.dataset.id, 1);
+
+                localStorage.userList = JSON.stringify(userList);
+
+                renderUserList();
+                applyActiveUserName()
+
+            })
+        })
+    }
+
+    function isFormValid() {
+            if (usernameInputElement.value.length > 0) {
+                return true;
+            } else{
+                usernameInputElement.classList.add('validation-error')
+            return false;
+        }
+    }
+
+    function handleFormSave() {
+        var userList = getUserList();
+        var nameValidationError = document.getElementsByClassName('name-validation-error')[0];
+        var emailValidationError = document.getElementsByClassName('email-validation-error')[0];
+        var user = new User(usernameInputElement.value, emailInputElement.value, 
+        checkboxElement.checked,selectElement.value);
+        var shouldSaveUser = true;
+
+        if (user.isInvalidName()) {
+            var errorText = user.isInvalidName();
+            nameValidationError.innerText = errorText;
+
+            shouldSaveUser = false;
+        } else {
+            nameValidationError.innerText = '';
+        }
+
+        if (user.isInvalidEmail()) {
+            emailValidationError.innerText = user.isInvalidEmail();
+
+            shouldSaveUser = false;
+        } else {
+            emailValidationError.innerText = '';
+        }
+
+        if (shouldSaveUser) {
+            var saveButton = document.getElementById('save-user');
+
+            if (saveButton.dataset.id) {
+                userList[saveButton.dataset.id] = user
+            } else {
+                userList.push(user);
+            }
+            usernameInputElement.value = '';
+            saveButton.removeAttribute('data-id');
+
+            localStorage.userList = JSON.stringify(userList);
+
+            applyActiveUserName();
+            renderUserList();
+        }
+    }
+
+
+    function showForm() {
+        document.getElementById('the-form').style.display = 'inline-block';
+    }
+
+    usernameInputElement.addEventListener('keydown',function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            handleFormSave()
+        }
+        else {
+            usernameInputElement.classList.remove('validation-error')
+        }
+       
+    });
+    document.getElementById('save-user').addEventListener('click',function() {
+        handleFormSave()
+        window.alert('Thank you')
+    });
+    applyActiveUserName();
+    renderUserList();
+
+</script>
+</body>
+</html>
