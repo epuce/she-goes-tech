@@ -225,12 +225,22 @@
         }
     })
 
+    document.getElementById('save-user').addEventListener('click', function() {
+        handleFormSave();
+    })
+    
     $('#save-user').on('click', function () {
         handleFormSave();
     })
 
     applyActiveUserName()
     renderUserList()
+
+    document.getElementById('checkbox-input').addEventListener('change', function() {
+        document.getElementById('hidden-input').style.display = "block"
+        
+        document.getElementById('hidden-input').style.display = "none"
+    })
 </script>
 
 </html>

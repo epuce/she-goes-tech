@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="my-btn.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <h1>This is static</h1>
+        <h1>{{ heading }}</h1>
+    
+        <input v-model="inputValue">
+
+        This is the input value: {{ inputValue }}
+
+        <div>
+            <button v-on:click="onButtonClick">Click me</button>
+            You have clicked {{ clickCount }} {{ clickCount === 1 ? 'time' : 'times' }}
+        </div>
+
+        <div>
+            <button v-on:click="onToggleElement">Toggle</button>
+
+            <span v-if="showToggleElement">I will be toggled</span>
+        </div>
+
+        <input v-model="todoInput" v-on:keyup.enter="onTodoInputEnter">
+
+        <ul>
+            <li v-for="item in todoList">
+                <input 
+                    type="checkbox"
+                    :checked="item.isDone" 
+                    v-on:change="onIsDoneChange(item)">
+                
+                <span :class="{'todo-done': item.isDone}">{{ item.title }}</span>
+            </li>
+        </ul>
+
+        <my-btn text="This is btn"></my-btn>
+        <my-btn text="This is an other btn"></my-btn>
+        <my-btn text="3 different buttons"></my-btn>
+    </div>
+
+    
+</body>
+<style>
+    .todo-done {
+        text-decoration: line-through;
+        opacity: 0.3;
+    }
+</style>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            heading: 'Yay, Vue is working',
+            inputValue: '',
+            clickCount: 0,
+            showToggleElement: true,
+            todoInput: '',
+            todoList: [],
+        },
+        methods: {
+            saveTodoList: function() {
+                localStorage.todoList = JSON.stringify(this.todoList)
+            },
+            onButtonClick: function() {
+                this.clickCount = this.clickCount + 1
+            },
+            onToggleElement: function() {
+                this.showToggleElement = !this.showToggleElement;
+                //  if (this.showToggleElement) {
+                //     this.showToggleElement = false;
+                //  } else {
+                //     this.showToggleElement = true;
+                //  }
+            },
+            onIsDoneChange: function(item) {
+                item.isDone = !item.isDone
+
+                this.saveTodoList()
+            },
+            onTodoInputEnter: function() {
+                this.todoList.push({
+                    title: this.todoInput,
+                    isDone: false,
+                })
+                this.todoInput = ''
+
+                this.saveTodoList()
+            }
+        },
+        created: function() {
+            try {
+                this.todoList = JSON.parse(localStorage.todoList)
+            } catch {
+                this.todoList = [];
+            } 
+        }
+    })
+</script>
+</html>

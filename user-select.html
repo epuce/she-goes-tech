@@ -33,7 +33,9 @@
                 :id="user.id">
             </user-row>
         </div>
-        <div class="user-select__footer"></div>
+        <div class="user-select__footer">
+            <button v-on:click="onUserSelect(-1, true)">Save</button>
+        </div>
     </div>
 </body>
 <style>
@@ -72,6 +74,12 @@
         right: 20px;
         color: blue;
     }
+
+    .user-select__footer {
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+    }
 </style>
 <script>
     Vue.component('user-row', {
@@ -94,7 +102,7 @@
             }
         },
         template: `
-            <div v-on:click="$emit('user-select', id)" class="user" :class="{'user--selected': isSelected}">
+            <div v-on:click="$emit('user-select', id, false)" class="user" :class="{'user--selected': isSelected}">
                 <img class="user_avatar" :src="avatar">
                 <span class="user_name">{{name}}</span>
                 <i v-if="isSelected" class="user_icon fa fa-solid fa-check"></i>
@@ -109,6 +117,16 @@
             users: []
         },
         methods: {
+            onSaveSelectedUsers: function() {
+                var selectedUserIds = [];
+
+                this.users.forEach((user) => {
+                    if (user.isSelected) {
+                        selectedUserIds.push(user.id)
+                    }
+                })
+                localStorage.selectedUsers = JSON.stringify(selectedUserIds)
+            },
             filterList: function() {
                 this.users = this.users.map((user) => {
                     if (
@@ -129,7 +147,7 @@
                     return [];
                 }
             },
-            onUserSelect: function(id) {
+            onUserSelect: function(id, doSave) {
                 this.users = this.users.map((user) => {
                     if (user.id === id) {
                         user.isSelected = !user.isSelected
@@ -138,16 +156,18 @@
                     return user
                 })
 
-                var selectedUsers = this.getSelectedUsers()
+                if (doSave) {
+                    var selectedUsers = this.getSelectedUsers()
 
-                if (selectedUsers.includes(id)) {
-                    var index = selectedUsers.indexOf(id);
-                    selectedUsers.splice(index, 1);
-                } else {
-                    selectedUsers.push(id)
+                    if (selectedUsers.includes(id)) {
+                        var index = selectedUsers.indexOf(id);
+                        selectedUsers.splice(index, 1);
+                    } else {
+                        selectedUsers.push(id)
+                    }
+
+                    localStorage.selectedUsers = JSON.stringify(selectedUsers)
                 }
-
-                localStorage.selectedUsers = JSON.stringify(selectedUsers)
             }
         },
         created: function() {
@@ -155,16 +175,15 @@
 
             fetch('https://reqres.in/api/users')
             .then(function(response1) { return response1.json() })
-            .then(function(response2) {
-                var selectedUsers = thisIsVue.getSelectedUsers()
+            .then((response2) => {
+                var selectedUsers = this.getSelectedUsers()
 
-                thisIsVue.users = response2.data.map((user) => {
+                this.users = response2.data.map((user) => {
                     return {
+                        ...user,
                         name: user.first_name + ' ' + user.last_name,
-                        avatar: user.avatar,
                         isSelected: selectedUsers.includes(user.id),
                         isShown: true,
-                        id: user.id,
                     }
                 })
             })
