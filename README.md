@@ -1,1 +1,2 @@
-# she-goes-tech
+# Goda Kondrotaitė-Žaltauskienė
+
