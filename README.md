@@ -1,1 +1,2 @@
-# she-goes-tech
+Slikti rādās,
+# labi būs!
