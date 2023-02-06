@@ -1,9 +1,9 @@
 # Intro
 - How familiar are you with development/coding?
-
 - Our arsenal of weapons: vscode, terminal, git, JavaScrip, CSS, HTML and some others
 - 10-15min break every 50min
-- Don't be afraid to ask
+- Don't be afraid to ask! ``There are no silly questions``
+- Every session will be recorded (ask me if the recording has been started, I tend to forget it)
 
 ## How to contact me:
 - email: info.epuce@gmail.com
@@ -16,14 +16,14 @@
 ### Download visual studio code: [link](https://code.visualstudio.com/download)
 ### Create a github profile: [link](https://github.com/signup)
 * Download git: [link](https://git-scm.com/downloads)
-
-* Add the ssh key
-    * run "ssh-keygen -t rsa -b 4096 -C "your_email@example.com" [link](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-    * press enter on all the questions
-    * run "eval "$(ssh-agent -s)""
-    * run "ssh-add ~/.ssh/id_rsa"
-    * copy all the content printed out "cat ~/.ssh/id_rsa.pub"
-    * add the kay in github [link](https://github.com/settings/keys)
+* Use VScode extension - Github
+    * Or Add the ssh key: [step by step introduction](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+        * run "ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+        * press enter on all the questions
+        * run "eval "$(ssh-agent -s)""
+        * run "ssh-add ~/.ssh/id_rsa"
+        * copy all the content printed out "cat ~/.ssh/id_rsa.pub"
+        * add the kay in github [link](https://github.com/settings/keys)
 
 * Checkout the project that was created: 
 ```bash
