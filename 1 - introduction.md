@@ -27,7 +27,7 @@
 
 * Checkout the project that was created: 
 ```bash
-git clone git@github.com/epuce/girls-go-tech.git
+git clone https://github.com/epuce/she-goes-tech.git
 ```
 
 * Create your own branch were all your work will be stored
