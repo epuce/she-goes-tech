@@ -1,1 +1,1 @@
-# she-goes-tech
+# neringa-nedzinskiene
