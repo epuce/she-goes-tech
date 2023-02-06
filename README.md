@@ -1,1 +1,1 @@
-# she-goes-tech
+# Ieva Zvanitaja Rubine
