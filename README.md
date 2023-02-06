@@ -1,1 +1,2 @@
-These are the changes
+Life as a rainbow
+full of colors
