@@ -1,1 +1,1 @@
-# girls-go-tech
+# she-goes-tech
