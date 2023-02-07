@@ -43,33 +43,27 @@ git push origin your-name-surname
 ```
 
 * Other commands
-    * git log (looks at commit history on current branch)
-    * git reflog (changes made on branch)
-    * git diff (not staged file changes)
-    * git status (look at files that hav changed)
-    * git reset HEAD~1 (1 - commits to be reset, can use hash instead)
-    * git checkout ./path/to/file.html (revert changes that are made to file)
-    * git fetch (sync change references with origin)
-    * git branch -d branch-name
+    * `git log` (looks at commit history on current branch)
+    * `git reflog` (changes made on branch)
+    * `git diff` (not staged file changes)
+    * `git status` (look at files that hav changed)
+    * `git reset HEAD~1` (1 - commits to be reset, can use hash instead)
+    * `git checkout` ./path/to/file.html (revert changes that are made to file)
+    * `git fetch` (sync change references with origin)
+    * `git branch -d branch-name` (create a new branch locally)
 
 * Get latest changes
-    * on top of your changes - git pull
-    * on top of branch you are pulling from - git pull --rebase origin branch-name
+    * on top of your changes - `git pull`
+    * on top of branch you are pulling from - `git pull --rebase origin branch-name`
 
 * .gitignore
     * file where we state the files, directories are stated to be ignored from git (cache, logs, packages)
 
 ### Git checkup
-* Create new project
-* Get it locally on your machine
+* Checkout a new branch: your-name-surname-v2
 * Create a new file
-* Push two different commits to origin/master
-* Create new branch based on current master
-* Add one commit to newly created branch
-* Push to newly created branch
-* Create pull (merge) request and merge the changes
-* Switch back to local master branch
+* Push two different commits to origin/your-name-surname-v2
+* Create pull (merge) request against your-name-surname and merge the changes
+* Switch back to your-name-surname
 * Get newly merged changes
-* Push new commit to origin/master
-
--- add a new file to the project where your-name-surname branch is located with the name `task-1.txt` and push the changes to remote
+* Push new commit to your-name-surname
