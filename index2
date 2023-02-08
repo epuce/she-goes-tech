@@ -6,4 +6,5 @@
   <body>
     <h1>Just a sample</h1>
     <p>second change to commit to github</p>
+    <div>changes not pushed to github</div>
   </body>
