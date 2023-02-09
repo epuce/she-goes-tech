@@ -7,5 +7,11 @@ var myObject = {
   userEmail : "Agne@agne.com"  
 };
 var myUndefined = a;
+var myUndefined1 = undefined; 
+var myUndefined2 
+
 var myNull = null;
-var myNaN = NaN; 
+
+var myNaN = NaN;
+var myNaN1 = parseInt("RandomText");
+
