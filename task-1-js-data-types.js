@@ -9,7 +9,7 @@ var days = ["pirmdiena", "otrdiena", "trešdiena", "ceturtdiena", "piektdiena"]
 
 var contact = {phone: 22320020, name: "Līga"}
 
-var undefined = []
+var undefined
 
 var number = null
 
