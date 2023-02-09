@@ -13,4 +13,6 @@ var account = {name: "unknown",
    user.names
    undefined
 
-   
+   var notThere = null
+
+   var NotANumber = NaN
