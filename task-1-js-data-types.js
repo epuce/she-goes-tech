@@ -6,3 +6,4 @@ const someObject = {name: "Goda", age: 10};
 const someUndefined = undefined;
 const someNull = null;
 const someNotaNumber = parseInt("Goda");
+
