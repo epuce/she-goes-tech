@@ -1,7 +1,7 @@
-var name = "John"
-var name1 = 'John'
+var name = "Liucija"
+var name1 = 'Liuc'
 
-var num = 412
+var num = 420
 
 var bool = true
 var bool1 = false
