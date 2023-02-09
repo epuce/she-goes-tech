@@ -139,7 +139,7 @@ person.name = "Alex"
 4. While **var** and **let** can be declared without being initialized, **const** must be initialized during declaration.
 
 ## Checkup
-### add a new file named task-2.js where all these actions will be performed
+### add a new file named task-1-js-data-types.js where all these actions will be performed
 1. Create a variable and assign a **string** to it
 2. Create a variable and assign a **number** to it
 3. Create a variable and assign a **boolean** to it
@@ -149,7 +149,7 @@ person.name = "Alex"
 7. Create a variable with **null** value
 8. Create a variable with **NaN** value
 
-After finishing push the file task-2.js to your github branch
+After finishing push the file task-1-js-data-types.js to your github branch
 
 ```JavaScript
 // How to test
@@ -226,10 +226,10 @@ false || false // No (false)
 ```
 
 ## Checkup
-### add a new file named task-3.js where all these actions will be performed
+### add a new file named `task-3-js-conditions.js` where all these actions will be performed
 - Write a `if/else` condition where if variable `money` is bigger than 0 we print out `You have *money*$` else print out `You have no money`
 - write a `switch` where the passed parameter is `animal` and based on the value we return `*animal name* say *animal noise*`
 - Write a condition that uses the AND symbol
 - Write a condition that uses the OR symbol
 
-After finishing push the file task-3.js to your github branch
+After finishing push the file task-3-js-conditions.js to your github branch
