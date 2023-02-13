@@ -37,6 +37,7 @@ if (name == "Matt" && favColor == "Blue"){
     alert ("The name and the color was wrong")
 }
 
+//teachers suggestion:  
 if (10 > 5 && 10 > 0) {
     alert("10 is bigger than 5 AND 0")
 } else if (true||false) {
