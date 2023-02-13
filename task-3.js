@@ -16,6 +16,7 @@ switch (animal) {
     break;
   default:
     console.log("There's no such sound");
+    break;
 }
 
 5 > 1 && 6 > 3
