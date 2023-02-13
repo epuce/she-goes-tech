@@ -1,23 +1,24 @@
 let money = 1;
-(money>0) ? console.log(`You have ${money}$`) : console.log("You have no money");
+(money>0) ? alert(`You have ${money}$`) : alert("You have no money");
 
 
-let animal = "dog";
+let animal = "mouse";
 switch (animal) {
     case "cat":
-        console.log (`${animal} says meow`);
+        alert(`cat says meow`);
     break;
     case "dog":
-        console.log (`${animal} says woof`);
+        alert(`dog says woof`);
     break;
     default:
-        console.log("I don't know what kind of animal this is");
+        alert("I don't know what this animal says");
+    break;
 };
 
 let numberOfBreadSlices = 1;
 let numberOfHamSlices = 1;
-numberOfBreadSlices>0 && numberOfHamSlices>0 ? console.log ('You can make a sandwich!') : console.log("No sandwich for you");
+numberOfBreadSlices>0 && numberOfHamSlices>0 ? alert('You can make a sandwich!') : alert("No sandwich for you");
 
 let numberOfWaterGlasses = 1;
 let numberOfColaGlasses = 1;
-numberOfWaterGlasses>0 || numberOfColaGlasses>0 ? console.log ('You have something to drink') : console.log("There is no drink for you");
+numberOfWaterGlasses>0 || numberOfColaGlasses>0 ? alert('You have something to drink') : alert("There is no drink for you");
