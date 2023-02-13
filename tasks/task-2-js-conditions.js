@@ -1,6 +1,6 @@
 var money;
 if (money > 0 ) {
-    console.log('You have' *money*$);
+    console.log('You have' + money + "$");
 }
 else {
     console.log('You have no money');
