@@ -1,3 +1,4 @@
+"use strict";
 var myName = "Neringa";
 var myAge = 31;
 var isOld = false;
