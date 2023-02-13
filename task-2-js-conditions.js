@@ -18,5 +18,14 @@ switch(animal) {
         break
 }
 
-20 > 6 && 10 > 5
-20 < 6 || 10 > 5
+if ((10>5) && (12>6)) {
+    alert("true")
+}   else {
+    alert("false")
+}
+
+if ((10>5) || (1>5)) {
+    alert("true")
+}   else {
+    alert("false")
+}
