@@ -1,4 +1,10 @@
 var money = 10
+if (money > 0) {
+    alert ("You have money " + money + "$")
+}   else {
+    alert ("You have no money")
+}
+
 var animal = "cat"
 switch(animal) {
     case "cat":
