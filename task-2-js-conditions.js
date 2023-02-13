@@ -1,11 +1,12 @@
 var money = 10; 
 if (money > 0) {
-    alert ("You have *money*$")
+    alert ("You have " + money + "$")
     } else {
     alert ("You have no money")
 };
 
 var animal = "Sheep";
+
 switch(animal) {
     case "Cow": 
        alert ("Cow says Moo")
@@ -34,4 +35,10 @@ if (name == "Matt" && favColor == "Blue"){
     alert ("Either the name or the fav color is correct")
 } else {
     alert ("The name and the color was wrong")
+}
+
+if (10 > 5 && 10 > 0) {
+    alert("10 is bigger than 5 AND 0")
+} else if (true||false) {
+    alert ("if one is true, the block is true")
 }
