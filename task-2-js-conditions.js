@@ -1,0 +1,1 @@
+var money = 0
