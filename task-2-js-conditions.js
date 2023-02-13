@@ -25,7 +25,7 @@ var userName = "John";
 
 if (age >= 18 && userName === "John") {
     alert ("Welcome")
-} else if (age <= 18 || name !== "John") {
+} else if (age <= 18 || userName !== "John") {
     alert ("Are you realy welcome?")
 } else {
     alert ("Go away!")
