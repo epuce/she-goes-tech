@@ -22,4 +22,14 @@ switch(animal){
     5>2 && 3>1
 
     5>2 || 3 <5
-    
+
+var height = 160;
+var Name = "Liucija";
+
+if (height >= 160 && Name === "Liucija") {
+    alert ("You can go")
+} else if (height <= 160 || Name !== "Liucija") {
+    alert ("I am no sure")
+} else {
+    alert ("Grow up")
+}
