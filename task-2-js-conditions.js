@@ -1,12 +1,12 @@
-var money = 5
+var money = 0
 if (money > 0) {
-    alert ("you have *money*$")
+    alert ("You have " + money + "$")
 } else {
     alert ("You have no money")
 }
 
 var animal = "cat"
-switch (cat) {
+switch (animal) {
     case "cat":
         alert ("cat say miaw")
         break
