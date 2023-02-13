@@ -1,6 +1,6 @@
 var money = 5;
 if (money>0){
-    alert ('You have *money*$')
+    alert (" You have " + money + "$")
 } else {
     alert ('You have no money')
 }
