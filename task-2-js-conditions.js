@@ -15,6 +15,8 @@ switch(animal) {
     case "Cow":
         console.log("Cow says moo");
         break;
+    default:
+        console.log("There is no animal")
 }
 
 var a = 1;
