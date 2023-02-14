@@ -1,7 +1,7 @@
 var money = 10
 
 if (money>0) {
-    alert("You have *money*$")
+    alert("You have" + money + "$")
 } else {"You have no money"}
 
 
