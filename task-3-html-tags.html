@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+
+  <body>
+    <!-- Create a table that represents users. Have 3 columns: ID, name, email. Have a head row that represents the column. Add 3 rows filled with data. -->
+    <table>
+      <thead>
+        <th>ID</th>
+        <th>User name</th>
+        <th>Email</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>John</td>
+          <td>john@john.com</td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>Steve</td>
+          <td>steve@steve.com</td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>Peter</td>
+          <td>peter@peter.com</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Create a form with 3 different input types  -->
+    <form>
+      <div>
+        <label for="fname">First name:</label><br />
+        <input type="text" id="fname" name="fname" value="Kriste" /><br />
+      </div>
+
+      <div>
+        <label for="email">Email:</label><br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="kriste@kriste.com"
+        /><br />
+      </div>
+
+      <div>
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" value="kriste" />
+      </div>
+
+      <div>
+        <label for="search">Search:</label><br />
+        <input
+          type="search"
+          id="search"
+          name="search"
+          value="search for something..."
+        />
+      </div>
+
+      <div>
+        <label for="upload">Upload:</label><br />
+        <input type="file" id="upload" name="upload" />
+        <input type="submit" value="upload" />
+      </div>
+
+      <div>
+        <label for="checkbox">Subscribe:</label>
+        <input type="checkbox" id="checkbox" name="checkbox" />
+      </div>
+
+      <button type="button">Save</button><br />
+      <button type="submit">Submit</button><br />
+      <button type="reset">Reset</button><br />
+    </form>
+
+    <div>
+      <label>Favorite cars:</label>
+      <select>
+        <option>Bmw</option>
+        <option>MB</option>
+        <option>Audi</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Description</label><br />
+      <textarea>I have something to say</textarea>
+    </div>
+
+    <!-- Create an order or unordered groceries list with 5 items -->
+
+    <ol>
+      <li>Milk</li>
+      <li>Bread</li>
+      <li>Meat</li>
+      <li>Bannanas</li>
+      <li>Sugar</li>
+    </ol>
+
+    <ul>
+      <li>Milk</li>
+      <li>Bread</li>
+      <li>Meat</li>
+      <li>Bannanas</li>
+      <li>Sugar</li>
+      <ul>
+        <li>Milk</li>
+        <li>Bread</li>
+        <li>Meat</li>
+        <li>Bannanas</li>
+        <li>Sugar</li>
+      </ul>
+    </ul>
+
+  </body>
+</html>
