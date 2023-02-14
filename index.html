@@ -1,9 +1,127 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>HELLO</title>
+    <!--this is a tab name-->
+  </head>
 
   <body>
-    edit some text add some new text
+    Hi, it's me!
+    <h1>I am h1</h1>
+    <!--most important pats-->
+    <h2>I'm h1</h2>
+    <h3>I'm h2</h3>
+    <h4></h4>
+    <h5></h5>
+    <h6></h6>
+    <h7></h7>
+    <!--TABLE-->
+    <table>
+      <!--everything inside will be treated as a table. Tables adjust to viewport-->
+      <thead>
+        <tr>
+          <!--table head-->
+          <th>
+            <!--to specify a cell within a header. These will be column titles-->
+            ID
+          </th>
+          <th>User name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!--table row. Everything inside is treated as 1 row-->
+          <td>1</td>
+          <td>info.neringa</td>
+          <td>info.neringa@gmail..com</td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>john.price</td>
+          <td>price@yahoo.com</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>jimJimmy</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form>
+      <div>
+        <!--this is just a plain wrapper-->
+        <label for="userName">User name</label>
+        <input
+          id="userName"
+        /><!--we cannot apply child elements, that's why they are self closing-->
+      </div>
+      <div>
+        <label for="subscribeCheckbox">Subscribe to news feed</label
+        ><!--once you click on the label, checkbox is checked or unckecked. This is  the result of "for" attribute added-->
+        <input
+          id="subscribeCheckbox"
+          type="checkbox"
+        /><!--we added type attribute, by default it is text-->
+      </div>
+      <input
+        type="password"
+      /><!--with attribute "type=password" once we type we don't see what we are typing-->
+      <input type="color" />
+      <input
+        type="email"
+      /><!--this is as text input, just for browser to undertand that email has . and @ symbols-->
+      <input
+        type="number"
+      /><!--we immediately get number keyboard, we cannot type letters, only numbers-->
+      <div>
+        <label>Favorite food</label>
+        <select>
+          <option>Pizza</option>
+          <option>Hot dog</option>
+          <option>Burger</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Description</label>
+        <textarea>I have something to say...</textarea
+        ><!--dynamic field which we can resize, different from input-->
+      </div>
+      <input
+        type="button"
+        value="Save"
+      /><!--this is the same as button with type "button"-->
+      <button type="button">Save</button>
+      <button type="submit">Submit</button
+      ><!--once we click on button, the data is sent to the server. Type "button" mean it is just button, the data is not sent anywhere. By default, the type is "submit"-->
+      <button type="reset">Reset</button
+      ><!--type "reset" clears the form-->
+    </form>
+
+    <ol>
+      <!--ordered list-->
+      <li>Clean house</li>
+      <li>Wash the dishes</li>
+      <li>Take out the dog</li>
+    </ol>
+    <ul>
+      <!--unordered list-->
+      <li>Pizza</li>
+      <li>Hot dog</li>
+      <li>Burger</li>
+    </ul>
+
+    <a href="https://www.google.com/" target="_blank">Link to google</a
+    ><!--the link tag. Target attribute explains how to open the link: in a new window or in the same one. "blank" means it will open in a new tab-->
+
+    <img
+      src="https://ychef.files.bbci.co.uk/1280x720/p07ryyyj.webp"
+      alt="Nice cat picture"
+    /><!--if img is not loaded we get the text which is written next to alt attribute-->
   </body>
   <script type="text/javascript" src="task-3.js"></script>
 </html>
