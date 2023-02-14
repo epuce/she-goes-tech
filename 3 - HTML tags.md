@@ -116,9 +116,9 @@
 ```
 
 ## Checkup
-### add a new file named task-4.html where all these actions will be performed
+### add a new file named `task-3-html-tags.html` where all these actions will be performed
 - Create a table that represents users. Have 3 columns: ID, name, email. Have a head row that represents the column. Add 3 rows filled with data.
 - Create a form with 3 different input types and a `save` button.
-- Create an order or unordered groceries list with 5 items
+- Create an ordered groceries list with 5 items where one list item has a child list
 
-After finishing push the file task-4.html to your github branch    
+After finishing push the newly created file to github
