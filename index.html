@@ -5,6 +5,74 @@
     <title>HELLO</title>
     <!--this is a tab name-->
   </head>
+  <style>
+    td,
+    th {
+      border: 1px solid black;
+      color: gray;
+    }
+    .id-cell {
+      color: red;
+      font-weight: 700;
+      display: block;
+      text-decoration: underline;
+      font-size: 24px;
+      text-align: center;
+      width: 70px;
+      transform: scale(1.2);
+    } /*this is class selector*/
+    th.color-red {
+      color: #0000ff;
+      color: rgb(0, 0, 255);
+      color: rgba(0, 0, 255, 0.1);
+      color: hsl(0, 50%, 30%);
+      color: hsla(100, 100%, 50%, 0.1);
+    } /*we want to add color only to th element with class color-red*/
+    td.color-red {
+      color: lightcoral;
+      width: 100px;
+      font-size: 23px;
+      text-decoration: underline;
+    }
+    .width-500 {
+      width: 200px;
+    }
+    /* input {
+      width: 70%;
+    } */
+    .width-500 input {
+      width: 30%;
+    } /*only inout inside the element that has class width-500 will have this style*/
+    div {
+      width: 50vw;
+    }
+    #user-name {
+      color: blue;
+    } /*this is id selector*/
+    .id-cell.background-dark {
+      background: yellow;
+    } /*we choose element which has these two classes*/
+    * {
+    } /*we select all the elements*/
+    .width-500 * {
+    } /*we choose all the elements with this class*/
+    input:focus {
+      border: 1px solid green;
+      outline: none;
+    }
+    button:hover {
+      background: red;
+    }
+    a:visited {
+      color: black;
+    }
+    td:not(.id-cell) {
+    } /*we exclude selector that we note inside brackets*/
+  </style>
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  /><!--adds stylesheet file to HTML, a good practise example-->
 
   <body>
     Hi, it's me!
@@ -22,30 +90,30 @@
       <thead>
         <tr>
           <!--table head-->
-          <th>
+          <th class="id-cell background-dark">
             <!--to specify a cell within a header. These will be column titles-->
             ID
           </th>
-          <th>User name</th>
+          <th class="color-red">User name</th>
           <th>Email</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <!--table row. Everything inside is treated as 1 row-->
-          <td>1</td>
-          <td>info.neringa</td>
+          <td class="id-cell width-500">1</td>
+          <td class="color-red background-dark">info.neringa</td>
           <td>info.neringa@gmail..com</td>
         </tr>
 
         <tr>
-          <td>2</td>
+          <td class="id-cell">2</td>
           <td>john.price</td>
           <td>price@yahoo.com</td>
         </tr>
         <tr>
-          <td>3</td>
-          <td>jimJimmy</td>
+          <td class="id-cell">3</td>
+          <td id="user-name">jimJimmy</td>
           <td></td>
         </tr>
       </tbody>
@@ -123,5 +191,5 @@
       alt="Nice cat picture"
     /><!--if img is not loaded we get the text which is written next to alt attribute-->
   </body>
-  <script type="text/javascript" src="task-3.js"></script>
+  <script type="text/javascript" src="task-2.js"></script>
 </html>
