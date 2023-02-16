@@ -1,0 +1,62 @@
+*{
+    text-align: center;
+}
+
+p{
+    font-weight: 600;
+}
+
+.li-element{
+    color: blue;
+}
+
+.li-child{
+    color:blueviolet;
+}
+
+.paragr2{
+    color:green;
+}
+
+.color-red{
+    color: red;
+}
+
+.paragr3.color-red{
+    font-style: italic;
+}
+
+ol{
+    list-style-position: inside;
+}
+
+.paragr1, .paragr2{
+    text-transform: uppercase;
+}
+
+form{
+    display: inline-block;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+label:not(.pass){
+text-transform: uppercase;
+}
+
+button:hover{
+    background-color: white;
+}
+
+button:active{
+    background-color: darkslategrey;
+}
+
+input:focus{
+    border-width: 2px;
+    text-align: left;
+}
+
+#list{
+    text-decoration: underline;
+}
