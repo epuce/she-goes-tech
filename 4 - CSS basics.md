@@ -93,15 +93,15 @@
 ### [Full list of all CSS selectors](https://www.w3schools.com/cssref/css_selectors.asp)
 
 ## Checkup
-### add a new file named task-5.css where all these actions will be performed
+### add a new file named task-4-css-selectors.html where all these actions will be performed
+### add the appropriate tag and it's selector to the file
 
 1. HTML element
 2. specific HTML child elements
 3. Element that has two classes
-4. All first level child elements
-5. All child elements
-6. All elements with a specific attribute
-7. Style two elements the same
-8. Style all selected elements that don't use a specific class
-9. Add style to an element when it's hovered
-10. Use a state selector that is not mentioned in this file, choose from [link]
+4. All elements
+5. Style two elements the same
+6. Style all selected elements that don't use a specific class
+7. Add style to an element when it's hovered
+8. Use a state selector
+9. Style an element based on it's ID
