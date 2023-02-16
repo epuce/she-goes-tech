@@ -6,6 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yes it works</title>
   </head>
+  <style>
+    td,
+    th {
+      border: 1px solid black;
+      color: grey;
+    }
+
+    .id-cell {
+      color: aqua;
+      font-weight: 600;
+      width: 104px;
+      font-size: 24px;
+      text-decoration: underline;
+      display: block;
+      text-align: center;
+      
+    }
+
+    th.color-red {
+      color: #000099;
+      color: rgb(0, 120, 102);
+      color: rgba(10, 55, 120, 0.1);
+      color: hsl(0, 50%, 90%);
+      color: hsla(0, 50%, 30%, 0.3);
+    }
+
+    .width-500 * {
+
+    }
+
+    td.color-red {
+      color: lightcoral;
+    }
+
+    #userName {
+      width: 200px;
+    }
+
+    .id-cell.background-dark {
+
+    }
+
+    .width-500 {
+      width: 400px;
+    }
+
+    .width-500 input {
+      width: 50%;
+    }
+
+    input:focus {
+      border: 1px solid #00aa00;
+      outline: none;
+    }
+
+    button:hover {
+      background: red;
+    }
+
+    a:visited {
+      color: red;
+    }
+
+    td:not(.id-cell) {
+      
+    }
+
+  </style>
+  <link rel="stylesheet" href="./style.css" />
   <body>
     <h1>I am h1</h1>
     <h2>I am h2</h2>
@@ -14,23 +83,26 @@
 
     <table>
       <thead>
-        <th>ID</th>
-        <th>User name</th>
+        <th class="id-cell background-dark" style="width: 100px">ID</th>
+        <th class="color-red">User name</th>
         <th>Email</th>
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
-          <td>info.john</td>
+          <td class="id-cell width-500" >
+            1
+            <input>
+          </td>
+          <td class="color-red">info.john</td>
           <td>info@gmail.com</td>
         </tr>
         <tr>
-          <td>2</td>
+          <td class="id-cell">2</td>
           <td>lisa.hello</td>
           <td>lisa@gmail.com</td>
         </tr>
         <tr>
-          <td>3</td>
+          <td class="id-cell">3</td>
           <td>i.am.leo</td>
           <td></td>
         </tr>
@@ -104,9 +176,12 @@
 
     <a href="https://www.google.com" target="_blank">Link to Google</a>
 
-    <img src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg">
-    <img src="./original.avif">
-    <img src="./non-existing-image.png" alt="Nice cat picture">
+    <img
+      src="https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_3x4.jpg"
+    />
+    <img src="./original.avif" />
+    <img src="./non-existing-image.png" alt="Nice cat picture" />
 
     <!-- img example -->
+  </body>
 </html>
