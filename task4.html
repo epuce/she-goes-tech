@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    * {
+        color:brown;
+    }
+
+    .idCell.backgroundDark {
+        background-color: aqua;
+    }
+    td {
+        border: 2px solid grey;
+        border-radius: 10px;
+    }
+    button:hover {
+        background-color: red;
+        border-radius: 5px;
+    }
+    input:focus {
+        color: green;
+    }
+    :first-child {
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <body>
+        <table>
+            <thead>
+              <tr>
+                <th class="idCell backgroundDark">ID</th>
+                <th class="red">Name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="idCell">1</td>
+                <td>Linda</td>
+                <td><a href="mailto:l.lejiete@gmail.com">l.lejiete@gmail.com</a></td>
+              </tr>
+              <tr>
+                <td class="idCell">2</td>
+                <td class="red">Anna</td>
+                <td><a href="mailto:a.sakse@gmail.com">a.sakse@gmail.com</a></td>
+              </tr>
+              <tr>
+                <td class="idCell">3</td>
+                <td>Pete</td>
+                <td><a href="mailto:pete@gmail.com">pete@gmail.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+    
+          <form>
+            <div>
+              <label for="Name"><strong>Name</strong></label>
+              <input id="Name" />
+            </div>
+      
+            <div>
+              <label for="subscribeCheckbox">Subscribe</label>
+              <input id="subscribeCheckbox" type="checkbox" />
+            </div>
+      
+            <div>
+              <label>Favorite animal</label>
+              <select>
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+              </select>
+            </div>
+            <button type="button">Save</button>
+          </form>
+          <ol>
+            <li>Bread</li>
+            <li>Milk</li>
+            <li>Veggies</li>
+            <li>
+              Fruits:
+              <ul>
+                <li>Apples</li>
+                <li>Oranges</li>
+                <li>Bananas</li>
+              </ul>
+            </li>
+          </ol>
+</body>
+</html>
