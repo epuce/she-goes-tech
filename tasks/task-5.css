@@ -1,0 +1,36 @@
+table {
+    background: grey;
+}
+
+table > thead {
+    color: green;
+    
+}
+
+.line.one {
+    color: white;
+}
+
+* {
+    background: rgb(150, 147, 147);
+}
+
+label, button {
+    text-transform: uppercase;
+}
+
+label:not(.sensitive) {
+    color: rgb(153, 30, 30);
+}
+
+button:hover {
+    background: green;
+}
+
+input:active {
+    background: white;
+}
+
+#name {
+    border-radius: 4px;
+}
