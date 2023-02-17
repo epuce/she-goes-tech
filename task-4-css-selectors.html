@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4</title>
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAANTU1AJmZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIhAAAAAAAAAiEAAAAAAAACIQAAAAAAAAIhAAAAAAAAAiEAAAIiIiIiIiEAAiIiIiIiIQACIQAAAiEAAAAiEAACIQAAAAIhAAIhAAAAACIQAiEAAAAAAiECIQAAAAAAIhIhAAAAAAACIiEAAAAAAAAiIQAAAAAAAAIhAAD/jwAA/48AAP+PAAD/jwAA/48AAIADAACAAwAAj48AAMePAADjjwAA8Y8AAPiPAAD8DwAA/g8AAP8PAAD/jwAA" rel="icon" type="image/x-icon" />
+
+    
+</head>
+<style>
+body {
+    padding: 20px;
+    background: #faf5e4;
+} 
+
+/* 4. All elements */
+* {
+    font-family: Arial, sans-serif; 
+    color: #2c786c; 
+  
+}
+
+h1, h2, h3 {
+    color:#004445
+}
+
+/* 9. Style element based on ID */
+#introText {
+ text-align: justify;
+ /* text-justify: inter-word; */
+}
+
+.screenWidth {
+  width: 50vw;
+}
+
+/* 5. Style two elements the same */
+/* 8. Use a state selector */
+.input:focus, .additionalText:focus {
+ border: 3px solid #2c786c;
+ outline: none; 
+}
+
+.button {
+  transition-duration: 0.4s;
+  background-color: #004445;
+  color: #faf5e4;
+  padding: 5px;
+}
+
+/* 7. Style when hovered */
+.button:hover {
+  background-color: #f8b400;
+  color: #004445;
+}
+
+table, th, td {
+  border: 1px solid #faf5e4;
+  border-collapse: collapse;
+}
+
+table {
+    background-color: #004445;
+    /* width: 50vw; */
+}
+th, td {
+  color: #faf5e4;
+  padding: 10px;
+}
+th {
+    color: #f8b400;
+}
+
+/* 6. style all elements that do not use a specific class  */
+li:not(.reasonNotBold){
+font-weight: 600;
+}
+
+.id-cell {
+    font-weight: 600; 
+}
+
+
+
+/* <link rel="stylesheet" href="path/to/file.css"> */
+</style>
+
+<body>
+    
+<h1>Welcome to Task 4</h1>
+
+<h2>Learning CSS</h2>
+
+<h3>Random text on why you should fill form</h3> 
+
+<!-- Div wrapping reasons to join. div is parent element, p and ul are child elements in relation to div. li elements are siblings, same parent ul -->
+<div> 
+
+<p id="introText">Lorem ipsum dolor sit amet adipiscing bibendum sem orci tempus aliquet gravida, orci amet iaculis aptent blandit quam accumsan donec in facilisis, cursus ante curabitur aliquet condimentum tincidunt facilisis non cubilia lorem et pretium aliquam phasellus ipsum metus quisque auctor tristique donec nibh, praesent congue ultricies aenean ornare ligula sagittis proin sed vestibulum purus tempus aenean neque aliquam curae vivamus purus egestas ligula tincidunt nullam.</p>
+
+<h3>A list of reasons to subscibe / fill form:</h3> 
+<ul>
+  <li class="reasonNotBold">Meet people</li>
+  <li class="reasonNotBold">Learn things</li>
+  <li class="reasonBold">Have fun!</li>
+</ul> 
+
+</div>
+
+<h3>Our sign up form</h2>
+    <form class="screenWidth">
+      <div>
+        <label for="name">Enter your name:</label>
+        <br>
+        <input id="name" class="input screenWidth">
+        <br>
+      </div>
+
+      <div>
+        <label for="email">Enter your email:</label>
+        <br>
+        <input id="email" type="email" class="input screenWidth">
+        <br>
+        
+      </div>
+
+
+      <div>
+        <label for="favAnimal">Select your favourite animal:</label>
+        <br>
+        <select id="favAnimal" class="screenWidth">
+          <option value="cat">cat</option>
+          <option value="dog">dog</option>
+          <option value="horse">horse</option>
+          <option value="other">other</option>
+        </select>
+        <br>
+      </div>
+
+    
+
+      <div>
+        <label for="additionalText">Add comments:</label>
+        <br>
+        <textarea id="additionalText" class="additionalText screenWidth">Add your thoughts here</textarea>
+        <br>
+      </div>
+
+      <div>
+        <label for="subscribe">Subscribe to our news:</label>
+        <input id="subscribe" type="checkbox">
+      </div>
+
+   
+      <button type="submit" class="button screenWidth">Save</button>
+    </form>
+
+<h3> Other peoples responses: </h3>
+<h4> Meet your peers! </h4>
+
+<!-- 3. element that has two classes -->
+<table class="table screenWidth">
+  <thead >
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Favourite Animal</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr>
+      <td class="id-cell">1</td>
+      <td>Agne</td>
+      <td>agne@email.com</td>
+      <td>Dog</td>
+      <td>No comments!</td>
+    </tr>
+    <tr>
+      <td class="id-cell">2</td>
+      <td>John</td>
+      <td>john@email.com</td>
+      <td>Cat</td>
+      <td>-</td>
+
+    </tr>
+    <tr>
+      <td class="id-cell">3</td>
+      <td>Matt</td>
+      <td>matt@email.com</td>
+      <td>Other</td>
+      <td>Hi all!</td>
+
+    </tr>
+    <tr>
+      <td class="id-cell">4</td>
+      <td>Rosie</td>
+      <td>rosie@email.com</td>
+      <td>Dog</td>
+      <td>No comments</td>
+
+    </tr>
+  </tbody>
+</table>
+
+<p id="outroText">Thanks and bye!</p>
+
+    
+</body>
+</html>
