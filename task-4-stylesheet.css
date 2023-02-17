@@ -1,0 +1,72 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+table {
+    width: 50%;
+    margin: auto;
+}
+
+.table-head-row {
+    font-size: 30px;
+    color: #0c5744;
+}
+
+.table-body tr {
+    text-align: center;
+}
+
+.id {
+    font-style: italic;
+}
+
+.id.special {
+    color: red;
+}
+
+.form {
+    border: 4px double #005522;
+    margin: 10px;
+    padding: 1%;
+}
+
+.button {
+    color: #b34dab;
+    font-size: 20px;
+    padding: 2px 20px;
+    box-shadow: 5px 5px;
+    margin: 20px;
+}
+
+.checkbox {
+    width: 20px;
+    height: 40px;
+    vertical-align: bottom;
+}
+
+.check-box-label {
+    display: inline-block;
+    padding: 15px 0px;
+}
+
+input:not(.checkbox):hover {
+    border-radius: 5px;
+    box-shadow: 0 3px 0px 3px rgb(133 181 39);
+}
+
+a:visited {
+    color: #b34dab;
+}
+
+#groceries {
+    margin-block-end: 0;
+}
+
+ol {
+    margin-block-start: 2px;
+}
+
+.ordered-list li{
+    font-variant: small-caps;
+}

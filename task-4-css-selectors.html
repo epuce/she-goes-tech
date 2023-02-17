@@ -1,82 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<style>
+  <link rel="stylesheet" href="./task-4-stylesheet.css" />
 
-
-    
-</style>
-
-
-<body>
+  <body>
     <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
+      <thead>
+        <tr class="table-head-row">
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
 
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>John</td>
-                <td>john@gmail.com</td>
-            </tr>
+      <tbody class="table-body">
+        <tr>
+          <td class="id">1</td>
+          <td>John</td>
+          <td>john@gmail.com</td>
+        </tr>
 
-            <tr>
-                <td>2</td>
-                <td>Anne</td>
-                <td>anne@yahoo.com</td>
-            </tr>
+        <tr>
+          <td class="id special">2</td>
+          <td>Anne</td>
+          <td>anne@yahoo.com</td>
+        </tr>
 
-            <tr>
-                <td>3</td>
-                <td>Adam</td>
-                <td>adam@gmail.com</td>
-            </tr>
-        </tbody>
+        <tr>
+          <td class="id">3</td>
+          <td>Adam</td>
+          <td>adam@gmail.com</td>
+        </tr>
+      </tbody>
     </table>
 
-    <form>
-        <div>
-            <label for="userName">User name</label>
-            <input id="userName">
-        </div>
+    <br />
+    <br />
+    <br />
 
-        <div>
-            <label for="agreeToConditions">Please check this box to agree to terms and conditions</label>
-            <input id="agreeToConditions" type="checkbox">
-        </div>
+    <form class="form">
+      <div>
+        <label for="userName">User name</label>
+        <input id="userName" />
+      </div>
 
-        <div>
-            <label for="age">Your age</label>
-            <input id="age" type="number">
-        </div>
+      <div>
+        <label for="agreeToConditions" class="check-box-label"
+          >Please check this box to agree to terms and conditions</label
+        >
+        <input id="agreeToConditions" type="checkbox" class="checkbox" />
+      </div>
 
-        <div>
-            <button type="button">Save</button>
-        </div>
+      <div>
+        <label for="age">Your age</label>
+        <input id="age" type="number" />
+      </div>
+
+      <div>
+        <button type="button" class="button">Save</button>
+      </div>
     </form>
 
-    <ol>
-        Groceries
+    <div>
+      <h4 id="groceries">Groceries</h4>
+      <ol class="ordered-list">
         <li>Bread</li>
         <li>Milk</li>
         <li>Water</li>
         <li>Spices</li>
         <li>Other items</li>
-            <ul>
-                <li>Cleaning supplies</li>
-                <li>Sponge</li>
-            </ul>
-    </ol>
-</body>
+        <ul>
+          <li>Cleaning supplies</li>
+          <li>Sponge</li>
+        </ul>
+      </ol>
+    </div>
+
+    <a href="https://www.google.com/">Link to Google</a>
+  </body>
 </html>
