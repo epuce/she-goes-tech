@@ -1,44 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
+    <h1 id="myHeader">Important form</h1>
     <table>
-        <thead>
-            <tr>
-                <th class="id-cell color-green">ID</th>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>12345</td>
-                <td>Valda</td>
-                <td>Valda@naujok.gmail</td>
-            </tr>
-            <tr>
-                <td>54321</td>
-                <td>Mantas</td>
-                <td>mantas@gmail</td>
-            </tr>
-            <tr>
-                <td>32145</td>
-                <td>Pranciskus</td>
-                <td>prancisku@gmail</td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th class="color-blue">ID</th>
+          <th class="thin-name color-green">Name</th>
+          <th class="thin-name color-green">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>12345</td>
+          <td>Valda</td>
+          <td>Valda@naujok.gmail</td>
+        </tr>
+        <tr>
+          <td>54321</td>
+          <td>Mantas</td>
+          <td>mantas@gmail</td>
+        </tr>
+        <tr>
+          <td>32145</td>
+          <td>Pranciskus</td>
+          <td>prancisku@gmail</td>
+        </tr>
+      </tbody>
     </table>
-    <style>
-        .id-cell {
-            font-weight:100
-        }
-        .color-green
+    <form>
+        <div>
+            <textarea>Additional comment</textarea>
+        </div>
+        
+      <label> I agree to terms and conditions:</label>
+      <input type="checkbox" />
 
+      <div>
+      <a href="www.google.lt" target="blank">Terms and conditions</a>
+    </div>
+
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
+    <style>
+      th {
+        border: 2px solid black;
+
+      }
+      td {
+        border: 1px solid black;
+
+      }
+      .thin-name {
+        font-weight: 100;
+
+      }
+      .color-blue {
+        color: blue;
+      }
+
+      .color-green {
+        color: green;
+      }
+
+      button:hover {
+        background: blue;
+      }
+
+      a:visited {
+        color: red;
+      }
+
+      #myHeader {
+        color: blue;
+        text-align: center;
+      }
     </style>
-</body>
+  </body>
 </html>
