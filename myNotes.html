@@ -6,26 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+
+  <style>
+    td,
+    th {
+      border: 1px solid black;
+      color: grey;
+    }
+    .id-cell {
+      color: aqua;
+      font-weight: 600;
+      font-weigth: 600px;
+      width: 70px;
+      font-size: 24px;
+    }
+
+    div {
+      width: 50vw;
+      height: 50vh;
+    }
+    th.color-red {
+      color: crimson;
+      color: rgb(13, 209, 0);
+      color: rgba(0, 0, 12, 0.4);
+      color: hsl(1, 1, 1);
+    }
+    td.color-red {
+      color: lightcoral;
+    }
+
+    #userName {
+      width: 200px;
+    }
+
+    .id-cell.background-dark {
+    }
+    .id-cell.background-dark {
+    }
+
+    * {
+    }
+
+    .width-500 * {
+    }
+
+    input:focus {
+      border-color: #00aa00;
+    }
+  </style>
+  <link rel="stylesheet" href=". /style.css" />
   <body>
     <table>
       <thead>
-        <th>ID</th>
-        <th>User name</th>
+        <th class="id-cell background-dark" style="width: 100px">ID</th>
+        <th class="color-red">User name</th>
         <th>Email</th>
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
-          <td>alina lucane</td>
+          <td class="id-cell">1</td>
+          <td class="color-red">alina lucane</td>
           <td>alina32@gmail.com</td>
         </tr>
         <tr>
-          <td>2</td>
+          <td class="id-cell">2</td>
           <td>john johm</td>
           <td>john@gmail.com</td>
         </tr>
         <tr>
-          <td>3</td>
+          <td class="id-cell">3</td>
           <td>leila horo</td>
           <td>leila34@gmail.com</td>
         </tr>
@@ -82,8 +131,10 @@
         </ul>
       </li>
     </ol>
-<!-- image example -->
+    <!-- image example -->
     <a href="https://www.google.com/" target="_blank"> link to Google</a>
-<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=1.00xw:0.756xh;0,0.0756xh&resize=980:*">  
-</body>
+    <img
+      src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=1.00xw:0.756xh;0,0.0756xh&resize=980:*"
+    />
+  </body>
 </html>
