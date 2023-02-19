@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        font-size: 16px;
+      }
+
+      .id-first {
+        color: aqua;
+      }
+
+      #wwww,
+      #qqqq {
+        width: 200px;
+      }
+
+      .bold-hover:hover {
+        font-weight: bold;
+      }
+
+      ol > li {
+        outline-color: blue;
+      }
+
+      .div-2-specific-child-element > h1 {
+        background-color: tomato;
+      }
+      .div-3-class-one {
+        background-color: aquamarine;
+      }
+      .div-3-class-two {
+        font-family: sans-serif;
+        font-size: 20px;
+        color: blue;
+      }
+      .div-6-selected {
+        background-color: beige;
+      }
+      .div-6-selected:not(.excluded) {
+        font-weight: bold;
+      }
+      .button-change {
+        background-color: brown;
+        padding: 6px;
+        border-radius: 4px;
+        font-family: sans-serif;
+      }
+      .button-change:focus {
+        background-color: bisque;
+      }
+      .list-headings * {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>foobar</h1>
+    <table>
+      <thead>
+        <th class="id-header background-black">ID</th>
+        <th>User name</th>
+        <th id="wwww">Email</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="id-first">1</td>
+          <td class="bold-hover">alina lucane</td>
+          <td id="qqqq">alina32@gmail.com</td>
+        </tr>
+        <tr>
+          <td class="id-first">2</td>
+          <td class="bold-hover">john johm</td>
+          <td id="eeee">john@gmail.com</td>
+        </tr>
+        <tr>
+          <td class="id-first">3</td>
+          <td class="bold-hover">leila horo</td>
+          <td>leila34@gmail.com</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="div-2-specific-child-element">
+      <h1>specific HTML child element</h1>
+      <div>
+        <h1>Specific element grandchild element</h1>
+      </div>
+    </div>
+
+    <div>
+      <div class="div-3-class-one div-3-class-two">
+        <ul>
+          <li>heihihihi</li>
+        </ul>
+        Element that has two classes
+      </div>
+      <br />
+      <div class="div-3-class-one">gigigigigigi</div>
+      <br />
+      <div class="div-3-class-two">div div div</div>
+    </div>
+
+    <div>
+      Style all selected elements that don't use a specific class
+      <div class="div-6-selected">first</div>
+      <div class="div-6-selected">second</div>
+      <div class="div-6-selected excluded">third</div>
+    </div>
+    <div>
+      <button class="button-change">I change color on focus</button>
+    </div>
+    <div class="container">
+      <div class="list-headings">
+        <h1>H1</h1>
+        <h2>H2</h2>
+        <h3>H3</h3>
+      </div>
+    </div>
+  </body>
+</html>
