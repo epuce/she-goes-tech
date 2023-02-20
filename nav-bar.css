@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#nav-bar {
+    height: 80px;
+    background: #2FC1C8;
+    padding: 0 10% 0 10%;
+}
+
+.nav-bar_link {
+    height: 100%; /* same height as the parent element*/
+    width: 83px;
+    display: inline-block; /* because anchor elementis an inline element and to change its size we need it to be block or inline block*/
+}
+
+.nav-bar_link img {
+    height: 100%;
+    margin-left: -30px;
+}
+
+.menu {
+    float: right;
+    line-height: 80px; /* line height should be as high as the parent*/
+    position: relative;
+}
+
+.menu:hover .menu-dropdown {
+    display:block; /* when we have hover state for menu class, we change property for .menu-dropdown class. If we hover parent element, change child element's property*/
+}
+
+.menu-dropdown {
+    display: none; /*the element is removed from layout, not visible, not interacting with any other content on the page. It does not take up nay space on the page. Naother option is property visibility: none - in this case the element takes up space, but is not visually visible*/
+    position: absolute; /* searched for the parent with position set to relative and positions itself against that parent. if there is no parent with position relative set, then it positions itself against the body*/
+    line-height: initial; /*change properties set by parent element back to default value, ignore parent element value*/
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2FC1C8;
+    border-radius: 0 0 6px 6px;
+}
+
+.menu-dropdown li {
+    padding: 5px 10px 5px 10px;
+}
