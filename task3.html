@@ -6,28 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
+<style>
+  .idCell {
+    width: 40px;
+    font-weight: bold;
+  }
+  th {
+    border: 1px solid black;
+    width: 100px;
+  }
+  td {
+    border: 1px solid black;
+    color: black;
+    width: 140px;
+    border-radius: 10px;
+    background-color: orange;
+    text-align: center;
+  }
+  th.red {
+    color: crimson;
+  }
+  td.red {
+    color: crimson;
+  }
+  #Name {
+    width: 300px;
+  }
+  .backgroundDark {
+    background-color: grey;
+  }
+  input:focus {
+    border: 5px green;
+    outline: 5px green;
+  }
+  button:hover {
+    color: red;
+  }
+</style>
+
+
 <body>
     <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
+            <th class="idCell backgroundDark">ID</th>
+            <th class="red">Name</th>
             <th>Email</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
+            <td class="idCell">1</td>
             <td>Linda</td>
             <td><a href="mailto:l.lejiete@gmail.com">l.lejiete@gmail.com</a></td>
           </tr>
           <tr>
-            <td>2</td>
-            <td>Anna</td>
+            <td class="idCell">2</td>
+            <td class="red">Anna</td>
             <td><a href="mailto:a.sakse@gmail.com">a.sakse@gmail.com</a></td>
           </tr>
           <tr>
-            <td>3</td>
+            <td class="idCell">3</td>
             <td>Pete</td>
             <td><a href="mailto:pete@gmail.com">pete@gmail.com</a></td>
           </tr>
