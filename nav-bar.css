@@ -10,6 +10,9 @@ ul {
     font-weight: 700;
 }
 
+.main {
+    margin-top: 100px; /* Add a top margin to avoid content overlay */
+}
 
 
 #nav-bar {
@@ -17,6 +20,10 @@ ul {
     background-color: #2b6372;
     color: whitesmoke;
     padding: 0 5% 0 5%;
+    
+    position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
 }
 
 .nav-bar__link {
@@ -36,6 +43,7 @@ ul {
     float: right;
     line-height: 80px;
     /* line-height has to be the same size as the container */
+margin-right: 10%;
 }
 
 .menu:hover .menu-dropdown {
