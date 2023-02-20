@@ -1,0 +1,54 @@
+body{
+    margin: 0;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#nav-bar{
+    height: 80px;
+    background-color: seagreen;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.nav-bar__link{
+    height: 100%;
+    width: 144px;
+    display: inline-block;
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZmg4fA7ZwYx7fB7O3Em3UJzIwJoQwDbDWQw&usqp=CAU);
+    background-size: 100% 100%;
+}
+
+.nav-bar__link img{
+    height: 100%;
+}
+
+.menu{
+float: right;
+line-height: 80px;
+position: relative;
+}
+
+/* when menu is hovered, then menu-dropdown display:block */
+.menu:hover .menu-dropdown{  
+    display: block;
+}
+
+.menu-dropdown{
+    display: none;
+    position: absolute;
+    line-height: initial;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: seagreen;
+    border-radius: 0 0 4px 4px;
+}
+
+.menu-dropdown li{
+    padding: 5px 10px 5px 10px;
+}
