@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#nav-bar {
+  height: 80px;
+  background: #2fc1c8; /*we can specify a path to an image, too. With background-color we can specify only color can be set*/
+  padding: 0 10% 0 10%;
+}
+
+.nav-bar__link {
+  height: 100%; /*it will take 100% of parent elemetn nav-bar*/
+  width: 80px;
+  display: inline-block;
+}
+
+.nav-bar__link img {
+  height: 100%;
+  margin-left: -30px;
+}
+
+.menu {
+  float: right;
+  line-height: 80px; /*should be the same as container height. Item then be centered vertically*/
+  position: relative;
+}
+
+.menu:hover .menu-dropdown {
+  display: block; /*when we hover state for menu class, we change display value for .menu-dropdown*/
+}
+
+.menu-dropdown {
+  display: none; /*element is not interacting with any other element, completely remove it from the layout. Visibility would allow to have place in the layout*/
+  position: absolute; /*in regards to parent container, allows content to not jump*/
+  line-height: initial; /*means remove all the styling which was applied or inherited*/
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%) /*in regards to its own width*/;
+  background: #2fc1c8;
+  border-radius: 0 0 6px 6px;
+}
+
+.menu-dropdown li {
+  padding: 5px 10px 5px 10px;
+}
