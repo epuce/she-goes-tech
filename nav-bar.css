@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-weight: 700;
+}
+
+
+
+#nav-bar {
+    height: 80px;
+    background-color: #2b6372;
+    color: whitesmoke;
+    padding: 0 5% 0 5%;
+}
+
+.nav-bar__link {
+    height: 100%;
+    width: 80px;
+    display: inline-block;
+}
+
+.nav-bar__link img {
+    height: 100%;
+    margin-left: -5px;
+    width: 87px;
+}
+
+.menu {
+    position: relative;
+    float: right;
+    line-height: 80px;
+    /* line-height has to be the same size as the container */
+}
+
+.menu:hover .menu-dropdown {
+    display: block;
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    background: #457b9d;
+    text-align: center;
+    line-height: initial;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Transform tells how far we want to move it left or right */
+    border-radius: 0 0 6px 6px; 
+}
+
+.menu-dropdown li {
+    padding: 5px 10px 5px 10px;
+    white-space: nowrap;
+}
+
+.menu-dropdown a {
+    text-decoration: none;
+    color: white;
+
+}
+
+/* other styles */
+h1,
+h2 {
+    color: #1d3557;
+}
+
+h2,
+p,
+.sideBySide {
+    padding: 0 5% 0 5%;
+ 
+    /* margin: 20px 10px 15px 20px; */
+}
+
+/* margin: top right bottom left */
+
+.sideBySide {
+    display: flex;
+    max-width: 100%;
+}
+
+.ImgWithText {
+    float: left;
+    width: 25%;
+    padding: 5px;
+    text-align: center;
+}
+
+.exampleImage {
+    width: 100%;
+}
