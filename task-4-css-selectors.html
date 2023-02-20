@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS in HTML</title>
+</head>
+
+<style>
+    * {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+
+    table {
+        border: 1px solid black;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+
+    table .table-header {
+        color: white;
+        background-color: #04AA6D;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+
+    .name {
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    td:not(.name) {
+        color: rgb(53, 49, 49);
+    }
+
+    #table-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+</style>
+
+<body>
+    <div>
+        <h3 id="table-title">Users table</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th class="table-header">ID</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td class="name italic">Eglė</td>
+                    <td>egle@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td class="name italic">Jurga</td>
+                    <td>jurga@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td class="name italic">Tomas</td>
+                    <td>tomas@gmail.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
+</body>
+
+</html>
