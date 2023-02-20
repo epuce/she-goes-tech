@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        html {
+            background-color: rgb(152, 148, 155);
+        }
+
+        div {
+            border: 1px solid rgb(146, 62, 210)
+        }
+        
+        .one.two {
+            background-color: aqua;
+        }
+
+        * {
+            font-weight: bold;
+        }
+
+        .first, .second {
+            color: rgb(237, 24, 31)
+        }
+
+        td:not(.first) {
+            font-style: italic;
+        }
+
+        #milk:hover {
+            color: rgb(18, 226, 101)
+        }
+
+        input:focus {
+            background-color: crimson;
+        }
+
+
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        Users
+      </thead>
+      <thead>
+        <th>ID</th>
+        <th>name</th>
+        <th>email</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="one two">1</td>
+          <td>info.linda</td>
+          <td>linda@linda.com</td>
+        </tr>
+        <tr>
+          <td class="first">2</td>
+          <td>info.janis</td>
+          <td>janis@janis.com</td>
+        </tr>
+        <tr>
+          <td class="second">3</td>
+          <td>info.josh</td>
+          <td>josh@josh.com</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form>
+      <div>
+        <label for="userName">User name</label>
+        <input id="userName" />
+      </div>
+
+      <div>
+        <label for="pagePolicies">Agree to the page policies</label>
+        <input id="pagePolicies" type="checkbox" />
+      </div>
+
+      <div>
+        <label for="phoneNumber">Your phone number</label>
+        <input id="phoneNumber" type="number" />
+      </div>
+
+      <button type="save">Save</button>
+    </form>
+
+    Groceries <br>
+    List
+    
+    <ol>
+      <li id="milk">Milk</li>
+      <li>Sugar</li>
+      <li>Cookies</li>
+      <li>
+        Drinks
+        <ul>
+          <li>Orange Juice</li>
+          <li>Apple Juice</li>
+          <li>Coke</li>
+        </ul>
+      </li>
+    </ol>
+  </body>
+</html>
