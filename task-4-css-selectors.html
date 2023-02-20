@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+        color:aqua;
+    }
+
+    .parent .child {
+        font-size: small;
+    }
+
+    .color.font {
+        color:beige;
+        font: bold;
+    }
+
+    * {
+        font-style: italic;
+    }
+
+    .first-link, .second-link {
+        font-size: xx-small;
+    }
+
+    ul li:not(.without) {
+        color: red;
+    }
+
+    .first-link:hover {
+        color:blueviolet;
+    }
+    
+    ol li:first-child {
+        color:rgb(124, 100, 100);
+    }
+
+    #second-list-item {
+        font-size: larger;
+    }
+
+</style>
+
+<body>
+    <h1>Paragraph1</h1>
+    
+    <div class="parent">
+        <div class="child">Something</div>
+    </div>
+
+    <h2 class="color font">Something 2</h2>
+
+    <a class="first-link"> Some link 1 </a>
+    <a class="second-link"> Some link 2 </a>
+
+    <ul>
+        <li>first</li>
+        <li>second</li>
+        <li class="without">third</li>
+    </ul>
+
+    <ol>
+        <li>first ordered</li>
+        <li id="second-list-item">second ordered</li>
+        <li class="without">third ordered</li>
+    </ol>
+</body>
+
+</html>
