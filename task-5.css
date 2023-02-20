@@ -1,0 +1,32 @@
+td {
+  font-style: italic;
+  border: 1px solid black;
+}
+.dairyProducts {
+  color: rgb(4, 172, 60);
+}
+.usersData .emailCell {
+  color: blue;
+}
+ol * {
+  font-weight: bold;
+}
+label,
+th {
+  color: blueviolet;
+}
+:not(.dairyProducts) {
+  font-family: sans-serif;
+}
+a:hover {
+  color: rgb(105, 57, 218);
+  text-decoration: underline;
+}
+input:focus {
+  font-size: large;
+}
+#shoppingLabel {
+  font-size: larger;
+  color: brown;
+  font-weight: bolder;
+}
