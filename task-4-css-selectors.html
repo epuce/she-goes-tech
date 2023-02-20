@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task 4</title>
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAANTU1AJmZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIhAAAAAAAAAiEAAAAAAAACIQAAAAAAAAIhAAAAAAAAAiEAAAIiIiIiIiEAAiIiIiIiIQACIQAAAiEAAAAiEAACIQAAAAIhAAIhAAAAACIQAiEAAAAAAiECIQAAAAAAIhIhAAAAAAACIiEAAAAAAAAiIQAAAAAAAAIhAAD/jwAA/48AAP+PAAD/jwAA/48AAIADAACAAwAAj48AAMePAADjjwAA8Y8AAPiPAAD8DwAA/g8AAP8PAAD/jwAA" rel="icon" type="image/x-icon" />
-
     
 </head>
 <style>
@@ -41,6 +40,12 @@ h1, h2, h3 {
 .input:focus, .additionalText:focus {
  border: 3px solid #2c786c;
  outline: none; 
+}
+
+
+/* select all child elements (if only one level .parent > p) */
+.parent p {
+font-style: italic;
 }
 
 .button {
@@ -96,7 +101,7 @@ font-weight: 600;
 <h3>Random text on why you should fill form</h3> 
 
 <!-- Div wrapping reasons to join. div is parent element, p and ul are child elements in relation to div. li elements are siblings, same parent ul -->
-<div> 
+<div class="parent"> 
 
 <p id="introText">Lorem ipsum dolor sit amet adipiscing bibendum sem orci tempus aliquet gravida, orci amet iaculis aptent blandit quam accumsan donec in facilisis, cursus ante curabitur aliquet condimentum tincidunt facilisis non cubilia lorem et pretium aliquam phasellus ipsum metus quisque auctor tristique donec nibh, praesent congue ultricies aenean ornare ligula sagittis proin sed vestibulum purus tempus aenean neque aliquam curae vivamus purus egestas ligula tincidunt nullam.</p>
 
