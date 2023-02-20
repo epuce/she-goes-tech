@@ -12,8 +12,8 @@
       <thead>
         <tr>
           <th class="color-blue">ID</th>
-          <th class="thin-name color-green">Name</th>
-          <th class="thin-name color-green">Email</th>
+          <th class="name-tag thin-name">Name</th>
+          <th class="email-tag thin-name">Email</th>
         </tr>
       </thead>
       <tbody>
@@ -67,8 +67,8 @@
         color: blue;
       }
 
-      .color-green {
-        color: green;
+      .name-tag, .email-tag {
+        color: green
       }
 
       button:hover {
@@ -82,6 +82,10 @@
       #myHeader {
         color: blue;
         text-align: center;
+      }
+
+      * {
+        font-size: 14px;
       }
     </style>
   </body>
