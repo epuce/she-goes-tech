@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    a {
+        color: green;
+    }
+
+    .parent input {
+        border: 1px solid red;
+    }
+
+    .parent .child {
+        color: blue;
+    }
+
+    .font-bold.color-red {
+        font-weight: bold;
+        color: red;
+    }
+
+    * {
+        font-size: 12px;
+    }
+
+    .link-primary, .link-secondary {
+        text-decoration: line-through;
+    }
+
+    li:not(.no-style) {
+        color: blueviolet;
+    }
+
+    button:hover {
+        background: green;
+    }
+
+    input:focus {
+        color: red;
+    }
+
+    #cool-form {
+        padding: 10px;
+        border: 1px solid black;
+    }
+</style>
+<body>
+    <a>Link to something</a>
+
+    <div class="parent">
+        <input>
+
+        <div class="child">text</div>
+    </div>
+
+    <h1 class="font-bold color-red">title</h1>
+
+    <a class="link-primary">Other link 1</a>
+    <span class="link-secondary">Other link 2</span>
+
+    <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li class="no-style">The end</li>
+        <li> Something </li>
+        <li class="no-style">also black</li>
+    </ul>
+
+    <button>Hover me</button>
+
+    <input>
+
+    <form id="cool-form">
+        <input>
+    </form>
+</body>
+</html>
