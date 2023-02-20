@@ -46,15 +46,15 @@
 <tbody>
     <tr>
         <td>1</td>
-        <td>Jānis</td>
+        <td>John</td>
     </tr>
     <tr>
         <td>2</td>
-        <td>Pēteris</td>
+        <td>James</td>
     </tr>
     <tr>
         <td>3</td>
-        <td>Juris</td>
+        <td>Jim</td>
     </tr>
 </tbody>
 </table>
