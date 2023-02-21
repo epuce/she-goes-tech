@@ -97,3 +97,34 @@ ul {
     order: 3;
 }
 
+.grid-wrapper div:nth-child(1) {
+    background: red;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start:1;
+    grid-row-end:3;
+  
+}
+
+.grid-wrapper div:nth-child(2) {
+    background: blue
+}
+
+.grid-wrapper div:nth-child(3) {
+    background: green
+}
+
+.grid-wrapper div:nth-child(4) {
+    background: yellow
+}
+
+.grid-wrapper div:nth-child(5) {
+    background: aquamarine
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 300px 30% auto;
+    grid-template-rows: 50px 100px;
+}
+
