@@ -1,5 +1,10 @@
+:root {
+  --nav-bar-height: 80px;
+}
+
 body {
   margin: 0;
+  padding-top: var(--nav-bar-height);
 }
 
 ul {
@@ -9,9 +14,15 @@ ul {
 }
 
 #nav-bar {
-  height: 80px;
+  height: var(--nav-bar-height);
   background: #b19d83;
   padding: 0 10% 0 10%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-bar__link {
@@ -25,8 +36,11 @@ ul {
 
 .menu {
   float: right;
-  line-height: 80px;
+
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .menu-dropdown {
@@ -38,6 +52,7 @@ ul {
   transform: translateX(-50%);
   background: #b19d83;
   border-radius: 0 0 4px 4px;
+  bottom: -100%;
 }
 
 .menu:hover .menu-dropdown {
@@ -46,4 +61,46 @@ ul {
 
 .menu-dropdown li {
   padding: 5px 10px 5px 10px;
+}
+
+.img-wrapper img {
+  width: 350px;
+}
+
+.img-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.img-wrapper img:nth-child(1) {
+  height: 150px;
+}
+
+.number-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.number-wrapper div {
+  width: 250px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+
+.number-wrapper div:nth-child(5) {
+  order: 1;
+}
+.number-wrapper div:nth-child(3) {
+  order: 2;
+}
+
+.number-wrapper div:nth-child(1) {
+  order: 3;
 }
