@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="img-wrapper-cat"> 
+        <img src="https://icon-library.com/images/icon-small/icon-small-4.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-4.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-4.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-4.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-4.jpg">
+      </div>
+
+      <div class="img-wrapper-list"> 
+        <img src="https://icon-library.com/images/icon-small/icon-small-2.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-22.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-5.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-9.jpg">
+        <img src="https://icon-library.com/images/icon-small/icon-small-14.jpg">
+      </div>
+
+
+
+
+</body>
+
+<style>
+
+.img-wrapper-cat img {
+    width: 250px;
+    height: 250px;
+}
+
+.img-wrapper-list img {
+    width: 250px;
+}
+
+.img-wrapper-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.img-wrapper-list div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.img-wrapper-list div:nth-child(5) {
+    order: 1;
+}
+
+.img-wrapper-list div:nth-child(4) {
+    order: 2;
+}
+
+.img-wrapper-list div:nth-child(3) {
+    order: 3;
+}
+
+.img-wrapper-list div:nth-child(2) {
+    order: 4;
+}
+
+.img-wrapper-list div:nth-child(1) {
+    order: 5;
+}
+
+
+
+</style>
+</html>
