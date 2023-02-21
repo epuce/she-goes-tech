@@ -98,3 +98,29 @@ ul {
 .number-wrapper div:nth-child(1) {
     order: 3;
 }
+
+.grid-wrapper div:nth-child(1) {
+    background: red;
+    grid-column-start: 1; /*tells where the column starts*/
+    grid-column-end: 3; /*tells before which column ends*/
+    grid-row-start: 1; /*the smae with rows*/
+    grid-row-end: 3;
+}
+.grid-wrapper div:nth-child(2) {
+    background: blue;
+}
+.grid-wrapper div:nth-child(3) {
+    background: green;
+}
+.grid-wrapper div:nth-child(4) {
+    background: black;
+}
+.grid-wrapper div:nth-child(5) {
+    background: purple;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 300px 30% auto;
+    grid-template-rows: 50px 100px 150px;
+}
