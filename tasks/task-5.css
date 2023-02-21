@@ -1,36 +1,33 @@
-table {
-    background: grey;
+/* Set that if there is no space for the images they jump to a new row; */
+.img-wrapper img {
+    width: 250px;
+    height: 250px;
 }
 
-table > thead {
-    color: green;
-    
+.img-wrapper.one{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.line.one {
-    color: white;
+.img-wrapper.two{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-* {
-    background: rgb(150, 147, 147);
+.img-wrapper.two img:nth-child(5) {
+    order: 1;
 }
 
-label, button {
-    text-transform: uppercase;
+.img-wrapper.two img:nth-child(3) {
+    order: 2;
 }
 
-label:not(.sensitive) {
-    color: rgb(153, 30, 30);
-}
-
-button:hover {
-    background: green;
-}
-
-input:active {
-    background: white;
-}
-
-#name {
-    border-radius: 4px;
+.img-wrapper.three {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
