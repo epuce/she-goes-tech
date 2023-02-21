@@ -1,0 +1,39 @@
+.first-block {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.first-block img {
+    height: 250px;
+}
+
+.second-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.second-block img {
+    height: 250px;
+}
+
+.second-block img:nth-child(2) {
+    order: 4;
+}
+
+.second-block img:nth-child(3) {
+    order: 5;
+}
+
+.third-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+    background-color: pink;   
+}
+
+.third-block img {
+    height: 150px;
+}
