@@ -23,6 +23,10 @@
         <img src="https://icon-library.com/images/icon-small/icon-small-14.jpg">
       </div>
 
+      <div class="content wrapper">
+    
+      </div>
+
 
 
 
@@ -35,42 +39,54 @@
     height: 250px;
 }
 
+.img-wrapper-cat {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
 .img-wrapper-list img {
-    width: 250px;
+    height: 200px;
 }
 
 .img-wrapper-list {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-direction: column;
+    height: 500px;
+    justify-content: space-between;
 }
 
-.img-wrapper-list div {
-    display: flex;
-    justify-content: space-evenly;
-}
 
-.img-wrapper-list div:nth-child(5) {
+.img-wrapper-list img:nth-child(5) {
     order: 1;
 }
 
-.img-wrapper-list div:nth-child(4) {
+.img-wrapper-list img:nth-child(4) {
     order: 2;
 }
 
-.img-wrapper-list div:nth-child(3) {
+.img-wrapper-list img:nth-child(3) {
     order: 3;
 }
 
-.img-wrapper-list div:nth-child(2) {
+.img-wrapper-list img:nth-child(2) {
     order: 4;
 }
 
-.img-wrapper-list div:nth-child(1) {
+.img-wrapper-list img:nth-child(1) {
     order: 5;
 }
 
-
+.content wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+}
 
 </style>
 </html>
