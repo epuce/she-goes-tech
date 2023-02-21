@@ -1,106 +1,110 @@
+:root{
+   --nav-bar-height: 80px; 
+} 
+/* defining a variable in CSS */
+
 body {
-    margin: 0;
-    font-family: Montserrat, Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  padding-top: var(--nav-bar-height); 
 }
 
 ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    font-weight: 700;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-weight: 700;
 }
 
-.main {
-    margin-top: 100px; /* Add a top margin to avoid content overlay */
-}
-
+/* .main {
+  margin-top: 100px; /* Add a top margin to avoid content overlay */
+/* } */ 
 
 #nav-bar {
-    height: 80px;
-    background-color: #2b6372;
-    color: whitesmoke;
-    padding: 0 5% 0 5%;
-    
-    position: fixed; /* Set the navbar to fixed position */
+  height: var(--nav-bar-height);
+  background-color: #2b6372;
+  color: whitesmoke;
+  padding: 0 5% 0 5%;
+  position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+  right: 0;
+  left: 0;
+  /* width: 90%; or could use   */
 }
 
 .nav-bar__link {
-    height: 100%;
-    width: 80px;
-    display: inline-block;
+  height: 100%;
+  width: 80px;
+  display: inline-block;
 }
 
 .nav-bar__link img {
-    height: 100%;
-    margin-left: -5px;
-    width: 87px;
+  height: 100%;
+  margin-left: -5px;
+  width: 87px;
 }
 
 .menu {
-    position: relative;
-    float: right;
-    line-height: 80px;
-    /* line-height has to be the same size as the container */
-margin-right: 10%;
+  position: relative;
+  float: right;
+  line-height: var(--nav-bar-height);
+  /* line-height has to be the same size as the container */
 }
 
 .menu:hover .menu-dropdown {
-    display: block;
+  display: block;
 }
 
 .menu-dropdown {
-    display: none;
-    position: absolute;
-    background: #457b9d;
-    text-align: center;
-    line-height: initial;
-    left: 50%;
-    transform: translateX(-50%);
-    /* Transform tells how far we want to move it left or right */
-    border-radius: 0 0 6px 6px; 
+  display: none;
+  position: absolute;
+  background: #457b9d;
+  text-align: center;
+  line-height: initial;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Transform tells how far we want to move it left or right */
+  border-radius: 0 0 6px 6px;
 }
 
 .menu-dropdown li {
-    padding: 5px 10px 5px 10px;
-    white-space: nowrap;
+  padding: 5px 10px 5px 10px;
+  white-space: nowrap;
 }
 
 .menu-dropdown a {
-    text-decoration: none;
-    color: white;
-
+  text-decoration: none;
+  color: white;
 }
 
 /* other styles */
 h1,
 h2 {
-    color: #1d3557;
+  color: #1d3557;
 }
 
 h2,
 p,
 .sideBySide {
-    padding: 0 5% 0 5%;
- 
-    /* margin: 20px 10px 15px 20px; */
+  padding: 0 5% 0 5%;
+
+  /* margin: 20px 10px 15px 20px; */
 }
 
 /* margin: top right bottom left */
 
 .sideBySide {
-    display: flex;
-    max-width: 100%;
+  display: flex;
+  max-width: 100%;
 }
 
 .ImgWithText {
-    float: left;
-    width: 25%;
-    padding: 5px;
-    text-align: center;
+  float: left;
+  width: 25%;
+  padding: 5px;
+  text-align: center;
 }
 
 .exampleImage {
-    width: 100%;
+  width: 100%;
 }
