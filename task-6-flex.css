@@ -1,0 +1,83 @@
+.img-wrapper img {
+    width: 250px;
+}
+
+.vertical-wrapper img {
+    width: 200px;
+}
+
+.vertical-wrapper img:nth-child(1){
+    width: 100px;
+} 
+
+
+/* Create a block that distributes 5 images equally spaced; */
+/* Set that if there is no space for the images they jump to a new row; */
+.img-wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-evenly; 
+/* pic alignment, centered etc. Space around gives equal space between pics. Space between aligns to edge of container. Space evenly = all spaces are even */
+}
+
+
+/* Create another block with different images and align them vertically so that the space between them it distributed equally */
+.vertical-wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: space-between; 
+}
+
+
+.vertical-wrapper img:nth-child(5) {
+    order: 1;
+}
+
+.vertical-wrapper img:nth-child(3) {
+    order: 2;
+}
+.vertical-wrapper img:nth-child(1) {
+    order: 3;
+}
+
+.center-wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+/* Number wrapper follow along lesson */
+.number-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.number-wrapper div {
+    width: 250px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+
+.number-wrapper div:nth-child(5) {
+    order: 1;
+}
+
+.number-wrapper div:nth-child(3) {
+    order: 2;
+}
+.number-wrapper div:nth-child(1) {
+    /* selecting first child element. could also do img:nth-child(1). Can also pass values even or odd  */
+    order: 3;
+}
+
+
