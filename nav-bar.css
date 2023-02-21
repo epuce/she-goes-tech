@@ -1,5 +1,11 @@
+:root{
+    --nav-bar-height:80px;
+}
+
+
 body{
     margin: 0;
+    padding-top: var(--nav-bar-height);
 }
 
 ul{
@@ -9,9 +15,13 @@ ul{
 }
 
 #nav-bar{
-    height: 80px;
+    height: var(--nav-bar-height);
     background: #2FC1C8;
     padding: 0 10% 0 10%;
+    position: fixed;
+    top:0;
+    right:0;
+    left:0;
 
 }
 
@@ -28,7 +38,7 @@ ul{
 
 .menu{
 float: right;
-line-height:80px;
+line-height:var(--nav-bar-height);
 position: relative;
 
 }
@@ -47,4 +57,74 @@ position: relative;
 }
 .menu-dropdown li{
     padding: 5px 10px 5px 10px;
+}
+.img-wrapper img{
+    width:250px;
+}
+.img-wrapper{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+.number-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.number-wrapper div{
+    
+    height:250px;
+    width:250px;
+    background: rgba(0, 0, 0, 0.1);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+.number-wrapper div:nth-child(5){
+    order:3;
+}
+.number-wrapper div:nth-child(3){
+    order:2;
+}
+.number-wrapper div:nth-child(2){
+    order:5;
+}
+
+.number-wrapper div:nth-child(1){
+    order:1;
+}
+.number-wrapper div:nth-child(4){
+    order:4;
+}
+
+
+
+.img-wrapper img:nth-child(1){
+height:150px;
+}
+
+
+.grid-wrapper div:nth-child(1){
+    background:red;
+
+}
+.grid-wrapper div:nth-child(2){
+    background:blue
+}
+.grid-wrapper div:nth-child(3){
+    background:green
+}
+.grid-wrapper div:nth-child(4){
+    background:black
+}.grid-wrapper div:nth-child(5){
+    background:purple
+}
+
+.grid-wrapper{
+    display: grid;
+    grid-template-columns: 300px 30% auto;
+    grid-template-rows: 50px 100px;
 }
