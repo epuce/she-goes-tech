@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-5-flex.html</title>
+</head>
+<style>
+    .img-wrapper {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+.img-wrapper img {width: 250px;
+}
+
+.img-wrapper-2 {
+    display: flex;
+    flex-direction: column;
+    height:1000px;
+}
+.img-wrapper-2 img {
+    height: 150px;
+}
+
+.img-wrapper-2 img:nth-child(5) {
+    order:1;
+}
+.img-wrapper-2 img:nth-child(3) {
+    order:2;
+}
+
+.content-wrapper {
+    position: fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background: rgba (0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width:500px;
+    height:300px;
+    background:#44aa77;
+}
+
+
+</style>
+<body>
+    <div class="img-wrapper">
+        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2011/01/cat-apps.jpg">
+        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2011/01/cat-apps.jpg">
+        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2011/01/cat-apps.jpg">
+        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2011/01/cat-apps.jpg">
+        <img src="https://d17fnq9dkz9hgj.cloudfront.net/uploads/2011/01/cat-apps.jpg">
+    </div>
+    <div class="img-wrapper-2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/640px-Cat_August_2010-4.jpg">
+    </div>
+    <div class="content-wrapper">
+        <div class="content"></div>
+    </div>
+
+</body>
+</html>
