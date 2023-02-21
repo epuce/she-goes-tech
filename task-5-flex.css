@@ -1,7 +1,7 @@
 .img-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .img-wrapper img {
@@ -10,9 +10,9 @@
 
 .img-wrapper-second {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 800px;
 }
 
 .img-wrapper-second img:nth-child(1) {
@@ -29,13 +29,18 @@
   order: 1;
 }
 
-.img-wrapper-third {
+.content-wrapper-third {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.img-wrapper-third img {
-  height: 200px;
+.content-wrapper-third div {
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
 }
