@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task-5-flex</title>
+  </head>
+  <style>
+
+.first-img-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.first-img-container img {
+  width: 140px;
+}
+
+.second-img-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 550px;
+  justify-content: space-evenly;
+}
+
+.second-img-container img {
+  width: 140px;
+}
+
+.second-img-container img:nth-child(5) {
+  order: 1;
+}
+.second-img-container img:nth-child(3) {
+  order: 2;
+}
+.second-img-container img:nth-child(2) {
+  order: 4;
+}
+
+.boxs-wrapper {
+  width: 600px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0, 0.1);
+  background-color: rgb(172, 99, 159);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  background-color: chartreuse;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  </style>
+  
+  <body>
+    <div class="first-img-container">
+      <img
+        src="https://st.depositphotos.com/1063346/1392/i/450/depositphotos_13929631-stock-photo-rubber-duck-on-blue.jpg"
+        alt="duck"
+      />
+      <img
+        src="https://st.depositphotos.com/1063346/1392/i/450/depositphotos_13929631-stock-photo-rubber-duck-on-blue.jpg"
+        alt="duck"
+      />
+      <img
+        src="https://st.depositphotos.com/1063346/1392/i/450/depositphotos_13929631-stock-photo-rubber-duck-on-blue.jpg"
+        alt="duck"
+      />
+      <img
+        src="https://st.depositphotos.com/1063346/1392/i/450/depositphotos_13929631-stock-photo-rubber-duck-on-blue.jpg"
+        alt="duck"
+      />
+      <img
+        src="https://st.depositphotos.com/1063346/1392/i/450/depositphotos_13929631-stock-photo-rubber-duck-on-blue.jpg"
+        alt="duck"
+      />
+    </div>
+
+    <div class="second-img-container">
+      <img
+        src="https://st3.depositphotos.com/12985790/15779/i/450/depositphotos_157790224-stock-photo-cooler-box-and-volleyball-ball.jpg"
+        alt="basket"
+      />
+      <img
+        src="https://st3.depositphotos.com/12985790/15779/i/450/depositphotos_157790224-stock-photo-cooler-box-and-volleyball-ball.jpg"
+        alt="basket"
+      />
+      <img
+        src="https://st3.depositphotos.com/12985790/15779/i/450/depositphotos_157790224-stock-photo-cooler-box-and-volleyball-ball.jpg"
+        alt="basket"
+      />
+      <img
+        src="https://st3.depositphotos.com/12985790/15779/i/450/depositphotos_157790224-stock-photo-cooler-box-and-volleyball-ball.jpg"
+        alt="basket"
+      />
+      <img
+        src="https://st3.depositphotos.com/12985790/15779/i/450/depositphotos_157790224-stock-photo-cooler-box-and-volleyball-ball.jpg"
+        alt="basket"
+      />
+    </div>
+
+    <div class="boxs-wrapper">
+      <div class="box">box1</div>
+      <div class="box">box2</div>
+      <div class="box">box3</div>
+      <div class="box">box4</div>
+      <div class="box">box5</div>
+    
+    </div>
+  </body>
+</html>
