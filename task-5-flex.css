@@ -1,0 +1,35 @@
+.img-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.dif-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 800px;
+}
+
+.dif-wrapper img{
+    width: 150px;
+}
+
+.dif-wrapper img:nth-child(3){
+order: 1;
+}
+
+.dif-wrapper img:nth-child(1){
+    order: 2;
+    }
+
+.dif-wrapper img:nth-child(5){
+    order: 3;
+}
+
+.third-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
