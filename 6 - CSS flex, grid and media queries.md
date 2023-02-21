@@ -36,7 +36,16 @@
         align-self: special values;
     }
 ```
-![flex support for browsers](img/W02L03-flex-support.png)
+
+### Flex checkup
+### add a new file named task-5-flex.html where all these actions will be performed
+1. Create a block that distributes 5 images equally spaced;
+2. Set that if there is no space for the images they jump to a new row;
+3. Create another block with different images and align them vertically so that the space between them it distributed equally
+4. Order the second list so that it is not the same order as stated in HTML
+5. Create a third block that centers vertically and horizontally it's content
+
+![flex support for browsers](img/flex-support.png)
 ### Grid model
 
 ```css
@@ -113,6 +122,14 @@
     }
 ```
 ![grid support for browsers](img/grid-support.png)
+
+### Grid checkup
+### add a new file named task-5-grid.html where all these actions will be performed
+
+1. Create a grid element that looks like this:
+
+![grid task](img/grid-task.png)
+
 ### Media queries
 
 ```css
@@ -130,9 +147,7 @@
   }
 }
 
-
-
-/* example --------------------------- */
+/* example */
 body {
   background: #009900;
 }
@@ -148,27 +163,11 @@ body {
     background-color: #000099;
   }
 }
-/* ----------------------------------- */
 ```
 ![media queries support for browsers](img/media_queries-support.png)
 
-### Flex checkup
-### add a new file named task-6.html and task-6.css where all these actions will be performed
-1. Create a block that distributes 5 images equally spaced;
-2. Set that if there is no space for the images they jump to a new row;
-3. Create another block with different images and align them vertically so that the space between them it distributed equally
-4. Order the second list so that it is not the same order as stated in HTML
-5. Create a third block that centers vertically and horizontally it's content
-
-### Grid checkup
-
-1. Create a grid element that looks like this:
-
-### add a new file named task-7.html and task-7.css where all these actions will be performed
-
-![grid task](img/grid-task.png)
-
-### Media query checkup (optional)
-1. Create a media query that changes changes the default font size if the screen is smaller than 1024px;
-2. Create a media query that shows a hidden element it he screen is between 320px and 1024px;
-3. Create a media query that aligns items vertically when in portrait (that means that the default state is that they are aligned horizontally)
+### Media query checkup
+### add a new file named task-5-media-queries.html where all these actions will be performed
+1. Create a media query that changes the default font size if the screen is smaller than 1024px;
+2. Create a media query that shows a hidden element if he screen is between 320px and 1024px;
+3. Create a media query that aligns items vertically when in portrait (default state is that they are aligned horizontally)
