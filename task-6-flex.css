@@ -10,6 +10,10 @@
     width: 100px;
 } 
 
+.center-wrapper img{
+    width: 400px;
+}
+
 
 /* Create a block that distributes 5 images equally spaced; */
 /* Set that if there is no space for the images they jump to a new row; */
@@ -26,8 +30,11 @@
     display: flex;
     flex-wrap: wrap; 
     align-items: center;
+    flex-direction: column;
     justify-content: space-between; 
+    height: 1000px;
 }
+
 
 
 .vertical-wrapper img:nth-child(5) {
@@ -41,11 +48,19 @@
     order: 3;
 }
 
+
+
 .center-wrapper {
     display: flex;
     flex-wrap: wrap; 
     justify-content: center;
     align-items: center;
+    /* position: fixed;  */
+    /* position fixed works as a pop up */
+    top: 0;
+    right: 0;
+    left: 0;
+
 }
 
 
@@ -59,6 +74,7 @@
 }
 
 .number-wrapper div {
+     
     width: 250px;
     height: 250px;
     background-color: rgba(0, 0, 0, 0.1);
