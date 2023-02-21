@@ -1,0 +1,43 @@
+.grid-wrapper {
+  display: grid;
+  background: rgb(255, 0, 0);
+  width: max-content;
+  grid-template-columns: 60px 40px 40px 260px 55px 40px;
+  grid-template-rows: 124px 124px 124px 124px;
+  grid-template-areas:
+    ". a a b b b"
+    ". a a . f f"
+    ". . c c g e"
+    ". d d d d e";
+}
+
+.grid-wrapper div:nth-child(1) {
+  background: rgb(0, 0, 0);
+  grid-area: a;
+}
+.grid-wrapper div:nth-child(2) {
+  background: rgb(0, 128, 0);
+  grid-area: b;
+}
+.grid-wrapper div:nth-child(3) {
+  background: rgb(3, 13, 29);
+  grid-area: c;
+}
+.grid-wrapper div:nth-child(4) {
+  background: rgb(2, 30, 71);
+  grid-area: d;
+}
+.grid-wrapper div:nth-child(5) {
+  background: rgb(77, 44, 6);
+  grid-area: e;
+}
+
+.grid-wrapper div:nth-child(6) {
+  background: rgb(255, 255, 255);
+  grid-area: f;
+}
+
+.grid-wrapper div:nth-child(7) {
+  background: rgb(255, 255, 255);
+  grid-area: g;
+}
