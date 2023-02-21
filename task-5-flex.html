@@ -23,8 +23,9 @@
 
       .img-wrap {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+        flex-direction: column;
+        height: 1500px;
+        justify-content: space-between;
       }
 
       .img-wrap img:nth-child(4) {
@@ -35,19 +36,21 @@
         order: 2;
       }
 
-      .number-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-
-      .number-wrapper div {
-        width: 250px;
-        height: 250px;
-        background: rgba(166, 8, 140, 0.1);
+      .content-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      .content {
+        width: 500px;
+        height: 300px;
+        background: rgb(25, 4, 4);
       }
     </style>
   </head>
@@ -88,12 +91,8 @@
       />
     </div>
 
-    <div class="number-wrapper">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
+    <div class="content-wrapper">
+      <div class="content"></div>
     </div>
   </body>
 </html>
