@@ -1,7 +1,11 @@
-body {
-    margin: 0;
+:root{ /*begining of the system*/
+--nav-bar-height: 80px; /*defining variable in css*/
 }
 
+body {
+    margin: 0;
+    padding-top: var(--nav-bar-height); /* selecting variable in css as a value. 80 px because if we don't add this, then the fisrt line is hidden by the nav-bar. because nav-bar has a position fixed, which covers everything underneath it*/
+}
 ul {
     padding: 0;
     margin: 0;
@@ -12,6 +16,9 @@ ul {
     height: 80px;
     background: #2FC1C8;
     padding: 0 10% 0 10%;
+    position: fixed;
+    top: 0;
+    width: 80%; /* because the with is only for the content. if we add the padding (for nav bar 10+10%), then it takes up 100% of the screen size*/
 }
 
 .nav-bar_link {
@@ -27,7 +34,7 @@ ul {
 
 .menu {
     float: right;
-    line-height: 80px; /* line height should be as high as the parent*/
+    line-height: var(--nav-bar-height); /* line height should be as high as the parent*/
     position: relative;
 }
 
@@ -48,4 +55,46 @@ ul {
 
 .menu-dropdown li {
     padding: 5px 10px 5px 10px;
+}
+
+.img-wrapper img {
+    width: 250px;
+}
+
+.img-wrapper img:first-child { /*first-child means we are slecting the fist child of image-wrapper class childs. Another option: nth-child(3) - specifying number, which child. or :nth-child(even) or :n-th-child(odd) - add style to every even or odd row*/
+    width: 150px;
+    height: 80px;
+}
+
+.img-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center; /*centers items verticaly, if items have different sizes*/
+}
+
+.number-wrapper {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+}
+
+.number-wrapper div {
+    width: 250px;
+    height: 250px;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+}
+
+.number-wrapper div:nth-child(5) {
+    order: 1; /*change order. all elements that don't have order idicated are fisr, but after that elements that have order are ordered according to specified properties*/
+}
+.number-wrapper div:nth-child(3) {
+    order: 2;
+}
+.number-wrapper div:nth-child(1) {
+    order: 3;
 }

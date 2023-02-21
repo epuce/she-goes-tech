@@ -1,0 +1,38 @@
+.image-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.second-image-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.second-image-wrapper img:nth-child(5) {
+    order: 2;
+}
+.second-image-wrapper img:nth-child(1) {
+    order: 5;
+}
+.second-image-wrapper img:nth-child(3) {
+    order: 4;
+}
+.second-image-wrapper img:nth-child(4) {
+    order: 5;
+}
+.second-image-wrapper img:nth-child(2) {
+    order: 1;
+}
+
+.third-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.third-block p {
+    font-size: 100px;
+}
