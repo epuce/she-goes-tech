@@ -1,5 +1,10 @@
+:root {
+  --nav-bar-height: 80px; /*applied for all the elements */
+}
+
 body {
   margin: 0;
+  padding: var(--nav-bar-height);
 }
 
 ul {
@@ -9,14 +14,19 @@ ul {
 }
 
 #nav-bar {
-  height: 80px;
+  height: var(--nav-bar-height);
   background: #2fc1c8; /*we can specify a path to an image, too. With background-color we can specify only color can be set*/
   padding: 0 10% 0 10%;
+  position: fixed; /*display:block disappears, fixed is in relation to the screen. That's why we add the below properties: */
+  top: 0;
+  /* width: 100%;this is almost the same as right:0. width:100% means that the content is taking the whole screen. With padding we will have content (menu) not visible on the right side. We need to add box-sizing:border-box and then it will work */
+  left: 0px;
+  right: 0px;
 }
 
 .nav-bar__link {
   height: 100%; /*it will take 100% of parent elemetn nav-bar*/
-  width: 80px;
+  width: var(--nav-bar-height);
   display: inline-block;
 }
 
@@ -27,7 +37,9 @@ ul {
 
 .menu {
   float: right;
-  line-height: 80px; /*should be the same as container height. Item then be centered vertically*/
+  line-height: var(
+    --nav-bar-height
+  ); /*should be the same as container height. Item then be centered vertically*/
   position: relative;
 }
 
@@ -48,4 +60,46 @@ ul {
 
 .menu-dropdown li {
   padding: 5px 10px 5px 10px;
+}
+
+.img-wrapper img {
+  width: 250px;
+}
+
+.img-wrapper {
+  display: flex;
+  /* height: 100px; with display:block img height will not be stretched, only with flex */
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.img-wrapper img:nth-child(1) {
+  width: 150px;
+}
+
+.number-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /*if we want to affect the divs itselves*/
+}
+
+.number-wrapper div {
+  width: 250px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex; /*if we want to affect the content itself*/
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+
+.number-wrapper div:nth-child(5) {
+  order: 1;
+}
+.number-wrapper div:nth-child(3) {
+  order: 2; /*only those which have order property are switching places*/
+}
+.number-wrapper div:nth-child(1) {
+  order: 3; /*only those which have order property are switching places*/
 }

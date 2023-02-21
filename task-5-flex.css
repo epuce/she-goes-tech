@@ -1,0 +1,39 @@
+.img-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.img-wrapper img,
+.img-wrapper-second img {
+  width: 250px;
+}
+.img-wrapper-second img:nth-child(1) {
+  width: 150px;
+  height: 100px;
+}
+.img-wrapper-second {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.number-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.number-wrapper div {
+  width: 250px;
+  height: 250px;
+  background: rgba(29, 29, 196, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+.number-wrapper div:nth-child(5) {
+  order: 1;
+}
+.number-wrapper div:nth-child(1) {
+  order: 3;
+}
