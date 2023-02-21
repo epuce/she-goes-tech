@@ -1,5 +1,9 @@
+:root {
+  --nav-bar-height: 80%;
+}
 body {
   margin: 0;
+  padding-top: 80px;
 }
 ul {
   padding: 0;
@@ -10,7 +14,15 @@ ul {
   height: 80px;
   background: #226666;
   padding: 0 10% 0 10%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
 }
+
 .nav-bar_link {
   height: 100%;
   width: 80%;
@@ -43,4 +55,45 @@ ul {
 
 .menu-dropdown li {
   padding: 5px 10px 5px 10px;
+}
+.image-wrapper img {
+  width: 250px;
+}
+.image-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.image-wrapper2 img {
+  width: 150px;
+  height: auto;
+}
+.image-wrapper2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.image-wrapper2 img :nth-child(3) {
+  order: 1;
+}
+.image-wrapper2 img :nth-child(5) {
+  order: 2;
+}
+.image-wrapper2 img :nth-child(1) {
+  order: 4;
+}
+.centered-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: aquamarine;
+}
+
+.centered-wrapper h1 {
+  text-align: center;
 }
