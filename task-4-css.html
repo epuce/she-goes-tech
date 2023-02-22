@@ -1,139 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-   <style>
-body {
-    background-color: #DED1D2;
-}
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: #ded1d2;
+      }
 
-h1 {
-    text-align: center;
-}
+      h1 {
+        text-align: center;
+      }
 
-div>h2 {
-    color: purple;
-   
-}
-* {
-    font-weight: 300;
-}
+      div > h2 {
+        color: purple;
+      }
+      * {
+        font-weight: 300;
+      }
 
-.tableData.name {
-    font-weight: 900;
-}
+      .tableData.name {
+        font-weight: 900;
+      }
 
-th, td {
-    border: 1px solid;
-}
-.tableHead {
-    background-color: purple;
-    color: white; 
-}
-#users tr:hover {
-    background-color: purple;
-    color: white;
-}
+      th,
+      td {
+        border: 1px solid;
+      }
+      .tableHead {
+        background-color: purple;
+        color: white;
+      }
+      #users tr:hover {
+        background-color: purple;
+        color: white;
+      }
 
-td:not(.name) {
-    text-align: center;
-}
+      td:not(.name) {
+        text-align: center;
+      }
 
-li:hover {
-    font-weight: 900;
-}
+      li:hover {
+        font-weight: 900;
+      }
+    </style>
 
-   </style>
-
-   <h1>This is my styled html page</h1>
+    <h1>This is my styled html page</h1>
     <!-- TABLE -->
     <div>
-        <h2>This is a table</h2>
-    <table>
+      <h2>This is a table</h2>
+      <table>
         <thead class="tableHead">
-            <tr>
-                <th class="tableData">ID</th>
-                <th class="tableData">NAME</th>
-                <th class="tableData">E-MAIL</th>
-            </tr>
+          <tr>
+            <th class="tableData">ID</th>
+            <th class="tableData">NAME</th>
+            <th class="tableData">E-MAIL</th>
+          </tr>
         </thead>
         <tbody id="users">
-            <tr>
-                <td class="tableData">1</td>
-                <td class="tableData name">Jane Doe</td>
-                <td class="tableData">Jane.Doe@email.com</td>
-            </tr>
-            <tr>
-                <td class="tableData">2</td>
-                <td class="tableData name">John Doe</td>
-                <td class="tableData">John.Doe@email.com</td>
-            </tr>
-            <tr>
-                <td class="tableData">3</td>
-                <td class="tableData name">Tim Doe</td>
-                <td class="tableData">Tim.Doe@email.com</td>
-            </tr>
+          <tr>
+            <td class="tableData">1</td>
+            <td class="tableData name">Jane Doe</td>
+            <td class="tableData">Jane.Doe@email.com</td>
+          </tr>
+          <tr>
+            <td class="tableData">2</td>
+            <td class="tableData name">John Doe</td>
+            <td class="tableData">John.Doe@email.com</td>
+          </tr>
+          <tr>
+            <td class="tableData">3</td>
+            <td class="tableData name">Tim Doe</td>
+            <td class="tableData">Tim.Doe@email.com</td>
+          </tr>
         </tbody>
-    </table>
-</div>
-<br>
-<br>
-<br>
-<!-- FORM -->
-<div> 
-    <h2>This is a form</h2>  
-<form>
+      </table>
+    </div>
+    <br />
+    <br />
+    <br />
+    <!-- FORM -->
+    <div>
+      <h2>This is a form</h2>
+      <form>
         <label for="first name">First Name</label>
-        <input id="first name"/>
-            <br>
-            <br>
+        <input id="first name" />
+        <br />
+        <br />
         <label for="last name">Last Name</label>
-        <input id="last name"/>
-            <br>
-            <br>
+        <input id="last name" />
+        <br />
+        <br />
         <label for="age">Age</label>
-        <input id="age" type="number">
-            <br>
-            <br>
+        <input id="age" type="number" />
+        <br />
+        <br />
         <label>Gender</label>
         <select>
-            <option value="none" selected disabled hidden>Select here</option>
-            <option value="m">Male</option>
-            <option value="f">Female</option>
+          <option value="none" selected disabled hidden>Select here</option>
+          <option value="m">Male</option>
+          <option value="f">Female</option>
         </select>
-            <br>
-            <br>
+        <br />
+        <br />
         <label>Message</label>
         <textarea></textarea>
-            <br>
-            <br>
-            <input type="checkbox">
-            <label>I hereby consent to my personal data processing in accordance with Privacy Policy</label>
-                    <br>
-                    <br> 
+        <br />
+        <br />
+        <input type="checkbox" />
+        <label
+          >I hereby consent to my personal data processing in accordance with
+          Privacy Policy</label
+        >
+        <br />
+        <br />
         <button type="submit">Save</button>
-        
-    </form>
+      </form>
     </div>
-<br>
-<br>
-<br>
-<!-- LIST -->
-<div>
-    <h2>This is an unordered list</h2>
-    <h3>Shopping list</h3>
-<ul>
-  <li>Coffee</li>
-  <li>Milk</li>
-  <li>Cookies</li>
-  <li>Bread</li>
-  <li>Eggs</li>
-</ul> 
-</div>
-</body>
+    <br />
+    <br />
+    <br />
+    <!-- LIST -->
+    <div>
+      <h2>This is an unordered list</h2>
+      <h3>Shopping list</h3>
+      <ul>
+        <li>Coffee</li>
+        <li>Milk</li>
+        <li>Cookies</li>
+        <li>Bread</li>
+        <li>Eggs</li>
+      </ul>
+    </div>
+  </body>
 </html>
