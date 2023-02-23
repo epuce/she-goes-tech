@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* .header,
+    .footer{
+        background: grey;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    body{
+        display:grid;
+        grid-template-rows: 80px calc(100%-160px) 80px;
+        grid-template-columns: 80%;
+        margin:0;
+        min-height: 100vh;
+        justify-content: center; */
+    /* } */
+.container{
+   
+    background-color: darkblue;
+    display:grid;
+    grid-template-columns: 10px 5px 5px 40px 10px 10px;
+    grid-template-rows: 25px 25px 25px 25px;
+    justify-content: center;
+    min-height: 100vh;
+}
+.color-red{
+    background-color: red;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 5;
+}
+.color-blue{
+    background-color: blue;
+}
+
+.color-black{
+    background-color: black;
+}
+    
+</style>
+<body>
+    
+    <!-- <div class="header">
+        header</div>
+    <div class="section-left">
+        left</div>
+    <div class="section-right">
+        right</div>
+    <div class="footer"> 
+        Footer
+    </div> -->
+<div class="container">
+    <div class="color-red"> red</div>
+    <div class="color-black"> black</div>
+    <div class="color-green">green</div>
+    <div class="color-white">white</div>
+    <div class="color-darkblue"> dark blue</div>
+    <div class="color-blue">blue</div>
+    <div class="color-brown">brown</div>
+</div>
+</body>
+</html>

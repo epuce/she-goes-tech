@@ -1,32 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Yes it works</title>
+    <title>Document</title>
 </head>
 <style>
     body{
         color: blue;
+        align-items: baseline;
     }
 
-    @media screen and (max-width: 500px) and (min-width:720px){
+    @media screen and (min-width: 1024px){
         body{
-            color: red;
+            font-size: red;
+        }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 1024px){
+        body{
+           display: none ;
         }
     }
     @media screen and (orientation:landscape) {
         body{
-            color: red;
+            align-items: center;
     }
 }
 </style>
 <body>
-    <div>
-        some cool content
-    </div>
+    <div>eretert</div>
+    <div>ertet</div>
+    <div>ert</div>
     
 </body>
 </html>
