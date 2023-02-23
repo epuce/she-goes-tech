@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task-5-media-queries.html</title>
+  </head>
+  <style>
+    body {
+      color: red;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .container div {
+      width: 60px;
+      height: 60px;
+      color: white;
+      background: grey;
+      
+    }
+
+    @media screen and (max-width: 1024px) {
+      body {
+        color: blue;
+      }
+    }
+
+    @media screen and (max-width: 1024px) and (min-width: 320px) {
+      .hidden {
+        visibility: visible;
+      }
+    }
+
+    @media screen and (orientation: portrait) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <body>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam
+      inventore laboriosam quod libero error nisi a neque voluptatum ex, nulla
+      sit minima consectetur blanditiis magnam repellendus totam fugit dolore
+      quae.
+    </p>
+    <p class="hidden">I am hidden.</p>
+    <div class="container">
+      <div>First</div>
+      <div>Second</div>
+      <div>Third</div>
+    </div>
+  </body>
+</html>
