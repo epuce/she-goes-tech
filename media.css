@@ -1,0 +1,28 @@
+body {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 1023px) {
+  .font-change {
+    font-size: 25px;
+  }
+}
+.hidden-element {
+  display: none;
+}
+@media (min-width: 320px) and (max-width: 1024px) {
+  .hidden-element {
+    display: block;
+    color: pink;
+  }
+}
+
+@media (orientation: portrait) {
+  .vertically-aligned {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: chocolate;
+  }
+}
