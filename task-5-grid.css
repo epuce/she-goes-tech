@@ -36,5 +36,5 @@
 .grid-puzzle div:nth-child(6) {
     background: brown;
     grid-column: 5 / span 1;
-    margin-top: -75px;
+    margin-top: -125px;
 }
