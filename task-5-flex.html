@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .img-flex {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    img {
+      width: 400px;
+    }
+
+    .another-img {
+      height: 1200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .another-img > img {
+      width: 20%;
+    }
+
+    .order {
+      height: 200px;
+      background: pink;
+      display: flex;
+      flex-flow: wrap row;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .order div:nth-child(5) {
+      order: 1;
+    }
+
+    .order div:nth-child(2) {
+      order: 2;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      align-content: center;
+    }
+
+    .content > p {
+      background-color: black;
+      height: 120px;
+      width: 120px;
+    }
+  </style>
+  <body>
+    <div class="img-flex">
+      <img
+        src="https://www.lifewire.com/thmb/i29J8jsudvYZ_APUlfNWlP9f4Bc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_SQ_Watch-Dogs-Legion-PC-1-4cb0288b78324a52bf9ccce096ab5218.jpg"
+      />
+      <img
+        src="https://www.lifewire.com/thmb/i29J8jsudvYZ_APUlfNWlP9f4Bc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_SQ_Watch-Dogs-Legion-PC-1-4cb0288b78324a52bf9ccce096ab5218.jpg"
+      />
+      <img
+        src="https://www.lifewire.com/thmb/i29J8jsudvYZ_APUlfNWlP9f4Bc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_SQ_Watch-Dogs-Legion-PC-1-4cb0288b78324a52bf9ccce096ab5218.jpg"
+      />
+      <img
+        src="https://www.lifewire.com/thmb/i29J8jsudvYZ_APUlfNWlP9f4Bc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_SQ_Watch-Dogs-Legion-PC-1-4cb0288b78324a52bf9ccce096ab5218.jpg"
+      />
+      <img
+        src="https://www.lifewire.com/thmb/i29J8jsudvYZ_APUlfNWlP9f4Bc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_hero_SQ_Watch-Dogs-Legion-PC-1-4cb0288b78324a52bf9ccce096ab5218.jpg"
+      />
+    </div>
+    <div class="another-img">
+      <img
+        src="https://static01.nyt.com/images/2018/11/25/opinion/25SUDERMAN/25SUDERMAN-superJumbo.jpg"
+      />
+      <img
+        src="https://static01.nyt.com/images/2018/11/25/opinion/25SUDERMAN/25SUDERMAN-superJumbo.jpg"
+      />
+      <img
+        src="https://static01.nyt.com/images/2018/11/25/opinion/25SUDERMAN/25SUDERMAN-superJumbo.jpg"
+      />
+      <img
+        src="https://static01.nyt.com/images/2018/11/25/opinion/25SUDERMAN/25SUDERMAN-superJumbo.jpg"
+      />
+      <img
+        src="https://static01.nyt.com/images/2018/11/25/opinion/25SUDERMAN/25SUDERMAN-superJumbo.jpg"
+      />
+    </div>
+    <div class="order">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+    </div>
+    <div class="content">
+      <p></p>
+    </div>
+  </body>
+</html>
