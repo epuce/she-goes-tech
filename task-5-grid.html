@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRID</title>
+</head>
+<style>
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 75px repeat(2, 50px) 200px repeat(2, 50px);
+    grid-template-rows: repeat(4, 125px);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+
+    .grid-wrapper div:nth-child(1){
+  background: red;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 6;
+}
+    
+
+.grid-wrapper div:nth-child(2){
+  background: black;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.grid-wrapper div:nth-child(3){
+  background-color: green;
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.grid-wrapper div:nth-child(4){
+    background-color: #112233;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+.grid-wrapper div:nth-child(5){
+    background-color: #123355;
+  grid-column-start: 2;
+  grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+.grid-wrapper div:nth-child(6){
+  background: #65431f;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 3;
+  grid-row-end: 5;
+}
+
+
+
+</style>
+<body>
+    <div class="grid-wrapper">
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        </div>
+</body>
+</html>
