@@ -1,0 +1,40 @@
+.grid-puzzle {
+  background-color: red;
+  height: 500px;
+  width: 500px;
+  display: grid;
+  grid-template-columns: 50px 60px auto 50px 40px;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+
+.grid-puzzle div:nth-child(1) {
+  background: black;
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 2;
+}
+.grid-puzzle div:nth-child(2) {
+  background: green;
+  grid-column: 3 / span 3;
+  grid-row: 1 / 1;
+}
+.grid-puzzle div:nth-child(3) {
+    background:darkblue ;
+    grid-column: 3 / span 1;
+    grid-row: 3 / span 1;
+    margin-left: -30px;
+}
+.grid-puzzle div:nth-child(4) {
+    background:blue;
+    grid-column: 2 / span 3;
+    grid-row: 4 / span 2;
+}
+.grid-puzzle div:nth-child(5) {
+    background: white;
+    grid-column: 4 / span 2;
+    grid-row: 2 / span 2;
+}
+.grid-puzzle div:nth-child(6) {
+    background: brown;
+    grid-column: 5 / span 1;
+    margin-top: -75px;
+}
