@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=@, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+    }
+    @media screen and (max-width: 1024px) {
+      div {
+        font-size: smaller;
+      }
+    }
+
+    input {
+      visibility: hidden;
+    }
+    @media screen and (min-width: 320px) and (max-width: 1024px) {
+      input {
+        visibility: visible;
+      }
+    }
+
+    @media screen and (orientation: landscape) {
+      body {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <body>
+    <div>Test</div>
+    <div>Test2</div>
+    <input />
+  </body>
+</html>
