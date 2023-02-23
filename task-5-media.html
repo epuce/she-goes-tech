@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      font-size: 50px;
+    }
+
+
+    /* Create a media query that changes changes the default font size if the screen is smaller than 1024px; */
+    @media screen and (max-width: 1024px) {
+      body {
+        font-size: 15px;
+      }
+    }
+
+    /* Create a media query that shows a hidden element it he screen is between 320px and 1024px; */
+    .hidden {
+      display: none;
+      color: red;
+      font-weight: bold;
+    }
+
+    @media screen and (max-width: 1024px) and (min-width: 320px) {
+      .hidden {
+        display: inline;
+      }
+    }
+
+    /* Create a media query that aligns items vertically when in portrait (that means that the default state is that they are aligned horizontally)  */
+    .flip {
+      transform: rotate(0);
+      height: 20%;
+      width: 20%;
+    }
+
+    @media screen and (orientation: portrait) {
+      .flip {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+
+  <body>
+    <p class="smaller">Text that gets smaller</p>
+    <p class="hidden">Small screen surprise!</p>
+
+    <img
+      class="flip"
+      src="https://i.kym-cdn.com/photos/images/original/001/482/295/98f.png"
+      alt="a man yelling parkour"
+    />
+  </body>
+</html>
+
+<!-- src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Arrow_east.svg/512px-Arrow_east.svg.png" alt="arrow" -->
