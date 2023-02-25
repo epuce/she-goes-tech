@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.div-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+    .block1 {
+        background-color: aqua;
+        width: 100px;
+        height: 100px;
+    }
+
+    .block2 {
+        background-color: red;
+        width: 100px;
+        height: 100px;
+    }
+
+    .block3 {
+        background-color: green;
+        width: 100px;
+        height: 100px;
+    }
+
+    .block4 {
+        background-color: black;
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (max-width: 1024px) {
+        body {
+            font-size: 20px;
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        .number {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        .number {
+            display: none;
+        }
+    }
+
+    @media screen and (orientation: portrait) {
+        .div-wrapper {display: flex;
+            flex-direction: column;
+            height: 800px;
+        }
+    }
+</style>
+
+<body>
+    <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas alias voluptates ea excepturi numquam in totam
+        magnam. Eveniet atque minima, repellendus illum ipsam quidem blanditiis laborum cupiditate neque? Iusto, a.
+    </p>
+
+    <p class="number"> 2200</p>
+
+    <div class="div-wrapper">
+        <div class="block1"></div>
+        <div class="block2"></div>
+        <div class="block3"></div>
+        <div class="block4"></div>
+
+
+    </div>
+</body>
+
+</html>
