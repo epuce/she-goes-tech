@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task5</title>
+    <style>
+        body {
+          color: red;
+          background-color: rgb(57, 57, 57);
+          font-size: 36px;
+        }
+    
+        .small_screen_text {
+          visibility: hidden;
+        }
+    
+        .container {
+          display: flex;
+          flex-direction: row;
+        }
+    
+        .container div {
+          width: 60px;
+          height: 60px;
+          background: grey;
+          margin: 10px;
+        
+        }
+    
+        @media screen and (max-width: 1024px) {
+          body {
+            color: rgb(97, 97, 201);
+            font-size: 24px;
+          }
+        }
+    
+        @media screen and (max-width: 1024px) and (min-width: 320px) {
+          .small_screen_text {
+            visibility: visible;
+          }
+        }
+    
+        @media screen and (orientation: portrait) {
+          .container {
+            flex-direction: column;
+          }
+        
+        }
+      </style>
+      <body>
+        <p>
+          Hello world
+        </p>
+        <p class="small_screen_text">Hidden text</p>
+        <div class="container">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+      </body>
+</html>
