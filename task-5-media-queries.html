@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      font-size: 24px;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    .boxes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0;
+      width: 200px;
+      height: 200px;
+    }
+
+   .box-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   }
+   
+    #red {
+      background-color: red;
+    }
+
+    #orange {
+      background-color: orange;
+    }
+
+    #pink {
+      background-color: pink;
+    }
+
+    @media screen and (max-width: 1024px) {
+      body {
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 1024px) and (min-width: 320px) {
+      .hidden {
+        visibility: visible;
+      }
+    }
+
+    @media screen and (orientation: portrait) {
+      .box-wrapper {
+        align-items: column;
+      }
+    }
+  </style>
+
+  <body>
+    TEXT
+    <div class="hidden">Hidden Text</div>
+    <div class="box-wrapper">
+    <div class="boxes" id="red"></div>
+    <div class="boxes" id="orange"></div>
+    <div class="boxes" id="pink"></div>
+  </div>
+  </body>
+</html>
