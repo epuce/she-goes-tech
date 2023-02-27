@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      color: purple;
+      font-weight: 900;
+    }
+    @media screen and (max-width: 1024px) and (min-width: 720px) {
+      body {
+        color: red;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      p {
+        font-size: 40px;
+      }
+    }
+    h1 {
+      visibility: hidden;
+    }
+    @media screen and (max-width: 1024px) and (min-width: 320px) {
+      h1 {
+        visibility: visible;
+      }
+    }
+    .wrapper {
+      display: flex;
+    }
+
+    .wrapper div {
+        display: flex;
+        margin: 10px;
+    }
+    @media screen and (orientation: portrait) {
+      .wrapper {
+        display: block;
+      }
+    }
+
+    /* everything above 1024px treated as desktop/ everything below tablet device till 720pc/ then its treated as mobile device */
+    /* (orientation: landscape) - used for tablets when you can flip them from vertical to horizontal */
+  </style>
+  <body>
+    <h1>HEADING</h1>
+    <p>some more text and some more text</p>
+    <div class="wrapper">
+      <div>one</div>
+      <div>two</div>
+      <div>three</div>
+      <div>four</div>
+    </div>
+  </body>
+</html>
