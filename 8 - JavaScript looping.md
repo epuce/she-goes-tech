@@ -75,7 +75,7 @@ console.log(sqrtArray)
 
 ### Checkup
 
-### add a new file named task-8.js where all these actions will be performed
+### add a new file named task-6-javascript-loops.js where all these actions will be performed
 
 1. create a loop that prints every second number starting from 10 and ending with 20
 2. loop thru an array of 5 values and print out it's content
