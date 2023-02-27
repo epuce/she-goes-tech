@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .img-wrapper {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+    .img-wrapper img {
+        width: 250px;
+    }
+
+    .img-wrapper-2 {
+        display: flex;
+        flex-direction: column;
+        height: 1000px;
+        justify-content: space-between;
+    }
+
+    .img-wrapper-2 img {
+        height: 150px;
+    }
+
+    .img-wrapper-2 img:nth-child(1) {
+        order: 1;
+    }
+    .img-wrapper-2 img:nth-child(3) {
+        order: 2;
+    }
+
+    .content-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        width: 500px;
+        height: 300px;
+        background: #44aa77;
+    }
+</style>
+<body>
+    <button>Click me</button>
+
+    <div class="img-wrapper">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+    </div>
+
+    <div class="img-wrapper-2">
+        <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg">
+        <img src="https://cdn.dribbble.com/userupload/3158902/file/original-7c71bfa677e61dea61bc2acd59158d32.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+        <img src="https://marketplace.canva.com/EAEz7zOew58/2/0/1600w/canva-moon-light-logo-template-8pEo1H1XNj4.jpg">
+    </div>
+
+    <div class="content-wrapper">
+        <div class="content"></div>
+    </div>
+</body>
+</html>

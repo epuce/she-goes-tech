@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body {
+        font-size: larger;
+       
+    }
+
+    h2 {
+        visibility: hidden;
+    }
+
+    @media screen and (max-width: 1024px) {
+        body {
+            font-size: small;
+        }
+    }
+
+    @media screen and (min-width: 320px) and (max-width:1024px) {
+        h2 {
+            visibility: visible;
+        }
+    }
+
+    @media screen and (orientation: landscape) {
+        body {
+            position: relative;
+        }
+
+        body :nth-child(1) :nth-child(2){
+            position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+    }
+}
+</style>
+<body>
+    <h1>This is a text</h1>
+    <h2>Hidden element</h2>
+</body>
+</html>
