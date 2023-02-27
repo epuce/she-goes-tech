@@ -106,3 +106,25 @@ width: 150px;
 .number-wrapper div:nth-child(1) {
     order: 3;
 }
+
+.grid-wrapper div:nth-child(1){
+    background: red;
+}
+.grid-wrapper div:nth-child(2){
+    background: blue;
+}
+.grid-wrapper div:nth-child(3){
+    background: black;
+}
+.grid-wrapper div:nth-child(4){
+    background: green;
+}
+.grid-wrapper div:nth-child(5){
+    background: yellow;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 300px 30% auto;
+    grid-template-rows: 50px 100px;
+}
