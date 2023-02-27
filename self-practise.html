@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+ /* Disabled links */
+    /* a:not([href]){
+
+    } */
+  </style>
+  <body>
+<!-- Are you giving a user a way to go to another page or a different part of the same page? Use a link (<a href="/somewhere">link</a>)
+Are you making a JavaScript-powered clickable action? Use a button (<button type="button">button</button>)
+Are you submitting a form? Use a submit input (<input type="submit" value="Submit">) -->
+
+<!-- LINKS -->
+<!-- Basic link -->
+    <a hrf=""https://css-tricks.com"">CSS-Tricks</a>
+
+<!-- Jump link=hash link -->
+    <section id="section-2"></section>
+    <a href="#section-2">Section Two</a>
+
+<!-- Opening link in a new window -->
+  <a href="https://css-tricks.com" target="_blank" rel="noopener noreferrer">
+  CSS-Tricks
+</a>
+<!-- rel attribute is for the relationship of the link to the target. rel="noopener" prevents a new tab from using JS window.opener feature which could potentially access the page containing the link (your site) to perform malicious thins. real='noreferrer prevents other sites (Google analytics) from identifying you page as the source of clicked link'-->
+<!-- Link to trigger a download -->
+<a href="" download>Download PDF</a>
+
+<!-- Links around images -->
+<a href="/buy/puppies/now">
+  <img src="puppy.jpg" alt="A happy puppy.">
+</a>
+
+<!-- Link states -->
+<!-- :hover: For styling when a mouse pointer is over the link.
+:visited: For styling when the link has been followed, as best as the browser can remember. It has limited styling ability due to security.
+:link: For styling when a link has not been visited.
+:active: For styling when the link is pressed (e.g. the mouse button is down or the element is being tapped on a touch screen).
+:focus: Very important! Links should always have a focus style. -->
+  </body>
+</html>

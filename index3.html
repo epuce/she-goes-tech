@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .header,
+    .footer {
+      background: gray;
+
+      /* grid-column: 1/3; */
+    }
+    body {
+      display: grid;
+      grid-template-rows: 80px 75% 80px; /*size of middle section is equal to calc(100%-160px)*/
+      grid-template-columns: 80%; /*we create 2 columns which take 40% of total viewport width*/
+      margin: 0;
+      min-height: 100vh;
+      max-height: 100vh; /*how much we see, minimum we see 100% viewport height*/
+      /* all: unset; removes all the default properties. That's not best to use */
+      justify-content: center;
+      overflow: auto;
+    }
+    .container {
+      display: grid;
+      overflow: auto;
+    }
+    .section-left,
+    .section-right {
+      height: 3000px;
+    }
+  </style>
+  <body>
+    <div class="header">Header</div>
+    <div class="container">
+      <div class="section-left">Left</div>
+      <div class="section-rights">Right</div>
+    </div>
+    <div class="footer">Footer</div>
+  </body>
+</html>

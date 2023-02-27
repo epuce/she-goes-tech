@@ -48,7 +48,7 @@ ul {
 }
 
 .menu-dropdown {
-  display: none; /*element is not interacting with any other element, completely remove it from the layout. Visibility would allow to have place in the layout*/
+  display: none; /*element is not interacting with any other elements, completely remove it from the layout. Visibility would allow to have place in the layout*/
   position: absolute; /*in regards to parent container, allows content to not jump*/
   line-height: initial; /*means remove all the styling which was applied or inherited*/
   text-align: center;

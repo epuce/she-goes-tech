@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+    body {
+      font-size:20px;
+    }
+    p{
+visibility:hidden;
+    }
+    .div-wrapper{
+      display:flex;
+      align-items:center;
+    }
+    .first-div, .second-div{
+      height:100px;
+      width:100px;
+    }
+    .first-div{
+      background:red;
+    }
+    .second-div{
+     background:blue;
+    }
+
+  @media screen and (max-width: 1024px)  {
+      body {
+        font-size:30px;
+      }
+    } 
+  @media screen and (max-width: 1024px) and (min-width:320px)  {
+     p{
+      visibility:visible;
+     }
+    }
+   @media screen and (orientation: landscape) {
+      .div-wrapper{
+        justify-content:center;
+      }
+    }
+  </style>
+  <body>
+    TEXT
+    <p>Hello</p>
+    <div class="div-wrapper">
+    <div class="first-div"></div>
+    <div class="second-div"></div>
+    </div>
+  </body>
+
+</html>
