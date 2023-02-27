@@ -4,6 +4,8 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    font-family: sans-serif;
+    background-color: #f3f3f3;
 }
 
 .wrapper-404 {
@@ -32,10 +34,12 @@ body {
 .info-action_joined-input {
     border: 1px solid gray;
     display: flex;
+    border-radius: 4px;
 }
 
 .info-action_joined-input input {
     border: none;
+    border-radius: 4px 0 0 4px;
 }
 
 .info-action_joined-input button {
@@ -43,4 +47,6 @@ body {
     border-left: 1px solid gray;
     width: 60px;
     height: 100%;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
 }
