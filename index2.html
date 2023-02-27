@@ -1,2 +1,51 @@
-the sky is red
-no the sky is blue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .header,
+    .footer {
+        background: gray;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    body {
+        display: grid;
+        grid-template-rows: 80px 75% 80px;
+        grid-template-columns: repeat(2, 50%);
+        margin: 0;
+        min-height: 100vh;
+        max-height: 100vh;
+        justify-content: center;
+    }
+
+    .section-left,
+    .section-right {
+        height: 3000px
+    }
+
+    .header {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+</style>
+<body>
+<div class="header">
+    Header
+</div>
+<div class="section-left">
+    Left
+</div>
+<div class="section-right">
+    Right
+</div>
+<div class="footer">
+    Footer
+</div>
+</body>
+</html>
