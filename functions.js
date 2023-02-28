@@ -60,15 +60,28 @@ function monthlyBillSum(bill, ...otherBills) {
     return sum;
 }
 
-/*or like this, but then we have to put in an array (see below)
+/*or like this, but then we have to put in an array (see below)*/
 function monthlyBillSum(bills) {
     return bills.reduce(function(acc, bill) {
         return acc+bill
     })
 }
 
-monthlyBillSum([100, 150, 250, 600]) <- array of numbers*/
+/*monthlyBillSum([100, 150, 250, 600]) <- array of numbers*/
 
+/*or like this*/
+
+function sumOfAll (...params) {
+    var sum = 0;
+
+    params.forEach(function(num) {
+        sum = sum+num;
+    })
+
+    console.log(sum)
+}
+
+/*functions with objects*/
 var jim = {
     name: "Jim",
     age: 55,
