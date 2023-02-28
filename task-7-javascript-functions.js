@@ -1,8 +1,11 @@
 ["Tom", "Tim", "Ted"].forEach(function() {
-    console.log("Hallo")
+    
 })
 
-...
+function name() {
+    console.log("name")
+}
+
 
 function SumOf(a, b) {
     console.log (a+b)
@@ -14,4 +17,5 @@ function foodBill (main, ...other) {
     }, main)
     }
 
-    
+
+
