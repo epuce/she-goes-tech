@@ -66,6 +66,7 @@ while (i < 10) {
   console.log("Number " + i);
   i = i + 2;
 } //we modified i, therefore, we cannot run it again since we modified it once
+
 var isAdmin = true;
 while (isAdmin) {
   var randomNumber = Math.random() * 100;
@@ -76,3 +77,31 @@ while (isAdmin) {
   }
   console.log(Math.random());
 }
+
+[1, 2, 3, 4, 5].forEach(function (num, i) {
+  console.log("item at indexn: " + i + " is " + num);
+});
+[1, 2, 3, 4, 5].reduce(function (acc, num) {
+  console.log(acc, num);
+  return acc * num;
+}, 10);
+
+console.log(
+  [10, 20, 130, 45, 58].map(function (value) {
+    return value + value * 0.15;
+  })
+);
+var array = ["Ed", "Max", "Jim"];
+for (var i = 0; i < array.length; i++) {
+  console.log("Hi, " + array[i]);
+}
+
+// var isBiggerThatTen = true;
+// while (isBiggerThatTen === true) {
+//   var num = Math.random() * 100;
+//   if (num > 10) {
+//     console.log(num);
+//   } else {
+//     isBiggerThatTen = false;
+//   }
+// }
