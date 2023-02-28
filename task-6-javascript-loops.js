@@ -18,10 +18,11 @@ let numArr = [];
 
 while (!isLength5) {
   var randomNumber = Math.random() * 100;
-  numArr.push(randomNumber);
-  if (numArr.length <= 5) {
-    console.log(numArr);
+
+  if (numArr.length < 5) {
+    numArr.push(randomNumber);
   } else {
     isLength5 = true;
   }
 }
+console.log(numArr);
