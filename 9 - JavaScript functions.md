@@ -9,7 +9,7 @@
 * Declared - there is a name to refer to
 ```JavaScript
 // The function that is executed on the click and does not matter where in the fil it has been declared
-function printNumber(num) {
+function printNumber() {
     console.log('Yay it works')
 }
 
@@ -41,7 +41,7 @@ function witchNumberIsBigger(a, b) {
 
 
 // If you don't know how many parameters you'll need
-const monthlyBill = function(amount, ...theRest) {
+var monthlyBill = function(amount, ...theRest) {
     var totalBill = theRest.reduce((acc, value) => {
         return acc += value;
     }, amount)
@@ -52,11 +52,11 @@ monthlyBill(10.50, 3.70, 20) // Return 34.2
 monthlyBill(10.50, 3.70, 20, 7.5, 23.55) // Return 65.25
 
 // Reading parameters from object
-var myData = (params) => {
-    const {name, surname, isActive} = params;
+var myData = function(params) {
+    const {name, surname: lastName, isActive} = params;
 
     console.log(name)
-    console.log(surname)
+    console.log(lastName)
     console.log(isActive)
 }
 
