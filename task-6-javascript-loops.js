@@ -26,3 +26,13 @@ while (!isLength5) {
   }
 }
 console.log(numArr);
+
+//Other options done by teacher
+for (let i = 10; i <= 20; i = i + 2) {
+  console.log(i);
+}
+
+let array = [];
+while (array.length < 5) {
+  array.push(Math.random());
+}
