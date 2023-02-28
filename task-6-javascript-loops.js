@@ -9,7 +9,7 @@ arr.forEach(function (num) {
 });
 
 arr.map(function (num) {
-  return num * num;
+  return num * num; /*or here we can write num**2 (by the power of 2) or for example num**3 (by the power of 3)*/
 });
 
 var anotherArray = [];
