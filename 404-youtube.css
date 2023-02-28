@@ -1,0 +1,47 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.wrapper-404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-img {
+    width: 200px;
+}
+
+.info-text {
+    text-align: center;
+}
+
+.info-action {
+    display: flex;
+}
+
+.info-action .info-action__logo {
+    width: 130px;
+    margin-right: 10px;
+}
+
+info-action .info-action__joined-input {
+    border: 1px solid gray;
+    display: flex;
+}
+
+.info-action .info-action__joined-input input {
+    border: none;
+}
+
+.info-action .info-action__joined-input button {
+    border: none;
+    border-left: 1px solid gray;
+    width: 60px;
+    cursor: pointer;
+}
