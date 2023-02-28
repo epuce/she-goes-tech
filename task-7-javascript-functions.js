@@ -2,7 +2,7 @@
     console.log("Following numbers")
 })
 
-function Myname (name){
+function myName (name){
     console.log("My name is "+ name)
 }
 
@@ -22,9 +22,9 @@ return total;
 function sumOfAll(...params){
     var sum =0;
 
-    params.forEach(function(num)){
+    params.forEach(function(num){
         sum= sum + sum;
-    }
+    })
 }
 
 var user = {
