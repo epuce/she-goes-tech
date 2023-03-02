@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .list-item {
+        color: red;
+    }
+    .div-color {
+        color: blue;
+    }
+  </style>
+  <body>
+    <input id="user-age" />
+    <button class="js-save-user-age">Save user age</button>
+
+    <input id="favorite-food" />
+    <button class="js-save-favorite-food">Save favorite food</button>
+
+    <ul>
+        <li>First element</li>
+        <li>Second element</li>
+        <li>Third element</li>
+    </ul>
+
+    <div>First div</div>
+    <div>Second div</div>
+    <div>Third div</div>
+  </body>
+  <script>
+    //Retrieve the domain name (hostname)
+    window.Location.hostname;
+
+    //Save and then retrieve some data with localStorage
+    //A simple data type, like string, boolean, number, etc.
+    document
+      .querySelector(".js-save-user-age")
+      .addEventListener("click", function () {
+        localStorage.userAge = document.querySelector("#user-age").value;
+      });
+    document.querySelector("#user-age").value = localStorage.userAge;
+
+    //A complex data type, like object or array
+    document
+      .querySelector(".js-save-favorite-food")
+      .addEventListener("click", function () {
+        try {
+          var favFoodList = JSON.parse(localStorage.favFoodList);
+        } catch {
+          var favFoodList = [];
+        }
+        favFoodList.push(document.querySelector("#favorite-food").value);
+        localStorage.favFoodList = JSON.stringify(favFoodList);
+      });
+
+    //Create an HTML list, loop thru the list elements and add a class to each of the list elements
+    document.querySelectorAll("li").forEach(function(elem){
+       elem.classList.add("list-item")
+    })
+
+    document.querySelectorAll("div").forEach(function(element){
+        element.addEventListener("mouseover",function(){
+            element.classList.add("div-color")
+        })
+    })
+  </script>
+</html>

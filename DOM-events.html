@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      document
+        .getElementsByClassName("js-save-data")[0]
+        .addEventListener("click", function () {
+          console.log("You did a click");
+        });
+        //alternative
+        //document.querySelectorAll("js-save-data").forEach(function(elem){
+          //elem.addEventListener("click", function(){
+           // console.log("You did a click");
+         // })
+       // })
+        Object.values(document
+        .getElementsByClassName("js-save-data")).forEach(function(elem){
+          elem.addEventListener("click", function(){
+            console.log("You did a click");
+          })
+        })
+
+      document
+        .getElementById("user-name")
+        .addEventListener("focus", function () {
+          console.log("I am active");
+        });
+
+       var userNameInput =  document.querySelector("#user-name");
+
+      function activateBlur() {
+        userNameInput.classList.toggle("validation-error", !userNameInput.value)
+      }
+      userNameInput.addEventListener("blur", activateBlur);
+
+      document.querySelector(".js-save-user-name").addEventListener("click", function (){
+        
+        try{
+          //Get he list form storage, parse it to be used as an array
+        var list = JSON.parse(localStorage.list);
+        } catch {
+          var list = [];
+        }
+
+        //Add the new element to the end of the list
+        list.push(userNameInput.value);
+
+        //Save the modify list as a string
+        localStorage.list = JSON.stringify(list);
+      })
+
+      
+     
+
+      userNameInput.value = localStorage.userName;
+    });
+  </script>
+  <style>
+    .validation-error {
+        border: 1px solid red;
+    }
+  </style>
+  <body>
+    <button class="btn js-save-data">Click me</button>
+    <button class="btn js-save-data">Click me</button>
+    <button class="btn js-save-data">Click me</button>
+    <input id="user-name" />
+    <button class="js-save-user-name">Save user name</button>
+  </body>
+</html>
