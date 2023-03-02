@@ -8,10 +8,14 @@
   </head>
   <style>
     .list-item {
-        color: red;
+      color: red;
     }
     .div-color {
-        color: blue;
+      color: blue;
+    }
+
+    .puf {
+      display: none;
     }
   </style>
   <body>
@@ -22,18 +26,16 @@
     <button class="js-save-favorite-food">Save favorite food</button>
 
     <ul>
-        <li>First element</li>
-        <li>Second element</li>
-        <li>Third element</li>
+      <li>First element</li>
+      <li>Second element</li>
+      <li>Third element</li>
     </ul>
 
     <div>First div</div>
-    <div>Second div</div>
-    <div>Third div</div>
   </body>
   <script>
     //Retrieve the domain name (hostname)
-    window.Location.hostname;
+    console.log(window.location.hostname);
 
     //Save and then retrieve some data with localStorage
     //A simple data type, like string, boolean, number, etc.
@@ -58,14 +60,22 @@
       });
 
     //Create an HTML list, loop thru the list elements and add a class to each of the list elements
-    document.querySelectorAll("li").forEach(function(elem){
-       elem.classList.add("list-item")
-    })
+    document.querySelectorAll("li").forEach(function (elem) {
+      elem.classList.add("list-item");
+    });
 
-    document.querySelectorAll("div").forEach(function(element){
-        element.addEventListener("mouseover",function(){
-            element.classList.add("div-color")
-        })
-    })
+    //Create some HTML and add three different event listeners to created HTML
+    const element = document.querySelector("div");
+
+    element.addEventListener("mouseover", function (event) {
+      event.target.classList.add("div-color");
+    });
+
+    element.addEventListener("mouseleave", function (event) {
+      event.target.classList.remove("div-color");
+    });
+    element.addEventListener("click", function (event) {
+      event.target.classList.add("puf");
+    });
   </script>
 </html>
