@@ -149,7 +149,7 @@ document.addEventListener("keyup", function(){});
 
 ### Checkup
 
-### add a new file named task-10.js where all these actions will be performed
+### add a new file named task-8-DOM-events.html where all these actions will be performed
 
 1. Retrieve the domain name (hostname)
 2. Save and then retrieve some data with localStorage
