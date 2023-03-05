@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script>
+    window.location.hostname;
+
+    localStorage.linda = "linda is exhausted";
+    console.log(localStorage.linda);
+
+    localStorage.kakis = JSON.stringify({
+      eats: "fish",
+      hates: "water",
+    });
+
+    console.log(JSON.parse(localStorage.kakis));
+
+    window.addEventListener("DOMContentLoaded", function () {
+      Object.values(document.getElementsByTagName("li")).forEach(function (
+        elem
+      ) {
+        elem.classList.add("addedClass");
+      });
+
+      var inputBox = document.getElementById("inputBox");
+
+      inputBox.addEventListener("focus", function () {
+        console.log("I am active");
+      });
+
+      inputBox.addEventListener("blur", function () {
+        console.log("I am not active");
+      });
+
+      inputBox.addEventListener("keyup", function (event) {
+        console.log("A button is pressed " + event.keyCode);
+      });
+    });
+  </script>
+  <body>
+    <ul>
+      <li>Coffee</li>
+      <li>Tea</li>
+      <li>Milk</li>
+    </ul>
+
+    <input id="inputBox" />
+  </body>
+</html>
