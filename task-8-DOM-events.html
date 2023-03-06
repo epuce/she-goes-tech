@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style></style>
+
+  <body>
+    <p id="demo"></p>
+
+    <p id="userInfo"></p>
+
+    <ul>
+      <p>Shopping list</p>
+      <li id="one">bread</li>
+      <li id="two">milk</li>
+      <li id="three">butter</li>
+    </ul>
+
+     <!-- Create some HTML and add three different event listeners to created HTML -->
+
+    <button id="myBtn">Click it</button>
+
+    <p id="clickBtn"></p>
+
+    <script>
+      //A simple data type, like string, boolean, number, etc.
+      document.getElementById("demo").innerHTML = "Hi there!";
+
+      //Retrieve the domain name (hostname)
+      window.location.hostname;
+
+      //Save and then retrieve some data with localStorage
+      window.localStorage.setItem("name", "Tom");
+      var name = localStorage.getItem("name");
+
+      //A complex data type, like object or array
+      const user = {
+        firstName: "Tommy",
+        age: 32,
+        gender: "male",
+        profession: "plummer",
+      };
+      window.localStorage.setItem("user", JSON.stringify(user));
+      document.getElementById("userInfo").innerHTML =
+        localStorage.getItem("user");
+
+      //Create some HTML and add three different event listeners to created HTML
+      const element = document.getElementById("myBtn");
+      element.addEventListener("click", function () {
+        document.getElementById("clickBtn").innerHTML = "Hi there!";
+      });
+     
+
+     
+    </script>
+
+    <!-- Create an HTML list, loop thru the list elements and add a class to each of the list elements -->
+
+   
+  </body>
+</html>
