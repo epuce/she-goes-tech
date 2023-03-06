@@ -7,32 +7,34 @@
     <title>task-8-DOM-events.html</title>
   </head>
   <script>
-    var hostName = window.location.hostname;
+    console.log(location.hostname);
 
-    window.localStorage.setItem("name", "Kristina");
+    localStorage.setItem("name", "Kristina");
+    console.log(localStorage.getItem("name"));
 
-    window.localStorage.setItem("cities", ["Vilnius", "Kaunas", "Varėna"]);
+    localStorage.cities = JSON.stringify(["Vilnius", "Kaunas", "Varėna"]);
+    console.log(JSON.parse(localStorage.cities));
 
     window.addEventListener("DOMContentLoaded", function () {
       Object.values(document.getElementsByTagName("li")).forEach(function (
         elem
       ) {
-        elem.classList.add("withClass");
+        elem.classList.add("with-class");
       });
-      document
-        .getElementsByClassName("withClass")[0]
-        .addEventListener("click", function () {
-          console.log("Clicked");
-        });
-      document
-        .getElementsByTagName("li")[1]
+
+      var someInput = document.getElementById("some-input")
+
+      someInput
         .addEventListener("focus", function () {
-          console.log("Active");
+          console.log("Focus");
         });
-      document
-        .getElementsByClassName("withClass")[2]
+        someInput
         .addEventListener("blur", function () {
-          console.log("Last one");
+          console.log("Blur");
+        });
+        someInput
+        .addEventListener("change", function () {
+          console.log("change");
         });
     });
   </script>
@@ -42,5 +44,7 @@
       <li>Kaunas</li>
       <li>Varėna</li>
     </ul>
+
+    <input id="some-input" type="number"/>
   </body>
 </html>
