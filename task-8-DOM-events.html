@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<ul class="js-list">
+    <li>Linda</li>
+    <li>Anna</li>
+    <li>Ilze</li>
+
+    <input id='some-input' type="number">
+
+</body>
+<script>
+ /* Retrieve the domain name (hostname) */
+    console.log(location.hostname, window.location.hostname)
+
+    /* Save and then retrieve some data with localStorage
+A simple data type, like string, boolean, number, etc.
+A complex data type, like object or array */
+    localStorage.newData = 'Yes, it works'
+    console.log(localStorage.newData)
+    /* vai */
+    console.log(localStorage.newData)
+    console.log(localStorage.getItem("newData"))
+
+    /*Create an HTML list, loop thru the list elements and add a class to each of the list elements*/
+    localStorage.list = JSON.stringify ([1,2,3,4])
+    console.log(JSON.parse(localStorage.list))
+
+document.querySelectorAll('.js-list li').forEach(function(elem) {
+    elem.classList.add('list-item')
+})
+
+
+  /* Create some HTML and add three different event listeners to created HTML */
+
+
+document.getElementById('some-input').addEventListener('focus', function() {
+    console.log('focus')
+})
+document.getElementById('some-input').addEventListener('blur', function() {
+    console.log('blur')
+})
+document.getElementById('some-input').addEventListener('change', function() {
+    console.log('change')
+})
+
+  /* Create some HTML and add three different event listeners to created HTML, version 2, noīsināts kods ar var definēšanu */
+var someInput = document.getElementById('someInput')
+  
+  someInput.addEventListener('focus', function() {
+    console.log('focus')
+})
+someInput.addEventListener('blur', function() {
+    console.log('blur')
+})
+someInput.addEventListener('change', function() {
+    console.log('change')
+})
+
+</script>
+</html>
