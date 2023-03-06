@@ -48,3 +48,21 @@ function parseBox(box) {
 }
 
 parseBox(box1);
+
+var technicalSheet = function (box) {
+  var { weight, height, width, length, color } = box;
+
+  console.log(
+    "This box weights " +
+      box.weight +
+      " kg and it´s dimensions are " +
+      box.height +
+      " x " +
+      box.width +
+      " x " +
+      box.length +
+      " inches" +
+      " and it´s color is " +
+      box.color
+  );
+};
