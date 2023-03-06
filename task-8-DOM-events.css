@@ -27,3 +27,6 @@ h3 {
 }
 
 
+.added-class {
+    list-style-type: circle;
+}

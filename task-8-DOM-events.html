@@ -18,13 +18,13 @@
     </div>
     <div class="third-block">
         <h3>Tasks</h3>
-        <ul id="list">
-            <li>Wash dishes</li>
-            <li>Wash clothes</li>
-            <li>Make dinner</li>
-            <li>Do homework</li>
-            <li>Relax</li>
-            <li id="hidden">Watch Netflix</li>
+        <ul id="list" class="ul-list">
+            <li class="li">Wash dishes</li>
+            <li class="li">Wash clothes</li>
+            <li class="li">Make dinner</li>
+            <li class="li"> Do homework</li>
+            <li class="li">Relax</li>
+            <li id="hidden" class="li">Watch Netflix</li>
         </ul>
     </div>
     <div>
@@ -41,6 +41,10 @@
         localStorage.setItem('string', simpleData);
         console.log(window.localStorage.string)
 
+        /*another way ->*/
+
+        localStorage.simpleData2 = 123 /*simpleData2 is how we name the stored item*/
+
         var complexData = {
             name: "John",
             surname: "Smith",
@@ -48,14 +52,22 @@
             yearsOfExperience: 8
         }
         
-        window.localStorage.object = JSON.stringify(complexData)
+        window.localStorage.object = JSON.stringify(complexData) /*object in this case is how we name the saved item*/
         console.log(JSON.parse(window.localStorage.object)) 
 
         /*Create an HTML list, loop thru the list elements and add a class to each of the list elements*/
 
-        var list = document.getElementById('list').childNodes 
-        /*?*/
-       
+        /*var list = document.querySelectorAll('.li') 
+        /*?
+        for (i = 0; i < list.length; i++) {
+            list[0].classList.add('added-class')
+        }*/
+
+        document.querySelectorAll('.ul-list li').forEach(function(elem){
+            elem.classList.add('added-class')
+        }) /*adding new class to each item in the HTML list*/
+        
+
         /*Create some HTML and add three different event listeners to created HTML*/
 
         function changeText () {
