@@ -11,6 +11,9 @@
     .key-pressed{
 border:1px solid red;
     }
+.list-item:after{
+
+}
   </style>
   <body>
     <button class="btn js-save-data">Click me</button>
@@ -20,10 +23,14 @@ border:1px solid red;
   <input id="user-age" >
   <button class="
   js-save">Save </button>
- 
+ <ol>
+  <li class="list-item"></li>
+  <li></li>
+</ol>
+
  
 </html>
-  <script  type="text/javascript" src="task-8-dom.js">
+  <script  type="text/javascript" src="crud.js">
 
     window.addEventListener("DOMContentLoaded", function(){document.getElementById("user-name").addEventListener("focus", function () {
   console.log("I am active");
