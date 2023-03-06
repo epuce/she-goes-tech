@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<link rel="stylesheet" href="./task-8-DOM-events.css">
+
+<body>
+    <div class="first-block">
+        <h1 id="h1">Click me!</h1>
+    </div>
+    <div class="second-block">
+        <h2 id="h2">I have a secret</h2>
+    </div>
+    <div class="third-block">
+        <h3>Tasks</h3>
+        <ul id="list">
+            <li>Wash dishes</li>
+            <li>Wash clothes</li>
+            <li>Make dinner</li>
+            <li>Do homework</li>
+            <li>Relax</li>
+            <li id="hidden">Watch Netflix</li>
+        </ul>
+    </div>
+    <div>
+        <img id="img" src="./original.avif">
+    </div>
+
+    <script>
+        /*Retrieve the domain name (hostname)*/
+        window.location.hostname
+
+        /*Save and then retrieve some data with localStorage*/
+        var simpleData = 'Hello, world'
+
+        localStorage.setItem('string', simpleData);
+        console.log(window.localStorage.string)
+
+        var complexData = {
+            name: "John",
+            surname: "Smith",
+            occupation: "accountant",
+            yearsOfExperience: 8
+        }
+        
+        window.localStorage.object = JSON.stringify(complexData)
+        console.log(JSON.parse(window.localStorage.object)) 
+
+        /*Create an HTML list, loop thru the list elements and add a class to each of the list elements*/
+
+        var list = document.getElementById('list').childNodes 
+        /*?*/
+       
+        /*Create some HTML and add three different event listeners to created HTML*/
+
+        function changeText () {
+            if (document.getElementById('h1').innerHTML === "Click me!") {
+            document.getElementById('h1').innerHTML = 'It worked!'
+        } else if (document.getElementById('h1').innerHTML === "It worked!") {
+            document.getElementById('h1').innerHTML = 'Click me!'
+        }
+    }
+        document.getElementById('h1').addEventListener('click', changeText)
+
+        function showImage () {
+            document.getElementById('img').style.visibility = 'visible';
+
+        }
+
+        function hideImage () {
+            document.getElementById('img').style.visibility = 'hidden';
+
+        }
+
+        document.getElementById('h2').addEventListener('mouseover', showImage)
+        document.getElementById('h2').addEventListener('mouseout', hideImage)
+
+        function listScroll () {
+            document.getElementById('list').style.fontSize = '20px'
+        }
+
+        document.addEventListener('scroll', listScroll)
+
+        function showHiddenTask () {
+            document.getElementById('hidden').style.visibility = 'visible';
+        }
+
+        document.addEventListener('keydown', showHiddenTask)
+
+    </script>
+</body>
+</html>
