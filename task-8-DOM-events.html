@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task-8-DOM-events.html</title>
+  </head>
+  <script>
+    var hostName = window.location.hostname;
+
+    window.localStorage.setItem("name", "Kristina");
+
+    window.localStorage.setItem("cities", ["Vilnius", "Kaunas", "Varėna"]);
+
+    window.addEventListener("DOMContentLoaded", function () {
+      Object.values(document.getElementsByTagName("li")).forEach(function (
+        elem
+      ) {
+        elem.classList.add("withClass");
+      });
+      document
+        .getElementsByClassName("withClass")[0]
+        .addEventListener("click", function () {
+          console.log("Clicked");
+        });
+      document
+        .getElementsByTagName("li")[1]
+        .addEventListener("focus", function () {
+          console.log("Active");
+        });
+      document
+        .getElementsByClassName("withClass")[2]
+        .addEventListener("blur", function () {
+          console.log("Last one");
+        });
+    });
+  </script>
+  <body>
+    <ul>
+      <li>Vilnius</li>
+      <li>Kaunas</li>
+      <li>Varėna</li>
+    </ul>
+  </body>
+</html>
