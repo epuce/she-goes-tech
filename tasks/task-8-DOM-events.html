@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-8-DOM-events</title>
+</head>
+<body>
+    <input id="user-input">
+    <button class="js-save-data">Save data</button>
+    <input class="input">
+    <input class="input">
+    <input class="input">
+</body>
+
+<script>
+    //task-1
+    window.location.hostname;
+
+    //task-2
+    //i
+    localStorage.userName = 'Sāra';
+    var userName = localStorage.userName;
+
+    //ii
+    var userNames = [];
+    localStorage.userNames = JSON.stringify(userNames);
+
+    var userNames = JSON.parse(localStorage.userNames);
+
+    //task-3
+    var userInput = document.getElementsByClassName('input');
+     for (let index = 0; index < userInput.length; index++) {
+        userInput[index].classList.add('red');
+    }
+
+    //task-4
+    document.getElementById('user-input').addEventListener('focus', function () {
+        console.log('active');
+    });
+
+    document.getElementById('user-input').addEventListener('blur', function () {
+        console.log('lost focus');
+    });
+    
+    document.querySelector('.js-save-data').addEventListener('click', function () {
+        console.log('save data');
+    })
+
+
+</script>
+</html>
