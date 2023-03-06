@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="js-list">
+        <li>Ed</li>
+        <li>Max</li>
+        <li>Jim</li>
+    </ul>
+
+    <input id="some-input" type="number">
+</body>
+<script>
+    console.log(location.hostname, window.location.hostname)
+
+    localStorage.newData = "Yes it works"
+    localStorage.setItem('newDataCool', "This one works also")
+    console.log(localStorage.newData)
+    console.log(localStorage.getItem("newDataCool"))
+
+    localStorage.list = JSON.stringify([1,2,3,4]);
+    console.log(JSON.parse(localStorage.list))
+
+    document.querySelectorAll('.js-list li').forEach(function(elem) {
+        elem.classList.add('list-item')
+    })
+
+    var someInput = document.getElementById('some-input')
+
+    someInput.addEventListener('focus', function() {
+        console.log('focus')
+    })
+    someInput.addEventListener('blur', function() {
+        console.log('blur')
+    })
+    someInput.addEventListener('change', function() {
+        console.log('change')
+    })
+</script>
+</html>
