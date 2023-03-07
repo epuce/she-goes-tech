@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="btn js-save-data">Click me</button>
+    <button class="btn js-save-data">Click me</button>
+    <button class="btn js-save-data">Click me</button>
+    <input id="user-name">
+    <button class="js-save-user-name">Save user name</button>
+  </body>
+  <script>
+    document
+      .getElementsByClassName("js-save-data")[0]
+      .addEventListener("click", function () {
+        console.log("You did a click");
+      });
+      
+      Object.values(document.getElementsByClassName("js-save-data"))
+      .forEach(function(elem) {
+        elem.addEventListener("click", function() {
+            console.log("did a click")
+        })
+      })
+
+    document.getElementById("user-name").addEventListener("focus", function () {
+      console.log("I am active");
+    });
+
+    var UserNameInput = document.querySelector("#user-name");
+    function activateBlur() {
+        UserNameInput.classList.toggle("validation-error", !UserNameInput.value) 
+    }
+
+    document.querySelector("#user-name").addEventListener("blur", activateBlur);
+
+    document.querySelector(".js-save-user-name")
+        .addEventListener("click", function () {
+            try {
+             // Get the list from storage, parse it to be used as an array
+             var list = JSON.parse(localStorage.list);
+            } catch {
+                var list = [];
+            }
+
+            // add the new element to the end of the list
+            list.push(UserNameInput.value);
+
+            //  save the modify list as a string
+            localStorage.list = JSON.stringify(list);
+            
+    })
+
+    localStorage.userName = UserNameInput.value
+    UserNameInput.value = localStorage.userName
+
+  </script>
+  <style>
+    .validation-error {
+      border: 1px solid red;
+    }
+  </style>
+</html>

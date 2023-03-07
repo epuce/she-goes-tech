@@ -1,5 +1,5 @@
 " "
-
+console.log(location.hostname)
 
 localStorage.name = "Valda"
 
