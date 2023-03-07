@@ -1,7 +1,8 @@
+var nameInput = document.querySelector(".js-name"); //we are reading the value
+var emailInput = document.querySelector(".js-email");
+
 function saveForm() {
   console.trace(); //for debugging
-  const nameInput = document.querySelector(".js-name"); //we are reading the value
-  const emailInput = document.querySelector(".js-email");
   var isFormValid = true;
 
   if (nameInput.value.length < 3) {
@@ -10,6 +11,18 @@ function saveForm() {
   } else {
     nameInput.classList.remove("validation-error");
   }
+
+  var emailRegEx =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!emailRegEx.test(emailInput.value)) {
+    emailInput.classList.add("validation-error");
+    isFormValid = false;
+    console.log("invalid");
+  } else {
+    emailInput.classList.remove("validation-error");
+  }
+
   if (isFormValid) {
     //we only save when input is valid
     const user = {
@@ -18,7 +31,16 @@ function saveForm() {
     };
     //below we are reading the error
     var list = getUserList();
-    list.push(user);
+
+    if (saveBtn.dataset.index) {
+      //update
+      list[saveBtn.dataset.index] = user; //updates the existing one
+
+      delete saveBtn.dataset.index; //removed the index attribute
+    } else {
+      //add a new item to the list
+      list.push(user);
+    }
 
     localStorage.userList = JSON.stringify(list);
 
@@ -29,6 +51,7 @@ function saveForm() {
   }
 }
 
+//RETURNS SAVED USER LIST
 function getUserList() {
   try {
     var list = JSON.parse(localStorage.userList);
@@ -38,23 +61,32 @@ function getUserList() {
   return list;
 }
 
-document.querySelector(".js-save").addEventListener("click", function () {
+var saveBtn = document.querySelector(".js-save");
+
+saveBtn.addEventListener("click", function () {
   saveForm();
 });
 
-document.querySelectorAll("input").forEach(function (input) {
-  input.addEventListener("keypress", function (event) {
-    if (event.keyCode === 13) {
-      //Save form
-      saveForm();
-    }
-  });
-});
+// document.querySelectorAll("input").forEach(function (input) {
+//   input.addEventListener("keypress", function (event) {
+//     if (event.keyCode === 13) {
+//       //Save form
+//       saveForm();
+//     }
+//   });
+// });
 
+//UPLOADS THE TABLE
 function renderTable() {
   var list = getUserList();
   var tableContent = "";
 
+  if (list.length > 0) {
+    document.querySelector(".js-user-table-wrapper").style.display =
+      "inline-table";
+
+    // style.marginTop we need to use camelCase for properties with 2 words
+  }
   list.forEach(function (user, index) {
     var row =
       `
@@ -68,12 +100,47 @@ function renderTable() {
   <td>` +
       user.email +
       `</td>
+  <td>
+  <button class="js-edit" data-index="` +
+      index +
+      `">Edit</button>
+  </td>
+  <td> 
+  <button class="js-delete" data-index="` +
+      index +
+      `">Delete</button></td>
   </tr>
-  `;
+  `; //we add data attribute, data is a prefix which holds some data for us
 
     tableContent = tableContent + row;
   }); //we create html with js
 
   document.querySelector(".js-user-table").innerHTML = tableContent;
+  document
+    .querySelectorAll(".js-user-table .js-delete")
+    .forEach(function (button) {
+      button.addEventListener("click", function () {
+        var list = getUserList();
+        list.splice(button.dataset.index, 1); //number refers on how many items should be deleted
+        // console.log(button.dataset.index);//we get the data that we stored in the data attribute: data-inde="`+index+`"
+        localStorage.userList = JSON.stringify(list);
+        renderTable(); //after delete, then render (update) the table
+      });
+    });
+
+  document
+    .querySelectorAll(".js-user-table .js-edit")
+    .forEach(function (button) {
+      button.addEventListener("click", function () {
+        var list = getUserList();
+
+        var user = list[button.dataset.index]; //we get an element from the list based on the button index: button.dataset.index
+        nameInput.value = user.name; //now the user will be loaded inside the form
+        emailInput.value = user.email; //now the user will be loaded inside the form
+
+        saveBtn.dataset.index = button.dataset.index; //now Save button will get the same index as Edit button has once clicked
+        console.log(saveBtn.dataset);
+      });
+    });
 }
-renderTable();
+renderTable(); //this is needed to render the table once the page is uploaded
