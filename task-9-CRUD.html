@@ -27,7 +27,7 @@
       border: 1px solid #ff0000;
     }
     .user-table {
-      /* display: none; */
+      display: none;
       border-spacing: 0;
       border-collapse: collapse;
     }
@@ -38,12 +38,13 @@
   </style>
   <body>
     <form>
-      <label>TO DO:<input class="js-item" type="text" /></label>
+      <label>Item to add: <input class="js-item" type="text" /></label>
       <button type="button" class="js-add">Add</button>
     </form>
     <table class="user-table js-user-table-wrapper">
       <thead>
-        <th>TO DO items</th>
+        <th>Number</th>
+        <th>Description</th>
         <th></th>
         <th></th>
       </thead>

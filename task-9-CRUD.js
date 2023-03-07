@@ -2,7 +2,6 @@ var itemInput = document.querySelector(".js-item");
 
 function saveTodoItem() {
   var isFormValid = true;
-  console.log(itemInput.value);
 
   if (!itemInput.value.length > 0) {
     itemInput.classList.add("validation-error");
@@ -77,7 +76,6 @@ function renderTable() {
       `">Mark as done</button></td>
   </tr>
   `;
-
     tableContent = tableContent + row;
   });
 
@@ -98,10 +96,8 @@ function renderTable() {
     .forEach(function (button) {
       button.addEventListener("click", function () {
         var list = getTodoList();
-
         var item = list[button.dataset.index];
         itemInput.value = item.todo;
-
         saveBtn.dataset.index = button.dataset.index;
       });
     });
