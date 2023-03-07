@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form {
+        display: inline-flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    label, input {
+        display: block;
+    }
+
+    button {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .validation-error {
+        border: 3px solid red;
+        border-radius: 3px;
+    }
+
+    .user-table {
+        displey: none;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .user-table td, .user-table th {
+        border: 1px solid grey;
+    }
+</style>
+<body>
+    <form>
+        <label>
+            To do list
+            <input class="js-name" type="text">
+        </label>
+
+        <button type="button" class="js-save">
+            Add
+        </button>
+    </form>
+
+    <table class="user-table js-user-table-wrapper">
+        <thead>
+            <th>Nr.</th>
+            <th>To do</th>
+            <th></th>
+        </thead>
+        <tbody class="js-user-table"></tbody>
+    </table>
+</body>
+<script src="./task-9-CRUD.js"></script>
+</html>
