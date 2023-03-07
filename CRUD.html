@@ -22,13 +22,20 @@
         margin-top: 16px;
     }
 
-    table {
-        display:inline-table; /*in this way it is displayed next to the form*/
-    }
-
     .validation-error {
         border: 1px solid #FF0000;
     }
+
+    .user-table {
+        display: none;
+        border-spacing: 0;
+        border-collapse: collapse; /*if two table cells are next to each other, then they share the same border*/
+    }
+
+    .user-table td, .user-table th {
+        border: 1px solid #999999;
+    }
+
 </style>
 <body>
     <form>
@@ -49,11 +56,13 @@
         <button type="button" class="js-save">Save</button>
     </form>
 
-    <table>
+    <table class="user-table js-user-table-wrapper">
         <thead>
             <th>Index</th>
             <th>Name</th>
             <th>E-mail</th>
+            <th></th>
+            <!-- empty tag so that the generated delete button would fit nicely in the table -->
         </thead>
         <tbody class="js-user-table">
             <!-- the body is empty, because we are going to read the localStorage to fill the table*/ -->
