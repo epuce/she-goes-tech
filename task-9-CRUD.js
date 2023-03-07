@@ -2,23 +2,36 @@ var taskInput = document.querySelector(".js-task");
 
 function addTask () {
 
-    //TODO validate that the task is longer than 1 character
+    var isTaskValid = true;
 
-    var task = {
-        taskItem: taskInput.value
-    };
+    if(taskInput.value.length > 0) {
+        isTaskValid = true;
+        taskInput.classList.remove("validation-error");
+    } else {
+       taskInput.classList.add("validation-error");
+        isTaskValid = false;
+    }
 
-    var list = getTaskList();
+    if(isTaskValid) {
+        var task = {
+            taskItem: taskInput.value
+        };
 
-    list.push(task);
+        var list = getTaskList();
+
+    if(addTaskButton.dataset.index) {
+        list[addTaskButton.dataset.index] = task;
+        addTaskButton.dataset.index = ''
+    } else {
+        list.push(task);
+    }
 
     localStorage.taskList = JSON.stringify(list);
 
     taskInput.value = "";
 
     renderTaskList();
-
-    console.log(localStorage.taskList)
+    }
 }
 
 function getTaskList() {
@@ -49,13 +62,26 @@ function renderTaskList() {
     var list = getTaskList();
     var listContent = "";
 
-   list.forEach(function(task){
-    var row = `<li>`+task.taskItem+`</li>`
+   list.forEach(function(task, index){
+    var row = `<li>`+task.taskItem+`<button class="js-edit" data-index"`+index+`">Edit</button></li>`
 
     listContent = listContent + row
    })
 
    document.querySelector(".js-task-list").innerHTML = listContent;
+
+   document.querySelectorAll('.js-task-list .js-edit').forEach(function(button){
+    button.addEventListener('click', function(){
+        var list = getTaskList()
+        var task = list[button.dataset.index]
+
+        taskInput.value = task
+
+        addTaskButton.dataset.index = button.dataset.index
+    })
+   })
 }
+
+renderTaskList();
 
 // document.querySelector(".js-task-list").innerHTML = listContent;
