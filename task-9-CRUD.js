@@ -63,12 +63,24 @@ function renderTaskList() {
     var listContent = "";
 
    list.forEach(function(task, index){
-    var row = `<li>`+task.taskItem+`<button class="js-edit" data-index"`+index+`">Edit</button></li>`
+    var row = `<li>`+task.taskItem+`<button class="js-edit" data-index"`+index+`">Edit</button><input type="checkbox" class="js-check-done" data-index="`+index+`"></input></li>`
 
     listContent = listContent + row
    })
 
    document.querySelector(".js-task-list").innerHTML = listContent;
+
+   document.querySelectorAll('.js-task-list .js-check-done').forEach(function(checkbox){
+    checkbox.addEventListener('click', function(){
+        var list = getTaskList()
+        
+        list.splice(checkbox.dataset.index, 1)
+
+        localStorage.taskList = JSON.stringify(list)
+
+        renderTaskList();
+    })
+   })
 
    document.querySelectorAll('.js-task-list .js-edit').forEach(function(button){
     button.addEventListener('click', function(){
@@ -84,4 +96,5 @@ function renderTaskList() {
 
 renderTaskList();
 
-// document.querySelector(".js-task-list").innerHTML = listContent;
+//TODO style with CSS
+//TODO check task edit function
