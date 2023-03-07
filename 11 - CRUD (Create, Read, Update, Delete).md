@@ -95,9 +95,9 @@ userList.splice(id, 1);
 // store the modified list
 localStorage.userList = JSON.stringify(userList);
 ```
-### add a new file named task-11.html where all these actions will be performed
+### add a new file named task-9-CRUD.html where all these actions will be performed
 
-Create A form that stores your TODO item list by fallowing these principles:
+Create A form that stores your TODO items by fallowing these principles:
 1. You can add an item to the list
 2. You can see the full list
 3. There is a button named "modify" for each item, that allows editing the TODO item
