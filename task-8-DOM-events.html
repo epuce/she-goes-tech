@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script>
-    //  Retrieve the domain name
-
-    window.location.hostname;
-
-    //Save and then retrieve some data with localStorage
-
-    localStorage.setItem("string", "Solar System");
-    var string = localStorage.getItem("string");
-    console.log(string);
-
-    //Create an HTML list, loop thru the list elements and add a class to each of the list elements
-  </script>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <ul class="js-list">
+      <li>Sue</li>
+      <li>Michael</li>
+      <li>Jim</li>
+    </ul>
+    <input type="number" id="js-email" />
+  </body>
+  <script>
+    //  Retrieve the domain name
+
+    console.log(window.location.hostname);
+
+    //Save and then retrieve some data with localStorage
+    localStorage.newData = "This is new data";
+    console.log(localStorage.newData);
+    // or
+    localStorage.setItem("newData", "This is new data");
+    console.log(localStorage.getItem("newData"));
+    // for complex data types
+    localStorage.list = JSON.stringify(["Sue", "Michael", "Jim"]);
+    console.log(JSON.parse(localStorage.list));
+
+    localStorage.setItem("string", "Solar System");
+    var string = localStorage.getItem("string");
+    console.log(string);
+
+    //Create an HTML list, loop thru the list elements and add a class to each of the list elements
+    document.querySelectorAll(".js-list li").forEach(function (elem) {
+      elem.classList.add("list-item");
+    });
+    // Three different event listeners to HTML
+    var emailInput = document.getElementById("js-email");
+
+    emailInput.addEventListener("focus", function () {
+      console.log("focus");
+    });
+    emailInput.addEventListener("blur", function () {
+      console.log("blur");
+    });
+    emailInput.addEventListener("change", function () {
+      console.log("change");
+    });
+  </script>
 </html>
