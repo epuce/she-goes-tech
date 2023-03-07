@@ -62,6 +62,8 @@ function renderTable() {
   if (list.length > 0) {
     document.querySelector(".js-to-do-table-wrapper").style.display =
       "inline-table";
+      document.querySelector(".js-message").style.display =
+      "none";
   }
  
   list.forEach(function (toDo, index) {
@@ -97,6 +99,8 @@ function renderTable() {
       if (list.length === 0) {
         document.querySelector(".js-to-do-table-wrapper").style.display =
           "none";
+          document.querySelector(".js-message").style.display =
+          "inline-flex";
     }
     })
   })
