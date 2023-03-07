@@ -1,6 +1,7 @@
+var nameInput = document.querySelector('.js-name')
+var emailInput = document.querySelector('.js-email')
+
 function saveForm() {
-    var nameInput = document.querySelector('.js-name')
-    var emailInput = document.querySelector('.js-email')
     var isFormValid = true;
 
     if (nameInput.value.length < 3) {
@@ -8,6 +9,15 @@ function saveForm() {
         isFormValid = false
     } else {
         nameInput.classList.remove('validation-error')
+    }
+
+    var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (!emailRegEx.test(emailInput.value)) {
+        emailInput.classList.add('validation-error')
+        isFormValid = false
+    } else {
+        emailInput.classList.remove('validation-error')
     }
 
     if (isFormValid) {
@@ -18,7 +28,13 @@ function saveForm() {
     
         var list = getUserList()
     
-        list.push(user)
+        if (saveBtn.dataset.index) {
+            list[saveBtn.dataset.index] = user;
+
+            saveBtn.dataset.index = ""
+        } else {
+            list.push(user)
+        }
     
         localStorage.userList = JSON.stringify(list)
     
@@ -39,10 +55,11 @@ function getUserList() {
     return list;
 }
 
-document.querySelector('.js-save')
-    .addEventListener('click', function() {
-        saveForm()
-    })
+var saveBtn = document.querySelector('.js-save')
+    
+saveBtn.addEventListener('click', function() {
+    saveForm()
+})
 
 document.querySelectorAll('input').forEach(function(input) {
     input.addEventListener('keypress', function(event) {
@@ -56,12 +73,29 @@ function renderTable() {
     var list = getUserList()
     var tableContent = ''
 
+    if (list.length > 0) {
+        document.querySelector('.js-user-table-wrapper')
+            .style.display = 'inline-table'
+
+            // style.marginTop
+    }
+
     list.forEach(function(user, index) {
         var row = `
             <tr>
                 <td>`+(index+1)+`</td>
                 <td>`+user.name+`</td>
                 <td>`+user.email+`</td>
+                <td>
+                    <button class="js-edit"
+                            data-index="`+index+`">
+                        Edit
+                    </button>
+                    <button class="js-delete"
+                            data-index="`+index+`">
+                        Delete
+                    </button>
+                </td>
             </tr>
         `
         // `<td>`+index+`</td>` = "<td>0</td>"
@@ -72,6 +106,31 @@ function renderTable() {
     })
 
     document.querySelector('.js-user-table').innerHTML = tableContent
+
+    document.querySelectorAll('.js-user-table .js-delete')
+        .forEach(function(button) {
+            button.addEventListener('click', function() {
+                var list = getUserList();
+
+                list.splice(button.dataset.index, 1)
+
+                localStorage.userList = JSON.stringify(list);
+                renderTable()
+            })
+        })
+
+    document.querySelectorAll('.js-user-table .js-edit')
+        .forEach(function(button) {
+            button.addEventListener('click', function() {
+                var list = getUserList()
+                var user = list[button.dataset.index]
+
+                nameInput.value = user.name
+                emailInput.value = user.email
+
+                saveBtn.dataset.index = button.dataset.index
+            })
+        })
 }
 
 renderTable()
