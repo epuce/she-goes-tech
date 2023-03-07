@@ -4,9 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Task-9-CRUD</title>
 </head>
+<style>
+form {
+      display: inline-flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    label,
+    input {
+      display: block;
+      margin-top: 16px;
+    }
+    button {
+      margin-top: 16px;
+    }
+    table {
+      display: inline-table;
+    }
+    .validation-error {
+      border: 1px solid #ff0000;
+    }
+    .user-table {
+      display: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    .user-table td,
+    .user-table th {
+      border: 1px solid #999999;
+    }
+</style>
 <body>
+    <form>
+        <label>Add item: <input class="js-item" type="text" /></label>
+        <button type="button" class="js-add">Add</button>
+      </form>
+      <table class="user-table js-user-table-wrapper">
+        <thead>
+          <th>Number</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody class="js-user-table"></tbody>
+      </table>
+    </body>
+    <script src="./task-9-CRUD.js"></script>
     
 </body>
 </html>
