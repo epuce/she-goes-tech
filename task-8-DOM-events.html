@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Task3 -->
+    <ol class="js-list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+    
+
+    <!-- Task4 -->
+    <input id="field" placeholder="Type something">
+
+    
+</body>
+<script>
+
+// Task1
+    window.location.hostname
+
+// Task2
+    var userName = "userName";
+    window.localStorage.nameUser = userName;
+
+    var userList = {
+        userName: 'vaida',
+        userAge: 34
+    };
+    window.localStorage.age = JSON.stringify(userList.userAge);
+    window.localStorage.name = userList.userName;
+
+
+    // Task3
+    document.querySelectorAll('.js-list li').forEach(function(element){
+         element.classList.add('loop-class');
+    });
+    
+
+    // Task4
+    var inputData = document.getElementById('field');
+    inputData.addEventListener('focus', function(){
+        console.log('focus');
+    });
+    inputData.addEventListener('blur', function(){
+        console.log('blur');
+    });
+    inputData.addEventListener('change', function(){
+        console.log('change');
+    });
+    
+
+</script>
+</html>
