@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task-9-CRUD.html</title>
+  </head>
+  <style>
+    html {
+      font-family: "Titillium Web", sans-serif;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    label,
+    input {
+      display: block;
+    }
+
+    .todo-list {
+      display: none;
+      color: #f7f3ea;
+      font-size: 20px;
+      text-align: center;
+      padding-top: 30px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero, .task-table {
+      text-align: center;
+      padding-top: 40px;
+      background-color: #273a71;
+    }
+
+    .hero h1, .add-task p, .task-table p {
+      color: #f7f3ea;
+      font-size: 36px;
+      max-width: 843px;
+      margin: 0 auto;
+    }
+
+    .add-task input {
+        margin-top: 40px;
+        margin-left: 40px;
+        padding: 5px 160px;
+    }
+
+    .add-button {
+        margin-left: 180px;
+    }
+
+    section > .container {
+      padding: 120px 0;
+    }
+
+    .add-task {
+      display: flex;
+      background-color: #304175;
+    }
+
+    .add-button {
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      text-decoration: none;
+      background-color: #30bae7;
+      padding: 10px 82px;
+      border-radius: 5px;
+      border-bottom: 4px solid #299ec5;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .edit-button,
+    .delete-button {
+      font-size: 10px;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      text-decoration: none;
+      background-color: #eb7d4b;
+      padding: 10px;
+      border-radius: 5px;
+      border-bottom: 4px solid #c86a40;
+      display: inline-block;
+    }
+  </style>
+  <body>
+    <section class="hero">
+      <div class="container">
+        <h1>Organize your work and life, finaly.</h1>
+      </div>
+    </section>
+    <section class="add-task">
+      <div class="container">
+        <form>
+          <label>
+            <p>Please, enter what you need to do:</p>
+            <input class="js-item" type="text" />
+          </label>
+          <button type="button" class="add-button js-add">Add</button>
+        </form>
+      </div>
+    </section>
+    <section class="task-table">
+      <div class="container">
+        <p>
+            Your to do list:
+        </p>
+        <table class="todo-list js-todo-list">
+          <tbody class="js-todo-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+  <script>
+    var toDoItemInput = document.querySelector(".js-item");
+
+    function saveItem() {
+      var toDoListItem = {
+        task: toDoItemInput.value,
+      };
+
+      var list = getToDoItemsList();
+
+      if (addBtn.dataset.index) {
+        list[addBtn.dataset.index] = toDoListItem;
+        addBtn.dataset.index = "";
+      } else {
+        list.push(toDoListItem);
+      }
+
+      localStorage.toDoList = JSON.stringify(list);
+
+      toDoItemInput.value = "";
+      renderTable();
+    }
+    function getToDoItemsList() {
+      try {
+        var list = JSON.parse(localStorage.toDoList);
+      } catch {
+        var list = [];
+      }
+
+      return list;
+    }
+
+    var addBtn = document.querySelector(".js-add");
+
+    addBtn.addEventListener("click", function () {
+      saveItem();
+    });
+
+    document.querySelectorAll("input").forEach(function (input) {
+      input.addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          saveItem();
+        }
+      });
+    });
+
+    function renderTable() {
+      var list = getToDoItemsList();
+      var tableContent = "";
+
+      if (list.length > 0) {
+        document.querySelector(".js-todo-list").style.display = "inline-table";
+      }
+      list.forEach(function (toDoListItem, index) {
+        var row =
+          `<tr>
+            <td>` +
+          (index + 1) +
+          `</td>
+            <td>` +
+          toDoListItem.task +
+          `</td>
+            <td>
+                <button class="edit-button js-edit" data-index="` +
+          index +
+          `">
+                    Modify
+                </button>
+            </td>
+            <td>
+            <button class="delete-button js-delete" data-action="delete" data-index="` +
+          index +
+          `">Mark as done</button>
+            </td>
+            </tr>`;
+
+        tableContent = tableContent + row;
+      });
+
+      document.querySelector(".js-todo-table").innerHTML = tableContent;
+
+      document
+        .querySelectorAll(".js-todo-table .js-delete")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            var list = getToDoItemsList();
+            list.splice(button.dataset.index, 1);
+            localStorage.toDoList = JSON.stringify(list);
+            renderTable();
+          });
+        });
+
+      document
+        .querySelectorAll(".js-todo-table .js-edit")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            var list = getToDoItemsList();
+            var toDoListItem = list[button.dataset.index];
+
+            toDoItemInput.value = toDoListItem.task;
+
+            addBtn.dataset.index = button.dataset.index;
+          });
+        });
+    }
+
+    renderTable();
+  </script>
+</html>
