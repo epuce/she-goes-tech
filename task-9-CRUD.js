@@ -63,7 +63,7 @@ function renderTaskList() {
     var listContent = "";
 
    list.forEach(function(task, index){
-    var row = `<div class="js-container-div"><div class="js-list-item-div"><li>`+task.taskItem+`</li></div><div class="js-button-div"><button class="js-edit" data-index"`+index+`">Edit</button><input type="checkbox" class="js-check-done" data-index="`+index+`"></input></div></div>`
+    var row = `<div class="js-container-div"><div class="js-list-item-div"><li>`+task.taskItem+`</li></div><div class="js-button-div"><button class="js-edit" data-index="`+index+`">Edit</button><input type="checkbox" class="js-check-done" data-index="`+index+`"></input></div></div>`
 
     listContent = listContent + row
    })
@@ -87,7 +87,7 @@ function renderTaskList() {
         var list = getTaskList()
         var task = list[button.dataset.index]
 
-        taskInput.value = task
+        taskInput.value = task.taskItem
 
         addTaskButton.dataset.index = button.dataset.index
     })
