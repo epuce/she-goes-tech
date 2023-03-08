@@ -63,7 +63,7 @@ function renderTaskList() {
     var listContent = "";
 
    list.forEach(function(task, index){
-    var row = `<li>`+task.taskItem+`<button class="js-edit" data-index"`+index+`">Edit</button><input type="checkbox" class="js-check-done" data-index="`+index+`"></input></li>`
+    var row = `<div class="js-container-div"><div class="js-list-item-div"><li>`+task.taskItem+`</li></div><div class="js-button-div"><button class="js-edit" data-index"`+index+`">Edit</button><input type="checkbox" class="js-check-done" data-index="`+index+`"></input></div></div>`
 
     listContent = listContent + row
    })
@@ -96,5 +96,4 @@ function renderTaskList() {
 
 renderTaskList();
 
-//TODO style with CSS
 //TODO check task edit function
