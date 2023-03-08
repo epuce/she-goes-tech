@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    html {
+      font-family: monospace;
+    }
+    body {
+      background-color: #e5e5f7;
+      background-image: linear-gradient(#b6b9ef 2px, transparent 2px),
+        linear-gradient(90deg, #b6b9ef 2px, transparent 2px),
+        linear-gradient(#b6b9ef 1px, transparent 1px),
+        linear-gradient(90deg, #e6e6ef 1px, #e5e5f7 1px);
+      background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+      background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+      padding: 0 5vw 0 5vw;
+    }
+
+    table {
+      margin-top: 20px;
+    }
+
+    table td,
+    table th {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      border: #353434 solid 1px;
+      background: #b8b4b4;
+    }
+    tbody td {
+      font-weight: 500;
+      background: #e2e2e6;
+    }
+    button {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #b6b9ef;
+    }
+    button:hover {
+      background-color: #7076e6;
+    }
+  </style>
+
+  <body>
+    <!-- You can add an item to the list -->
+
+    <!-- You can see the full list -->
+
+    <!-- There is a button named "modify" for each item, that allows editing the TODO item -->
+
+    <!-- There is a button named "mark as done" that removes the item from the list -->
+
+    <h2>SHOPPING LIST</h2>
+    <label>
+      <input class="js-item" type="text" />
+    </label>
+    <button class="js-add">Add</button>
+
+    <table class="item-table">
+      <thead>
+        <th>Index</th>
+        <th>Product</th>
+        <th></th>
+      </thead>
+      <tbody class="js-item-table"></tbody>
+    </table>
+  </body>
+
+  <script>
+    var itemInput = document.querySelector(".js-item");
+
+    function saveForm() {
+      var item = itemInput.value;
+      var list = getItemList();
+
+      if (addBtn.dataset.index) {
+        list[addBtn.dataset.index] = item;
+
+        addBtn.dataset.index = "";
+      } else {
+        list.push(item);
+      }
+
+      localStorage.itemList = JSON.stringify(list);
+
+      itemInput.valuev = "";
+
+      renderTable();
+    }
+
+    function getItemList() {
+      try {
+        var list = JSON.parse(localStorage.itemList);
+      } catch {
+        var list = [];
+      }
+      return list;
+    }
+
+    var addBtn = document.querySelector(".js-add");
+
+    addBtn.addEventListener("click", function () {
+      saveForm();
+    });
+
+    document.querySelectorAll("input").forEach(function (input) {
+      input.addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          saveForm();
+        }
+      });
+    });
+
+    function renderTable() {
+      var list = getItemList();
+      var tableContent = "";
+
+      list.forEach(function (item, index) {
+        var row =
+          `
+    <tr>
+        <td>` +
+          (index + 1) +
+          `</td>
+        <td>` +
+          item +
+          `</td>
+        <td>
+            <button class='js-modify'
+                data-index="` +
+          index +
+          `">
+                 Modify 
+            </button>
+
+            <button class='js-remove'
+            data-index="` +
+          index +
+          `">
+            Remove
+            </button>
+        </td>
+
+    </tr>    
+    `;
+        tableContent = tableContent + row;
+      });
+
+      document.querySelector(".js-item-table").innerHTML = tableContent;
+
+      document
+        .querySelectorAll(".js-item-table .js-remove")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            var list = getItemList();
+
+            list.splice(button.dataset.index, 1);
+
+            localStorage.itemList = JSON.stringify(list);
+            renderTable();
+          });
+        });
+
+      document
+        .querySelectorAll(".js-item-table .js-modify")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            var list = getItemList();
+            var item = list[button.dataset.index];
+
+            itemInput.value = item;
+
+            addBtn.dataset.index = button.dataset.index;
+          });
+        });
+    }
+
+    renderTable();
+  </script>
+</html>
