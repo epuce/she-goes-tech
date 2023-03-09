@@ -9,7 +9,7 @@
   <style>
     th,
     td {
-      border: 1 px solid rgb(70, 69, 69);
+      border: 1px solid rgb(70, 69, 69);
     }
 
     table {
@@ -65,7 +65,7 @@
       } else {
         list.push(todo);
       }
-      localStorage.todoList = JSON.stringify(list);
+      localStorage.setItem ('todoList' = JSON.stringify(list);
       todoInput.value = "";
       renderTable();
     }
