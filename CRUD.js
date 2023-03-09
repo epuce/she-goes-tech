@@ -1,39 +1,55 @@
 var nameInput = document.querySelector('.js-name')
 var emailInput = document.querySelector('.js-email')
 
-function saveForm() {
-    var isFormValid = true;
-
-    if (nameInput.value.length < 3) {
-        nameInput.classList.add('validation-error')
-        isFormValid = false
-    } else {
-        nameInput.classList.remove('validation-error')
-    }
-
+function User(name, email) {
     var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-    if (!emailRegEx.test(emailInput.value)) {
-        emailInput.classList.add('validation-error')
-        isFormValid = false
-    } else {
-        emailInput.classList.remove('validation-error')
+    this.setName = function(newName) {
+        this.name = typeof newName === 'string' ? newName : '';
     }
 
-    if (isFormValid) {
-        var user = {
-            name: nameInput.value,
-            email: emailInput.value,
+    this.setEmail = function(newEmail) {
+        this.email = typeof newEmail === 'string' ? newEmail : '';
+    }
+
+    this.isValidEmail = function() {
+        return emailRegEx.test(this.email)
+    }
+
+    this.isValidName = function() {
+        return nameInput.value.length >= 3
+    }
+
+    this.isValidUser = function() {
+        return this.isValidEmail() && this.isValidName()
+    }
+
+    this.getUser = function() {
+        return {
+            name: this.name,
+            email: this.email,
         }
-    
+    }
+
+    this.setName(name);
+    this.setEmail(email);
+}
+
+function saveForm() {
+    var user = new User(nameInput.value, emailInput.value)
+
+    nameInput.classList.toggle('validation-error', !user.isValidName())
+    emailInput.classList.toggle('validation-error', !user.isValidEmail())
+
+    if (user.isValidUser()) {
         var list = getUserList()
     
         if (saveBtn.dataset.index) {
-            list[saveBtn.dataset.index] = user;
+            list[saveBtn.dataset.index] = user.getUser();
 
             saveBtn.dataset.index = ""
         } else {
-            list.push(user)
+            list.push(user.getUser())
         }
     
         localStorage.userList = JSON.stringify(list)
@@ -81,11 +97,12 @@ function renderTable() {
     }
 
     list.forEach(function(user, index) {
+        var userInstance = new User(user.name, user.email);
         var row = `
             <tr>
                 <td>`+(index+1)+`</td>
-                <td>`+user.name+`</td>
-                <td>`+user.email+`</td>
+                <td>`+userInstance.name+`</td>
+                <td>`+userInstance.email+`</td>
                 <td>
                     <button class="js-edit"
                             data-index="`+index+`">
@@ -124,9 +141,13 @@ function renderTable() {
             button.addEventListener('click', function() {
                 var list = getUserList()
                 var user = list[button.dataset.index]
+                
+                var userInstance = new User()
+                userInstance.setEmail(user.email)
+                userInstance.setName(user.name)
 
-                nameInput.value = user.name
-                emailInput.value = user.email
+                nameInput.value = userInstance.name
+                emailInput.value = userInstance.email
 
                 saveBtn.dataset.index = button.dataset.index
             })
