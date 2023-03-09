@@ -29,6 +29,18 @@
     .validation-error {
         border: 1px solid #FF0000;
     }
+
+    .user-table {
+        display: none ;
+        /* hide the table. None - the element is not theree */
+        border-collapse: collapse;
+        /* one border, when there are two togerher */
+        border-spacing: 0;
+    }
+
+    .user-table td, .user-table th {
+        border: 1px solid #999999;
+    }
 </style>
 <body>
     <form>
@@ -52,12 +64,12 @@
         </button>
     </form>
 
-    <table>
+    <table class="user-table js-user-table-wrapper">
         <thead>
             <th>Index</th>
             <th>Name</th>
             <th>E-mail</th>
-
+            <th></th>
             <tbody class="js-user-table"></tbody>
         </thead>
     </table>
