@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    th,
+    td {
+      border: 1 px solid rgb(70, 69, 69);
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+  </style>
+  <body>
+    <form>
+      <label for="todo">To Do</label>
+      <input type="text" id="js-todo-input" />
+      <button type="button" class="js-add">Add</button>
+    </form>
+    <table class="todo-table js-table-wrapper">
+      <thead>
+        <th>To Do</th>
+        <th>Action</th>
+      </thead>
+      <tbody class="js-todo-table"></tbody>
+    </table>
+    <ul id="toDoList"></ul>
+  </body>
+  <script>
+    var todoInput = document.querySelector(".js-todo-input");
+    var addBtn = document.querySelector(".js-add");
+
+    addBtn.addEventListener("click", function () {
+      addItem();
+    });
+    document.querySelectorAll("input").forEach(function (input) {
+      input.addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          addItem();
+        }
+      });
+    });
+    function addItem() {
+      var isFormValid = true;
+      if (todoInput.value.length === 0) {
+        todoInput.classList.add("validation-error");
+        isFormValid = false;
+      } else {
+        todoInput.classList.remove("validation-error");
+      }
+      if (isFormValid) {
+        var todo = todoInput.value;
+      }
+      var list = getTodoList();
+      if (addBtn.dataset.index) {
+        var index = addBtn.dataset.index;
+        list[index] = todo;
+        addBtn.dataset.index = "";
+      } else {
+        list.push(todo);
+      }
+      localStorage.todoList = JSON.stringify(list);
+      todoInput.value = "";
+      renderTable();
+    }
+
+    function getTodoList() {
+      try {
+        var todoList = JSON.parse(localStorage.todoList);
+      } catch {
+        todoList = [];
+      }
+
+      return todoList;
+    }
+  </script>
+</html>
