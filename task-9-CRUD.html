@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+    background-color: rgb(168, 176, 178);
+    }
+
+    form {
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .label, input {
+        display: block;
+    }
+
+    button {
+        margin-top: 20px;
+    }
+
+    .validation-error {
+        border: 5px solid #FF0000;
+    }
+
+    .user-table {
+        padding: 20px;
+        text-align: left;
+        border-bottom: 3px solid #ddd;
+        border-top: 3px solid #ddd;
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    user-table td, .user-table th {
+        border: 3px #ddd;
+        padding: 8px;
+
+    }
+
+    button {
+        border: 2px solid #FF0000;
+
+    }
+
+</style>
+<body>
+    <h1>
+        Application Form  
+    </h1>
+    <form>
+        <label>
+            Name Surname
+
+            <input class="js-name"
+                   type="text">
+        </label>
+
+        <button type="button"
+                class="js-save">
+            Save
+        </button>
+    </form>
+    <div>
+    </div>
+    <p1>Thank you for your time! <div>
+        To successful cooperation!</p1>
+    </div>
+    <table class="user-table js-user-table-wrapper">
+        <thead>
+            <th>Index</th>
+            <th>Name Surname</th>
+            <th>Action</th>
+            <th></th>
+        </thead>
+        <tbody class="js-user-table"></tbody>
+    </table>
+</body>
+<script src="./task-9-CRUD.js"></script>
+</html>
