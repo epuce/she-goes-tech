@@ -14,6 +14,7 @@ this.sayHi = function () {
   return "Hello, my name is " + this.firstName;
 };
 
+
 // Task3
 function Teacher() {
   Student.apply(this, arguments);
