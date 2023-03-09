@@ -1,0 +1,25 @@
+form{
+    display: inline-flex;
+    flex-direction: column;
+}
+
+input{
+    display: block;
+    margin-bottom: 6px;
+    outline: none;
+}
+
+.task-table{
+    margin-top: 16px;
+    border-collapse: collapse;
+    display: none;
+}
+
+th, td{
+    border: 1px solid black;
+    width: 100px;
+}
+
+.validation-error{
+    border: 1px solid red;
+}
