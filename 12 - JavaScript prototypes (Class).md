@@ -39,7 +39,7 @@ function Admin() {
 
 ### Checkup
 
-### add a new file named task-12.js where all these actions will be performed
+### add a new file named task-10-javascript-prototypes.js where all these actions will be performed
 
 1. Use two of built in prototype functions
 2. Create your own prototype
