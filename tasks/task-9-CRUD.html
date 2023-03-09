@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-9</title>
+</head>
+<style>
+.todo-list {
+    display: none;
+}
+li {
+    padding-bottom: 10px;
+}
+.wrong-input {
+    border: solid 1px red;
+}
+</style>
+<body>
+    <form>
+        <label>
+            ToDo item
+            <input class="js-todo-input" type="text">
+        </label>
+
+        <button type="button" class="js-save" >
+            Save
+        </button>
+    </form>
+    <div class="todo-list js-todo-list-wrapper">
+        <h3>ToDo list:</h3>
+        <ol class="js-todo-list">
+            <li></li>
+        </ol>
+    </div>
+</body>
+
+<script src="./task-9-CRUD.js"></script>
+</html>
