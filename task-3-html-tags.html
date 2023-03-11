@@ -12,29 +12,38 @@
     td {
       border: 1px solid black;
     }
+
+    .id-cell {
+      color: aqua;
+      font-weight: 600;
+      width: 70px;
+      font-size: 24px;
+      text-decoration: underline;
+    }
   </style>
 
+<link rel="stylesheet" href="./style.css">
   <body>
     <!-- Create a table that represents users. Have 3 columns: ID, name, email. Have a head row that represents the column. Add 3 rows filled with data. -->
     <table>
       <thead>
-        <th>ID</th>
+        <th class="id-cell">ID</th>
         <th>User name</th>
         <th>Email</th>
       </thead>
       <tbody>
         <tr>
-          <td>001</td>
+          <td class="id-cell">001</td>
           <td>John</td>
           <td>john@john.com</td>
         </tr>
         <tr>
-          <td>002</td>
+          <td class="id-cell">002</td>
           <td>Steve</td>
           <td>steve@steve.com</td>
         </tr>
         <tr>
-          <td>003</td>
+          <td class="id-cell">003</td>
           <td>Peter</td>
           <td>peter@peter.com</td>
         </tr>
