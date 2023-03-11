@@ -12,6 +12,14 @@
             console.log("You did a click")
         })
 
+        document.querySelectorAll(' .js-save-data').forEach(() =>ad {})
+        Object.values(document.getElementsByClassName('js-save-data'))
+            .forEach(function(elem) {
+            elem.addEventListener('click', fuction() {
+                console.log("did a click")
+            })
+        })
+
         document.getElementById('user-name').addEventListener('focus', function() {
             console.log("I am active")
         })
@@ -27,6 +35,17 @@
 
         document.querySelector('.js-save-user-name')
             .addEventListener('click', function() {
+                try{
+                //Get the list from storage, parse it to be used as an array
+                var list = JSON.parse(localStorage.list);
+                } catch {
+                    var list = [];
+                }
+                //Add the new element to the end of the list
+                list.push(userNameInput.value);
+
+                //Save the modify list as a string 
+                localStorage.list = JSON.stringify(list);
                 localStorage.userName = userNameInput.value
             })
 
@@ -45,3 +64,4 @@
     <button class="js-save-user-name">Save user name</button>
 </body>
 </html>
+
