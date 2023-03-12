@@ -1,0 +1,61 @@
+function Animal() {
+}
+
+function Animal(name, age, foodList) {
+    this.name = name
+    this.age = age
+    this.foodlist = foodList
+}
+
+var animal = new Animal("Max", 21, ["snacks", "grass", "bones"])
+---
+function Animal(name, age, foodList) {
+    if (typeof name === "string") {
+        this.name = name
+    } else {
+        this.name = " "
+    }
+    this.name = name
+    this.age = 
+        Number.isNaN(parseInt(age)) ? undefined :
+        parseInt (age)
+    this.foodlist = Array.isArray(foodList) ? foodList : []
+}
+
+<!-- how to call: var animalJack = new Animal("Jim", "test", 12) -->
+
+---
+
+function Animal(name, age, foodList) {
+    if (typeof name === "string") {
+        this.name = name
+    } else {
+        this.name = " "
+    }
+    this.name = name
+    this.age = 
+        Number.isNaN(parseInt(age)) ? undefined :
+        parseInt (age)
+    this.foodlist = Array.isArray(foodList) ? foodList : []
+        this.sayHi = function() {
+            return "Hi my name is " + this.name}
+}
+
+---
+
+function Dog() {
+    Animal.apply(this, arguments)
+}
+<!-- copy all from animal -->
+
+function Dog() {
+    Animal.apply(this, arguments)
+    this.animalType = "dog"
+}
+<!-- extend it -->
+
+var dog = new Dog("Rex", 7)
+<!-- call it -->
+
+---
+
