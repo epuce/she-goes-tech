@@ -22,7 +22,7 @@ function Person(name, age, favSnack) {
         return "Hello, my name is " + this.name
     }
 }
-var Person = new Person("Tim", 23, "apple")
+var Person1 = new Person("Tim", 23, "apple")
 
 ---
 function Person(name, age, favSnack) {
