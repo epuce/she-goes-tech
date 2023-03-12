@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="email">
+    <button class="js-save-email">Subscribe to newsletter</button>
+    <ul class="js-list">
+        <li>Monday</li>
+        <li>Tuesday</li>
+        <li>Wednesday</li>
+    </ul>
+</body>
+
+<script>
+  console.log(window.location.hostname);
+
+  localStorage.email = "info@email.com"
+  localStorage.setItem('emailToo', "hello@hello.com")
+  console.log(localStorage.email);
+  console.log(localStorage.getItem("emailToo"))
+
+localStorage.list = JSON.stringify(["Jan", "Liga", "Dylan"]);
+console.log(JSON.parse(localStorage.list))
+
+document.querySelectorAll(".js-list li").forEach(function(elem) {
+elem.classList.add("list-item")
+})
+
+document.getElementById('email').addEventListener('focus', function() {
+    console.log('focus')
+})
+document.getElementById('email').addEventListener('blur', function() {
+    console.log('blur')
+})
+document.getElementById("email").addEventListener('change', function() {
+    console.log('change')
+})
+
+</script>
+</html>
