@@ -1,0 +1,180 @@
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+/* TODO: come back to navbar */
+.nav-bar {
+  height: 80px;
+}
+
+.nav-bar-logo {
+padding: 10px;
+padding-left: 20px;
+  height: 60px;
+}
+
+.container {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+/* margin-top: 80px; */
+  display: block;
+  width: 350px;
+  /* height: 500px; */
+  height: auto;
+  margin: auto;
+  padding: 0 30px;
+  background-color: white;
+  box-shadow: 0 10px 15px lightgray;
+  padding: 24px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  padding: 0 0 4;
+  margin-bottom: 0px;
+}
+
+h3 {
+    margin-top: 0px;
+  font-size: 14px;
+  line-height: 1.42857;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.input {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+  width:  340px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 10px 0px 6px;
+  padding-left: 10px;
+}
+
+.input:hover {
+  border: 2px solid #0a66c2;
+}
+
+.forgot-password-link {
+  display: block;
+  width: inherit;
+  padding: 2px;
+  text-align: left;
+  text-decoration: none;
+  font-weight: bolder;
+  color: #0a66c2;
+  transition: 0.3s;
+  border-radius: 12px;
+  vertical-align: middle;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.forgot-password-link:hover {
+  background: rgba(10, 102, 195, 0.3);
+  text-decoration: underline;
+}
+
+.sign-in-btn {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: #0a66c2;
+  border: 0;
+  border-radius: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 24px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;  
+}
+
+.sign-in-btn:hover {
+    background-color: #064380;
+}
+
+.or-container {
+    display: flex;
+    align-items:center; 
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.or-border {
+    border-top: 1px solid #e7e7e7;
+    width: 175px;
+}
+
+.or-content {
+    color: gray;
+    margin: 0 10px;
+}
+
+.sign-in-alternative-btn {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 30px;
+  width: 100%;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 24px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  margin-bottom: 10px;
+
+}
+
+.sign-in-logo {
+  height: 15px;
+}
+
+.join-now {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  width: 50%;
+  font-weight: bolder;
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding: 24px;
+}
+.join-now a {
+    color: #0a66c2;
+      text-decoration: none;
+}
+
+.join-now a:hover {
+  background: rgba(10, 102, 195, 0.3);
+  text-decoration: underline;
+  color: #0a66c2;
+  transition: 0.3s;
+  border-radius: 12px;
+}
