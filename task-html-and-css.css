@@ -89,7 +89,6 @@ form {
 
 input {
   direction: ltr;
-  -webkit-appearance: none;
   margin: 0;
   background: #ffffff url(/rsrc.php/v3/yU/r/O7nelmd9XSI.png) repeat-x;
   border: 1px solid #dddfe2;
@@ -108,7 +107,6 @@ input {
   direction: ltr;
   margin: 0;
   box-sizing: content-box;
-  -webkit-font-smoothing: antialiased;
   font-weight: bold;
   justify-content: center;
   position: relative;
