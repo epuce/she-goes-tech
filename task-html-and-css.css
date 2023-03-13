@@ -1,0 +1,114 @@
+:root {--nav-bar-height: 40px;
+}
+
+body {
+    margin: 0;
+    padding-top: 100px
+}
+
+#nav-bar {
+    height: var(--nav-bar-height);
+    background: white;
+    padding: 30px 5% 30px 5%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.nav-bar_link {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+
+.nav-bar_link img {
+    height: 100%;
+}
+
+form .sign-in-css .under-si-css {
+    display: inline-flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sign-in-form-css {
+    border: 1px  #e8e6e688 solid;
+    padding: 0px 20px 20px 20px;
+    box-shadow: 3px 3px 10px #e8e6e688;
+    border-radius: 10px;
+}
+
+label, input {
+    display: block;
+}
+
+.form-center {
+    display: flex;
+    justify-content: center;
+}
+
+.join-now-css {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.sign-in-css {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 0 4px 0;
+    margin-bottom: 0;
+}
+
+.under-si-css {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.forgot-password_css {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2749ba;
+    font-weight: 600;
+}
+
+.btn-sign-in-css {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 30px;
+    background-color: #2749ba;
+    border: none;
+    color: white;
+}
+
+.sign-in-apple-css {
+    width: 100%;
+    padding: 6px 20px;
+    border-radius: 30px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.form-or-css {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.join-now-css {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-join-now {
+    border: none;
+    background-color: white;
+    font-weight: 900;
+    color:#3a5799;
+}
