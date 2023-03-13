@@ -25,18 +25,35 @@
     .validation-error {
       border: 1px solid red;
     }
+    .user-table {
+      display: none;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+    .user-table td,
+    .user-table th {
+      border: 1px solid rgb(126, 125, 125);
+    }
   </style>
+
   <body>
     <form>
-      <label>Name <input type="text" class="js-name" /> </label>
-      <label>Email <input type="email" class="js-email" /></label>
+      <label
+        >Name
+        <input class="js-name" type="text" />
+      </label>
+      <label>
+        Email
+        <input class="js-email" type="email" />
+      </label>
       <button type="button" class="js-save">Save</button>
     </form>
-    <table>
+    <table class="user-table js-user-table-wrapper">
       <thead>
         <th>Index</th>
         <th>Name</th>
         <th>Email</th>
+        <th></th>
       </thead>
       <tbody class="js-user-table"></tbody>
     </table>
