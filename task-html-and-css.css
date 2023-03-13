@@ -1,0 +1,95 @@
+
+    .linkedin-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .sign-in-form-linkedin {
+        border: 1px  #808080 solid;
+        padding: 0px 15px 15px 20px;
+        box-shadow: 2px 2px 2px #808080;
+        border-radius: 8px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+   
+
+.header-info-sign .header__heading {
+    font-size: 3.2rem;
+    line-height: 0.2;
+    font-weight: 600;
+    color: rgba(0,0,0,0.9);
+    padding: 0 0 4px 0;
+    font-family: arial, sans-serif;
+}
+
+.header-info-sign .info-stay {
+    font-size: 1.4rem;
+    line-height: 1.42857;
+    font-weight: 400;
+    color: rgba(0,0,0,0.9);
+    font-family: arial, sans-serif;
+
+}
+
+.container {
+    display:flex;
+    align-items:center;
+}
+
+.border {
+    border-top:1px solid gray;
+    width: 100px;
+}
+
+.content {
+    margin: 0 10px;
+}
+
+label, input {
+    display: block;
+}
+input {
+    width: 100%;
+    padding: 15px 100px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid rgb(86, 84, 84);
+    border-radius: 3px;
+
+}
+.apple-logo {
+    width: 25px;
+}
+
+
+.info-question {
+    font-family: Arial, sans-serif;
+    color: #3f63dc;
+    font-weight: 560;
+}
+.btn-sign-in-linkedin {
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 30px;
+    background-color: #0072b1;
+    border: none;
+    color: white;
+    font-family:  Arial, sans-serif;
+}
+.btn-sign-in-apple {
+    width: 100%;
+    padding: 6px 12px;
+    border-radius: 30px;
+    background-color: white;
+    border: 1px #0c0c0c solid;
+    color: rgb(54, 52, 52);
+    font-family:  Arial, sans-serif;;
+}
+.join-link {
+    font-family: Arial, sans-serif;
+}
+
