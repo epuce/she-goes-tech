@@ -1,5 +1,5 @@
 ## HTML and CSS task
-### add a new files named task-html-and-css.js task-html-and-css.css where the UI will be recreated
+### add a new files named task-html-and-css.html task-html-and-css.css where the UI will be recreated
 
 * Chose ONE of the fallowing 4 examples and try to re-create it as close a possible.
 * Only HTML and CSS (can use bootstrap if preferred) is needed to replicate the UI

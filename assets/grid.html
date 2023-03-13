@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      display: grid;
+      min-height: 100vh;
+      grid-template-rows: 80px auto 80px;
+      grid-template-columns: repeat(2, 40%);
+      justify-content: center;
+      margin: 0;
+    }
+
+    .header,
+    .container-left,
+    .container-right,
+    .footer {
+      text-align: center;
+    }
+
+    .header,
+    .footer {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      background: gray;
+    }
+  </style>
+  <body>
+    <div class="header">Header</div>
+    <div class="container-left">Left</div>
+    <div class="container-right">Right</div>
+    <div class="footer">Footer</div>
+  </body>
+</html>

@@ -1,3 +1,4 @@
+<!-- TODO: Move this topic before other javascript topics -->
 # JavaScript Data types
     JavaScript is the brain behind most of web page actions, usability, visual transformation, interaction
 * JavaScript files and with the extension `.js`
