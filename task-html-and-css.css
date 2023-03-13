@@ -1,0 +1,111 @@
+* { box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 320px;
+    height: 480px;
+    background: #ffffff;
+    box-shadow: 0px 5px 12px #b2b0b0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    padding: 10px;
+    
+}
+
+.inputs {
+    display: flex;
+    height: 83px;
+    width: 280px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email, .password {
+    display: block;
+    width: 100%;
+    height: 30px;
+    border-radius: 3px;
+}
+
+.sign-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    border-radius: 24px;
+    background: #0a66c2;
+    color: white;
+    border: 0;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.new-to-linkedin {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.img-container {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    justify-content: center;
+}
+
+.apple-img {
+    width: 20px;
+    height: 20px;
+}
+
+.sign-in-apple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    border-radius: 24px;
+    background: white;
+    color: rgb(111, 111, 111);
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.sign-in:hover {
+    background: #07427c;
+    transition: 0.5s;
+}
+
+.or-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+
+.or-border {
+    border-top: 1px solid;
+    width: 100px;
+    color: #b2b0b0;
+}
+
+.or {
+    margin: 0 10px;
+    color: #b2b0b0;
+}
+
+.forgot-password {
+    color:#0a66c2;
+    font-weight: bolder;
+}
+
