@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google LogIn</title>
+</head>
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.loginBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
+    height: 500px;
+    border: 0.2px solid #3d3d3d;
+    border-radius: 10px;
+}
+
+.imgLogo {
+    justify-content: center;
+
+    width: 75px;
+    padding-top: 40px;
+}
+
+h1 {
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    margin-bottom: 0px;
+}
+
+h4 {
+    font-weight: lighter;
+}
+
+.loginGoogle input {
+    display: flex;
+    justify-content: center;
+    width: 350px;
+    height: 60px;
+    border: 0.2px solid #3d3d3d;
+    border-radius: 5px;
+}
+
+.clickableText {
+    font-size: small;
+    justify-content: left;
+    color: blue;
+    text-decoration: none;
+}
+
+.loginBlock2 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.loginBlock3 {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    justify-content: left;
+}
+
+.loginBlock4 {
+    display: flex;
+    width: 350px;
+    padding-top: 40px;
+    align-content: center;
+}
+
+.loginBlock4 .createAccount {
+    width: 50%;
+}
+
+.loginBlock4 .Next {
+    width: 50%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-items: end;
+}
+
+.buttonCreateAccount {
+    border: none;
+    background-color: transparent;
+    color: blue;
+    top: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: -10px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+p {
+    font-size: small;
+    color: #3d3d3d
+}
+
+.buttonNext {
+    color: white;
+    background-color: #4C8BF5;
+    border-radius: 5px;
+    width: 80px;
+    height: 40px;
+    border: none;
+}
+
+.buttonNext:hover {
+    color: #e3e3e3;
+    background-color: #176BEF;
+    box-shadow: 0 0 0 2px #3d3d3d;
+}
+
+.buttonCreateAccount:hover {
+    color:#176BEF;
+    background-color: #A0C3FF;
+}
+
+.almostFooter {
+    display: flex;
+    width: 450px;
+    align-content: center;
+}
+
+.almostFooter .almostFooter1 {
+    width: 40%;
+}
+
+.almostFooter .almostFooter2 {
+    width: 20%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-items: end;
+}
+
+.almostFooter .almostFooter3 {
+    width: 20%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-items: end;
+}
+
+.almostFooter .almostFooter4 {
+    width: 20%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    align-items: end;
+}
+
+</style>
+<body>
+    <div class="loginBlock">
+        <div class="loginBlock2">
+            <img src="https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png" class="imgLogo">
+            <h1>Sign in</h1>
+            <h4>Use your Google Account</h4>
+
+                <div class="loginGoogle">
+                    <input style="padding-left: 10px;" placeholder="Email or phone">
+                </div>
+        </div>
+        <div class="loginBlock3">
+            <a style="text-decoration: none" href="https://accounts.google.com/signin/v2/usernamerecovery?continue=https%3A%2F%2Faccounts.google.com%2F&dsh=S235307892%3A1678725549835426&flowEntry=ServiceLogin&flowName=GlifWebSignIn&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AWnogHfbL-XzD1zjqYBsWGWt1Q4S85GUBh8497tTe7t8jTffroRs65H1KJNSLrdcspAIWpxHQISsog">
+            <p class="clickableText">Forgot email?</p>
+            </a>
+            <p style="margin-bottom: 0px;">Not your computer? Use Guest mode to sign in privately.</p>
+            <a href="https://support.google.com/chrome/answer/6130773?hl=en" style="text-decoration: none">
+                <p class="clickableText">Learn more</p>
+            </a>
+        </div>
+
+        <div class="loginBlock4">
+            <div class="createAccount">
+            <button type="button" class="buttonCreateAccount">Create account</button>
+            </div>
+            <div class="Next">
+            <button type="button" class="buttonNext">Next</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="almostFooter">
+    <div class="almostFooter1"><p>
+        English (United States)
+    </p>
+    </div>
+    <div class="almostFooter2"><a style="text-decoration: none;" href="https://support.google.com/accounts?hl=en&visit_id=638143312743473471-1588993650&rd=2&p=account_iph#topic=3382296"><p>Help</p></div>
+    <div class="almostFooter3"><a style="text-decoration: none;" href="https://policies.google.com/privacy?gl=LV&hl=en-US"><p>Privacy</p></a></div>
+    <div class="almostFooter4"><a style="text-decoration: none;" href="https://policies.google.com/terms?gl=LV&hl=en-US"><p>Terms</p></div>
+    </div>
+</body>
+<script src="./task-11-CRUD-Google.js">
+
+</script>
+</html>
