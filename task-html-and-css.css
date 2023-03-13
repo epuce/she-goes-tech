@@ -1,0 +1,178 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.4rem;
+  padding: 0 5.6rem;
+}
+
+.logo {
+  height: 2.8rem;
+}
+.container {
+  margin: 0 auto;
+  max-width: 352px;
+  padding: 2.4rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  /* height: 41rem; */
+}
+.container h2 {
+  font-size: 3.2rem;
+  line-height: 1.25;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  padding: 0 0 4px 0;
+}
+.container p {
+  font-size: 1.4rem;
+  line-height: 1.42857;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+}
+.form-header {
+  height: 6.3rem;
+  /* margin-bottom: 2.4rem; */
+}
+input {
+  font-size: 1.8rem;
+  line-height: 1.25;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+  height: 52px;
+  padding: 28px 12px 6px;
+  width: 100%;
+  margin-top: 2rem;
+}
+input:focus {
+  border-color: #0a66c2;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form a {
+  display: inline-block;
+  margin-top: 1.8rem;
+}
+.login-form button {
+  display: block;
+  margin-top: 1.8rem;
+  width: 100%;
+  color: white;
+  background-color: #0a66c2;
+  height: 5.2rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2.8rem;
+}
+.login-form button:hover {
+  background-color: #006097;
+}
+.forgot-text {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0a66c2;
+  text-decoration: none;
+}
+.forgot-text:hover {
+  text-decoration: underline;
+}
+.apple-button {
+  /* background-color: rgba(207, 207, 207, 0.25); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+
+  border: none;
+  height: 4.2rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 2.8rem;
+}
+.apple-button:hover {
+  background-color: rgba(207, 207, 207, 0.25);
+  box-shadow: inset 0 0 0 2px
+    var(--color-text-low-emphasis-shift, rgba(0, 0, 0, 0.6));
+}
+.new-users-login-wrapper {
+  margin: 0 auto;
+  max-width: 352px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.new-users-login-wrapper p {
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 1.6rem;
+}
+.new-users-login-wrapper a {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-action, #0a66c2);
+  text-decoration: none;
+}
+footer {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer-wrapper {
+  width: 100rem;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+.footer-wrapper ul {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.33333;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+  list-style-type: none;
+}
+
+.footer-wrapper img {
+  font-size: 1.6rem;
+  height: 1.8rem;
+}
+
+.logo-and-copyright {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.footer-wrapper a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
