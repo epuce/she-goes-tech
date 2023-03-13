@@ -191,6 +191,10 @@ input {
   font-weight: 600;
 }
 
+.comment {
+    font-size: 14px;
+}
+
 .logo-wrapper {
   width: 300px;
 }
