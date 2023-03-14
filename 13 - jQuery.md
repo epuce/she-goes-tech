@@ -127,9 +127,14 @@ for (var i = 0; i < allElements.length; i++) {
   
 ### All jQuery options: [cheat-sheet](https://oscarotero.com/jquery/)
 
-### add a new file named task-13.js where all these actions will be performed
 ### Checkup
-1. Add an click event to a button that toggles it's class (add some style to the class)
-2. Create an HTML element, append a new one to it and one before
-3. Create a button that when clicked will scroll the page by 50%
-4. Create a checkbox that when checked shows an other element and when unchecked hides the element
+
+### add a new file named task-12-jquery.js where all these actions will be performed
+### all javascript related actions hav eto be performend using jquery
+
+1. Add a save button that when clicked would read the value from an input
+    1. The input should have a validation of minimum 3 characters that's being highlited when invalid 
+2. When the input is valid show a popup within the page (NOT an alert) that writes `Thank you for subscribing "value from input"`
+3. Add a close button to the popup that will close it
+    1. Add the option to close the popup when clicking `Escape` key
+4.  When the popup is closed, the input field should be cleared and don't have the validation error visible
