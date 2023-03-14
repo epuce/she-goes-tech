@@ -12,8 +12,8 @@ html {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 3.4rem;
+  align-items: flex-end;
+  height: 6.6rem;
   padding: 0 5.6rem;
 }
 
@@ -21,20 +21,20 @@ html {
   height: 2.8rem;
 }
 .container {
-  margin: 0 auto;
-  max-width: 352px;
+  max-width: 35.2rem;
+  height: 45.8rem;
+  margin: auto;
   padding: 2.4rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
-  /* height: 41rem; */
 }
+
 .container h2 {
   font-size: 3.2rem;
   line-height: 1.25;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.9);
-  padding: 0 0 4px 0;
+  padding: 0 0 0.4rem 0;
 }
 .container p {
   font-size: 1.4rem;
@@ -42,33 +42,55 @@ html {
   font-weight: 400;
   color: rgba(0, 0, 0, 0.9);
 }
-.form-header {
-  height: 6.3rem;
-  /* margin-bottom: 2.4rem; */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
+
 input {
   font-size: 1.8rem;
   line-height: 1.25;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.9);
-  height: 52px;
-  padding: 28px 12px 6px;
+  height: 5.2rem;
+  padding: 0.6rem;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 2.4rem;
 }
+
 input:focus {
   border-color: #0a66c2;
 }
-.form-wrapper {
-  display: flex;
-  flex-direction: column;
+.show-button-wrapper {
+  width: 100%;
+  position: relative;
+}
+.button-inside-input {
+  position: absolute;
+  border: none;
+  display: block;
+  background: none;
+  padding: 0;
+  color: #0a66c2;
+  cursor: pointer;
+  border-radius: 1.4rem;
+  padding: 1.2rem;
+  top: 40%;
+  right: 0%;
+  z-index: 999999;
 }
 
+.button-inside-input:hover {
+  background-color: rgb(208, 232, 255, 0.9);
+}
 .login-form a {
   display: inline-block;
   margin-top: 1.8rem;
+  display: relative;
 }
-.login-form button {
+
+.sign-in-button {
   display: block;
   margin-top: 1.8rem;
   width: 100%;
@@ -82,7 +104,7 @@ input:focus {
   border: none;
   border-radius: 2.8rem;
 }
-.login-form button:hover {
+.sign-in-button:hover {
   background-color: #006097;
 }
 .forgot-text {
@@ -97,13 +119,11 @@ input:focus {
   text-decoration: underline;
 }
 .apple-button {
-  /* background-color: rgba(207, 207, 207, 0.25); */
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-
-  border: none;
+  border: 0.1px solid black;
   height: 4.2rem;
   cursor: pointer;
   font-size: 1.6rem;
@@ -112,18 +132,10 @@ input:focus {
 }
 .apple-button:hover {
   background-color: rgba(207, 207, 207, 0.25);
-  box-shadow: inset 0 0 0 2px
+  box-shadow: inset 0 0 0 1px
     var(--color-text-low-emphasis-shift, rgba(0, 0, 0, 0.6));
 }
-.new-users-login-wrapper {
-  margin: 0 auto;
-  max-width: 352px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 3rem;
-}
+
 .new-users-login-wrapper p {
   line-height: 1.5;
   font-weight: 400;
@@ -132,12 +144,24 @@ input:focus {
 }
 .new-users-login-wrapper a {
   cursor: pointer;
-  display: inline-block;
+  display: block;
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-action, #0a66c2);
   text-decoration: none;
 }
+.new-users-login-wrapper a:hover {
+  text-decoration: underline;
+}
+.new-users-login-wrapper {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
 footer {
   margin-top: 2.5rem;
   display: flex;
@@ -175,4 +199,18 @@ footer {
 .footer-wrapper a:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.divider::after,
+.divider::before {
+  content: "";
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex: 1;
 }

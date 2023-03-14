@@ -23,18 +23,21 @@
           <div class="form-wrapper">
             <form class="login-form">
               <input type="email" placeholder="Email or Phone" required />
-              <input type="password" placeholder="Password" required />
+              <div class="show-button-wrapper">
+                <input type="password" placeholder="Password" required />
+                <button class="button-inside-input">show</button>
+              </div>
               <a href="#" class="forgot-text">Forgot password?</a>
-              <button>Sign in</button>
+              <button class="sign-in-button">Sign in</button>
               <div class="additional- login"></div>
             </form>
-            <p>
-              ------------------------------ or ----------------------------
-            </p>
+            <!-- <div class="apple-login-wrapper"> -->
+            <p class="divider">or</p>
             <button class="apple-button">
               <ion-icon name="logo-apple"></ion-icon>
               <p>Sign in with Apple</p>
             </button>
+            <!-- </div> -->
           </div>
         </div>
       </div>
