@@ -1,14 +1,15 @@
 * { box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    width: 320px;
-    height: 480px;
+    width: 350px;
+    height: 460px;
     background: #ffffff;
     box-shadow: 0px 5px 12px #b2b0b0;
     position: absolute;
@@ -16,24 +17,29 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 8px;
-    padding: 10px;
+    padding: 24px;
     
 }
 
 .inputs {
     display: flex;
-    height: 83px;
-    width: 280px;
+    height: 125px;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    font-weight: 400;
 }
 
 .email, .password {
     display: block;
     width: 100%;
-    height: 30px;
+    height: 52px;
     border-radius: 3px;
+    font-weight: 400;
+    border-width: thin;
+    padding: 10px;
+
 }
 
 .sign-in {
@@ -53,7 +59,7 @@
 .new-to-linkedin {
     display: flex;
     justify-content: center;
-    align-items: end;
+    margin-top: 80vh;
 }
 
 .img-container {
@@ -66,6 +72,8 @@
 .apple-img {
     width: 20px;
     height: 20px;
+    margin-right: 10px;
+    margin-top: 1px;
 }
 
 .sign-in-apple {
@@ -79,10 +87,16 @@
     color: rgb(111, 111, 111);
     font-weight: bolder;
     cursor: pointer;
+    border-width: thin;
 }
 
 .sign-in:hover {
     background: #07427c;
+    transition: 0.5s;
+}
+
+.sign-in-apple:hover {
+    background: #f3f3f3;
     transition: 0.5s;
 }
 
@@ -107,5 +121,11 @@
 .forgot-password {
     color:#0a66c2;
     font-weight: bolder;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: dashed;
+    color: #0a66c2;
 }
 
