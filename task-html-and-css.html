@@ -7,6 +7,7 @@
     <title>Document</title>
   </head>
   <link rel="stylesheet" href="./task-html-and-css.css" />
+
   <body>
     <div class="flex-container">
       <div class="box-border">
@@ -15,26 +16,39 @@
           <h1>Sign in</h1>
           <h2>to continue to Gmail</h2>
           <div class="email-div">
-            <input type="text" placeholder="Email or phone" />
+            <div class="input-container">
+              <input type="text" placeholder="" class="input" />
+              <label class="input-label">Email or phone</label>
+            </div>
             <button class="forgot-email">Forgot email?</button>
           </div>
           <div class="not-your-computer">
             <p>Not your computer? Use Guest mode to sign in privately.</p>
-            <a href="">Learn more</a>
+            <a href="" class="learn-more">Learn more</a>
           </div>
           <div class="create-acc-next">
             <button class="create-account">Create account</button>
             <button class="next">Next</button>
           </div>
         </div>
-    </div>
-        <div class="footer">
-          <div><button class="language">English(United States)</button></div>
-          <div class="terms"><a href="">Help</a>
-          <a href="">Privacy</a>
-          <a href="">Terms</a></div>
+      </div>
+      <div class="footer">
+        <div>
+          <select class="language">
+            <option value="0">English (United States)</option>
+            <option value="1">Latviešu</option>
+            <option value="2">Deutsh</option>
+            <option value="3">Francais</option>
+            <option value="4">Espanol</option>
+            <option value="5">Filipino</option>
+          </select>
         </div>
-      
+        <div class="terms">
+          <a href="">Help</a>
+          <a href="">Privacy</a>
+          <a href="">Terms</a>
+        </div>
+      </div>
     </div>
   </body>
 </html>

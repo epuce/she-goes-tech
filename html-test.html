@@ -11,11 +11,44 @@
         display: flex;
         justify-content: space-between;
     }
+
+    p {
+            margin:20px 0;
+            position:relative;
+            display:inline-block;
+        }
+
+        label {
+            padding:10px;
+            pointer-events: none;
+            position:absolute;
+            left:0;
+            top:0;
+            transition: 0.2s;
+            transition-timing-function: ease;
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            opacity:0.5;
+            background: #fff;
+        }
+
+        input {
+            padding:10px;
+        }
+
+        input:focus + label, input:not(:placeholder-shown) + label {
+            opacity:1;
+            transform: scale(0.75) translateY(-70%) translateX(-14px);
+        }
 </style>
 <body>
     <div>
         <h1>Text</h1>
         <h2>Text</h2>
     </div>
+
+    <p>
+        <input placeholder=" ">
+        <label>Placeholder Text</label>
+    </p>
 </body>
 </html>
