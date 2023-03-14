@@ -36,6 +36,10 @@
     .user-table td, .user-table th {
         border: 1px solid #999999;
     }
+
+    .hide {
+        display: none;
+    }
 </style>
 <body>
     <form>
@@ -61,12 +65,28 @@
 
     <table class="user-table js-user-table-wrapper">
         <thead>
-            <th>Index</th>
+            <th class="js-index">Index</th>
             <th>Name</th>
             <th>E-mail</th>
             <th></th>
         </thead>
         <tbody class="js-user-table"></tbody>
     </table>
+
+    <template class="js-row-template">
+        <tr>
+            <td class="js-index"></td>
+            <td class="js-name"></td>
+            <td class="js-email"></td>
+            <td>
+                <button class="js-edit">
+                    Edit
+                </button>
+                <button class="js-delete">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </template>
 </body>
 </html>

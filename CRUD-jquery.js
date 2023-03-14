@@ -19,7 +19,7 @@ $(function () {
         }
 
         this.isValidName = function () {
-            return nameInput.value.length >= 3
+            return this.name.length >= 3
         }
 
         this.isValidUser = function () {
@@ -85,68 +85,49 @@ $(function () {
 
     function renderTable() {
         var list = getUserList()
-        var tableContent = ''
-
+        var $userTable = $('.js-user-table');
         if (list.length === 0) {
             $('.js-user-table-wrapper').hide()
         }
 
+        $userTable.html('')
+
         list.forEach(function (user, index) {
             var userInstance = new User(user.name, user.email);
-            var row = `
-            <tr>
-                <td>`+ (index + 1) + `</td>
-                <td>`+ userInstance.name + `</td>
-                <td>`+ userInstance.email + `</td>
-                <td>
-                    <button class="js-edit"
-                            data-index="`+ index + `">
-                        Edit
-                    </button>
-                    <button class="js-delete"
-                            data-index="`+ index + `">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-        `
-            // `<td>`+index+`</td>` = "<td>0</td>"
-            // `<td>`+index+`</td>` = "<td>1</td>"
-            // "text" + 123 + "text" = "text123text"
+            var $row = $(
+                $('.js-row-template').html()
+            )
 
-            tableContent = tableContent + row
+            $row.find('.js-index').text(index + 1)
+            $row.find('.js-name').text(userInstance.name)
+            $row.find('.js-email').text(userInstance.email)
+            $row.find('.js-edit, .js-delete').data('index', index)
+
+            $userTable.append($row);
         })
 
-        document.querySelector('.js-user-table').innerHTML = tableContent
+        $userTable.find('.js-delete').on('click', function() {
+            var list = getUserList();
 
-        document.querySelectorAll('.js-user-table .js-delete')
-            .forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var list = getUserList();
+            list.splice($(this).data('index'), 1)
 
-                    list.splice(button.dataset.index, 1)
+            localStorage.userList = JSON.stringify(list);
+            renderTable()
+        })
 
-                    localStorage.userList = JSON.stringify(list);
-                    renderTable()
-                })
-            })
+        $userTable.find('.js-edit').on('click', function() {
+            var list = getUserList()
+            var user = list[$(this).data('index')]
 
-        document.querySelectorAll('.js-user-table .js-edit')
-            .forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var list = getUserList()
-                    var user = list[button.dataset.index]
+            var userInstance = new User()
+            userInstance.setEmail(user.email)
+            userInstance.setName(user.name)
 
-                    var userInstance = new User()
-                    userInstance.setEmail(user.email)
-                    userInstance.setName(user.name)
+            $nameInput.val(userInstance.name)
+            $emailInput.val(userInstance.email)
 
-                    nameInput.value = userInstance.name
-                    emailInput.value = userInstance.email
-
-                    $saveBtn.data('index', button.dataset.index)
-                })
-            })
+            $saveBtn.data('index', $(this).data('index'))
+        })
     }
 
     renderTable()
