@@ -1,0 +1,160 @@
+html,
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.4286;
+}
+
+.sign-in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  width: 400px;
+  padding: 20px;
+  margin: 100px auto 20px;
+  padding-right: 40px;
+}
+
+h3 {
+  font-size: 24px;
+  color: #202124;
+  margin-bottom: 2px;
+}
+
+.begining-info h3:nth-child(2) {
+  margin-top: 10px;
+}
+
+h4 {
+  color: #202124;
+  margin-top: 8px;
+}
+
+.begining-info {
+  text-align: center;
+}
+
+.g {
+  color: rgb(66, 133, 244);
+}
+
+.o,
+.e {
+  color: rgb(234, 67, 53);
+}
+
+.o2 {
+  color: rgb(251, 188, 5);
+}
+
+.l {
+  color: rgb(52, 168, 83);
+}
+
+.email {
+  display: flex;
+  flex-direction: column;
+}
+
+.email,
+.otherComputer {
+  padding-bottom: 40px;
+}
+
+input {
+  height: 50px;
+  margin: 10px 30px;
+  border-radius: 8px;
+  border: 1px solid #dadce0;
+  font-size: 16px;
+  padding-left: 20px;
+}
+
+.email a,
+.otherComputer a {
+  text-decoration: none;
+  color: #1a73e8;
+  cursor: pointer;
+  font-weight: 600;
+  padding-left: 30px;
+  font-size: 14px;
+}
+
+p {
+  padding-left: 30px;
+  color: #3c4043;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  padding-bottom: 30px;
+}
+
+.newAcc {
+  background-color: #fff;
+  border: none;
+  color: #1a73e8;
+  font-weight: 600;
+  margin-left: 20px;
+  letter-spacing: 0.2px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.newAcc:hover {
+  background-color: #e9e9e96b;
+}
+
+.next {
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 25px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.next:hover {
+  background-color: #1652a1;
+  transition: 0.1s;
+  box-shadow: 0px 2px 6px 1px #3152adb0;
+}
+
+select {
+  border: none;
+  color:  #3c4043;;
+  padding-right: 40px;
+}
+
+ul {
+  display: flex;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul a {
+  text-decoration: none;
+  padding: 10px 17px;
+  margin: 0 5px;
+  color: #3c4043;
+  font-size: 12px;
+}
+
+footer {
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
