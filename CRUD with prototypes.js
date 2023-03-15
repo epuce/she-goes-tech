@@ -39,7 +39,7 @@ var nameInput =
     
   }
 
-/*we add eventlistener to know when the save button is clicked*/
+
 function saveForm() {
   
   /*var isFormValid = true; - we remove this because it is already in the prototype*/

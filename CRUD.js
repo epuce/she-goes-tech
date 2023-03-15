@@ -36,7 +36,8 @@ function saveForm() {
     var list = getUserList();
 
     if(saveBtn.dataset.index){ /*we use if statement for the editing part*/
-        list[saveBtn.dataset.index] = user; /*if the element needs to be updated, then this function. if it is new, then list.push*/
+        /*.dataset is a predefined method (as for example .length or .splice()) that we use for getting and setting data attribute*/
+    list[saveBtn.dataset.index] = user; /*if the element needs to be updated, then this function. if it is new, then list.push*/
         saveBtn.dataset.index = '' /*here we clear the data index*/
     } else {
     list.push(
@@ -111,7 +112,7 @@ function renderTable() {
     </tr>
     `;
 /* we add data-index, to know which index each row of the array has. data is a prefix that is used for using soma data for us. it doesn't care how it is called*/
-    /*we use tring concationation (see above with backticks)*/
+    /*we use string concationation (see above with backticks)*/
     tableContent = tableContent + row;
   });
 

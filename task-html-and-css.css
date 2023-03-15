@@ -46,7 +46,7 @@ input:focus-visible {
 h1 {
   color: #202124;
   font-size: 24px;
-  font-family: "Google Sans", "Noto Sans Myanmar UI", arial, sans-serif;
+  font-family: "Google Sans", "Noto Sans Myanmar", arial, sans-serif;
   font-weight: 400;
   line-height: 1.3333;
   margin-top: 10px;
@@ -57,6 +57,7 @@ h1 {
 
 h2 {
   color: #202124;
+  font-family: "Roboto","Noto Sans Myanmar UI",arial,sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -67,7 +68,7 @@ h2 {
 
 .forgot-email {
   font-size: 14px;
-  font-family: "Google Sans", "Noto Sans Myanmar UI", arial, sans-serif;
+  font-family: "Roboto","Noto Sans Myanmar UI",arial,sans-serif;
   line-height: 1.3333;
   border-radius: 4px;
   color: #1a73e8;
@@ -177,7 +178,7 @@ p {
   text-align: left;
   border: none;
   color: #202124;
-  font-family: roboto, "Noto Sans Myanmar UI", arial, sans-serif;
+  font-family: "Roboto", "Noto Sans Myanmar UI", arial, sans-serif;
   cursor: pointer;
 }
 
@@ -203,8 +204,10 @@ p {
   text-decoration: none;
   border-radius: 4px;
   color: #1a73e8;
-  font-weight: 550;
+  font-weight: 500;
+  font-size: 14px;
   letter-spacing: 0.25px;
+  font-family: "Roboto", "Noto Sans Myanmar UI", arial, sans-serif;
 }
 
 .learn-more:hover {
