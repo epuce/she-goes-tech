@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jquery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- we load some js within our file -->
+  </head>
+  <style>
+    .color-red {
+      color: red;
+    }
+    .background-green {
+      background-color: green;
+    }
+  </style>
+  <script>
+    // window.addEventListener("DOMContentLoaded", function () {
+    //below means the same as above: window.addEventListener("DOMContentLoaded", function ()
+    $(function () {
+      //OLD SOLUTION
+      document.querySelectorAll("button").forEach(function (elem) {
+        elem.addEventListener("click", function () {
+          console.log("click");
+          elem.classList.toggle("color-red");
+        });
+      });
+
+      //NEW SOLUTION
+      // Below jquery is the shorter version of the above code. We specify what selector we choose, doesn't matter if there are multiple buttons or only one. on means adding an event listener.
+
+      $("button").on("click", function () {
+        //$(this) means we are targeting the exact element was clicked at that moment
+        $(this).toggleClass("background-green");
+        console.log("jquery click");
+      });
+      document
+        .querySelector(".js-vanilla-btn")
+        .addEventListener("click", function () {
+          var jsVanilla = document.querySelector(".js-vanilla");
+          if (jsVanilla.style.display === "none") {
+            jsVanilla.style.display = "flex";
+          } else {
+            jsVanilla.style.display = "none";
+          }
+        });
+      $(".js-jquery-btn").on("click", function () {
+        $(".js-query").toggle(); //jquery knows if element is visible (no need if statement), and knows the current display property
+      });
+    });
+
+    // });
+
+    $("button-green").on("click", function () {
+      console.log("jquery click");
+    }); //jquery will not throw an error even though we do not have such button-green elemnt
+  </script>
+  <body>
+    <button>BTN 1</button>
+    <button>BTN 2</button>
+    <button>BTN 3</button>
+    <button class="js-vanilla-btn">BTN 4</button>
+    <button class="js-jquery-btn">BTN 5</button>
+
+    <h1 class="js-vanilla display-flex">Vanilla</h1>
+    <h1 class="js-query display-flex">jQuery</h1>
+  </body>
+</html>

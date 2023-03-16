@@ -8,7 +8,10 @@ html {
   font-size: 62.5%;
   font-family: "Roboto", sans-serif;
 }
-
+.main-wrapper {
+  padding: 12.8rem 0;
+  /* height: 50vh; */
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -163,10 +166,11 @@ input:focus {
 }
 
 footer {
-  margin-top: 2.5rem;
+  padding: 12.8rem 0;
+  /* margin-top: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 .footer-wrapper {
   width: 100rem;

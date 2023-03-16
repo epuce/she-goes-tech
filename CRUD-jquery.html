@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <script><script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./CRUD-jquery.js"></script>
   </head>
   <style>
     form {
@@ -27,8 +28,10 @@
     .validation-error {
       border: 1px solid #ff0000;
     }
+
     .user-table {
-      display: none;
+      display: inline-table;
+      /* display: none; */
       border-spacing: 0;
 
       /* to use border only on one side between cells: */
@@ -37,6 +40,9 @@
     .user-table td,
     .user-table th {
       border: 1px solid #999999;
+    }
+    .hide {
+      display: none;
     }
   </style>
   <body>
@@ -56,6 +62,18 @@
       </thead>
       <tbody class="js-user-table"></tbody>
     </table>
+    <template class="js-row-template">
+      <tr>
+        <td class="js-index"></td>
+        <td class="js-name"></td>
+        <td class="js-email"></td>
+        <td>
+          <button class="js-edit">Edit</button>
+        </td>
+        <td>
+          <button class="js-delete">Delete</button>
+        </td>
+      </tr>
+    </template>
   </body>
-  <script src="./CRUD.js"></script>
 </html>
