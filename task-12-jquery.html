@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./task-12-jquery.js"></script>
+  </head>
+  <style>
+    form {
+      display: inline-flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    label,
+    input {
+      display: block;
+    }
+    button {
+      margin-top: 16px;
+    }
+
+    .validation-error {
+      border: 1px solid red;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(139, 139, 139, 0.8);
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: none;
+    }
+
+    .popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: #fff;
+      width: 400px;
+      height: 100px;
+      margin-left: -250px;
+      margin-top: -250px;
+      z-index: 2;
+      display: none;
+      padding: 2rem;
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 0.25rem;
+    }
+    .close:before {
+      content: "✖";
+      padding: 0.5em;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <form>
+      <label>
+        Name
+        <input class="js-name" type="text" />
+        <button type="button" class="save-btn js-save">Save</button>
+      </label>
+    </form>
+    <div>
+      <div class="overlay">
+        <div class="popup">
+          <div class="close"></div>
+          <div class="popup-content"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
