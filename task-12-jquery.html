@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./task-12-jquery.js"></script>
+  </head>
 
-</head>
+  <link rel="stylesheet" href="./task-12-jquery.css" />
 
-<link rel="stylesheet" href="./task-12-jquery.css" />
+  <body>
+    <div class="input-form">
+      <label for="js-name">Name</label>
+      <input type="text" class="js-name" />
+      <button type="button" class="js-save">Save</button>
+    </div>
 
-<body>
-    <div class="input-form"><label for="js-name">Name</label>
-    <input type="text" class="js-name">
-    <button type="button" class="js-save">Save</button>
-</div>
-
-<div class="js-popup overlay">
-    <p class="js-popupText"></p>
-    <button class="js-closePopup">Close</button>
-</div>
-</body>
+    <div class="js-popup overlay">
+      <div class="popup-window">
+        <button class="js-closePopup">x</button>
+        <p class="js-popupText"></p>
+      </div>
+    </div>
+  </body>
 </html>
