@@ -49,7 +49,7 @@ $(function () {
       var list = getUserList();
 
       if ($saveBtn.data("index")) {
-        list[$saveBtn.dataset.index] = user.getUser();
+        list[$saveBtn.data('index')] = user.getUser();
 
         $saveBtn.data("index", "");
       } else {
