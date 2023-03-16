@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./CRUD-jquery.js"></script>
+  </head>
+  <style>
+    form {
+      display: inline-flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    label,
+    input {
+      display: block;
+    }
+
+    button {
+      margin-top: 16px;
+    }
+
+    .validation-error {
+      border: 1px solid #ff0000;
+    }
+
+    /* display -none removes from layout. But if visibility hidden, it still takes up space */
+    .user-table {
+      display: inline-table;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    .user-table td,
+    .user-table th {
+      border: 1px solid #999999;
+    }
+  </style>
+  <body>
+    <form>
+      <label>
+        Name
+        <input class="js-name" type="text" />
+      </label>
+
+      <label>
+        Email
+        <input class="js-email" type="email" />
+      </label>
+
+      <button type="button" class="js-save">Save</button>
+    </form>
+
+    <table class="user-table js-user-table-wrapper">
+      <thead>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+      </thead>
+      <tbody class="js-user-table">
+        <!-- empty because we will fill it in the form -->
+      </tbody>
+    </table>
+
+    <template class="js-row-template">
+      <!-- template automatically has a property display:none -->
+      <tr>
+        <td class="js-index"></td>
+        <td class="js-name"></td>
+        <td class="js-email"></td>
+        <td>
+          <button class="js-edit">Edit</button>
+          <button class="js-delete">Delete</button>
+        </td>
+      </tr>
+    </template>
+  </body>
+</html>
