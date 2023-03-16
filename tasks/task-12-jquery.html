@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./task-12-jquery.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>task-12-jquery</title>
+</head>
+<body>
+    <form action="submit">
+        <h2>Subscribe here:</h2>
+        <label>
+            Name
+            <input class="js-name input-name" type="text">
+        </label>
+        <button type="button" class="js-subscribe btn-subscribe">
+            Subscribe
+        </button>
+    </form>
+
+    <div class="popup-mask hide">
+        <div class="popup-wrapper">
+            <div class="popup">
+                <button class="js-close btn-close">X</button>
+                <h2 class="js-message greeting-text"></h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="./task-12-jquery.js"></script>

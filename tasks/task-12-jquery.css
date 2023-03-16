@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.validation-error {
+    border: 1px solid #ff0000;
+}
+
+.btn-subscribe {
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.popup-mask {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+}
+
+.popup-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 300px;
+    box-sizing: border-box;
+    margin: auto;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    padding: 0 20px;
+}
+
+.btn-close {
+    margin: 10px;
+    width: fit-content;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+.hide {
+    display: none;
+}
