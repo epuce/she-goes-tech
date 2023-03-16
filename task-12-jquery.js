@@ -27,7 +27,7 @@ $(function () {
     closePopUp();
   });
 
-  $popupWindow.on("keypress", function (event) {
+  $("body").on("keyup", function (event) {
     if (event.keyCode === 27) {
       closePopUp();
     }
@@ -39,8 +39,8 @@ $(function () {
     $nameInput.toggleClass("validation-error", !user.isValidName());
 
     if (user.isValidName()) {
+      $nameInput.css("pointer-events", "none");
       $popupWindow.css("visibility", "visible");
-      // var $popup = $($popupWindow.html());
       $(".popup").find(".text-from-input").text(user.name);
       $nameInput.val("");
     }
@@ -50,5 +50,6 @@ $(function () {
     $popupWindow.css("visibility", "hidden");
     $nameInput.val("");
     $nameInput.removeClass("validation-error");
+    $nameInput.css("pointer-events", "stroke");
   }
 });
