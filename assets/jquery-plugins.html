@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery plugins</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"></link>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( ".js-date-picker" ).datepicker();
+
+            $( ".js-auto-complete" ).autocomplete({
+                source: JSON.parse(localStorage.usernameList)
+            });
+
+            $( ".js-resize" ).resizable()
+
+            $('.js-sort').sortable()
+
+            $('.js-select').selectable()
+            
+            $('.js-drag').draggable({
+                containment: '.js-drag-container'
+            })
+            $('.js-drop').droppable({
+                drop: function() {
+                    $('.js-drop').css('background', '#'+Math.floor(Math.random()*16777215).toString(16))
+                }
+            })
+        })
+    </script>
+    <style>
+        .block {
+            margin-bottom: 16px;
+        }
+
+        .resize {
+            display: inline-block;
+            padding: 8px;
+            width: 500px;
+            height: 100px;
+            min-width: 160px;
+            border: 1px solid black;
+        }
+
+        .resize h1 {
+            margin: 0;
+            background: rgba(0,0,0,.4);
+        }
+
+        .sort {
+            padding: 0;
+            margin: 0;
+            width: 50%;
+        }
+        .sort li {
+            list-style: none;
+        }
+
+        .sort .ui-state-default {
+            margin-bottom: 4px;
+        }
+
+        .flex-drop {
+            display: flex;
+        }
+
+        .drag, .drop {
+            width: 50%;
+            display: inline-block;
+        }
+
+        .drag div, .drag div {
+            background: rgba(0,0,0,.4);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px;
+        }
+
+        .drop {
+            background: rgba(2, 186, 103, 0.4);
+        }
+
+        .ui-selected {
+            background: gainsboro;
+        }
+    </style>
+</head>
+<body>
+    <div class="block">
+        <input type="date">
+        <input class="js-date-picker">
+    </div>
+
+    <div class="block">
+        <input class="js-auto-complete">
+    </div>
+
+    <div class="block resize js-resize">
+        <h1>Some cool heading</h1>
+    </div>
+
+    <div class="block">
+        <ul class="js-sort sort">
+            <li class="ui-state-default">Item 1</li>
+            <li class="ui-state-default">Item 2</li>
+            <li class="ui-state-default">Item 3</li>
+            <li class="ui-state-default">Item 4</li>
+            <li class="ui-state-default">Item 5</li>
+            <li class="ui-state-default">Item 6</li>
+            <li class="ui-state-default">Item 7</li>
+        </ul>
+    </div>
+
+    <div class="block flex-drop js-drag-container">
+        <div class="drag">
+            <div class="js-drag">Block 1</div>
+            <div class="js-drag">Block 2</div>
+            <div class="js-drag">Block 3</div>
+            <div class="js-drag">Block 4</div>
+        </div>
+
+        <div class="js-drop drop">
+
+        </div>
+    </div>
+
+    <div class="block">
+        <ul class="js-select sort">
+            <li class="ui-state-default">Pizza</li>
+            <li class="ui-state-default">Burger</li>
+            <li class="ui-state-default">Hot dog</li>
+            <li class="ui-state-default">Wrap</li>
+            <li class="ui-state-default">Sushi</li>
+        </ul>
+    </div>
+</body>
+</html>

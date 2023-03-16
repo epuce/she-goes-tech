@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function() {
+        function saveForm() {
+            var $name = $('.js-name');
+
+            if ($name.val().length < 3) {
+                $name.addClass('validation-error')
+                return;
+            }
+
+            $name.removeClass('validation-error')
+
+            $('.js-subscribe-name').text($name.val())
+
+            openPopup()
+        }
+
+        function openPopup() {
+            $('.js-popup').css('display', 'flex')
+        }
+
+        function closePopup() {
+            $('.js-popup').hide()
+            $('.js-name').val('')
+        }
+
+        $('.js-close').on('click', closePopup)
+        $('.js-save').on('click', saveForm)
+
+        $('body').on('keyup', function(e) {
+            if ($('.js-popup').is(':visible') && e.keyCode === 27) {
+                closePopup()
+            }
+        })
+    })
+
+</script>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+    
+    .popup__wrapper {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0, 0.4);
+    }
+
+    .validation-error {
+        border-color: red;
+    }
+
+    .user-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;    
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .user-form input {
+        display: block;
+    }
+
+    .user-form input:focus {
+        outline: none;
+    }
+
+    .popup {
+        padding: 32px;
+        position: relative;
+        width: 70%;
+        background: #ffffff;
+    }
+
+    .popup .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 12px;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <form class="user-form">
+        <label>
+            Name
+
+            <input class="js-name">
+        </label>
+
+        <button type="button" class="js-save">Save</button>
+    </form>
+
+    <div class="popup__wrapper hide js-popup">
+        <div class="popup">
+            Thank you for subscribing
+            <strong class="js-subscribe-name"></strong>
+            <div class="js-close close">X</div>
+        </div>
+    </div>
+</body>
+</html>
