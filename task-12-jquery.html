@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-12-jquery</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./task-12-jquery.js"></script>
+
+</head>
+<style>
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+    .validation-error {
+        border: 1px solid #FF0000;
+    }
+
+    .close-logo {
+        width: 20px;
+    }
+
+    .js-save {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .js-message {
+        position: fixed;
+        background: rgba(204, 51, 179, 0.5);
+        top: 200px;
+        left: 300px;
+        width: 300px;
+        height: 100px;
+        flex-direction: column;
+        justify-content: center;
+        display: none;
+    }
+
+    .up-front {
+        display: inline-flex;
+        justify-content: center;
+    }
+</style>
+
+<div class="js-message">
+    <p class="js-messageText"></p>
+    <button class="js-closemessage"><img class="close-logo"
+            src="https://thumbs.dreamstime.com/b/close-window-icon-vector-essentials-ui-concept-thin-line-illustration-editable-stroke-linear-sign-use-web-193465975.jpg">
+    </button>
+
+</div>
+
+
+<body>
+    <form>
+        <div class="input-form"><label for="js-name"></label>
+            <input type="text" class="js-name">
+            <br></br>
+            <button type="button" class="js-save">Save</button>
+        </div>
+    </form>
+
+
+</body>
+
+</html>
