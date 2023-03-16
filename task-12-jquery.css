@@ -1,0 +1,30 @@
+.input-validation{
+    border: 1px solid red;
+}
+
+.hide-text{
+    display: none;
+}
+
+#popup{
+    border: 2px solid green;
+    text-align: center;
+    display: inline-block;
+    margin-left: 40%;
+    margin-top: 300px;
+    width:20%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.text, .js-popup-text{
+display: inline;
+word-break: break-all;
+}
+
+.close-btn-div{
+    padding-top: 10px;
+}
+
+
+
