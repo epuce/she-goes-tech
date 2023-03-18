@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jquery check-in</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./task-12-jquery.js"></script>
+  </head>
+  <style>
+    body {
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+      padding: 20px;
+      
+    }
+
+    .validation-error {
+      border: 1px solid #ff0000;
+    }
+
+    label,
+    input,
+    .btn {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .overlay::after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: fixed; /* could also be absolute */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1; /*  sit above input  */
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .popUp {
+      display: none;
+      z-index: 10; /*  sit above overlay  */
+      position: absolute;
+      border-radius: 7px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.575);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: pink;
+      color: black;
+      width: 40%;
+    }
+
+    p{
+      text-align: center;
+    }
+
+    .closeBtn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: black;
+      background-color: transparent;
+      border: none;
+      /* float: right; */
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .visible {
+      display: block;
+    }
+
+    img {
+      margin-top: 25px;
+      width: 50%;
+      /* vertical-align: middle; 
+      float: right;  */
+    }
+  </style>
+  <body class="js-body">
+    <h1>Hey!</h1>
+
+    <form class="form js-form">
+      <label>
+        Add your name to subscribe:
+        <input class="js-input" type="text" placeholder="Type sth here" />
+      </label>
+      <button type="button" class="btn js-btn">Save</button>
+    </form>
+    <div class="popUp js-pop-up">
+      <p class="js-pop-up-text"></p>
+
+      <button type="button" class="closeBtn js-btn-close">X</button>
+    </div>
+    <img
+      src="https://media.makeameme.org/created/subscribe-and-this.jpg"
+      alt="dog picture"
+    />
+  </body>
+</html>
