@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./task-1603-jQuery.js"></script>
+  </head>
+<style>
+    .input {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .validation-error {
+        border: 3px solid #FF0000;
+        border-radius: 5px;
+    }
+
+    .save-background {  
+        background-color: lightgray;  
+        opacity: .5;  
+    } 
+
+    .popup {
+        width: 350px;
+        background: #e5e5e5;
+        border-radius: 5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    .popup button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .textPopup {
+        display: flex;
+        justify-content: center;
+    }
+
+    .textInput {
+        font-weight: bold;
+    }
+
+    .overlay {
+        width: 100vw;
+        height: 100vw;
+        background: black;
+        opacity: 0.6;
+        position: fixed;
+        display: none;
+    }
+
+    .open-popup {
+        display: block;
+    }
+
+
+
+</style>
+
+
+  <body>
+    <form class="input">
+        <div class="overlay" id="overlayA"></div>
+        Name
+        <input id="name" type="text">
+        <button type="button" onclick="validateForm()">Save</button>
+      </form>
+      <element class="popup" id="popup">
+        <button onclick="closePopup()"><img src="https://www.citypng.com/public/uploads/preview/png-red-round-close-x-icon-31631915146jpppmdzihs.png" style="width: 20px;"></button>
+        <div class="textPopup">
+        <p>Thank you for subscribing&nbsp</p><p class="textInput" id="textButton"></p>
+        </div>
+      </element>
+  </body>
+</html>
