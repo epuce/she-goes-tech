@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./task-12-jquery.js"></script>
+  </head>
+  <style>
+    .action-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .js-save{
+        margin: 10px;
+    }
+
+    .validation-error{
+        border: 1px solid red;
+    }
+
+    .popup-wrapper {
+        background: white;
+        position: absolute;
+        left: 25%;
+        top: 10%;
+        width: 45%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0px 0px 10px;
+        display: none;
+    }
+
+    #close-btn{
+        float: right;
+        cursor: pointer;
+    }
+
+  </style>
+  <body>
+    <div class="action-wrapper">
+      <p>NAME</p>
+      <input type="text" class="js-name" />
+      <button type="button" class="js-save">Save</button>
+    </div>
+    <div class="popup-wrapper">
+        <div id="close-btn">
+            <span>Close</span>
+        </div>
+        <p>Thank you for subscribing <span id="js-input-value"></span></p>
+      </div>
+  </body>
+</html>
