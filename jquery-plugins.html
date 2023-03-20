@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<style>
+    .ui-widget-content .ui-state-highlight {
+        background: rgba(0, 0, 150, 0.5);
+    }
+
+    .ui-datepicker td a {
+        text-align: center;
+    }
+
+    .resize {
+        display: inline-block;
+        width: 500px;
+        height: 100px;
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .resize h1 {
+        background: rgba(0,0,0,.4);
+        margin: 0;
+    }
+</style>
+<script>
+    $(function() {
+        $('.js-date-picker').datepicker()
+
+        $('.js-auto-suggest').autocomplete({
+            source: ["Pizza", "Burger", "Hot dog", "BBQ", "Pasta"]
+        })
+
+        $('.js-resize').resizable()
+    })
+</script>
+<body>
+    <input type="date">
+    <input class="js-date-picker">
+
+    <input class="js-auto-suggest">
+
+    <div class="resize js-resize">
+        <h1>Some cool text</h1>
+    </div>
+
+    <img class="js-resize" 
+         src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F04%2F13%2Fkitten-pounce-158906394-2000.jpg&q=60">
+</body>
+</html>
