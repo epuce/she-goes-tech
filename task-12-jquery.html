@@ -7,6 +7,14 @@
     <title>Document</title>
 
     <style>
+
+      form {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+      gap: 8px;
+      margin-bottom: 20px;
+      }
       #popup-overlay {
         position: fixed;
         top: 0;
@@ -88,8 +96,13 @@
   </head>
 
   <body>
+    <form action="">
+  <label for="">Name</label>
     <input type="text" id="input" />
-    <button id="save-button">Save</button>
+   
+  </form>
+     <button id="save-button">Save</button>
+
     <div id="popup-overlay"></div>
     <div id="popup">
       <span id="close-icon">&times;</span>
