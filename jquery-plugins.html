@@ -30,6 +30,38 @@
         background: rgba(0,0,0,.4);
         margin: 0;
     }
+
+    .sort div {
+        width: 50%;
+        background: rgba(0,0,0,.4);
+        margin-bottom: 4px;
+    }
+
+    .drag div {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2px;
+        background: rgba(0,0,0,.4);
+    }
+
+    .drag, .drop {
+        width: 50%;
+    }
+
+    .drop {
+        background: #555555;
+    }
+
+    .flex-container {
+        display: flex;
+    }
+
+    .ui-selected {
+        background: red !important;
+    }
 </style>
 <script>
     $(function() {
@@ -40,6 +72,21 @@
         })
 
         $('.js-resize').resizable()
+
+        $('.js-sort').sortable()
+
+        $('.js-drag').draggable({
+            containment: '.js-drag-container'
+        })
+
+        $('.js-drop').droppable({
+            drop: function() {
+                $('.js-drop').css('background', '#'+Math.floor(Math.random()*16777215).toString(16))
+            }
+        })
+
+        $('.js-select').selectable()
+        $('.js-sort').selectable()
     })
 </script>
 <body>
@@ -52,7 +99,31 @@
         <h1>Some cool text</h1>
     </div>
 
-    <img class="js-resize" 
-         src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F04%2F13%2Fkitten-pounce-158906394-2000.jpg&q=60">
+    <div class="js-sort sort">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
+
+    <div class="flex-container js-drag-container">
+        <div class="drag">
+            <div class="js-drag">Item 1</div>
+            <div class="js-drag">Item 2</div>
+            <div class="js-drag">Item 3</div>
+            <div class="js-drag">Item 4</div>
+            <div class="js-drag">Item 5</div>
+        </div>
+        <div class="drop js-drop"></div>
+    </div>
+
+    <div class="js-select sort">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
 </body>
 </html>
