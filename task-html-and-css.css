@@ -8,9 +8,15 @@ html {
   font-size: 62.5%;
   font-family: "Roboto", sans-serif;
 }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 .main-wrapper {
   padding: 12.8rem 0;
-  /* height: 50vh; */
+  flex: 1;
+  /* sets the flex-basis to 0%. ll of our flex-items now want to have a base size of 0. Above allows to grow to fill in la the available space. Because of the flex-grow, they can all grow to fill up the empty space. And really, in this case, flex-shrink is no longer doing anything, as all the flex items now have a width of 0, and are growing to fill the available space */
 }
 .header {
   display: flex;
@@ -166,17 +172,17 @@ input:focus {
 }
 
 footer {
-  padding: 12.8rem 0;
-  /* margin-top: 0;
+  border-top: 1px solid #eee;
+  min-height: 7.2rem;
   display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 .footer-wrapper {
-  width: 100rem;
+  max-width: 112.8rem;
+  margin: 0 auto;
   display: flex;
   gap: 0.8rem;
   justify-content: center;
+  align-items: center;
 }
 .footer-wrapper ul {
   display: grid;
@@ -192,7 +198,6 @@ footer {
 
 .footer-wrapper img {
   font-size: 1.6rem;
-  height: 1.8rem;
 }
 
 .logo-and-copyright {
