@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+<!-- Plugin and cheatsheet at https://jqueryui.com/ -->
+<style>
+    .ui-widget-content .ui-state-highlight {
+        /*we can see the selectors in the Dev tools and select them. but we cannot add our own classes*/
+        background: rgba(0,0,150, 0.5)
+    }
+
+    .ui-datepicker td a {
+        text-align: center;
+    }
+    /*we can change all styling like this*/
+
+    .resize {
+        display: inline-block;
+        width: 500px;
+        height: 100px;
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .resize h1 {
+        background: rgba(0,0,0,0.4);
+        margin: 0;
+    }
+
+    .sort div {
+        width: 50%;
+        background: rgba(0,0,0,0.4);
+        margin-bottom: 4px;
+    }
+
+    .drag div {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            margin: 2px;
+            background: rgba(0,0,0,0.4)
+        }
+
+        .drag, .drop {
+            width: 50%;
+        }
+
+        .drop {
+            background: #555555;
+        }
+
+        .flex-container {
+            display: flex;
+        }
+
+        .ui-selected {
+            background: red !important; /*!important overrides all other selectors and makes this one the most important*/
+        }
+
+</style>
+<script>
+    $(function(){
+        $('.js-date-picker').datepicker() /*this works only because we have the ui plugin loaded, also because we have styles loaded. but we can also write our own styles*/
+        /* with this setup we can customize the date picker according to our preferences*/
+        $('.js-auto-suggest').autocomplete ({
+            source: ["Pizza", "Burger", "Hot dog", "BBQ", "Pasta"] /*here we provide a list for autocomplete*/
+        })
+
+        $('.js-resize').resizable()
+
+        $('.js-sort').sortable()
+
+        $('.js-drag').draggable({
+            containment: '.js-drag-container'
+        })
+
+        $('.js-drop').droppable({
+            drop: function(){
+                $('.js-drop').css('background', '#'+Math.floor(Math.random()*16777215).toString(16))
+            }
+        })
+
+        $('.js-select').selectable()
+    })
+    
+</script>
+<body>
+
+    <input type="date"> 
+    <!-- for type "date" there is predfined date format and style when opening the browser. therefore one of the options helping us is the jQuery plugin to style and customise the setup -->
+    <input class="js-date-picker">
+
+    <input class="js-auto-suggest">
+
+    <div class="resize js-resize">
+        <h1>Some cool text</h1>
+    </div>
+
+    <div class="js-sort sort">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
+
+    <div class="flex-container js-drag-container">
+        <div class="drag">
+        <div class="js-drag">Item 1</div>
+        <div class="js-drag">Item 2</div>
+        <div class="js-drag">Item 3</div>
+        <div class="js-drag">Item 4</div>
+        <div class="js-drag">Item 5</div>
+    </div>
+    <div class="drop js-drop"></div>
+    </div>
+
+    <div class="js-select sort">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
+
+
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxVptzYndb_gRQ4ZIZegfO03H_D8qjDH5lfA&usqp=CAU" class="js-resize">
+</body>
+</html>
