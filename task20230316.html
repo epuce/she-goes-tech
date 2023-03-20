@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<form>>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .user-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content:center;
+        gap: 16px;
+    }
+
+    .user-form input {
+        display: block;
+    }
+
+    .popup__wrapper {
+    
+        position: fixed;
+        top:0;
+        right:0;
+        bottom:0;
+        left:0;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        background: rgba (0,0,0,0.4);
+    }
+
+    .hide {
+        display: none;
+    }
+    .popup {
+        position:relative;
+        padding:32px;
+        width:70%;
+        background: #ffffff;
+    }
+    .popup .close {
+        position: absolute;
+        top: 0;
+        right:0;
+        cursor:pointer;
+        padding: 12px;
+    }
+    .validation-error
+    {
+        border-color: #ff0000;
+    }
+
+    .user-form input:focus {
+        outline:none;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function(){
+        $('.js-save').on('click', function(){
+            var $name=$('.js-name')
+
+            if($name.val().length<3){
+                $name.addClass('validation-error')
+            } else {
+                $name.removeClass('validation-error')
+                $('.js-popup').removeClass('hide')
+                $('.js-placeholder').text($name.val())
+
+            }
+        })
+        function closePopup(){
+            $('.js-popup').addClass('hide')
+            $('.js-name').val('')
+        }
+        $('.js-close').on('click',closePopup)
+        $('body').on('keyup', function(event) {
+        if (!$('.js-popup').hasClass('hide') && event.keyCode === 27) {
+                closePopup()
+            }
+        })
+    })
+
+
+</script>
+<body>
+    <form class="user-form">
+        <label>
+            Name
+        </label>
+        <button type="buton" class="js-save"></button>
+    </form>
+    <div class="popup__wrapper">
+        <div class="popup"></div>
+        Thank You for subscribing
+        <strong class="js-placeholder">placeholder</strong>
+        <div class="close" class="js-close">X</div>
+    </div>
+</body>
+</html>
