@@ -1,3 +1,5 @@
+$(function () { 
+
 var nameInput = document.querySelector(".js-name");
 var emailInput = document.querySelector(".js-email");
 
@@ -140,3 +142,5 @@ function renderTable() {
 }
 
 renderTable();
+
+})
