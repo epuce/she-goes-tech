@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+  color: #222935;
+
+  /* min-height: 100vh;
+  display: flex;
+  flex-direction: column; */
+}
+header {
+  width: 100%;
+}
+
+.nav-container {
+  max-width: 128rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 3.05rem;
+  height: 7.76rem;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
