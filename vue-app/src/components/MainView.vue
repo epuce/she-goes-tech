@@ -10,7 +10,14 @@
         <MyBtn text="Content" @click="addCount()">        </MyBtn>
 
         <button @click="isOpen = true">Open popup</button>
-        <MyPopup v-if="isOpen" @close-popup="isOpen = false"/>
+        <input v-model="someText">
+        
+        {{ someText }}
+
+        <MyPopup 
+            :text="someText"
+            v-if="isOpen" 
+            @close-popup="isOpen = false"/>
     </div>
 </template>
 
@@ -40,6 +47,7 @@ export default defineComponent({
         // var heading = "Vue data binding works"
         var clickCount = ref(0)
         var isOpen = ref(false)
+        var someText = ref('')
 
         var addCount = function() {
             clickCount.value = clickCount.value+1
@@ -49,6 +57,7 @@ export default defineComponent({
             clickCount: clickCount,
             addCount: addCount,
             isOpen,
+            someText,
         }
     }
 })

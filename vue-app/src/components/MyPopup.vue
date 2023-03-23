@@ -1,7 +1,7 @@
 <template>
     <div class="popup__wrapper">
         <div class="popup">
-            TEXT
+            Hello, nice to meet you: {{ text }}
         
             <button class="btn__close" @click="onClose()">Close</button>
         </div>
@@ -13,7 +13,10 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     props: {
-
+        text: {
+            type: String,
+            required: true,
+        }
     },
     setup(props, { emit }) {
         var onClose = function() {
