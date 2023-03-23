@@ -1,21 +1,21 @@
 <template>
   <div>
-  <MainView heading="Some cool text" btnType="warning"/>
-  <MainView heading="This also works" />
-  <MainView/>
-  <!-- the third one uses default value -->
-</div>
+    <MainView heading="Some cool text" btnType="warning" />
+    <MainView heading="This also works" />
+    <MainView />
+    <!-- the third one uses default value -->
+  </div>
 </template>
 
 <script>
-import MainView from './components/MainView.vue'
+import MainView from "./components/MainView.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    MainView
-  }
-}
+    MainView,
+  },
+};
 </script>
 
 <style>
