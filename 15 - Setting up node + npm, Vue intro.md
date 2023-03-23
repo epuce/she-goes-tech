@@ -16,7 +16,7 @@ npm -v
   * node package manager 
     * `npm install -g @vue/cli` to have the command line interface
     ```bash
-    vue new my-vue-app-name
+    vue create my-vue-app-name
     <!-- Select 1. option in when asked -->
     cd my-vue-app-name
     npm run serve
@@ -26,7 +26,7 @@ npm -v
     <script src="node_modules/vue/dist/vue.js"></script>
     ```
 
-```Vue
+```HTML
 <!-- ./components/MainView.vue -->
 <template>
     <div>
@@ -121,4 +121,10 @@ export default defineComponent({
 # React vs Vue vs Angular
 ![React vs Vue vs Angular](img/js-framework-usage.png)
 
-<!-- TODO: add checkup for vue intro -->
+1. Create a new component TaskVueIntro.vue
+2. Import the component within MainView.vue so it can be rendered
+3. Within TaskVueIntro.vue add two buttons that when clicked
+    1. One button changes it's text to from `Click me` to `Clicked`
+    2. The other button shows a new popup component TaskVueIntroPopup.vue
+        1. The popup has text `You did it` passed in as a prop
+        2. Make it so that when the popup is closed the parent component changes the button background color to red

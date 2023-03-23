@@ -130,7 +130,7 @@ for (var i = 0; i < allElements.length; i++) {
 ### Checkup
 
 ### add a new file named task-12-jquery.html where all these actions will be performed
-### all javascript related actions hav eto be performend using jquery
+### all javascript related actions hav eto be performed using jquery
 
 1. Add a save button that when clicked would read the value from an input
     1. The input should have a validation of minimum 3 characters that's being highlited when invalid 
