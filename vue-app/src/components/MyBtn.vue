@@ -15,6 +15,7 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
+  // below are the custom properties we want to change
   props: {
     text: {
       type: String,
@@ -25,6 +26,9 @@ export default defineComponent({
       required: false,
       default: "primary",
     },
+    // somethingElse{
+
+    // },
   },
   setup() {
     var onClick = function () {};

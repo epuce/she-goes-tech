@@ -1,8 +1,10 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <div>
-    <MainView heading="Some cool text" btnType="warning" />
+    <!-- we use MainView component name as html tag name -->
     <!-- we get btnType from MainView -->
+    <MainView heading="Some cool text" btnType="warning" />
+
     <MainView heading="This also works" />
     <MainView />
     <!-- above we will have the default value which we stated in the ManinView.vue -->
@@ -11,7 +13,7 @@
 </template>
 
 <script>
-import MainView from "./components/MainView.vue";
+import MainView from "./components/MainView.vue"; //we import the component
 
 export default {
   name: "App",
