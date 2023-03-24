@@ -1,13 +1,15 @@
 <template>
-    <button class="btn__change btn__clic" @click= "changeButtonText()"> Click me </button>
+    <button class="Btn_clicked" @click="Clicked()"> {{ textChange }} </button>
 
-    <button class='btn__open' @click= "onClick()"> TEXT </button>
+    <button @click="onClick()"> TEXT </button>
+
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import TaskVueIntroPopup from './TaskVueIntroPopup.vue';
 
-export default defineComponent({
+export default defineComponent ({
 
     props: {
         text: {  
@@ -15,14 +17,19 @@ export default defineComponent({
             required: true,
         }
     },
+
     setup() {
-        var changeButtonText = function(){
-                this.buttonText = "Clicked"
-            }
+        var textChange = ref("Click me")
+        var Clicked = function() {
+            textChange.value = "Clicked"
+        }
+
+       
 
         return {
-            changeButtonText: changeButtonText
-        
+            Clicked,
+            textChange,
+           
         }
     }
     

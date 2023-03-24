@@ -20,7 +20,7 @@
             @close-popup="isOpen = false"/>
 
         <TaskVueIntro>
-            
+        
         </TaskVueIntro>
 
     </div>
@@ -31,6 +31,7 @@ import { defineComponent, ref } from 'vue';
 import MyBtn from './MyBtn.vue';
 import MyPopup from './MyPopup.vue';
 import TaskVueIntro from './TaskVueIntro.vue'; 
+import TaskVueIntroPopup from './TaskVueIntroPopup.vue';
 
 export default defineComponent({
     components: {
