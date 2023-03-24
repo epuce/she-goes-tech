@@ -1,9 +1,11 @@
 <template>
-  <button @click="onClick()" 
-  :class="'btn--' + type">
+  <button :class= "{
+'btn--primary' : type === 'primary'
+  }">
     {{ text }}
   </button>
 </template>
+
 <script>
 import { defineComponent } from "vue";
 
@@ -18,16 +20,8 @@ export default defineComponent({
       required: false,
       default: "primary",
     },
-  },
-  setup() {
-    var onClick = function () {
-
-    };
-    return {
-      onClick: onClick,
-    };
-  },
-});
+  }
+})
 </script>
 <style>
 .btn--primary{
