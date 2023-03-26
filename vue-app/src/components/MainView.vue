@@ -9,33 +9,36 @@
     <MyBtn text="Add count" @click="addCount()" :type="btnType" something-else="this is some text" />
     <MyBtn text="Content" @click="addCount()"> </MyBtn>
 
-    <button @click="isOpen = true"> Open popup</button>
+    <button @click="isOpen = true">Open popup</button>
     <input v-model="someText">
 
     {{ someText }}
     
-    <MyPopup 
+  <MyPopup 
    :text="someText"
    v-if="isOpen"
    @close-popup="isOpen = false"/>
 
-  <TaskVueIntro
-  />
+<TaskVueIntro
+/>
 
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import MyBtn from "./MyBtn.vue";
+import MyBtn from './MyBtn.vue';
 import MyPopup from "./MyPopup.vue";
-import TaskVueIntro from './TaskVueIntro.vue';
+import TaskVueIntro from './TaskVueIntro.vue'
+
 
 export default defineComponent({
   components: {
     MyBtn: MyBtn,
     MyPopup,
-    TaskVueIntro
+    TaskVueIntro,
+    
+  
   },
   props: {
     heading: {
@@ -48,12 +51,18 @@ export default defineComponent({
       required: false,
       default: undefined,
     },
+    
+   
   },
   setup() {
     // var heading = "Vue data binding works"
     var clickCount = ref(0);
     var isOpen = ref(false);
-    var someText = ref('')
+    var someText = ref('');
+   
+    
+
+   
 
     var addCount = function () {
       clickCount.value = clickCount.value + 1;
@@ -64,9 +73,11 @@ export default defineComponent({
       addCount: addCount,
       isOpen,
       someText,
+   
+     
     };
   },
-});
+})
 </script>
 
 <style>

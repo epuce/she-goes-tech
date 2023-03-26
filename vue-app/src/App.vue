@@ -1,29 +1,30 @@
 <template>
   <div>
-    <MainView heading="some cool text" btnType="warning" />
-    <MainView heading="this also works" />
+    <MainView heading="Some cool text" btnType="warning" />
+    <MainView heading="This also works" />
     <MainView />
   </div>
 </template>
 
 <!-- App.vue(btnType) -> MainView.vue(type) -> MyBtn.vue -->
+
 <script>
 import MainView from "./components/MainView.vue";
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     MainView,
   },
   methods: {
     addCount: function () {
-      this.clickCount + 1;
-    },
+      this.clickCount = this.clickCount+1
+    }
   },
   data() {
-    "text";
-  },
-};
+    "text"
+  }
+}
 </script>
 
 <style>

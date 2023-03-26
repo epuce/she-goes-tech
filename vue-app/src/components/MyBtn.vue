@@ -1,7 +1,8 @@
 <template>
-  <button :class= "{
-'btn--primary' : type === 'primary'
-  }">
+  <button :class="{
+      'btn--primary': type === 'primary'
+    }"
+  >
     {{ text }}
   </button>
 </template>
@@ -18,17 +19,17 @@ export default defineComponent({
     type: {
       type: String,
       required: false,
-      default: "primary",
+      default: 'primary',
     },
-  }
-})
+  },
+});
 </script>
 <style>
-.btn--primary{
-    background: blue;
-} 
+.btn--primary {
+  background: blue;
+}
 
 .btn--warning {
-    background: orange;
+  background: orange;
 }
 </style>
