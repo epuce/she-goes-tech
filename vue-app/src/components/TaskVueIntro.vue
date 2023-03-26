@@ -1,7 +1,9 @@
 <template>
   <div>
     <button class="btn" @click="($event) => onClick()">{{ text }}</button>
+    <!-- How to add class .btn next to the below expression? -->
     <button
+      class="btn"
       :class="{
         'btn--clicked': type === 'clicked',
         'btn--unclicked': type === 'primary',
@@ -15,7 +17,6 @@
 
 <script>
 import {defineComponent} from "vue";
-
 export default defineComponent({
   props: {
     text: {
@@ -47,6 +48,7 @@ export default defineComponent({
 
 <style>
 .btn {
+  margin-top: 12px;
   width: 100px;
   height: 50px;
 }

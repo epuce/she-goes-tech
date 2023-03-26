@@ -25,13 +25,14 @@
     <!-- v stands for view. If isOpen is true, then view popup window. By adding @close-popup we listen for event which is emitted in MyComponent -->
     <TaskVueIntro
       :text="buttonText"
+      :type="buttonType"
       @button-clicked="($event) => (buttonText = 'clicked')"
       @open-Popup="($event) => (isOpenPopup = true)"
     />
     <TaskVueIntroPopup
       v-if="isOpenPopup"
       text="You did it"
-      @close-popup-view="isOpenPopup = false"
+      @close-popup-view="isClosedPopupFun()"
     />
   </div>
 </template>
@@ -77,9 +78,14 @@ export default defineComponent({
     //Check if popup is open
     var isOpen = ref(false); //we state the initial value as false.
     var isOpenPopup = ref(false);
+    var buttonType = ref("primary");
 
     var addCount = function () {
       clickCount.value = clickCount.value + 1; //always add one to the clickCount
+    };
+    var isClosedPopupFun = function () {
+      isOpenPopup.value = false;
+      buttonType.value = "clicked";
     };
     return {
       // heading //we return the variable that we created within an object
@@ -90,6 +96,9 @@ export default defineComponent({
       someText,
       buttonText,
       isOpenPopup,
+      isClosedPopupFun,
+      buttonType,
+      // isClicked,
     };
   },
 });
