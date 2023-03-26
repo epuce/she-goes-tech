@@ -2,7 +2,7 @@
   <div>
     <button @click="onClickButton()">{{ buttonTaskText }}</button>
 
-    <button @click="isOpenTaskPopup = true" :class="{'bacground-warning': changeClass}">Open task popup</button>
+    <button @click="isOpenTaskPopup = true" :class="{'bacground-warning': changeBackground}">Open task popup</button>
 
     <TaskVueIntroPopup
       v-if="isOpenTaskPopup"
