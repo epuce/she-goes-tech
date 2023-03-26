@@ -1,32 +1,75 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Yes it works</title>
-</head>
-<style>
-    body{
-        color: blue;
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yes it works</title>
+  </head>
+  <style>
+    body {
+      color: blue;
     }
 
-    @media screen and (max-width: 500px) and (min-width:720px){
-        body{
-            color: red;
+    @media screen and (max-width: 500px) and (min-width: 720px) {
+      body {
+        color: red;
+      }
+    }
+    @media screen and (orientation: landscape) {
+      body {
+        color: red;
+      }
+    }
+  </style>
+  <body>
+    <button class="btn js-save-data">Click me</button>
+    button class="btn js-save-data">Click me</button>
+    button class="btn js-save-data">Click me</button>
+    <input id="user-name" class="validation-error" />
+  </body>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      
+      const l1=document.getElementsByClassName("js-save-data")[0];
+      const l3= document.querySelectorAll(".js-save-data")[0];
+      const l2=document.querySelector(".js-save-data");
+      console.log(l1===l2);
+
+      document
+        .getElementsByClassName("js-save-data")[0]
+        .addEventListener("click", function () {
+          console.log("You did a click");
+        });
+
+      document
+        .getElementById("user-name")
+        .addEventListener("focus", function () {
+          console.log("I am active");
+        });
+
+        var userNameInput =document.querySelector("#user-name");
+      function activateBlur() {
+
+        // userNameInput.classList
+        // .toogle('validation-error', !userNameInout.value);
+        if (!userNameInput.value) {
+          // TODO: Show error
+          console.log("no value")
+          userNameInput.classList.add('validation-error')
+        } else{
+            userNameInput.classList.remove('validation-error');  
         }
+        console.log("Why are you leaving?");
+      }
+      document
+        .querySelector("#user-name")
+        .addEventListener("blur", activateBlur);
+    });
+  </script>
+  <style>
+    .validation-error{
+        border: 1px solid red;
     }
-    @media screen and (orientation:landscape) {
-        body{
-            color: red;
-    }
-}
-</style>
-<body>
-    <div>
-        some cool content
-    </div>
-    
-</body>
+  </style>
 </html>

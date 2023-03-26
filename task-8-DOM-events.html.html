@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button class="btn js-save-data">Button One</button>
+    <button class="btn js-save-data">Button Two</button>
+    <button class="btn js-save-data">Button Three</button>
+    <input id="user-email" class="validation-error" />
+    <div>
+      <ul>
+        <li>h1</li>
+        <li>h2</li>
+        <li>h3</li>
+        <li>h4</li>
+        <li>h5</li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    const hostName = window.location.hostname;
+    console.log(hostName);
+
+    window.addEventListener("DOMContentLoaded", function () {
+      document
+        .querySelector(".js-save-data")
+        .addEventListener("click", function () {
+          console.log("You clicked button One");
+        });
+
+      var userEmailInput = document.querySelector("#user-email");
+      function activateBlur() {
+        if (!userEmailInput.value) {
+          console.log("no value");
+          userEmailInput.classList.add("validation-error");
+        } else {
+          userEmailInput.classList.remove("validation-error");
+        }
+      }
+
+      document
+        .querySelector(".js-save-data")
+        .addEventListener("click", function () {
+          var localStorageList = localStorage.list;
+          if (localStorageList === undefined) {
+            var list = [];
+          } else {
+            var list = JSON.parse(localStorageList);
+          }
+
+          list.push(userEmailInput.value);
+          localStorage.list = JSON.stringify(list);
+          // localStorage.setItem('list', ...)
+          localStorage.userEmail = userEmailInput.value;
+        });
+      userEmailInput.value = localStorage.userEmail;
+    });
+
+    const elements = document.querySelectorAll("li");
+    let num = 0;
+    elements.forEach(function (element) {
+      element.classList.add("alina" + num);
+      num+=1;
+    });
+  </script>
+  <style>
+    .validation-error {
+      border: 10px solid red;
+    }
+  </style>
+</html>

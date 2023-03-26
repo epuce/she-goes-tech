@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <label> Input </label>
+    </div>
+    <div>
+      <input class="js-input" type="text" />
+    </div>
+    <div>
+      <button type="button" class="js-save">Save</button>
+    </div>
+    <div class="popup hidden" id="popup">
+      <div class="popup-header">
+        <button class="close-popup">×</button>
+      </div>
+      <div class="popup-body">Thank you for subscribing +`$saveInput.val`;</div>
+    </div>
+
+    <style>
+      body {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .validation-error {
+        border: 1px solid #ff0000;
+      }
+      .js-save {
+        width: 30%;
+      }
+      input {
+        width: 30%;
+        margin-top: 15px;
+      }
+      .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 1px solid #222;
+        border-radius: 4px;
+        padding: 20px;
+        transform: translate(-50%, -50%);
+      }
+      .hidden {
+        display: none;
+      }
+      .popup-header {
+        text-align: right;
+      }
+    </style>
+    <script>
+      var $saveInput = $(".js-input");
+      var $saveBtn = $(".js-save");
+      var $popUp = $(".popup");
+      var $popupBody = $(".popup-body");
+      var $closePopup = $(".close-popup");
+
+      $saveBtn.on("click", function () {
+        $saveInput.removeClass("validation-error");
+        console.log("button is clicked", $saveInput.val());
+        if ($saveInput.val().length < 3) {
+          $saveInput.addClass("validation-error");
+          return;
+        }
+        $popUp.removeClass("hidden");
+        const text = `Thank you for subscribing ${$saveInput.val()}`;
+        $popupBody.text(text);
+      });
+
+      $closePopup.on("click", function () {
+        hidePopup();
+      });
+
+      $(document).on("keydown", function (event) {
+        if (event.keyCode === 27) {
+          hidePopup();
+        }
+      });
+      function hidePopup() {
+        if (!$popUp.hasClass("hidden")) {
+          $popUp.addClass("hidden");
+          $saveInput.val("");
+        }
+      }
+    </script>
+  </body>
+</html>
