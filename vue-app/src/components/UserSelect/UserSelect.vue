@@ -1,0 +1,80 @@
+<template>
+    <div class="user-select">
+        <div class="user-select__header">
+            <label class="user-select__header-label">
+                Add users
+
+                <input 
+                    class="user-select__header-input" 
+                    placeholder="Type down to narrow the list">
+            </label>
+        </div>
+        <div class="user-select__body">
+            <div v-for="(user, index) in users" :key="index">
+                <UserOption :user="user"/>
+            </div>
+        </div>
+        <div class="user-select__footer">
+            <button type="button" class="user-select__add-btn">
+                Add
+            </button>
+        </div>
+    </div>
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+import UserOption from './UserOption.vue';
+
+export default defineComponent({
+    components: {
+        UserOption
+    },
+    props: {
+        users: {
+            type: Array,
+            required: true
+        }
+    }
+})
+</script>
+
+<style>
+.user-select {
+    width: 100%;
+    max-width: 350px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+}
+
+.user-select__header-label {
+    /* 700 === bold */
+    font-weight: bold;
+    text-align: left;
+    display: block;
+}
+
+.user-select__header-input {
+    border: none !important;
+    outline: none !important;
+    display: block;
+    width: 100%;
+}
+
+.user-select__header {
+    padding: 16px 14px;
+    border-bottom: 1px solid lightgray;
+}
+
+.user-select__add-btn {
+    padding: 8px 12px;
+    background: skyblue;
+    border: none;
+    border-radius: 4px;
+}
+
+.user-select__footer {
+    padding: 16px;
+    border-top: 1px solid lightgray;
+}
+</style>
