@@ -7,7 +7,7 @@
     <!-- <button @click="addCount">Add count</button> -->
     <MyBtn text="Add count" @click="$event => addCount()" :type="btnType"></MyBtn>
 
-    <button @click="isOpen = true">Open popup</button>
+    <button @click="isOpen = true" >Open popup</button>
     <input v-model="someText">
     
     {{ someText }}
@@ -15,7 +15,7 @@
     <MyPopup 
         :text="someText"
         v-if="isOpen" 
-        @close-popup="$event => isOpen = false"/>
+    />
 
     <TaskVueIntro/>
         
@@ -51,6 +51,7 @@ export default defineComponent ({
         var clickCount = ref(0)
         var isOpen = ref(false)
         var someText = ref('')
+        
 
         var addCount = function () {
             clickCount.value = clickCount.value+1
@@ -61,7 +62,7 @@ export default defineComponent ({
             clickCount: clickCount,
             addCount: addCount, //we can write only key name --> addCount,
             isOpen,
-            someText,
+            someText
         }
     }
 })

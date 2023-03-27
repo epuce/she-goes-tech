@@ -1,19 +1,16 @@
 <template>
     <div class="task__wrapper">
-        <button @click="$event =>  btnText = 'Clicked'">{{ btnText }}</button>
-        <button @click="
-                    isOpen = true, 
-                    onClickRed()"
-                    
+        <button @click="$event =>  btnText = 'Clicked'" :class="{'red': changeClass }">{{ btnText }}</button>
+        <button @click="isOpen = true"
+                :class="{'red': changeClass }"   
             >
             Open popup
         </button>
         <TaskVueIntroPopup 
             text="You did it"
             v-if="isOpen" 
-            @close-popup="$event => isOpen = false"
-           
-            />
+            @close-popup="onClose()"
+        />
 
     </div>
 </template>
@@ -36,15 +33,18 @@ export default defineComponent({
     setup () {
         var btnText = ref('Click me')
         var isOpen = ref(false)
+        var changeClass = ref(false)
 
-        var onClickRed = function () {
-            
+        var onClose = function () {
+            isOpen.value = false;
+            changeClass.value = true;
         }
 
         return {
             btnText,
             isOpen,
-            onClickRed
+            changeClass,
+            onClose
         }
     }
 })
