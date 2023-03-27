@@ -5,7 +5,9 @@
             'user-option--selected': user.isSelected
         }"
         >
-        <div class="user-option__avatar"></div>
+        <div class="user-option__avatar">
+            <UserAvatar :avatar="user.avatar" />
+        </div>
 
         {{ user.name }}
     </div>
@@ -13,6 +15,7 @@
 
 <script>
 import { defineComponent } from 'vue';
+import UserAvatar from './UserAvatar.vue';
 
 export default defineComponent({
     props: {
@@ -20,7 +23,8 @@ export default defineComponent({
             type: Object,
             required: true,
         }
-    }
+    },
+    components: { UserAvatar }
 })
 </script>
 
@@ -30,10 +34,17 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding: 6px 12px;
+    cursor: pointer;
 }
 
 .user-option--selected {
     background: lightblue;
     border-left-color: blue;
+}
+
+.user-option__avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
 }
 </style>

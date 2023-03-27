@@ -10,8 +10,8 @@
             </label>
         </div>
         <div class="user-select__body">
-            <div v-for="(user, index) in users" :key="index">
-                <UserOption :user="user"/>
+            <div v-for="(user, index) in userList" :key="index">
+                <UserOption :user="user" @click="onUserClick(index)"/>
             </div>
         </div>
         <div class="user-select__footer">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import UserOption from './UserOption.vue';
 
 export default defineComponent({
@@ -34,6 +34,20 @@ export default defineComponent({
         users: {
             type: Array,
             required: true
+        }
+    },
+    setup(props) {
+        var userList = ref(props.users)
+
+        var onUserClick = function(index) {
+            var user = userList.value[index]
+
+            user.isSelected = !user.isSelected; 
+        }
+
+        return {
+            onUserClick,
+            userList,
         }
     }
 })
