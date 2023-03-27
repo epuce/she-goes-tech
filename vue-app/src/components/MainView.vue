@@ -84,7 +84,7 @@ export default defineComponent({
       clickCount.value = clickCount.value + 1; //always add one to the clickCount
     };
     var isClosedPopupFun = function () {
-      isOpenPopup.value = false;
+      isOpenPopup.value = false; //since we are using ref(), we need to use .value
       buttonType.value = "clicked";
     };
     return {
