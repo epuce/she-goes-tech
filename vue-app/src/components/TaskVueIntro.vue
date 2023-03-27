@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <button class="Btn_clicked" @click="Clicked()"> {{ textChange }} </button>
 
     <button @click="onClick()"> TEXT </button>
@@ -7,7 +7,6 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import TaskVueIntroPopup from './TaskVueIntroPopup.vue';
 
 export default defineComponent ({
 
@@ -24,12 +23,9 @@ export default defineComponent ({
             textChange.value = "Clicked"
         }
 
-       
-
         return {
             Clicked,
             textChange,
-           
         }
     }
     
@@ -38,4 +34,4 @@ export default defineComponent ({
 })
 
 </script>
-<style></style>
+<style></style> -->
