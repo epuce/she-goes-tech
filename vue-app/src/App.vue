@@ -25,7 +25,7 @@ export default {
     var userList = [
       {
         avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
-        name: 'Jim Jimmies',
+        name: 'Jam Jimmies',
         isSelected: false,
       },
       {
@@ -35,12 +35,12 @@ export default {
       },      
       {
         avatar: 'https://www.w3schools.com/howto/img_avatar2.png',
-        name: 'Jil Jimmies',
+        name: 'Jamson Jimmies',
         isSelected: false,
       },
       {
         avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
-        name: 'Andy Jimmies',
+        name: 'Andy',
         isSelected: false,
       },      
       {

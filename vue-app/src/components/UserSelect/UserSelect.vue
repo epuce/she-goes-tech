@@ -5,13 +5,15 @@
                 Add users
 
                 <input 
+                    v-model="searchInput"
+                    @input="onSearchChange()"
                     class="user-select__header-input" 
                     placeholder="Type down to narrow the list">
             </label>
         </div>
         <div class="user-select__body">
-            <div v-for="(user, index) in userList" :key="index">
-                <UserOption :user="user" @click="onUserClick(index)"/>
+            <div v-for="(user, index) in tmpUsers" :key="index">
+                <UserOption v-if="user.isDisplayed" :user="user" @click="onUserClick(index)"/>
             </div>
         </div>
         <div class="user-select__footer">
@@ -37,17 +39,40 @@ export default defineComponent({
         }
     },
     setup(props) {
-        var userList = ref(props.users)
+        var searchInput = ref('')
+        var tmpUsers = ref(props.users.map(function(user) {
+            user.isDisplayed = true
+
+            return user
+        }))
 
         var onUserClick = function(index) {
-            var user = userList.value[index]
+            var user = tmpUsers.value[index]
 
             user.isSelected = !user.isSelected; 
         }
 
+        var onSearchChange = function() {
+            tmpUsers.value = tmpUsers.value.map(function(user) {
+                if (
+                    user.name.toLowerCase().includes(
+                        searchInput.value.toLowerCase().trim()
+                    )
+                ) {
+                    user.isDisplayed = true
+                } else {
+                    user.isDisplayed = false
+                }
+
+                return user;
+            })
+        }
+
         return {
             onUserClick,
-            userList,
+            tmpUsers,
+            searchInput,
+            onSearchChange,
         }
     }
 })
