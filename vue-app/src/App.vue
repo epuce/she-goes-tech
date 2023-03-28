@@ -4,6 +4,12 @@
   <MainView heading="This also works"/>
   <MainView/> -->
   <UserSelect :users="userList"/>
+
+  <router-link to='/' >Main</router-link>
+
+  <router-link to='/list' >List</router-link>
+
+  <router-view></router-view>
 </div>
 </template>
 
@@ -28,31 +34,47 @@ methods: {
 data() {
     var userList = [
       {
+        id: 1,
         avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=826&t=st=1679935369~exp=1679935969~hmac=9ac569f5d59c6b1431d9943c3ea01505f075f97bbb3da9fd67f7fe31242990dd', 
         name: 'Jim Jimy',
-        isSelected: false,
       },
       {
+        id: 7,
         avatar: 'https://cdn-icons-png.flaticon.com/512/147/147144.png', 
         name: 'Jack Jimy',
-        isSelected: true,
       },
       {
+        id: 4,
         avatar: 'https://www.w3schools.com/howto/img_avatar2.png', 
         name: 'June Jimy',
-        isSelected: false,
       },
       {
+        id: 2,
         avatar: 'https://cdn-icons-png.flaticon.com/512/147/147144.png', 
         name: 'Jessy Jimy',
-        isSelected: false,
       },
       {
+        id: 9,
         avatar: 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=826&t=st=1679935530~exp=1679936130~hmac=6bbd93228cce4a76cf1572502f41d6a8e62aaaf1dd8ac1fa3e1641ec5dbfbf45', 
         name: 'Juke Jimy',
-        isSelected: false,
       }
     ];
+
+    var selectedUserIds;
+
+    try { 
+      selectedUserIds  = JSON.parse(localStorage.selectedUserIds)
+    } catch {
+      selectedUserIds = []
+    }
+
+    // var selectedUserIds  = JSON.parse(localStorage.selectedUserIds)
+
+    userList = userList.map(function(user) {
+      user.isSelected = selectedUserIds.includes(user.id)
+
+      return user;
+    })
 
   return {
     userList

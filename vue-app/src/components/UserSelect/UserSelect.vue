@@ -5,17 +5,19 @@
             Add user
 
             <input 
-            class="user-select__header-input"
-            placeholder="Type down to narrow the list">
+                v-model="searchInput" 
+                @input="onSearchChange()"
+                class="user-select__header-input"
+                placeholder="Type down to narrow the list">
         </label>
     </div>
     <div class="user-select__body">
         <div v-for="(user, index) in userList" :key='index'>
-            <UserOption :user="user" @click="onUserClick(index)"/>
+            <UserOption v-if='user.isDisplayed' :user="user" @click="onUserClick(index)"/>
         </div>
     </div>
     <div class="user-select__footer">
-        <button type="button" class="user-select__add-btn">Add</button>
+        <button @click="saveSelectedUsers()" type="button" class="user-select__add-btn">Add</button>
     </div>
 </div>
 </template>
@@ -34,9 +36,14 @@ export default defineComponent ({
             required: true
         }
     },
-    setup(props) {
 
-        var userList = ref(props.users)
+    setup(props) {
+        var searchInput = ref('')
+        var userList = ref(props.users.map(function(user) {
+            user.isDisplayed = true
+
+            return user 
+        }))
 
         var onUserClick = function(index) {
             var user = userList.value[index]
@@ -50,9 +57,41 @@ export default defineComponent ({
             user.isSelected = !user.isSelected;
         }
 
+        var onSearchChange = function() {
+            userList.value = userList.value.map(function(user) {
+
+            if (user.name.toLowerCase().includes(searchInput.value.toLowerCase().trim())) {
+                user.isDisplayed = true
+            } else {
+                user.isDisplayed = false
+            }
+
+            return user;
+        })   
+    }
+
+        // for ref structures we read value
+
+        var saveSelectedUsers = function() {
+            var selectedUsers = userList.value.filter(function(user) {
+                return user.isSelected;
+            })
+
+            var selectedUserIds = selectedUsers.map(function(selectedUsers) {
+                return selectedUsers.id;
+            })
+    
+            localStorage.selectedUserIds = JSON.stringify(selectedUserIds)
+            // console.log(selectedUsers)
+            }
+         
+
         return {
             onUserClick,
             userList,
+            searchInput,
+            onSearchChange,
+            saveSelectedUsers,
         }
     }
 })
@@ -72,6 +111,7 @@ export default defineComponent ({
     font-weight: bold;
     text-align: left;
     display: block;
+    cursor: pointer;
 }
 
 .user-select__header-input {

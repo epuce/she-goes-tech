@@ -1,7 +1,7 @@
 <template> 
     <div class="user-option" 
         :class="{
-        'user-option--selected': user.isSelected
+        'user-option__selected': user.isSelected
     }">
         <div class="user-option__avatar">
             <UserAvatar :avatar="user.avatar" />
@@ -37,7 +37,7 @@ export default defineComponent({
     cursor: pointer;
 }
 
-.user-option--selected {
+.user-option__selected {
     background: lightblue;
     border-left-color: blue;
 }
