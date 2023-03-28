@@ -1,0 +1,37 @@
+     .img-wrapper img {
+        width: 500px;
+     }
+     
+     .img-wrapper {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+    .img-wrapper-2 img {
+         height: 200px;
+     }
+     
+    .img-wrapper-2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 1500px;
+        flex-wrap: wrap;
+    }
+    .img-wrapper-3 {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-wrapper-3 img {
+        width: 300px;
+        height: 300px;
+    }
+
+    
