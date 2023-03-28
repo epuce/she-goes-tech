@@ -6,7 +6,6 @@
 
                 <input 
                     v-model="searchInput"
-                    @input="onSearchChange()"
                     class="user-select__header-input" 
                     placeholder="Type down to narrow the list">
             </label>
@@ -17,7 +16,7 @@
             </div>
         </div>
         <div class="user-select__footer">
-            <button type="button" class="user-select__add-btn">
+            <button @click="saveSelectedUsers()" type="button" class="user-select__add-btn">
                 Add
             </button>
         </div>
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import UserOption from './UserOption.vue';
 
 export default defineComponent({
@@ -68,11 +67,26 @@ export default defineComponent({
             })
         }
 
+        var saveSelectedUsers = function() {
+            var selectedUsers = tmpUsers.value.filter(function(user) {
+                return user.isSelected;
+            })
+
+            var selectedUserIds = selectedUsers.map(function(selectedUser) {
+                return selectedUser.id;
+            })
+
+            localStorage.selectedUserIds = JSON.stringify(selectedUserIds)
+        }
+
+        watch(searchInput, onSearchChange)
+
         return {
             onUserClick,
             tmpUsers,
             searchInput,
             onSearchChange,
+            saveSelectedUsers,
         }
     }
 })
@@ -110,6 +124,7 @@ export default defineComponent({
     background: skyblue;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .user-select__footer {
