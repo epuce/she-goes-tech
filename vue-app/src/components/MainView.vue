@@ -9,7 +9,7 @@
     <MyBtn text="Add count" @click="addCount()" :type="btnType" something-else="this is some text" />
     <MyBtn text="Content" @click="addCount()"> </MyBtn>
 
-    <button @click="isOpen = true">Open popup</button>
+    <button @click="isOpen = true" :class="{'color-red':changeClass}">Open popup</button>
     <input v-model="someText">
 
     {{ someText }}
@@ -59,20 +59,25 @@ export default defineComponent({
     var clickCount = ref(0);
     var isOpen = ref(false);
     var someText = ref('');
-   
-    
-
+    var changeClass = ref(false)
    
 
     var addCount = function () {
       clickCount.value = clickCount.value + 1;
     };
 
+    var onClose = function(){
+      isOpen.value = false;
+      changeClass.value=true;
+    }
+
     return {
       clickCount: clickCount,
       addCount: addCount,
       isOpen,
       someText,
+      onClose,
+      changeClass
    
      
     };
