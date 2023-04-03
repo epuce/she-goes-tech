@@ -5,7 +5,7 @@
 
             <input v-model="user.name">
         </label>
-        <button @click="saveUser()">Save</button>
+        <button @click="saveUser()" :disabled="isSaveDisabled">Save</button>
         <table>
             <thead>
                 <tr>
@@ -22,6 +22,9 @@
                     <td>
                         <button @click="fillForm(user.id)">Edit</button>
                     </td>
+                    <td>
+                        <button @click="deleteUser(user.id)">Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -36,6 +39,7 @@ export default defineComponent({
         UserAvatar,
     },
     setup() {
+        var isSaveDisabled = ref(false);
         var users = ref([])
         var user = ref({
             name: "",
@@ -67,11 +71,41 @@ export default defineComponent({
         }
 
         var saveUser = function() {
-            fetch("https://reqres.in/api/users/"+user.value.id, {
-                method: "PUT",
-                body: JSON.stringify({
-                    name: user.value.name
+            isSaveDisabled.value = true;
+
+            if (user.value.id) {
+                fetch("https://reqres.in/api/users/"+user.value.id, {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        name: user.value.name
+                    })
+                }).then(function(response) {
+                    return response.json()
+                }).then(function() {
+                    user.value = {
+                        id: null,
+                        name: ""
+                    }
+                    isSaveDisabled.value = false;
                 })
+            } else {
+                fetch("https://reqres.in/api/users", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: user.value.name
+                    })
+                }).then(function(response) {
+                    return response.json()
+                }).then(function() {
+                    user.value.name = ""
+                    isSaveDisabled.value = false
+                })
+            }
+        }
+
+        var deleteUser = function(userId) {
+            fetch("https://reqres.in/api/users/"+userId, {
+                method: "DELETE"
             }).then(function(response) {
                 return response.json()
             }).then(function(returnData) {
@@ -84,6 +118,8 @@ export default defineComponent({
             fillForm,
             user,
             saveUser,
+            isSaveDisabled,
+            deleteUser,
         }
     }
 })
