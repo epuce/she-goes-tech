@@ -9,27 +9,31 @@
     <!-- <MainView /> -->
     <!-- above we will have the default value which we stated in the ManinView.vue -->
     <!-- we declare it  -->
-    <UserSelect :users="userList" />
+    <!-- <UserSelect :users="userList" /> -->
     <!-- we have to specify the property where we are going to go -->
-    <router-link to="/">Main</router-link>
+    <!-- <router-link to="/">Main</router-link>
     <br />
     <router-link to="/list">List</router-link>
     <br />
-    <router-link to="/list">Something</router-link>
+    <router-link to="/list">Something</router-link> -->
 
     <!-- this part will be updated when we navigate between one and another. These are <a> tags within view -->
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
+    <UserView />
+    <TaskServerRequest />
   </div>
 </template>
 
 <script>
-// import MainView from "./components/MainView.vue"; //we import the component
-import UserSelect from "./components/UserSelect/UserSelect.vue";
-
+// import UserSelect from "./components/UserSelect/UserSelect.vue";
+import UserView from "./components/UserView.vue";
+import TaskServerRequest from "./components/TaskServerRequest.vue";
 export default {
   name: "App",
   components: {
-    UserSelect,
+    // UserSelect,
+    UserView,
+    TaskServerRequest,
     // MainView,
   }, //it means that "hey, we will use it by adding it under components"
 

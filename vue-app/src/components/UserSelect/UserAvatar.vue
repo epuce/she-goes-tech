@@ -12,6 +12,11 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    size: {
+      type: String,
+      required: false,
+      default: "100%",
+    },
   },
 });
 </script>
@@ -19,7 +24,9 @@ export default defineComponent({
 <style>
 .user-avatar {
   /* it is 100% parent width and height which is 32px */
-  width: 100%;
+  /* we bind to the size which we noted under props */
+  width: v-bind(size);
+  height: v-bind(size);
   /* to get avatar round:  */
   border-radius: 50%;
   border: 2px solid white;
