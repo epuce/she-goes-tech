@@ -1,62 +1,83 @@
 <template>
   <div>
-    <!-- <MainView heading="some cool text" btnType="warning" />
-    <MainView heading="this also works" />
-    <MainView /> -->
-    <UserSelect :users="userList"/>
+    <!-- <MainView heading="Some cool text" btnType="warning" /> -->
+    <!-- <MainView heading="This also works"/> -->
+    <!-- <MainView/> -->
+    <!-- <UserSelect :users="userList"/> -->
+
+    <!-- <router-link to="/" >Main</router-link> -->
+    <!-- <br /> -->
+    <!-- <router-link to="/list" >List</router-link> -->
+    <!-- <br /> -->
+    <!-- <router-link to="/something" >Something</router-link> -->
+
+    <!-- <router-view></router-view> -->
+
+    <!-- <UserView /> -->
+    <TaskServerRequest />
   </div>
 </template>
 
-<script>
-// import MainView from "./components/MainView.vue"; // switch from hello world, to the one we are using now
-import UserSelect from "./components/UserSelect/UserSelect.vue";
+<!-- App.vue(btnType) -> MainView.vue(type) -> MyBtn.vue -->
 
+<script>
+// import MainView from './components/MainView.vue'
+// import UserSelect from './components/UserSelect/UserSelect.vue'
+// import UserView from './components/UserView.vue';
+import TaskServerRequest from './components/TaskServerRequest.vue';
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    // MainView,
-    UserSelect,
+    // MainView
+    // UserSelect,
+    // UserView,
+    TaskServerRequest
   },
-  methods: {},
+  methods: {
+  },
   data() {
     var userList = [
       {
-        avatar:
-          "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=2000",
-        name: "Jim Jimmies",
-        isSelected: false,
+        id: 1,
+        avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+        name: 'Jam Jimmies',
       },
       {
-        avatar:
-          "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
-        name: "Jack Jimmies",
-        isSelected: true,
+        id: 7,
+        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+        name: 'Jack Jimmies',
+      },      
+      {
+        id: 10,
+        avatar: 'https://www.w3schools.com/howto/img_avatar2.png',
+        name: 'Jamson Jimmies',
       },
       {
-        avatar:
-          "https://png.pngtree.com/png-vector/20200614/ourlarge/pngtree-businessman-user-avatar-character-vector-illustration-png-image_2242909.jpg",
-        name: "Jill Jimmies",
-        isSelected: false,
-      },
+        id: 2,
+        avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+        name: 'Andy',
+      },      
       {
-        avatar:
-          "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
-        name: "Andy Jimmies",
-        isSelected: false,
-      },
-      {
-        avatar:
-          "https://png.pngtree.com/png-vector/20200614/ourlarge/pngtree-businessman-user-avatar-character-vector-illustration-png-image_2242909.jpg",
-        name: "John Jimmies",
-        isSelected: false,
+        id: 5,
+        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+        name: 'Johnie Jimmies',
       },
     ];
-
+    var selectedUserIds;
+    try {
+      selectedUserIds = JSON.parse(localStorage.selectedUserIds)
+    } catch {
+      selectedUserIds = []
+    }
+    userList = userList.map(function(user) {
+      user.isSelected = selectedUserIds.includes(user.id)
+      return user;
+    })
     return {
-      userList,
+      userList
     }
   }
-};
+}
 </script>
 
 <style>

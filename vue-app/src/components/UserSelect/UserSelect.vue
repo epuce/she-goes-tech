@@ -5,26 +5,38 @@
         Add user
 
         <input
+          v-model="searchInput"
+          @input="onSearchChange()"
           class="user-select__header-input"
           placeholder="Type down to narrow the list"
-        >
+        />
       </label>
     </div>
     <div class="user-select__body">
-      <div v-for="(user, index) in userList" :key="index">
-        <UserOption :user="user" @click="onUserClick(index)" />
+      <div v-for="(user, index) in tmpUsers" :key="index">
+        <UserOption
+          v-if="user.isDisplayed"
+          :user="user"
+          @click="onUserClick(index)"
+        />
       </div>
     </div>
     <div class="user-select__footer">
-      <button type="button" class="user-select__add-btn">Add</button>
+      <button
+        @click="saveSelectedUsers()"
+        type="button"
+        class="user-select__add-btn"
+      >
+        Add
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import UserOption from "./UserOption.vue";
-export default defineComponent ({
+export default defineComponent({
   components: {
     UserOption,
   },
@@ -35,18 +47,57 @@ export default defineComponent ({
     },
   },
   setup(props) {
-    var userList = ref(props.users)
+    var searchInput = ref("");
+    var tmpUsers = ref(
+      props.users.map(function (user) {
+        user.isDisplayed = true;
+
+        return user;
+      })
+    );
 
     var onUserClick = function (index) {
-      var user = userList.value[index];
-    //   var user = props.users[index];
+      var user = tmpUsers.value[index];
+      //   var user = props.users[index];
 
       user.isSelected = !user.isSelected;
     };
 
+    var onSearchChange = function () {
+      tmpUsers.value = tmpUsers.value.map(function (user) {
+        if (
+          user.name
+            .toLowerCase()
+            .includes(searchInput.value.toLowerCase().trim())
+        ) {
+          user.isDisplayed = true;
+        } else {
+          user.isDisplayed = false;
+        }
+
+        return user;
+      });
+    };
+
+    var saveSelectedUsers = function () {
+      var selectedUsers = tmpUsers.value.filter(function (user) {
+        return user.isSelected;
+      });
+      var selectedUserIds = selectedUsers.map(function (selectedUser) {
+        return selectedUser.id;
+      });
+      localStorage.selectedUserIds = JSON.stringify(selectedUserIds);
+      // console.log(selectedUsers)
+    };
+
+    watch(searchInput, onSearchChange) 
+
     return {
       onUserClick,
-      userList,
+      tmpUsers,
+      searchInput,
+      onSearchChange,
+      saveSelectedUsers,
     };
   },
 });
@@ -54,34 +105,35 @@ export default defineComponent ({
 
 <style>
 .user-select {
-    width: 100%;
-    max-width: 350px;
-    border: 1px solid lightgray;
-    border-radius: 6px;
+  width: 100%;
+  max-width: 350px;
+  border: 1px solid lightgray;
+  border-radius: 6px;
 }
 .user-select__header-label {
-    font-weight: bold;
-    text-align: left;
-    display: block;
+  font-weight: bold;
+  text-align: left;
+  display: block;
 }
 .user-select__header-input {
-    border: none !important;
-    outline: none !important;
-    display: block;
-    width: 100%;
+  border: none !important;
+  outline: none !important;
+  display: block;
+  width: 100%;
 }
 .user-select__header {
-    padding: 16px 14px;
-    border-bottom: 1px solid lightgray;
+  padding: 16px 14px;
+  border-bottom: 1px solid lightgray;
 }
 .user-select__add-btn {
-    padding: 8px 12px;
-    background: skyblue;
-    border: none;
-    border-radius: 4px;
+  padding: 8px 12px;
+  background: skyblue;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 .user-select__footer {
-    padding: 18px;
-    border-top: 1px solid lightgray;
+  padding: 18px;
+  border-top: 1px solid lightgray;
 }
 </style>

@@ -26,8 +26,8 @@ import { defineComponent, ref } from "vue"; // connecting package manager (npm) 
 
 export default defineComponent({
   components: {
-    myBtn: myBtn,
-    MyPopup, // this is equal to Popup: Popup, used when they are the same
+    // myBtn: myBtn,
+    // MyPopup, // this is equal to Popup: Popup, used when they are the same
     // TaskVueIntro,
     // TaskVueIntroPopup,
   },
