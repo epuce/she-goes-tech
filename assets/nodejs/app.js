@@ -2,8 +2,10 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const userRoutes = require('./routes/user.route');
+const triggerRoutes = require('./routes/trigger.route');
 
 const app = new express();
+app.use(express.json())
 app.use(cors());
 
 const router = express.Router();
@@ -14,6 +16,7 @@ router.get('', (reject, response) => {
 })
 
 app.use('/api/users', userRoutes);
+app.use('/api/trigger', triggerRoutes);
 app.use('*', router);
 
 const db = mysql.createConnection({

@@ -14,6 +14,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/user.route');
 
 const app = new express();
+app.use(express.json())
 app.use(cors());
 
 const router = express.Router();
@@ -30,7 +31,7 @@ const db = mysql.createConnection({
     host: '104.248.125.41',
     user: 'user-she-goes-tech',
     password: 'password-she-goes-tech',
-    database: 'your-githhub-username-she-goes-tech'
+    database: 'she-goes-tech'
 })
 
 db.connect((error) => {
