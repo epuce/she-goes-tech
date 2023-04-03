@@ -5,7 +5,7 @@
     - `npm i cors express mysql require`
 - Create the server entry point file `app.js`
 - Start the node server `nodeman app.js`
-    - We use nodeman instead of node so that the server live updates when we do any changes to the files 
+    - We use nodeman instead of node so that the server live updates when we do any changes to the files
 ```JavaScript
 // app.js
 const express = require('express');

@@ -109,10 +109,12 @@ $.ajax({
 ---
 ### [full list](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
-### add a new file named task-14.html where all these actions will be performed
-
-1. Create a picture gallery by loading the data from: https://fakerapi.it/api/v1/persons
-2. Add needed css to style the layout as in the expected result
+### Checkup 
+1. Create a new component TaskServerRequest.vue
+2. Import the component within MainView.vue so it can be rendered
+3. Within TaskServerRequest.vue create a picture gallery by loading the data from: https://fakerapi.it/api/v1/persons
+4. Add needed css to style the layout as in the expected result
+5. Expand the picture (without the text) when clicking on it 
 
 ### Expected result
 
