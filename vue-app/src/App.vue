@@ -3,26 +3,35 @@
   <!-- <MainView heading='Some cool text' btnType="warning"/>
   <MainView heading="This also works"/>
   <MainView/> -->
-  <UserSelect :users="userList"/>
+  <!-- <UserSelect :users="userList"/>
 
   <router-link to='/' >Main</router-link>
 
   <router-link to='/list' >List</router-link>
 
-  <router-view></router-view>
+  <router-view></router-view>  -->
+
+  <!-- <UsersView /> -->
+
+  <TaskServerRequest />
+
 </div>
 </template>
 
 <script>
 // import MainView from './components/MainView.vue'
-import UserSelect from './components/UserSelect/UserSelect.vue'
+// import UserSelect from './components/UserSelect/UserSelect.vue'
+// import UsersView from './components/UsersView.vue';
+import TaskServerRequest from './components/TaskServerRequest.vue'
 
 export default {
   name: 'App',
   components: {
-    // MainView
-   UserSelect
-  },
+    // MainView,
+    // UserSelect
+    // UsersView,
+    TaskServerRequest
+},
 
 
 methods: {
