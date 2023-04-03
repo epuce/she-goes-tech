@@ -114,7 +114,7 @@ $.ajax({
 2. Import the component within MainView.vue so it can be rendered
 3. Within TaskServerRequest.vue create a picture gallery by loading the data from: https://fakerapi.it/api/v1/persons
 4. Add needed css to style the layout as in the expected result
-5. Expand the picture (without the text) when clicking on it 
+5. (Optional) Expand the picture (without the text) when clicking on it 
 
 ### Expected result
 
