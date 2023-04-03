@@ -1,7 +1,7 @@
 <template>
     <div>
-        It works
-        <h1>{{ heading }}</h1>
+    
+        <!---<h1>{{ heading }}</h1>
         <h2>You have clicked {{ clickCount }} times</h2>
         <MyBtn text="Add count" :type="btnType" @click="addCount()"></MyBtn>
         <button @click="isOpen = true">Open popup</button>
@@ -9,22 +9,27 @@
         {{ someText }}
         <MyPopup :text="someText" v-if="isOpen" @close-popup="isOpen = false" />
 
-        <TaskVueIntro/>
+        <TaskVueIntro/>-->
+        <TaskServerRequest/>
     </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue';
-import MyBtn from './MyBtn.vue';
-import MyPopup from './MyPopup.vue';
-import TaskVueIntro from './TaskVueIntro.vue';
+import TaskServerRequest from './TaskServerRequest.vue';
+
+//import MyBtn from './MyBtn.vue';
+//import MyPopup from './MyPopup.vue';
+//import TaskVueIntro from './TaskVueIntro.vue';
 
 export default defineComponent({
     components: {
-        MyBtn: MyBtn,
-        MyPopup,
-        TaskVueIntro,
-    },
+    // MyBtn: MyBtn,
+    // MyPopup,
+    //TaskVueIntro,
+    TaskServerRequest,
+    
+},
     props: {
         heading: {
             type: String,
