@@ -8,13 +8,19 @@ export default defineComponent ({
         avatar: {
             type: String,
             required: true,
+        },
+        size: {
+            type: String,
+            required: false,
+            default: '100%',
         }
     }
 })
 </script>
 <style >
     .user-avatar {
-        width: 100%;
+        width: v-bind(size);
+        height: v-bind(size);
         border-radius: 50%;
         border: 2px solid white;
         box-sizing: border-box;
