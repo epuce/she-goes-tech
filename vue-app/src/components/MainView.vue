@@ -1,45 +1,49 @@
 <template>
   <div>
-    Yay it works
+    <!-- Yay it works -->
 
-    <h1>{{ heading }}</h1>
-    <h2>You have clicked {{ clickCount }} times</h2>
+    <!-- <h1>{{ heading }}</h1> -->
+    <!-- <h2>You have clicked {{ clickCount }} times</h2> -->
 
     <!-- <button @click="addCount">Add count</button> -->
-    <MyBtn text="Add count" @click="addCount()" :type="btnType" something-else="this is some text" />
-    <MyBtn text="Content" @click="addCount()"> </MyBtn>
+    <!-- <MyBtn text="Add count" @click="addCount()" :type="btnType" something-else="this is some text" /> -->
+    <!-- <MyBtn text="Content" @click="addCount()"> </MyBtn> -->
 
-    <button @click="isOpen = true" :class="{'color-red':changeClass}">Open popup</button>
-    <input v-model="someText">
+    <!-- <button @click="isOpen = true" :class="{'color-red':changeClass}">Open popup</button> -->
+    <!-- <input v-model="someText"> -->
 
-    {{ someText }}
+    <!-- {{ someText }} -->
     
-  <MyPopup 
-   :text="someText"
-   v-if="isOpen"
-   @close-popup="isOpen = false"/>
+  <!-- <MyPopup  -->
+   <!-- :text="someText" -->
+   <!-- v-if="isOpen" -->
+   <!-- @close-popup="isOpen = false"/> -->
 
-<TaskVueIntro
-/>
+<!-- <TaskVueIntro
+/> -->
+
+<TaskServerRequest/>
 
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import MyBtn from './MyBtn.vue';
-import MyPopup from "./MyPopup.vue";
-import TaskVueIntro from './TaskVueIntro.vue'
+import TaskServerRequest from "./TaskServerRequest.vue";
+// import MyBtn from './MyBtn.vue';
+// import MyPopup from "./MyPopup.vue";
+// import TaskVueIntro from './TaskVueIntro.vue'
+
 
 
 export default defineComponent({
   components: {
-    MyBtn: MyBtn,
-    MyPopup,
-    TaskVueIntro,
-    
+    // MyBtn: MyBtn,
+    // MyPopup,
+    // TaskVueIntro,
+    TaskServerRequest,
   
-  },
+},
   props: {
     heading: {
       type: String,

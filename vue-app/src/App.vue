@@ -14,7 +14,9 @@
 
     <!-- <router-view></router-view> -->
 
-<UserView/>
+<!-- <UserView/> -->
+
+<MainView/>
   </div>
 </template>
 
@@ -23,14 +25,16 @@
 <script>
 // import MainView from "./components/MainView.vue";
 // import UserSelect from './components/UserSelect/UserSelect.vue';
-import UserView from './components/UserView.vue';
+import MainView from './components/MainView.vue';
+// import UserView from './components/UserView.vue';
 
 export default {
   name: 'App',
   components: {
     // MainView,
     // UserSelect,
-    UserView
+    // UserView,
+    MainView
 },
   methods: {
   },
