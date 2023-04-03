@@ -12,69 +12,69 @@
 * GET - used for reading data
 ```JS
 fetch("https://reqres.in/api/users", {
-        method: "GET",
-        // other params
-    })
-    .then(response => response.json())
-    .then(function(data) {
-        // returns list of users
-        console.log(data)
-    })
+    method: "GET",
+    // other params
+})
+.then(response => response.json())
+.then(function(data) {
+    // returns list of users
+    console.log(data)
+})
 ```
 
 * POST - used for creating data
 ```JS
 var data = JSON.stringify(
-        {
-            name: "Ed",
-            job: "farmer"
-        }
-    )
+    {
+        name: "Ed",
+        job: "farmer"
+    }
+)
 
 fetch("https://reqres.in/api/users", {
-        method: "POST",
-        body: data,
-        // other params
-    })
-    .then(response => response.json())
-    .then(function(data) {
-        // returns id, and crated timestamp together with other data
-        console.log(data)
-    })
+    method: "POST",
+    body: data,
+    // other params
+})
+.then(response => response.json())
+.then(function(data) {
+    // returns id, and crated timestamp together with other data
+    console.log(data)
+})
 ```
 * PUT - used for updating data
 * PATCH - to update a specific part of an item where comparing to PUT the whole item is intended to be updated
 ```JS
 var data = JSON.stringify(
-        {
-            name: "Ed",
-            job: "farmer"
-        }
-    )
+    {
+        name: "Ed",
+        job: "farmer"
+    }
+)
 
 // For this endpoint we have to specify the ID we are updating within the URL `../api/users/{id}`
 fetch("https://reqres.in/api/users/2", {
-        method: "PUT",
-        body: data,
-        // other params
-    })
-    .then(response => response.json())
-    .then(function(data) {
-        // returns id, and crated timestamp together with other data
-        console.log(data)
-    })
+    method: "PUT",
+    body: data,
+    // other params
+})
+.then(response => response.json())
+.then(function(data) {
+    // returns id, and crated timestamp together with other data
+    console.log(data)
+})
 ```
 * DELETE - used for deleting data
 ```JS
 // For this endpoint we have to specify the ID we are deleting within the URL `../api/users/{id}`
 fetch("https://reqres.in/api/users/2", {
-        method: "DELETE",
-        // other params
-    })
-    .then(response => response.json())
-    .then(function(data) {
-        console.log(data)
-    })
+    method: "DELETE",
+    // other params
+})
+.then(response => response.json())
+.then(function(data) {
+    console.log(data)
+})
 ```
 
 ### jQuery syntax
