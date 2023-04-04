@@ -18,6 +18,7 @@ export default defineComponent({
       name: "",
       email: "",
       image: "",
+      id: null,
     });
 
     fetch("https://fakerapi.it/api/v1/persons", {
