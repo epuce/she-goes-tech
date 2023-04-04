@@ -1,49 +1,83 @@
-<script setup>
-import MainView from '././components/MainView.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <MainView heading="Some cool text" btnType="warning"/>
+    <!-- <MainView heading="Some cool text" btnType="warning"/>
     <MainView heading="Some super cool text"/>
-    <MainView/>
+    <MainView/> -->
+    <!-- <UserSelect :users="userList"/>
+
+    <router-link to="/">Main</router-link>
+    <br>
+    <router-link to="/list">List</router-link>
+
+    <router-view></router-view> -->
+    <TaskServerRequest/>
+    <!-- <UserView /> -->
   </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import UserSelect from './components/UserSelect/UserSelect.vue';
+import UserView from './components/UserView.vue';
+import TaskServerRequest from './components/TaskServerRequest.vue';
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+export default {
+  name: 'App',
+  components: {
+    //UserSelect,
+    //UserView,
+    TaskServerRequest,
+  },
+  methods: {
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  },
+  data () {
+    var userList = [
+      {
+        id: 1,
+        avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+        name: 'Jam Jimmies',
+      },
+      {
+        id: 8,
+        avatar: 'https://www.w3schools.com/w3images/avatar2.png',
+        name: 'Jack Jimmies',
+      },
+      {
+        id: 11,
+        avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+        name: 'Andy',
+      },
+      {
+        id: 22,
+        avatar: 'https://www.blexar.com/avatar.png',
+        name: 'Johnie Jimmies',
+      },
+      {
+        id: 15,
+        avatar: 'https://www.blexar.com/avatar.png',
+        name: 'Jil Jimmies',
+      },
+    ];
+
+    var selectedUserIds;
+
+    try {
+      var selectedUserIds = JSON.parse(localStorage.selectedUserIds) 
+    } catch {
+      selectedUserIds = []
+    }
+    
+
+      userList = userList.map(function(user) {
+        user.isSelected = selectedUserIds.includes(user.id) //this adds to the data in app.vue by key "isSelected"
+        
+        return user;
+      })
+
+    return {
+      userList
+    }
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
-</style>
+</script>
+
