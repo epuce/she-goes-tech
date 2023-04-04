@@ -102,4 +102,14 @@
 [SQL commands w3school](https://www.w3schools.com/sql/default.asp)
 
 ### Checkup
-<!-- TODO -->
+
+### add a new file named task-13-SQL-basics.sql where all these actions will be performed
+
+#### When you are sure that the SQL script worked, write it down inside the task file
+
+1. Create a `comments` table that has 3 columns: `id` `comment` `user_id`
+    1. Make ID column as the primary column that auto increments
+2. Insert 3 rows into the newly created table
+3. Retrieve the newly created rows
+4. Update an existing row
+5. Delete an existing row  
