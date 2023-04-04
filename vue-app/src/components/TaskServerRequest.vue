@@ -93,6 +93,6 @@ p {
   font-weight: 700;
 }
 .img-transform {
-  transform: scale(1.5);
+  transform: scale(2);
 }
 </style>
