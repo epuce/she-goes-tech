@@ -20,6 +20,8 @@
             v-if="isOpen" 
             @close-popup="isOpen = false"/>
 
+        <TaskServerRequest></TaskServerRequest>
+
     </div>
 </template>
 
@@ -28,14 +30,15 @@ import { defineComponent, ref } from 'vue';
 import MyBtn from './MyBtn.vue';
 import MyPopup from './MyPopup.vue';
 import TaskVueIntro from './TaskVueIntro.vue';
+import TaskServerRequest from './TaskServerRequest.vue';
 
 export default defineComponent({
     components: {
-        MyBtn: MyBtn,
-        MyPopup,
-        TaskVueIntro,
-       
-    },
+    MyBtn: MyBtn,
+    MyPopup,
+    TaskVueIntro,
+    TaskServerRequest,
+},
     props: {
         heading: {
             type: String,

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excersize 23.02.</title>
+</head>
+
+<style>
+    .header,
+    .footer {
+        background: #434666;
+        color: #ffffff;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    body {
+        display: grid;
+        grid-template-rows: 80px auto 80px;
+        grid-template-columns: repeat(2, 40%);
+         /* sintax to set two columns of 40% each */
+        margin: 0;
+        min-height: 100vh;
+         /* vh - screen height */
+         justify-content: center;
+    }
+
+    .section-right,
+    .section-right {
+
+    }
+</style>
+
+<body>
+    <div class="header">
+        Header
+    </div>
+    <div class="section-left">
+        Left
+    </div>
+    <div class="section-right">
+        Right
+    </div>
+    <div class="footer">
+        Footer
+    </div>
+</body>
+</html>

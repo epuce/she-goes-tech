@@ -4,6 +4,7 @@ function validateForm() {
     if (document.getElementById("name").value.length < 3) {
         document.getElementById("name").classList.add('validation-error');
     } else {
+        document.getElementById("name").classList.remove('validation-error');
         popup.classList.add("open-popup");
         overlayA.classList.add("open-popup");
         document.getElementById("textButton").innerHTML = document.getElementById("name").value;

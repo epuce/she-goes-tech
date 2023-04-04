@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      #popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+
+      #popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #000;
+        display: none;
+        z-index: 1;
+      }
+
+      .validation-error {
+        border-color: #f70000;
+      }
+
+      #close-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var $input = $("#input");
+        var $saveButton = $("#save-button");
+        var $popupOverlay = $("#popup-overlay");
+        var $popup = $("#popup");
+        var $popupMessage = $("#popup-message");
+        var $closeIcon = $("#close-icon");
+
+        $saveButton.click(function () {
+          var inputValue = $input.val();
+
+          if (inputValue.length < 3) {
+            $input.addClass("validation-error");
+            return;
+          }
+          $input.removeClass("validation-error");
+
+          $popupMessage.text("Thank you for subscribtion " + inputValue);
+          $popupOverlay.show();
+          $popup.show();
+          // Add a keydown listener to close the popup box when the escape key is pressed
+          $(document).on("keydown", function (e) {
+            if (e.keyCode == 27) {
+              closePopup();
+            }
+          });
+        });
+
+        $closeIcon.click(closePopup);
+
+        $popupOverlay.click(closePopup);
+
+        function closePopup() {
+          $popupOverlay.hide();
+          $popup.hide();
+          $input.val("");
+          $input.removeClass("validation-error");
+
+        //   $(document).off("keydown");
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <input type="text" id="input" />
+    <button id="save-button">Save</button>
+    <div id="popup-overlay"></div>
+    <div id="popup">
+      <span id="close-icon">&times;</span>
+      <p id="popup-message"></p>
+    </div>
+  </body>
+</html>

@@ -21,12 +21,19 @@
         margin-top: 16px;
     }
 
-    table {
-        display: inline-table;
-    }
-
     .validation-error {
         border: 1px solid #FF0000;
+    }
+
+    .user-table {
+        display: none;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .user-table td, .user-table th {
+        border: 1px solid grey;
+
     }
 </style>
 <body>
@@ -51,11 +58,12 @@
         </button>
     </form>
 
-    <table>
+    <table class="user-table js-user-table-wrapper">
         <thead>
             <th>Index</th>
             <th>Name</th>
             <th>E-mail</th>
+            <th></th>
         </thead>
         <tbody class="js-user-table"></tbody>
     </table>
