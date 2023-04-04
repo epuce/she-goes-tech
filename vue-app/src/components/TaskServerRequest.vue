@@ -1,6 +1,6 @@
 <template lang="">
     <div class='grid-wrapper'>
-        <div v-for='(user) in users' :key='user.id'>
+        <div v-for='(user) in users' :key='user.id' class='grid-element'>
             <div> 
                 <TaskImage :task_image="user.image" />
             </div>
@@ -51,7 +51,18 @@ export default defineComponent ({
 }
 
 .user-name {
+color: black;
+font-weight: bold;
+}
 
+.grid-element {
+    padding: 20px;
+    text-align: left;
+}
+
+.user-email {
+color: black; 
+font-size: 10px;
 }
     
 </style>
