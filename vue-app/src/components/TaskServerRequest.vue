@@ -6,8 +6,10 @@
           :picture="user.image"
           width="300px"
           height="350px"
-          @click="transform()"
-          :transform="buttonTransform"
+          @click="transform(user.id)"
+          :class="{
+            'img-transform': buttonTransform,
+          }"
         />
 
         <p class="name-surname">{{ user.firstname }} {{ user.lastname }}</p>
@@ -27,10 +29,29 @@ export default defineComponent({
   },
   setup() {
     var users = ref([]);
-    var buttonTransform = ref("");
+    var buttonTransform = ref(false);
+    var user = ref({
+      id: null,
+    });
 
-    var transform = function () {
-      buttonTransform.value = "scale(2)";
+    var transform = function (userId) {
+      if (buttonTransform.value === false) {
+        fetch("https://reqres.in/api/users/" + userId, {
+          method: "GET",
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (returnData) {
+            user.value = {
+              id: returnData.data.id,
+            };
+            buttonTransform.value = true;
+          });
+      } else {
+        buttonTransform.value = false;
+      }
+      // buttonTransform.value = false;
     };
 
     fetch("https://fakerapi.it/api/v1/persons", {
@@ -70,5 +91,8 @@ p {
 }
 .name-surname {
   font-weight: 700;
+}
+.img-transform {
+  transform: scale(1.5);
 }
 </style>
