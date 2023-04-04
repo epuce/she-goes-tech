@@ -10,55 +10,51 @@
 <script>
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
-    setup(){
+    setup() {
         var items = ref([])
-        var item = ref({
-            name: '',
-            id: null,
-            email: '',
-
-        })
         fetch("https://fakerapi.it/api/v1/persons", {
             method: "GET"
-        }).then(function(response){
+        }).then(function (response) {
             return response.json()
-        }).then(function(returnedData){
+        }).then(function (returnedData) {
             items.value = returnedData.data
         })
         return {
             items,
-            item
         }
     }
 }) 
 </script>
 <style>
-    
-    .wrapper {
-        display: flex;
-        flex-direction: row;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: left;
-        flex-wrap: wrap;
-        width: 800px;
-        
-    }   
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: left;
+    flex-wrap: wrap;
+    width: 800px;
 
-    .item {
-        padding: 15px;
-    }
-    .firstLastName {
-        font-weight: bold;
-        font-size: 10px;
-    }
-    
-    .email {
-        font-size: 6px;
-    }
+}
 
-    img {
-        width: 120px;
-        height: 120px
-    }
+.item {
+    padding: 15px;
+}
 
+.firstLastName {
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.email {
+    font-size: 6px;
+}
+
+img {
+    width: 120px;
+    height: 120px
+}
+
+img:hover {
+    cursor: pointer;
+}
 </style>
