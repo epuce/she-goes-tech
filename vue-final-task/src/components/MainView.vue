@@ -1,9 +1,7 @@
 <template>
     <div class="main-view-wrapper">
-        <OpenFormBtn/>
-        <!-- <div class="form-view-warpper">
-            Form view
-        </div> -->
+        <OpenFormBtn open-form-btn="Open Form" @click="openForm"/>
+        <UserForm :class="isFormOpen ? 'user-form--opened' : ''"/>
         <div class="table-view-wrapper">
             Table view
         </div>
@@ -16,13 +14,30 @@
     </div>
 </template>
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref} from 'vue';
 import OpenFormBtn from './OpenFormBtn.vue'
+import UserForm from './UserForm.vue'
 
 export default defineComponent ({ 
     components: {
-    OpenFormBtn
+    OpenFormBtn,
+    UserForm
   },
+
+  setup() {
+    var isFormOpen = ref(false);
+
+var openForm = function () {
+  isFormOpen.value = !isFormOpen.value;
+};
+
+return {
+  isFormOpen,
+  openForm,
+};
+  }
+
+
 })
 </script>
 <style>
@@ -68,6 +83,10 @@ body {
 
 button {
     display:inline-block;
+}
+
+.user-form--opened {
+    margin-left: 0; 
 }
 
 </style>
