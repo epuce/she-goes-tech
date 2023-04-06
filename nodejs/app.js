@@ -2,6 +2,7 @@ var express = require('express')
 var cors = require('cors')
 var mysql = require('mysql')
 var userRoutes = require('./routes/user.route')
+var sqlRoutes = require('./routes/sql.route')
 
 var app = new express()
 app.use(express.json())
@@ -15,7 +16,9 @@ router.get('*', function(reject, response) {
 })
 
 app.use('/api/users', userRoutes)
+app.use('/api/sql', sqlRoutes)
 app.use(router)
+
 
 var db = mysql.createConnection({
     host: '104.248.125.41',
