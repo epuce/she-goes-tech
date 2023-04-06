@@ -20,13 +20,14 @@ export default defineComponent({
 </script>
 <style>
 .user-form-container {
-  width: 200px;
+  max-width: 220px;
+  min-width: 220px;
   height: 100%;
-  background-color: darkgray;
-  position: fixed;
-  /* margin-left: -200px; */
-  margin-left: 0;
+  background-color: #7e7b7b;
+  margin-left: -220px;
   transition: margin-left 1s ease-in-out;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 

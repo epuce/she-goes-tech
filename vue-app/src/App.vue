@@ -17,6 +17,7 @@
 
     <!-- <UserView/> -->
     <TaskServerRequest />
+    <TaskServerRequestv2 />
   </div>
 </template>
 
@@ -24,6 +25,7 @@
 // import MainView from "./components/MainView.vue";
 // import UserSelect from "./components/UserSelect/UserSelect.vue";
 import TaskServerRequest from "./components/TaskServerRequest.vue";
+import TaskServerRequestv2 from "./components/TaskServerRequestv2.vue";
 // import UserView from "./components/UserView.vue";
 
 export default {
@@ -33,7 +35,8 @@ export default {
     // UserSelect,
     // UserView,
     TaskServerRequest,
-  },
+    TaskServerRequestv2
+},
   // methods: {
   // //   addCount: function() {
   // //     this.ClickCount = this.clickCount;

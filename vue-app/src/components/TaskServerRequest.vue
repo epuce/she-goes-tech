@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="gallery-container">
-      <div v-for="person in persons" :key="person.id" class="person-wrapper">
-        <img :src="person.image" @click="togglePictureSize" class="small-img" />
+      <div v-for="(person, id) in persons" :key="id" class="person-wrapper">
+        <img :src="person.image" @click="togglePictureSize(id)" class="small-img" />
         <h1 class="person-name">
           {{ person.firstname }} {{ person.lastname }}
         </h1>
@@ -10,7 +10,7 @@
         <div
           class="big-image-wrapper"
           v-if="isPictureBig"
-          @click="togglePictureSize"
+          @click="togglePictureSize(id)"
         >
           <img class="big-image" :src="person.image" />
         </div>

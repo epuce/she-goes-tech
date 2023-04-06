@@ -1,10 +1,8 @@
 <template>
     <div class="main-view-wrapper">
-        <OpenFormBtn open-form-btn="Open Form" @click="openForm"/>
         <UserForm :class="isFormOpen ? 'user-form--opened' : ''"/>
-        <div class="table-view-wrapper">
-            Table view
-        </div>
+        <OpenFormBtn open-form-btn="Open Form" @click="openForm"/>
+        <UserTable/>
         <!-- <div class="popup-overlay">
             <div class="popup">
                 <div class="text">This is a popup</div>
@@ -17,12 +15,14 @@
 import { defineComponent, ref} from 'vue';
 import OpenFormBtn from './OpenFormBtn.vue'
 import UserForm from './UserForm.vue'
+import UserTable from './UserTable.vue';
 
 export default defineComponent ({ 
     components: {
     OpenFormBtn,
-    UserForm
-  },
+    UserForm,
+    UserTable
+},
 
   setup() {
     var isFormOpen = ref(false);
@@ -46,12 +46,8 @@ body {
 }
 .main-view-wrapper {
     display: flex;
-}
-
-.table-view-wrapper {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 .popup-overlay {

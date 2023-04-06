@@ -38,10 +38,10 @@ export default defineComponent({
 <style>
 .open-form__btn {
   background-color: darkred;
+  position: fixed;
   width: 30px;
   height: 90px;
-  position: fixed;
-  top: 30%;
+  top: 200px;
   left: 0px;
   display: flex;
   justify-content: center;
@@ -54,7 +54,7 @@ export default defineComponent({
 
 .open-form__btn--opened {
   position: fixed;
-  left: 200px;
+  left: 220px;
 }
 
 .button-txt {

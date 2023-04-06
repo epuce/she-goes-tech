@@ -1,6 +1,7 @@
 <template>
     <div class="email-input">
         <lable for="email" class="email-input_lable">Email</lable>
+        <br/>
         <input name="email" type="text" class="email-input_input">
     </div>
 </template>
@@ -12,15 +13,19 @@ export default defineComponent({
 </script>
 <style>
 .email-input{
-margin: 10px;
+margin-top: 10px;
 }
 
 .email-input_lable {
     color: white;
+    font-family: sans-serif;
+    font-size: small;
 }
 
 .email-input_input {
     border-radius: 5px;
     border: transparent;
+    width: 100%;
+    box-sizing: border-box;
 }
 </style>

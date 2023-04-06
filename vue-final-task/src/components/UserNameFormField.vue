@@ -11,16 +11,16 @@ export default defineComponent({
 })
 </script>
 <style>
-.username-input{
-margin: 10px;
-}
-
 .username-input_lable {
     color: white;
+    font-family: sans-serif;
+    font-size: small;
 }
 
 .username-input_input {
     border-radius: 5px;
     border: transparent;
+    width: 100%;
+    box-sizing: border-box;
 }
 </style>
