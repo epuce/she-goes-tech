@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style>
+    .color-red {
+        color: red;
+    }
+    .background-green {
+    background-color: #3aab6996;
+    }
+</style>
+<script>
+    // window.addEventListener('DOMContentLoaded', function(){
+        $(function(){
+        document.querySelectorAll('button').forEach(function(elem) {
+            elem.addEventListener('click', function(){
+                elem.classList.toggle('color-red')
+                console.log('click');
+            })
+        })
+
+        $('button').on('click', function(){
+            $(this).toggleClass('background-green')
+            console.log('jquery')
+        })
+
+        $('.js-jquery-btn').on('click', function(){
+            $('.js-jquery')
+        })
+    })
+</script>
+
+<body>
+
+    <button>BTN 1</button>
+    <button>BTN 2</button>
+    <button>BTN 3</button>
+    <button>BTN 4</button>
+    <button class=".js-jquery-btn">BTN 5</button>
+
+    <h1 class="js-vanilla">Vanilla</h1>
+    <h1 class="js-jquery">jQuery</h1>
+
+
+</body>
+</html>
