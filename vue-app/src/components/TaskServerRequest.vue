@@ -47,7 +47,6 @@ export default defineComponent ({
     height: 500px;
     grid-template-columns: 25% 25% 25% 25% 25%;
     grid-template-rows: (25%, 25%);
-
 }
 
 .user-name {
