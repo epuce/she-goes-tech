@@ -5,6 +5,7 @@ var express = require("express");
 var cors = require("cors");
 var mysql = require("mysql");
 var userRoutes = require("./routes/user.route");
+var sqlRoutes = require("./routes/sql.route");
 // we create a new server with this command:
 var app = new express();
 
@@ -64,18 +65,22 @@ router.get("*", function (reject, response) {
 
 // gloueing together that's is coming from routes file, the beginning of url will be /api/users
 app.use("/api/users", userRoutes);
+app.use("/api/sql", sqlRoutes);
 // our app will use the router in all the cases that will be performed. First argument of * means in what case (wild card value)
 app.use(router);
 
 // we need to create a new database connection, trigger it and allow it to be used
+
 var db = mysql.createConnection({
-  // all of us will connect to the same database, each of us will create separate database table and store the data there
   host: "104.248.125.41",
   user: "user-she-goes-tech",
   password: "password-she-goes-tech",
   database: "she-goes-tech",
 });
 
+// all of us will connect to the same database, each of us will create separate database table and store the data there. We find the correct door and key
+
+// Unlocking the door
 db.connect(function (error) {
   if (error) {
     console.log(error);
@@ -84,7 +89,7 @@ db.connect(function (error) {
   }
 });
 
-// we start our server. function is for what we will do once successful
+// we start our server. function is for what we will do once successful. We specify the port of 8002
 app.listen(8002, function () {
   // now console will be the terminal, not the browser as before
   console.log("Served is up on http://localhost:8002");
