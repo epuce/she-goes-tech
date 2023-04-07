@@ -7,7 +7,7 @@ router.get('', function(request, response) {
         first_name VARCHAR(255),
         email VARCHAR(255),
         id INT NOT NULL AUTO_INCREMENT,
-        PRIMARY KEY (id)
+        PRIMARY KEY(id)
     )`
 
     var sql = `ALTER TABLE \`KristePe-users\` ADD (
