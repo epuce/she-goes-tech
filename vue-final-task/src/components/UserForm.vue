@@ -1,34 +1,117 @@
+<!-- CSS OK -->
+
 <template>
-  <div class="user-form-container" >
-    <UserNameFormField/>
-    <EmailFormField/>
-    <CheckboxFormField/>
+  <div class="user-form">
+    <div class="username-form-field">
+      <label for="username-form-field" class="username-form-field_label"
+        >Username</label
+      >
+      <input
+        name="username"
+        type="text"
+        class="username-form-field_input"
+        v-model="nameInput"
+      />
+    </div>
+    <div class="email-form-field">
+      <label for="email" class="email-form-field_label">Email</label>
+      <br />
+      <input name="email" type="text" class="email-form-field_input" />
+    </div>
+    <div class="checkbox-form-field">
+      <input
+        name="checkbox"
+        type="checkbox"
+        class="checkbox-form-field_input"
+        v-model="agreeToSpecialDeals"
+      />
+      <label for="checkbox" class="checkbox-form-field_label"
+        >Send me special deals</label
+      >
+      <br />
+      <transition name="fade">
+        <div class="select-form-field" v-if="agreeToSpecialDeals">
+          <label for="select" class="select-form-field_label"
+            >I'm willing to receive them every:</label
+          >
+          <select name="select" type="select" class="select-form-field_input">
+            <option value="hour">Hour</option>
+            <option value="Day">Day</option>
+            <option value="Week">Week</option>
+            <option value="Month">Month</option>
+          </select>
+        </div>
+      </transition>
+    </div>
+
+    <SubscribeBtn />
   </div>
 </template>
+
 <script>
-import { defineComponent } from "vue";
-import UserNameFormField from "./UserNameFormField.vue";
-import EmailFormField from "./EmailFormField.vue";
-import CheckboxFormField from "./CheckboxFormField.vue"
+import { defineComponent, ref } from "vue";
+import SubscribeBtn from "./SubscribeBtn.vue";
+
 export default defineComponent({
-    components: {
-    UserNameFormField,
-    EmailFormField,
-    CheckboxFormField
-}
+  components: {
+    SubscribeBtn,
+  },
+
+  setup() {
+    var nameInput = ref("");
+    var agreeToSpecialDeals = ref(false);
+
+    return {
+      nameInput,
+      agreeToSpecialDeals,
+    };
+  },
 });
 </script>
+
 <style>
-.user-form-container {
-  max-width: 220px;
-  min-width: 220px;
-  height: 100%;
-  background-color: #7e7b7b;
-  margin-left: -220px;
-  transition: margin-left 1s ease-in-out;
-  padding: 10px;
+.username-form-field_label,
+.email-form-field_label,
+.checkbox-form-field_label,
+.select-form-field_label {
+  color: white;
+  font-family: sans-serif;
+  font-size: small;
+}
+
+.username-form-field_input,
+.email-form-field_input,
+.select-form-field_input {
+  border-radius: 5px;
+  border: transparent;
+  width: 100%;
   box-sizing: border-box;
 }
 
+.email-form-field,
+.checkbox-form-field,
+.select-form-field {
+  margin-top: 10px;
+}
 
+.checkbox-form-field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.checkbox-form-field_input {
+  border-radius: 5px;
+  border: transparent;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

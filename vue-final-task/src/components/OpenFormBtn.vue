@@ -1,15 +1,22 @@
+<!-- CSS AND JS OK, DONE -->
+
 <template>
   <div>
     <button
       type="button"
-      class="open-form__btn"
+      class="open-form-btn"
       @click="openForm"
-      :class="isFormOpen ? 'open-form__btn--opened' : ''"
+      :class="isFormOpen ? 'open-form-btn--opened' : ''"
     >
-      <span class="button-txt">{{ openFormBtn }}</span>
+      <span 
+        class="open-form-btn__txt"
+      >
+        {{ openFormBtn }}
+      </span>
     </button>
   </div>
 </template>
+
 <script>
 import { defineComponent, ref } from "vue";
 
@@ -35,8 +42,9 @@ export default defineComponent({
   },
 });
 </script>
+
 <style>
-.open-form__btn {
+.open-form-btn {
   background-color: darkred;
   position: fixed;
   width: 30px;
@@ -52,16 +60,14 @@ export default defineComponent({
   transition: left 1s ease-in-out;
 }
 
-.open-form__btn--opened {
-  position: fixed;
+.open-form-btn--opened {
   left: 220px;
 }
 
-.button-txt {
+.open-form-btn__txt {
   transform: rotate(90deg);
   white-space: nowrap;
   font-weight: 700;
-  left: 0px;
   transition: left 1s ease-in-out;
 }
 </style>
