@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.popup-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background: rgba(101, 101, 101, 0.4)
+}
+
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 20%;
+    transform: translate(55%, 100%);
+    box-shadow: 0px 5px 12px #b2b0b0;
+}
+
+.close-button {
+    display: block;
+
+}
+
+.user-name {
+    display: block;
+    padding: 4px;
+    text-decoration: solid;
+}
+
+/*.popup-container {
+    display: none;
+}
+*/
+
+.hidePopup {
+    display: none;
+};
+
+.validation-error {
+    border: red solid;
+
+}
