@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p class="js-first-paragraph"></p>
+    <button class="js-save" onclick="changeParagraph()">Click</button>
+    <button class="js-reset" onclick="resetParagraph()">Reset</button>
+
+    <ul class="js-list">
+      <li>Vienas</li>
+      <li>Du</li>
+      <li>Trys</li>
+    </ul>
+    <input class="js-input" />
+    <script>
+      console.log(window.location.hostname);
+
+      localStorage.userName = "k.ms";
+      console.log(localStorage.userName);
+
+      localStorage.toDoList = JSON.stringify(["Sleep", "Walk", "Eat"]);
+      console.log(JSON.parse(localStorage.toDoList));
+
+      let listNumbers = document.querySelectorAll(".js-list li");
+      listNumbers.forEach(function (listElements) {
+        listElements.classList.add("random-numbers");
+      });
+
+      const firstParagraph = document.querySelector(".js-first-paragraph");
+      const text = "Hello, World!";
+      function changeParagraph() {
+        firstParagraph.innerHTML = text;
+      }
+
+      function resetParagraph() {
+        firstParagraph.innerHTML = "";
+      }
+
+      document
+        .querySelector(".js-input")
+        .addEventListener("focus", function (event) {
+          console.log("Click");
+        });
+
+      document.querySelector(".js-input").addEventListener("blur", function () {
+        console.log("Blur");
+      });
+    </script>
+  </body>
+</html>
