@@ -1,23 +1,23 @@
-const express = require('express');
-const mysql = require('mysql');
-const cors = require('cors');
-const userRoutes = require('./routes/user.route');
+var express = require('express');
+var mysql = require('mysql');
+var cors = require('cors');
+var userRoutes = require('./routes/user.route');
 
-const app = new express();
+var app = new express();
 app.use(express.json())
-app.use(cors());
+// app.use(cors());
 
-const router = express.Router();
+var router = express.Router();
 
-router.get('', (reject, response) => {
+router.get('*', function(reject, response) {
     console.log('Response was sent to the browser');
-    response.send("Requested route does not exist");
+    response.send("You accessed the node server");
 })
 
 app.use('/api/users', userRoutes);
-app.use('*', router);
+app.use(router);
 
-const db = mysql.createConnection({
+var db = mysql.createConnection({
     host: '104.248.125.41',
     user: 'user-she-goes-tech',
     password: 'password-she-goes-tech',
@@ -26,7 +26,7 @@ const db = mysql.createConnection({
 
 db.connect((error) => {
     if (error) {
-        throw error;
+        console.log(error);
     } else {
         console.log("Connected to database")
     }
