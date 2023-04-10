@@ -33,9 +33,14 @@
                         <label>Email</label>
                         <input>
                         <div class="subscriptionRow">
-                        <label>Subscribe</label>
-                        <input type="checkbox" class="checkbox">
+                        <CheckBox label="Subscribe" value="foo" v-model="MySelectedValues" />
                         </div>
+                        <VueDropdown class="my-dropdown-toggle"
+                            :options="arrayOfObjects" 
+                            :selected="object" 
+                            v-on:updateOption="methodToRunOnSelect" 
+                            :placeholder="'Select an Item'"
+                            :closeOnOutsideClick="boolean">></VueDropdown>
                     </div>
                     <div class="footer">
                         <button class="buttonSubscribe">Submit</button>
@@ -47,11 +52,47 @@
 
 <script>
 import { defineComponent } from 'vue';
+import CheckBox from './CheckBox.vue';
+import VueDropdown from './VueDropdown';
 
-export default defineComponent({})
+export default defineComponent ({
+    data() {
+          return {
+            arrayOfObjects: [""],
+            object: {
+              name: 'How often do you want to receive news?',
+            }
+          }
+        },
+
+    components: {
+        CheckBox,
+        VueDropdown
+    },
+
+    methods: {
+          methodToRunOnSelect(payload) {
+            this.object = payload;
+          }
+        }
+})
 </script>
 
 <style>
+.my-dropdown-toggle {
+  border-radius: 5px;
+}
+
+::v-deep .dropdown-toggle {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+  }
+
+::v-deep .dropdown-toggle-placeholder {
+    color: rgba(252,162,110,0.5);
+  }
+
 .subscribeWindow {
     color:azure;
     width: 650px;
@@ -133,6 +174,20 @@ export default defineComponent({})
 .subscriptionRow {
     text-align: left;
 }
+
+.subscriptionRow input {
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: none;
+    border-color: #FCA26E;
+}
+
+.checkmark {
+  
+}
+
 
 .checkbox {
     height: 15px;

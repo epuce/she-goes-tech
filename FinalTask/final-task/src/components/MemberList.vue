@@ -29,10 +29,10 @@ export default defineComponent({})
 </script>
 <style>
 .tableMembers {
-    width: 900px;
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 15%;
+    right: 15%
     }
 
 table {        
