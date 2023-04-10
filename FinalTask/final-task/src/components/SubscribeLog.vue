@@ -1,5 +1,5 @@
 <template>
-        <div class="subscribeWindow">
+        <div class="subscribeWindow" :style="{ display: showDiv1 ? 'block' : 'none' }">
             <div>
                 <div class="header">
                     <div>
@@ -9,11 +9,11 @@
                     </div>
                 </div>
                 <div class="footer">
-                    <button class="buttonSubscribe">Subscribe</button>
+                    <button class="buttonSubscribe" @click="toggleDivs">Subscribe</button>
                 </div>
             </div>
         </div>
-        <div class="formWindow">
+        <div class="formWindow" :style="{ display: showDiv2 ? 'block' : 'none' }">
             <div class="columnLeft">
                 <div class="header">
                     <div>
@@ -61,7 +61,9 @@ export default defineComponent ({
             arrayOfObjects: [""],
             object: {
               name: 'How often do you want to receive news?',
-            }
+            },
+            showDiv1: true,
+            showDiv2: false
           }
         },
 
@@ -71,9 +73,13 @@ export default defineComponent ({
     },
 
     methods: {
-          methodToRunOnSelect(payload) {
-            this.object = payload;
-          }
+            methodToRunOnSelect(payload) {
+                this.object = payload;
+            },
+            toggleDivs() {
+                this.showDiv1 = !this.showDiv1
+                this.showDiv2 = !this.showDiv2
+            }
         }
 })
 </script>
@@ -106,7 +112,7 @@ export default defineComponent ({
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    display: none;
+    display: block;
 }
 
 .formWindow {
@@ -121,7 +127,7 @@ export default defineComponent ({
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    display: block;
+    display: none;
     
 }
 
