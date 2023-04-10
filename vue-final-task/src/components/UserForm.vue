@@ -44,22 +44,25 @@
       </transition>
     </div>
 
-    <SubscribeBtn />
+    
+    
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import SubscribeBtn from "./SubscribeBtn.vue";
+
 
 export default defineComponent({
   components: {
-    SubscribeBtn,
-  },
+    
+},
 
   setup() {
     var nameInput = ref("");
     var agreeToSpecialDeals = ref(false);
+
+    
 
     return {
       nameInput,

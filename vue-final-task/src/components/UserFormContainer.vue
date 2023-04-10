@@ -1,18 +1,52 @@
-<!-- CSS AND JS OK, DONE -->
-
 <template>
-  <div class="user-form-container">
+  <div
+    class="user-form-container"
+    :class="isFormOpen ? 'user-form--opened' : ''"
+    @close-form="isFormOpen=!isFormOpen"
+  >
     <UserForm />
+    <SubscribeBtn @click="showPopup()"/>
+    <button
+      type="button"
+      class="open-form-btn"
+      @click="openForm()"
+      :class="isFormOpen ? 'open-form-btn--opened' : ''"
+    >
+      <span class="open-form-btn__txt"> Open Form </span>
+    </button>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref, defineExpose } from "vue";
 import UserForm from "./UserForm.vue";
+import SubscribeBtn from "./SubscribeBtn.vue"
 
 export default defineComponent({
   components: {
     UserForm,
+    SubscribeBtn
+  },
+
+  setup(props, {emit}) {
+    var isFormOpen = ref(false);
+
+    function openForm(){
+      isFormOpen.value=!isFormOpen.value
+    }
+
+    function showPopup () {
+      emit("show-popup")
+    }
+
+    defineExpose({ openForm });
+
+    
+    return {
+      isFormOpen,
+      showPopup,
+      openForm
+    };
   },
 });
 </script>
@@ -26,5 +60,36 @@ export default defineComponent({
   transition: margin-left 1s ease-in-out;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.open-form-btn {
+  background-color: darkred;
+  position: fixed;
+  width: 30px;
+  height: 90px;
+  top: 200px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px darkred;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: left 1s ease-in-out;
+}
+
+.open-form-btn--opened {
+  left: 220px;
+}
+
+.open-form-btn__txt {
+  transform: rotate(90deg);
+  white-space: nowrap;
+  font-weight: 700;
+  transition: left 1s ease-in-out;
+}
+
+.user-form--opened {
+  margin-left: 0;
 }
 </style>
