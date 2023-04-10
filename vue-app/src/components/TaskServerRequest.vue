@@ -1,19 +1,23 @@
 <template>
   <div>
     <div class="col-grid">
-      <figure class="flex-container" v-for="user in users" :key="user.id">
+      <figure
+        class="flex-container"
+        v-for="(user, index) in users"
+        :key="index"
+      >
         <TaskServerRequestPicture
           :picture="user.image"
-          width="300px"
-          height="350px"
-          @click="transform(user.id)"
+          alt="avatar image"
+          @click="transform(index)"
           :class="{
-            'img-transform': buttonTransform,
+            'img-transform': fullWidthImageIndex === index,
           }"
         />
-
-        <p class="name-surname">{{ user.firstname }} {{ user.lastname }}</p>
-        <p class="email">{{ user.email }}</p>
+        <div>
+          <p class="name-surname">{{ user.firstname }} {{ user.lastname }}</p>
+          <p class="email">{{ user.email }}</p>
+        </div>
       </figure>
     </div>
   </div>
@@ -29,29 +33,15 @@ export default defineComponent({
   },
   setup() {
     var users = ref([]);
+    var fullWidthImageIndex = ref(null);
     var buttonTransform = ref(false);
-    var user = ref({
-      id: null,
-    });
 
     var transform = function (userId) {
-      if (buttonTransform.value === false) {
-        fetch("https://reqres.in/api/users/" + userId, {
-          method: "GET",
-        })
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (returnData) {
-            user.value = {
-              id: returnData.data.id,
-            };
-            buttonTransform.value = true;
-          });
+      if (fullWidthImageIndex.value === userId) {
+        fullWidthImageIndex.value = null;
       } else {
-        buttonTransform.value = false;
+        fullWidthImageIndex.value = userId;
       }
-      // buttonTransform.value = false;
     };
 
     fetch("https://fakerapi.it/api/v1/persons", {
@@ -67,6 +57,7 @@ export default defineComponent({
     return {
       users,
       buttonTransform,
+      fullWidthImageIndex,
       transform,
     };
   },
@@ -85,7 +76,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   text-align: start;
+  width: 300px;
+  height: 350px;
 }
+
 p {
   margin: 0;
 }
@@ -93,6 +87,6 @@ p {
   font-weight: 700;
 }
 .img-transform {
-  transform: scale(2);
+  transform: scale(1.2);
 }
 </style>

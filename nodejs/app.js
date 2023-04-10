@@ -1,21 +1,24 @@
 // require is the package which we will use and express is the package which we have to import to our file
 var express = require("express");
 
-//cross-origin sharing.
+//cross-origin resource sharing.
 var cors = require("cors");
 var mysql = require("mysql");
 var userRoutes = require("./routes/user.route");
 var sqlRoutes = require("./routes/sql.route");
+
 // we create a new server with this command:
 var app = new express();
 
+// when we are sending the data back to the server we are using JSON format, alos we are getting the JSON and this is what the below code means
 app.use(express.json());
 
-// this is for security reasons. We want to allow communicate two servers of vue app and nodejs server
+// this is for security reasons. We want to allow communicate two servers of vue app and nodejs server r.g., 8002 port server and 8084 port server
 // app.use(cors);
 
 var router = express.Router();
 
+// to send some data to vue.app
 // router.get("/api/users", function (r, response) {
 //   // to send data back
 //   var users = [
@@ -69,8 +72,7 @@ app.use("/api/sql", sqlRoutes);
 // our app will use the router in all the cases that will be performed. First argument of * means in what case (wild card value)
 app.use(router);
 
-// we need to create a new database connection, trigger it and allow it to be used
-
+// we need to create a new database connection, trigger it and allow it to be used. Finding the right door
 var db = mysql.createConnection({
   host: "104.248.125.41",
   user: "user-she-goes-tech",
@@ -78,7 +80,7 @@ var db = mysql.createConnection({
   database: "she-goes-tech",
 });
 
-// all of us will connect to the same database, each of us will create separate database table and store the data there. We find the correct door and key
+// all of us will connect to the same public database, each of us will create separate database table and store your own data there. We find the correct door and key
 
 // Unlocking the door
 db.connect(function (error) {
@@ -92,7 +94,7 @@ db.connect(function (error) {
 // we start our server. function is for what we will do once successful. We specify the port of 8002
 app.listen(8002, function () {
   // now console will be the terminal, not the browser as before
-  console.log("Served is up on http://localhost:8002");
+  console.log("Server is up on http://localhost:8002");
 });
 
 // this database we created db we are exporting with the same name

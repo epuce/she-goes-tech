@@ -4,12 +4,14 @@ var router = express.Router();
 
 // here we need to specify ids and the methods
 // /api/users-->with GET method
+// to read something
 router.get("", function (_, response) {
   var sql =
     'SELECT id, first_name AS name, CONCAT(first_name, "", last_name) AS full_name FROM `neringa-nedzinskiene`';
   runSql(sql, response);
 });
 // /api/users/:id-->with GET
+// we need request beause we will read an id
 router.get("/:id", function (request, response) {
   var sql =
     "SELECT*FROM `neringa-nedzinskiene-users` where id=" + request.params.id;
@@ -18,6 +20,7 @@ router.get("/:id", function (request, response) {
 });
 
 // /api/users/:id-->DELETE method
+// to delete something
 router.delete("/:id", function (request, response) {
   var sql =
     "DELETE FROM `neringa-nedzinskiene-users` WHERE id=" + request.params.id;
@@ -32,8 +35,9 @@ router.delete("/:id", function (request, response) {
 //       JSON.stringify(request.body)
 //   );
 // });
-// /api/users/:id-->PUT
 
+// /api/users/:id-->PUT
+// to update something
 router.put("/:id", function (request, response) {
   // response.send(
   //   "Will update user with id: " +
@@ -54,7 +58,9 @@ router.put("/:id", function (request, response) {
 
   runSql(sql, response);
 });
+
 // /api/users -> POST
+// to create something
 router.post("", function (request, response) {
   var first_name = request.body.first_name;
   var last_name = request.body.last_name;
