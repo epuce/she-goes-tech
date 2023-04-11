@@ -10,7 +10,9 @@ router.get("", function (request, response) {
   // To add a new column to the table
   var sql = "ALTER TABLE `neringa1991-users` ADD (last_name VARCHAR(255))";
 
-  // app.db means we are reading exported database (it was exported from app.js). Running sql means quering. query() accepts 2 parameter: first is a string which holds sql commands, second is function. We connect to the database and then we run our query
+  var sql =
+    "CREATE TABLE IF NOT EXISTS `neringa1991-comments`(id INT NOT NULL AUTO_INCREMENT, comment VARCHAR(255),user_id VARCHAR(255), PRIMARY KEY (id))";
+
   app.db.query(sql, function (error, data) {
     var responseData = {};
 
