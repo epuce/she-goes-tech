@@ -16,5 +16,5 @@ SELECT * FROM `moharso-comments`
 UPDATE `moharso-comments` SET comment="New comm", user_id="55" WHERE id=1
 
 -- Delete
-DELETE FROM `Comments` WHERE id=3
+DELETE FROM `moharso-comments` WHERE id=3
 
