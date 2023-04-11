@@ -1,20 +1,6 @@
 var express = require('express')
 var router = express.Router()
-var app = require('../app')
-
-function runSql(sql, response){
-    app.db.query(sql, function(error, data){
-        var returnData = {}
-
-        if(error) {
-            returnData.error = error
-        } else {
-            returnData.data = data
-        }
-
-        response.send(JSON.stringify(returnData))
-    })
-}
+var userController = require('../controllers/user.controller')
 
 /*
 we need to create new routes / APIs:
@@ -26,59 +12,27 @@ we need to create new routes / APIs:
 */
 
 // /api/users -> GET
-router.get('', function(_, response){
-    var sql = 'SELECT id, first_name AS name, CONCAT(first_name, " ", last_name) AS full_name FROM `IevaZR-users`'
-    
-    runSql(sql, response)
-})
+//router.get('', function(_, response){
+    // var sql = 'SELECT id, first_name AS name, CONCAT(first_name, " ", last_name) AS full_name FROM `IevaZR-users`'
+    // runSql(sql, response)
+//})
+// we change this function above with this one and moved the above one to user.controller.js
+router.get('', userController.list)
 //we could also use * to return everything available instead of id, first_name AS name, CONCAT(first_name, " ", last_name) AS full_name
 
 // /api/users/:id -> GET
-router.get('/:id', function(request, response){
-    var sql = 'SELECT * FROM `IevaZR-users` WHERE id='+request.params.id
-
-    runSql(sql, response)
-})
+router.get('/:id', userController.findUser)
+// we did the some with this function as with the above function - moved it to user.controller.js
 //the part after the : is dynamic
 
 // /api/users/:id -> DELETE
-router.delete('/:id', function(request, response){
-    var sql = 'DELETE FROM `IevaZR-users` WHERE id='+request.params.id
-    
-    runSql(sql, response)
-})
+router.delete('/:id', userController.delete)
+//the same as above
 
 ///api/users/:id -> PUT
-router.put('/:id', function(request, response){
-    var{first_name, last_name, email} = request.body;
-    
-    var sql = 'UPDATE `IevaZR-users` SET first_name="'+first_name+'", last_name="'+last_name+'", email="'+email+'" WHERE id='+request.params.id
-    runSql(sql, response)
-})
+router.put('/:id', userController.update)
 
 ///api/users -> POST
-router.post('', function(request, response){
-
-    var first_name = request.body.first_name
-    var last_name = request.body.last_name
-    var email = request.body.email
-
-    /*or the same in one line
-    var {first_name, last_name, email} = request.body*/
-
-    var sql = 'INSERT INTO `IevaZR-users` (first_name, last_name, email) VALUES("'+first_name+'", "'+last_name+'", "'+email+'")'
-
-    app.db.query(sql, function(error, data){
-        var returnData = {}
-
-        if(error) {
-            returnData.error = error
-        } else {
-            returnData.data = data
-        }
-
-        response.send(JSON.stringify(returnData))
-    })
-})
+router.post('', userController.save)
 
 module.exports = router

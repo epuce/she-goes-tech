@@ -4,8 +4,8 @@
     :class="isFormOpen ? 'user-form--opened' : ''"
     @close-form="isFormOpen=!isFormOpen"
   >
-    <UserForm />
-    <SubscribeBtn @click="showPopup()"/>
+    <UserForm ref="UserForm"/>
+    <SubscribeBtn @click="saveForm()"/>
     <button
       type="button"
       class="open-form-btn"
@@ -30,22 +30,28 @@ export default defineComponent({
 
   setup(props, {emit}) {
     var isFormOpen = ref(false);
+    var userForm = ref()
 
     function openForm(){
       isFormOpen.value=!isFormOpen.value
     }
 
-    function showPopup () {
+   
+
+    function saveForm () {
+      userForm.value.saveForm()
       emit("show-popup")
     }
 
-    defineExpose({ openForm });
+    defineExpose({ 
+      openForm,
+    });
 
     
     return {
       isFormOpen,
-      showPopup,
-      openForm
+      openForm,
+      saveForm
     };
   },
 });

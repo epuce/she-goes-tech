@@ -16,6 +16,7 @@ var cors = require('cors')
 var mysql = require('mysql')
 /*we import mysql package*/
 var userRoutes = require('./routes/user.route')
+var commentRoutes = require('./routes/comments.route')
 var sqlRoutes = require('./routes/sql.route')
 
 var app = new express()
@@ -72,6 +73,7 @@ router.get('*', function(reject, response){
 /*now if we go to http://localhost:8002/api/users, we see the users object*/
 
 app.use('/api/users', userRoutes)
+app.use('/api/comments', commentRoutes)
 app.use('/api/sql', sqlRoutes)
 /*we specify where we will use router. in app we will use router in all calls that will be perfomed*/
 app.use(router)

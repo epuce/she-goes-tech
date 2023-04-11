@@ -16,7 +16,12 @@
     <div class="email-form-field">
       <label for="email" class="email-form-field_label">Email</label>
       <br />
-      <input name="email" type="text" class="email-form-field_input" />
+      <input
+        name="email"
+        type="text"
+        class="email-form-field_input"
+        v-model="nameInput"
+      />
     </div>
     <div class="checkbox-form-field">
       <input
@@ -43,30 +48,55 @@
         </div>
       </transition>
     </div>
-
-    
-    
   </div>
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-
+import { defineComponent, ref, defineExpose } from "vue";
 
 export default defineComponent({
-  components: {
-    
-},
+  components: {},
 
   setup() {
     var nameInput = ref("");
+    var emailInput = ref("");
     var agreeToSpecialDeals = ref(false);
+    var isFormValid = ref(true);
+    var emailRegEx =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    
+    function saveForm() {
+      if (nameInput.value.length < 3) {
+        isFormValid.value = false;
+      } else {
+        isFormValid.value = true;
+      }
+
+      if (!emailRegEx.test(emailInput.value)) {
+        isFormValid.value = false;
+      } else {
+        isFormValid.value = true;
+      }
+
+      if (isFormValid.value) {
+        var user = {
+          name: nameInput.value,
+          email: emailInput.value,
+        };
+        return user;
+      }
+    }
+
+    defineExpose({ 
+      saveForm
+    })
 
     return {
       nameInput,
+      emailInput,
       agreeToSpecialDeals,
+      isFormValid,
+      saveForm,
     };
   },
 });
