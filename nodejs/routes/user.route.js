@@ -57,14 +57,7 @@ router.post('', (request, response)=>{
 
     var sql = `INSERT INTO \`VaidaLinkuviene-users\` (first_name, last_name, email)   VALUES(" `+first_name+`", "`+last_name+`", "`+email+`")`
 
-    app.db.query(sql, (error, data)=>{
-        var returnData ={}
-        if(error){
-        }else{
-            returnData.data = data
-        }
-        response.send(JSON.stringify(returnData))
-    })
+   runSql(sql, response)
 
 })
 
