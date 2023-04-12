@@ -3,6 +3,7 @@ var app = new express();
 var cors = require('cors');
 var mysql = require('mysql');
 var userRoutes = require('./routes/user.route');
+var commentRoutes = require('./routes/comment.route');
 var sqlRoutes = require('./routes/sql.route');
 
 app.use(express.json());
@@ -17,6 +18,7 @@ router.get('*', (reject, response) =>{
 
 app.use('/api/users', userRoutes);
 app.use('/api/sql', sqlRoutes);
+app.use('/api/comments', commentRoutes);
 app.use(router);
 
 
