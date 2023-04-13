@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var app = require('../app')
 
+
 router.get('', function(request, response) {
     var sql = `CREATE TABLE IF NOT EXISTS \`KristePe-users\` (
         first_name VARCHAR(255),
@@ -14,9 +15,6 @@ router.get('', function(request, response) {
     //     last_name VARCHAR(255)
     // )`
 
-    var sql = `SELECT * FROM KristePe-comments`;
-
-    var sql = `DELETE FROM KristePe-comments`;
 
     var sql = `CREATE TABLE IF NOT EXISTS \`KristePe-comments\` (
         comment VARCHAR(255),
@@ -24,6 +22,8 @@ router.get('', function(request, response) {
         id INT NOT NULL AUTO_INCREMENT,
         PRIMARY KEY(id)
     )`
+
+    var sql = `ALTER TABLE \`KristePe-comments\` MODIFY COLUMN user_id INT NOT NULL`
 
     var sql = `INSERT INTO \`KristePe-comments\` (user_id, comment)
     VALUES
