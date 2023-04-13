@@ -40,9 +40,13 @@ export default defineComponent({
     setup(props) {
         var searchInput = ref('')
         var tmpUsers = ref(props.users.map(function(user) {
-            user.isDisplayed = true
+            // user.isDisplayed = true
+            // return user
 
-            return user
+            return {
+                ...user,
+                isDisplayed: true,
+            }
         }))
 
         var onUserClick = function(index) {
