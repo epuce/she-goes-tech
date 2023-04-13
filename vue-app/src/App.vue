@@ -19,21 +19,24 @@
 
     <!-- this part will be updated when we navigate between one and another. These are <a> tags within view -->
     <!-- <router-view></router-view> -->
-    <UserView />
-    <TaskServerRequest />
+    <!-- <UserView />
+    <TaskServerRequest /> -->
+    <UserCommentsView />
   </div>
 </template>
 
 <script>
-// import UserSelect from "./components/UserSelect/UserSelect.vue";
-import UserView from "./components/UserView.vue";
-import TaskServerRequest from "./components/TaskServerRequest.vue";
+// // import UserSelect from "./components/UserSelect/UserSelect.vue";
+// import UserView from "./components/UserView.vue";
+// import TaskServerRequest from "./components/TaskServerRequest.vue";
+import UserCommentsView from "./components/UserCommentsView.vue";
 export default {
   name: "App",
   components: {
-    // UserSelect,
-    UserView,
-    TaskServerRequest,
+    UserCommentsView,
+    // // UserSelect,
+    // UserView,
+    // TaskServerRequest,
     // MainView,
   }, //it means that "hey, we will use it by adding it under components"
 
@@ -101,12 +104,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0;
 }
 </style>

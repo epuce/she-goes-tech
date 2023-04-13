@@ -64,6 +64,19 @@ export default defineComponent({
     // when the response is received, we do something with it. We convert response to object
 
     //we get information for only one specific user
+    // ES6 script
+    // var fillForm = async (userId) => {
+    //   var response = await fetch("https://reqres.in/api/users/" + userId, {
+    //     method: "GET",
+    //   });
+    //   let returnValue = await response.json();
+
+    //   user.value = {
+    //     name: returnData.data.first_name,
+    //     id: returnData.data.id,
+    //   };
+    // };
+
     var fillForm = function (userId) {
       fetch("https://reqres.in/api/users/" + userId, {
         method: "GET",

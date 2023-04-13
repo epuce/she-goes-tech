@@ -10,8 +10,46 @@ router.get("", function (request, response) {
   // To add a new column to the table
   var sql = "ALTER TABLE `neringa1991-users` ADD (last_name VARCHAR(255))";
 
+  // -- Create a comments table that has 3 columns: id comment user_id. Make ID column as the primary column that auto increments
   var sql =
     "CREATE TABLE IF NOT EXISTS `neringa1991-comments`(id INT NOT NULL AUTO_INCREMENT, comment VARCHAR(255),user_id VARCHAR(255), PRIMARY KEY (id))";
+
+  var sql = "ALTER TABLE `neringa1991-comments` MODIFY COLUMN comment TEXT";
+
+  // changed values to null
+  var sql = "UPDATE `neringa1991-comments` SET user_id=NULL";
+
+  var sql = "ALTER TABLE `neringa1991-comments` MODIFY COLUMN user_id INT";
+
+  // // Insert 3 rows into the newly created table
+  // var sql = `INSERT INTO \`neringa1991-comments\`
+  //       (comment, user_id)
+  //       VALUES("NICE WORK","jiMMY__EE")
+  //   `;
+  // var sql = `INSERT INTO \`neringa1991-comments\`
+  //       (comment, user_id)
+  //       VALUES("SQL is not that easy","not_a_fan")
+  //   `;
+  // var sql = `INSERT INTO \`neringa1991-comments\`
+  //       (comment, user_id)
+  //       VALUES("SQL is nice","user_name")
+  //   `;
+  // var sql = `INSERT INTO \`neringa1991-comments\`
+  //       (comment, user_id)
+  //       VALUES("SQL is nice!!!",1), ("Ok!!!",2)
+  //   `;
+
+  // // // Retrieve the newly created rows
+  // var sql = "SELECT * FROM `neringa1991-comments`";
+
+  // // // -- Update an existing row
+  // var sql = `UPDATE \`neringa1991-comments\`
+  //   SET comment="HELLO, WORLD!", user_id=1
+  //   WHERE id=8`;
+
+  // // // -- Delete an existing row
+  // var sql = "DELETE FROM `neringa1991-comments` WHERE id=4";
+  // var sql = "SELECT * FROM `neringa1991-comments`";
 
   app.db.query(sql, function (error, data) {
     var responseData = {};
