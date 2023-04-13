@@ -41,6 +41,8 @@ router.get('', function(request, response) {
 
     var sql = 'DELETE FROM `edmunds.puce-comments` WHERE id=1'
 
+    var sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'edmunds.puce-users'"
+
     app.db.query(sql, function(error, data) {
         var responseData = {}
 
