@@ -1,53 +1,39 @@
 
 // Create table
 
-var sql = `CREATE TABLE IF NOT EXISTS \`viola.pumpure-comments\` (
+CREATE TABLE IF NOT EXISTS `viola.pumpure-comments` (
+        
+        comment TEXT(255),
+        user_id INT(255),
         id INT NOT NULL AUTO_INCREMENT,
-        comment VARCHAR(255),
-        user_id VARCHAR(255),
         PRIMARY KEY (id)
-        )`;
+        )
+
 
 // Insert row
 
-var sql =
-    `INSERT INTO \`viola.pumpure-comments\`
-            (comment, user_id)
-            VALUES(
-                "` +
-    comment +
-    `",
-                "` +
-    user_id +
-    `")
-                `;
+INSERT INTO `viola.pumpure-comments`
+          (user_id, comment)
+          VALUES (1, "this is the first comment"), 
+            (2, "the second comment"), 
+            (1, "third comment")
+              
 
 // Retrieve rows
 
-router.get(" ", function (_, response) {
-  var sql = "SELECT * FROM `viola.pumpure-comments`";
 
-  runSql(sql, response);
-});
+  SELECT * FROM `viola.pumpure-comments`
+
 
 // Update row
 
-router.put("/:id", function (request, response) {
-  var { comments, user_id } = request.body;
-  var sql = "UPDATE `viola.pumpure-comments` SET comment='" +
-      comment +
-      "', user_id='" +
-      user_id +
-      "' WHERE id=" +
-      request.params.id;
-  
-    runSql(sql, response);
-  });
+ UPDATE `viola.pumpure-comments`
+              SET comment="The updated comment"
+              WHERE user_id=1
+              
+
 
 // Delete row
 
-router.delete("/:id", function (request, response) {
-  var sql =
-    "DELETE FROM `viola.pumpure-comments` WHERE id=" + request.params.id;
-  runSql(sql, response);
-});
+  DELETE FROM `viola.pumpure-comments` WHERE id=1
+
