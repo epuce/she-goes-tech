@@ -13,7 +13,9 @@
 
   <!-- <UsersView /> -->
 
-  <TaskServerRequest />
+  <!-- <TaskServerRequest /> -->
+
+  <UserCommentsView />
 
 </div>
 </template>
@@ -22,15 +24,14 @@
 // import MainView from './components/MainView.vue'
 // import UserSelect from './components/UserSelect/UserSelect.vue'
 // import UsersView from './components/UsersView.vue';
-import TaskServerRequest from './components/TaskServerRequest.vue'
+// import TaskServerRequest from './components/TaskServerRequest.vue'
+
+import UserCommentsView from './components/UserCommentsView.vue';
 
 export default {
   name: 'App',
   components: {
-    // MainView,
-    // UserSelect
-    // UsersView,
-    TaskServerRequest
+    UserCommentsView
 },
 
 
@@ -93,12 +94,8 @@ data() {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0
 }
+
 </style>
