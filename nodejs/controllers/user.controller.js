@@ -13,7 +13,7 @@ function runSql(sql, response){
 }
 
 exports.list = (request, response) =>{
-    var sql = 'SELECT id, first_name AS name, CONCAT(first_name, " ", last_name) AS full_name FROM `VaidaLinkuviene-users`'
+    var sql = 'SELECT * FROM `VaidaLinkuviene-users`'
     runSql(sql, response)
 }
 

@@ -7,7 +7,9 @@ var commentRoutes = require('./routes/comment.route');
 var sqlRoutes = require('./routes/sql.route');
 
 app.use(express.json());
-// app.use(cors);
+app.use(cors({
+    origin:'http://localhost:8080'
+}));
 
 var router = express.Router()
 

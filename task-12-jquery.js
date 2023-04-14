@@ -27,12 +27,11 @@ $(function () {
 
 closeClick();
 
-const closeKey=()=>{
-  closeBtn.keyup(function(event){
-    if(event.which===27){
+
+  $('body').on('keyup',function(event){
+    if(event.keycode===27){
         closeClick();
     }
 })
-  }
-  closeKey();
+
 });
