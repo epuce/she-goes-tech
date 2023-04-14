@@ -1,26 +1,21 @@
 <template>
-        <div class="subscribeWindow" :style="{ display: showDiv1 ? 'block' : 'none' }">
-            <div>
-                <div class="header">
-                    <div>
-                    <h1>Welcome!</h1>
-                    <p>To keep connected with us <br />
-                    please fill out the form!</p>
-                    </div>
-                </div>
-                <div class="footer">
-                    <button class="buttonSubscribe" @click="toggleDivs">Subscribe</button>
-                </div>
-            </div>
-        </div>
-        <div class="formWindow" :style="{ display: showDiv2 ? 'block' : 'none' }">
-            <div class="columnLeft">
+        <div class="subscribeWindowWrapper">
+            <div class="subscribeWindow" id="myDiv">
                 <div class="header">
                     <div>
                     <h3>Welcome!</h3>
                     <p>To keep connected with us <br />
                     please fill out the form!</p>
                     </div>
+                </div>
+                <div class="footer">
+                    <button class="buttonSubscribe" @click="toggleDivs" :style="{ display: showDiv1 ? 'block' : 'none' }">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="formWindow" id="formWindow" :style="{ display: showDiv2 ? 'block' : 'none' }">
+            <div class="columnLeft">
+                <div class="header">
                 </div>
                 <div class="footer">
                 </div>
@@ -39,8 +34,8 @@
                             :options="arrayOfObjects" 
                             :selected="object" 
                             v-on:updateOption="methodToRunOnSelect" 
-                            :placeholder="'Select an Item'"
-                            :closeOnOutsideClick="boolean">></VueDropdown>
+                            :placeholder="'jkjk'"
+                            :closeOnOutsideClick="boolean"></VueDropdown>
                     </div>
                     <div class="footer">
                         <button class="buttonSubscribe">Submit</button>
@@ -54,7 +49,6 @@
 import { defineComponent } from 'vue';
 import CheckBox from './CheckBox.vue';
 import VueDropdown from './VueDropdown';
-
 export default defineComponent ({
     data() {
           return {
@@ -66,12 +60,10 @@ export default defineComponent ({
             showDiv2: false
           }
         },
-
     components: {
         CheckBox,
         VueDropdown
     },
-
     methods: {
             methodToRunOnSelect(payload) {
                 this.object = payload;
@@ -79,8 +71,15 @@ export default defineComponent ({
             toggleDivs() {
                 this.showDiv1 = !this.showDiv1
                 this.showDiv2 = !this.showDiv2
-            }
-        }
+
+                const element = document.getElementById('myDiv');
+                element.classList.add('subscribeWindowTwo');
+
+                const formWindow = document.getElementById('formWindow');
+                formWindow.classList.add('formWindowTwo');
+            },
+           
+}
 })
 </script>
 
@@ -102,17 +101,24 @@ export default defineComponent ({
 .subscribeWindow {
     color:azure;
     width: 650px;
-    height: 400px;
+    margin-left: 0;
     background-color: rgba(24, 37, 37, 0.9);
     border-radius: 30px;
     box-shadow: 10px 25px 30px rgba(24,37,37,0.8);
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     display: block;
+    float: left;
+    transition: width 0.5s linear, margin-left 0.5s linear;
+}
+
+.subscribeWindowTwo {
+    width: 226px;
+    margin-left: -212px;
+    border-radius: 30px 0px 0px 30px;
 }
 
 .formWindow {
@@ -127,31 +133,34 @@ export default defineComponent ({
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    display: none;
+    opacity: 0;
     
+    transition: opacity 2s ease;
+    transition-delay: 1s;
+}
+
+.formWindowTwo {
+    opacity: 1;
 }
 
 .columnLeft {
     float: left;
-    width: 35%;
-    background-color: rgba(24, 37, 37, 0.9);
+    width: 226px;
+    background-color: none;
     border-radius: 30px 0px 0px 30px;
 }
-
 .columnRight {
     float: right;
-    width: 65%;
+    width: 424px;
     background-color: rgba(24, 37, 37, 0.4);
     border-radius: 0px 30px 30px 0px;
 }
-
 .header {
     height: 320px;
     display: flex; 
     justify-content: center;
     align-items: center;
 }
-
 .headerForm {
     height: 240px;
     display: flex;
@@ -161,7 +170,6 @@ export default defineComponent ({
     padding-left: 40px;
     padding-right: 40px;
 }
-
 .headerForm input {
     background: none;
     border: none;
@@ -170,17 +178,14 @@ export default defineComponent ({
     margin-bottom: 20px;
     color: azure;
 }
-
 .headerForm label {
     text-align: left;
     font-weight: 500;
     font-size: large;
 }
-
 .subscriptionRow {
     text-align: left;
 }
-
 .subscriptionRow input {
     top: 0;
     left: 0;
@@ -189,30 +194,24 @@ export default defineComponent ({
     background-color: none;
     border-color: #FCA26E;
 }
-
 .checkmark {
   
 }
-
-
 .checkbox {
     height: 15px;
     width: 15px;
     background-color: none;
 }
-
 h1 {
     margin: 0;
     font-size: 50px;
 }
-
 .footer {
     height: 80px;
     justify-content: center;
     align-items: flex-end;
     display: flex;
 }
-
 .buttonSubscribe {
     padding: 10px 25px 10px 25px;
     border-radius: 25px;
@@ -225,11 +224,9 @@ h1 {
     margin-bottom: 20px;
     box-shadow: 0 0 5px #FCA26E;
 }
-
 .buttonSubscribe:hover {
     color: white;
     background: #FCA26E;
 }
-
     
 </style>
