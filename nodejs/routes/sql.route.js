@@ -9,18 +9,32 @@ router.get('', function (request, response) {
         last_name VARCHAR(255)
     )`
 
-    var sql = 'CREATE TABLE IF NOT EXISTS `buraityte-comments` (id INT NOT NULL AUTO_INCREMENT, comment TEXT, user_id INT, PRIMARY KEY (id))'
+    // var sql = 'CREATE TABLE IF NOT EXISTS `buraityte-comments` (id INT NOT NULL AUTO_INCREMENT, comment TEXT, user_id INT, PRIMARY KEY (id))'
 
-    var sql = 'INSERT INTO `buraityte-comments` (user_id, comment) VALUES (1, "Comment one")';
-    var sql = 'INSERT INTO `buraityte-comments` (user_id, comment)  VALUES (2, "Comment two")';
-    var sql = 'INSERT INTO `buraityte-comments` (user_id, comment)  VALUES (3, "Comment three")';
-  
-    // could also do "INSERT INTO comments (user_id, comment) VALUES (1, 'Comment 1'), (2,'Comment 2'), (3, 'Comment 3')";
-    var sql ='SELECT * FROM buraityte-comments';
 
-    var sql = 'UPDATE `buraityte-comments` SET comment="New value" WHERE user_id=1'
+    var sql = `CREATE TABLE IF NOT EXISTS \`buraityte-comments\` (
+        comment TEXT,
+        user_id INT,
+        id INT NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (id)
+    )`
 
-    var sql= 'DELETE FROM `buraityte-comments` WHERE id= 1';
+
+    var sql = `INSERT INTO \`buraityte-comments\` (user_id, comment)
+        VALUES
+        (1, "Yea this is a cool comment"),
+        (1, "Some other comment"),
+        (2, "User two comment")
+    `
+
+    var sql = 'SELECT * FROM `buraityte-comments`'
+
+    // var sql = `UPDATE \`buraityte-comments\`
+    //     SET comment="Some new value"
+    //     WHERE user_id=1
+    // `
+
+    // var sql = 'DELETE FROM `buraityte-comments` WHERE id=1'
 
     app.db.query(sql, function(error, data) {
         var responseData = {}
@@ -35,5 +49,4 @@ router.get('', function (request, response) {
     })    
 })
 
-// if we want to make sql multiline, we use `` instead of ''
-module.exports = router; 
+module.exports = router;

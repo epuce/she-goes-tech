@@ -7,7 +7,9 @@ var sqlRoutes = require('./routes/sql.route')
 
 var app = new express()
 app.use(express.json())
-// app.use(cors)
+app.use(cors ({
+    origin: 'http://localhost:8080'
+}))
 // cors is used for security reasons. When someone is asking for data from a different server, then this allows to reach data
 
 var router = express.Router()

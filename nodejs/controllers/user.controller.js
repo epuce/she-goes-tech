@@ -15,7 +15,7 @@ function runSql(sql, response) {
 }
 
 exports.list = function(request, response) {
-    var sql = 'SELECT id, first_name AS name, CONCAT(first_name, " ", last_name) AS full_name FROM `buraityte-users`'
+    var sql = 'SELECT * FROM `buraityte-users`'
 
     runSql(sql, response)
 }
@@ -54,11 +54,9 @@ exports.update = function(request, response) {
 }
 
 exports.save = function(request, response) {
-    var fist_name = request.body.first_name
-    var last_name = request.body.last_name
-    var email = request.body.email
+     var {first_name, last_name, email} = request.body;
 
-    var {first_name, last_name, email} = request.body;
+     response.send(request.body)
 
     var sql = `
         INSERT INTO \`buraityte-users\`

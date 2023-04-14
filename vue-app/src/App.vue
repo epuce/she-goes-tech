@@ -4,17 +4,15 @@
     <!-- <MainView heading="This also works"/> -->
     <!-- <MainView/> -->
     <!-- <UserSelect :users="userList"/> -->
-
     <!-- <router-link to="/" >Main</router-link> -->
     <!-- <br /> -->
     <!-- <router-link to="/list" >List</router-link> -->
     <!-- <br /> -->
     <!-- <router-link to="/something" >Something</router-link> -->
-
     <!-- <router-view></router-view> -->
-
     <!-- <UserView /> -->
-    <TaskServerRequest />
+    <!-- <TaskServerRequest /> -->
+    <UserCommentsView />
   </div>
 </template>
 
@@ -24,14 +22,14 @@
 // import MainView from './components/MainView.vue'
 // import UserSelect from './components/UserSelect/UserSelect.vue'
 // import UserView from './components/UserView.vue';
-import TaskServerRequest from './components/TaskServerRequest.vue';
+
+import UserCommentsView from './components/UserCommentsView.vue';
+
+// import TaskServerRequest from './components/TaskServerRequest.vue';
 export default {
   name: 'App',
   components: {
-    // MainView
-    // UserSelect,
-    // UserView,
-    TaskServerRequest
+    UserCommentsView
   },
   methods: {
   },
@@ -46,7 +44,7 @@ export default {
         id: 7,
         avatar: 'https://www.w3schools.com/howto/img_avatar.png',
         name: 'Jack Jimmies',
-      },      
+      },
       {
         id: 10,
         avatar: 'https://www.w3schools.com/howto/img_avatar2.png',
@@ -56,7 +54,7 @@ export default {
         id: 2,
         avatar: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
         name: 'Andy',
-      },      
+      },
       {
         id: 5,
         avatar: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -69,7 +67,7 @@ export default {
     } catch {
       selectedUserIds = []
     }
-    userList = userList.map(function(user) {
+    userList = userList.map(function (user) {
       user.isSelected = selectedUserIds.includes(user.id)
       return user;
     })
@@ -79,14 +77,9 @@ export default {
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0;
 }
 </style>
+
