@@ -1,5 +1,3 @@
-<!-- CSS OK -->
-
 <template>
   <div class="subscribe-btn-container">
     <button class="subscribe-btn">Subscribe</button>
@@ -9,10 +7,7 @@
 <script>
 import { defineComponent } from "vue";
 
-export default defineComponent({
-  
-  
-});
+export default defineComponent({});
 </script>
 
 <style>
