@@ -64,13 +64,14 @@ table {
     }
 
 table th {
-    font-size: large;
+    font-size:x-large;
     font-weight: bold;
     border-bottom: 1px solid  #FCA26E;
     padding-top: 5px;
 }
 
 table td {
+    font-size: large;
     font-weight: 400;
     border-bottom: 1px solid  #FCA26E;
     padding-top: 5px;

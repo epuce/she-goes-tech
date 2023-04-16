@@ -9,11 +9,11 @@
                     </div>
                 </div>
                 <div class="footer">
-                    <button class="buttonSubscribe" @click="toggleDivs" :style="{ display: showDiv1 ? 'block' : 'none' }">Subscribe</button>
+                    <button class="buttonSubscribe" @click="toggleDivs" :style="{ display: showButtonSubscribe ? 'block' : 'none' }">Subscribe</button>
                 </div>
             </div>
         </div>
-        <div class="formWindow" id="formWindow" :style="{ display: showDiv2 ? 'block' : 'none' }">
+        <div class="formWindow" id="formWindow" >
             <div class="columnLeft">
                 <div class="header">
                 </div>
@@ -49,8 +49,8 @@ import VueDropdown from './VueDropdown';
 export default defineComponent ({
     data() {
           return {
-            showDiv1: true,
-            showDiv2: false,
+            showButtonSubscribe: true,
+            //showDiv2: false,
             isChecked: false,
             displayDropdown: 'none'
           }
@@ -61,8 +61,8 @@ export default defineComponent ({
     },
     methods: {
             toggleDivs() {
-                this.showDiv1 = !this.showDiv1
-                this.showDiv2 = !this.showDiv2
+                this.showButtonSubscribe = !this.showButtonSubscribe
+                //this.showDiv2 = !this.showDiv2
 
                 const element = document.getElementById('myDiv');
                 element.classList.add('subscribeWindowTwo');
@@ -74,8 +74,6 @@ export default defineComponent ({
             toggleDropdown() {
                 this.displayDropdown = this.isChecked ? 'none' : 'block';
                 }
-
-                
     }
            
 }
@@ -119,13 +117,14 @@ export default defineComponent ({
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     opacity: 0;
+    visibility: hidden;
     
-    transition: opacity 2s ease-out;
-    transition-delay: 1s;
+    transition: opacity 1s, visibility 1s linear;
 }
 
 .formWindowTwo {
     opacity: 1;
+    visibility: visible;
 }
 
 .columnLeft {
@@ -210,6 +209,10 @@ h1 {
 .buttonSubscribe:hover {
     color: white;
     background: #FCA26E;
+}
+
+input:focus {
+    outline: none !important;
 }
     
 </style>
