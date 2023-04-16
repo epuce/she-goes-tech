@@ -18,25 +18,32 @@
     <router-link to="/list">Something</router-link> -->
 
     <!-- this part will be updated when we navigate between one and another. These are <a> tags within view -->
-    <!-- <router-view></router-view> -->
-    <!-- <UserView />
+    <!-- <router-view></router-view>
+    <UserView />
     <TaskServerRequest /> -->
-    <UserCommentsView />
+    <!-- <UserCommentsView /> -->
+    <!-- <OpenForm /> -->
+    <LandingPage />
   </div>
 </template>
 
 <script>
-// // import UserSelect from "./components/UserSelect/UserSelect.vue";
+// import UserSelect from "./components/UserSelect/UserSelect.vue";
+// import MainView from "./components/MainView.vue";
 // import UserView from "./components/UserView.vue";
 // import TaskServerRequest from "./components/TaskServerRequest.vue";
-import UserCommentsView from "./components/UserCommentsView.vue";
+// import OpenForm from "./components/LandingPage/OpenForm.vue";
+import LandingPage from "./components/LandingPage/LandingPage.vue";
+// import UserCommentsView from "./components/UserCommentsView.vue";
 export default {
   name: "App",
   components: {
-    UserCommentsView,
-    // // UserSelect,
+    // UserCommentsView,
+    // UserSelect,
     // UserView,
     // TaskServerRequest,
+    // OpenForm,
+    LandingPage,
     // MainView,
   }, //it means that "hey, we will use it by adding it under components"
 

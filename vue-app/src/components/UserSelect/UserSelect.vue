@@ -63,7 +63,6 @@ export default defineComponent({
     var userList = ref(
       props.users.map(function (user) {
         user.isDisplayed = true; //we add isDisplayed=true to the array which is in App.vue
-
         return user;
       })
     );
