@@ -28,17 +28,14 @@
                         <label>Email</label>
                         <input>
                         <div class="subscriptionRow">
-                        <CheckBox label="Subscribe" value="foo" v-model="MySelectedValues" />
+                            <CheckBox label="Subscribe" v-model="isChecked" @click="toggleDropdown" />
                         </div>
-                        <VueDropdown class="my-dropdown-toggle"
-                            :options="arrayOfObjects" 
-                            :selected="object" 
-                            v-on:updateOption="methodToRunOnSelect" 
-                            :placeholder="'jkjk'"
-                            :closeOnOutsideClick="boolean"></VueDropdown>
+                        <div :style="{ display: displayDropdown}">
+                            <VueDropdown>Dropdown</VueDropdown>
+                        </div>
                     </div>
                     <div class="footer">
-                        <button class="buttonSubscribe">Submit</button>
+                        <button type="button" class="buttonSubscribe">Submit</button>
                     </div>
                 </form>
             </div>
@@ -52,12 +49,10 @@ import VueDropdown from './VueDropdown';
 export default defineComponent ({
     data() {
           return {
-            arrayOfObjects: [""],
-            object: {
-              name: 'How often do you want to receive news?',
-            },
             showDiv1: true,
-            showDiv2: false
+            showDiv2: false,
+            isChecked: false,
+            displayDropdown: 'none'
           }
         },
     components: {
@@ -65,9 +60,6 @@ export default defineComponent ({
         VueDropdown
     },
     methods: {
-            methodToRunOnSelect(payload) {
-                this.object = payload;
-            },
             toggleDivs() {
                 this.showDiv1 = !this.showDiv1
                 this.showDiv2 = !this.showDiv2
@@ -78,26 +70,19 @@ export default defineComponent ({
                 const formWindow = document.getElementById('formWindow');
                 formWindow.classList.add('formWindowTwo');
             },
+
+            toggleDropdown() {
+                this.displayDropdown = this.isChecked ? 'none' : 'block';
+                }
+
+                
+    }
            
 }
-})
+)
 </script>
 
 <style>
-.my-dropdown-toggle {
-  border-radius: 5px;
-}
-
-::v-deep .dropdown-toggle {
-    color: #ffffff;
-    font-size: 25px;
-    font-weight: 800;
-  }
-
-::v-deep .dropdown-toggle-placeholder {
-    color: rgba(252,162,110,0.5);
-  }
-
 .subscribeWindow {
     color:azure;
     width: 650px;
@@ -135,7 +120,7 @@ export default defineComponent ({
     transform: translate(-50%, -50%);
     opacity: 0;
     
-    transition: opacity 2s ease;
+    transition: opacity 2s ease-out;
     transition-delay: 1s;
 }
 
@@ -194,9 +179,7 @@ export default defineComponent ({
     background-color: none;
     border-color: #FCA26E;
 }
-.checkmark {
-  
-}
+
 .checkbox {
     height: 15px;
     width: 15px;

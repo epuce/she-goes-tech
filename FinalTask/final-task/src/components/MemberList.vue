@@ -8,12 +8,12 @@
                 <th>Email</th>
                 <th>Special offer</th>
                 <th>Offer cycle</th>
-                <th></th>
+                <th>Delete</th>
             </thead>
-            <tbody>
-                <td>1</td>
-                <td>Linda</td>
-                <td></td>
+            <tbody v-for="user in userList" :key="user.id" class="user-list__user">
+                <td>{{ user.id }}</td>
+                <td> {{ user.first_name }} {{ user.last_name }} </td>
+                <td>{{ user.email }} </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -23,9 +23,30 @@
     </div>
 </template>
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
-export default defineComponent({})
+export default defineComponent({
+    setup() {
+        const user = ref({
+            first_name: '',
+            last_name: '',
+            email: '',
+            id: null
+        })
+        const userList = ref([])
+
+        fetch('http://localhost:8002/api/users')
+        .then(resp => resp.json())
+        .then(resp => {
+            userList.value = resp.data
+        })
+
+        return {
+            userList,
+            user
+        }
+}
+})
 </script>
 <style>
 .tableMembers {
@@ -42,7 +63,16 @@ table {
     width: 100%;   
     }
 
-table td, table th {
+table th {
+    font-size: large;
+    font-weight: bold;
     border-bottom: 1px solid  #FCA26E;
+    padding-top: 5px;
+}
+
+table td {
+    font-weight: 400;
+    border-bottom: 1px solid  #FCA26E;
+    padding-top: 5px;
     }
 </style>
