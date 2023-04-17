@@ -15,7 +15,7 @@ function runSQL(sql, response) {
 }
 
 exports.list = function(request, response) {
-    var sql = 'SELECT id, first_name AS name, CONCAT(first_name, " ",last_name) AS full_name FROM `lindalejiete-users`'
+    var sql = 'SELECT * FROM `lindalejiete-users`'
 
     runSQL(sql, response)
 }
@@ -43,10 +43,6 @@ exports.update = function(request, response) {
 }
 
 exports.save = function(request, response) {
-    var first_name = request.body.first_name
-    var last_name = request.body.last_name
-    var email = request.body.email
-
     var {first_name, last_name, email} = request.body;
 
     var sql = `
@@ -55,15 +51,5 @@ exports.save = function(request, response) {
         VALUES("`+first_name+`","`+last_name+`","`+email+`")
     `
 
-    app.db.query(sql, function(error, data) {
-        var returnData = {}
-
-        if (error) {
-            returnData.error = error
-        } else {
-            returnData.data = data
-        }
-
-        response.send(JSON.stringify(returnData))
-    })
+    runSQL(sql, response)
 }

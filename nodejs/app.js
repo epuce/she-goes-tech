@@ -1,5 +1,5 @@
 var express = require('express')
-//var cors = require('cors')
+var cors = require('cors')
 var mysql = require('mysql')
 var userRoutes = require('./routes/user.route')
 var commentRoutes = require('./routes/comments.route')
@@ -7,7 +7,9 @@ var sqlRoutes = require('./routes/sql.route')
 
 var app = new express()
 app.use(express.json())
-//app.use(cors)
+app.use(cors({
+    origin: true,
+}))
 
 var router = express.Router()
 
