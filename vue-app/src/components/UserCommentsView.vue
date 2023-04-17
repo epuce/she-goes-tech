@@ -23,6 +23,8 @@
             <div class="user-list">
                 <div v-for="user in userList" :key="user.id" class="user-list__user">
                     {{ user.first_name }} {{ user.last_name }}
+
+                    <font-awesome-icon name="delete" />
                 </div>
             </div>
         </div>
@@ -54,6 +56,10 @@ export default defineComponent({
 
             fetch('http://localhost:8002/api/users', {
                 method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': 'http://localhost:8002'
+                },
                 body: JSON.stringify(payload),
             })
             .then(resp => resp.json())

@@ -9,6 +9,7 @@ var app = new express()
 app.use(express.json())
 app.use(cors({
     origin: 'http://localhost:8081',
+    origin: true,
 }))
 
 var router = express.Router()

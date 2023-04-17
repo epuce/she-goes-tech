@@ -71,8 +71,6 @@ exports.update = async function(request, response) {
 exports.save = function(request, response) {
     var {first_name, last_name, email} = request.body;
 
-    response.send(request.body)
-
     var sql = `
         INSERT INTO \`edmunds.puce-users\`
         (first_name, last_name, email)
