@@ -24,7 +24,10 @@
                 <div v-for="user in userList" :key="user.id" class="user-list__user">
                     {{ user.first_name }} {{ user.last_name }}
 
-                    <font-awesome-icon name="delete" />
+                    <font-awesome-icon 
+                        icon="fa-trash"
+                        @click="onUserDelete(user.id)"
+                        class="user-list__delete" />
                 </div>
             </div>
         </div>
@@ -58,7 +61,6 @@ export default defineComponent({
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'http://localhost:8002'
                 },
                 body: JSON.stringify(payload),
             })
@@ -78,11 +80,22 @@ export default defineComponent({
             })
         }
 
+        const onUserDelete = (userId) => {
+            fetch(`http://localhost:8002/api/users/${userId}`, {
+                method: 'DELETE'
+            })
+            .then(resp => resp.json())
+            .then(() => {
+                userList.value = userList.value.filter((user) => user.id !== userId)
+            })
+        }
+
 
         return {
             userList,
             onUserSave,
             user,
+            onUserDelete
         }
     }
     
@@ -121,11 +134,26 @@ export default defineComponent({
 }
 
 .user-list__user {
+    padding: 2px 0;
     margin-bottom: 8px;
     cursor: pointer; 
 }
 
 .user-list__user:hover {
     background: rgba(33,33,144, 0.05);
+}
+
+.user-list__user:hover .user-list__delete {
+    display: inline-block;
+}
+
+.user-list__delete path {
+    fill: rgba(0,0,0, 0.3)
+}
+
+.user-list__delete {
+    display: none;
+    float: right;
+    margin-right: 2px;
 }
 </style>
