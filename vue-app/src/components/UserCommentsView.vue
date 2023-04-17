@@ -21,12 +21,19 @@
             </form>
 
             <div class="user-list">
-                <div v-for="user in userList" :key="user.id" class="user-list__user">
-                    {{ user.first_name }} {{ user.last_name }}
+                <div v-for="item in userList" 
+                    :key="item.id"
+                    class="user-list__user"
+                    :class="{
+                        'user-list__user--active': user.id === item.id
+                    }"
+                    @click="fillUserForm(item)">
+                    
+                    {{ item.first_name }} {{ item.last_name }}
 
                     <font-awesome-icon 
                         icon="fa-trash"
-                        @click="onUserDelete(user.id)"
+                        @click="onUserDelete(item.id)"
                         class="user-list__delete" />
                 </div>
             </div>
@@ -57,27 +64,54 @@ export default defineComponent({
                 last_name: user.value.last_name,
             }
 
-            fetch('http://localhost:8002/api/users', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            })
-            .then(resp => resp.json())
-            .then(resp => {
-                if (!resp.error) {
-                    userList.value.push({
-                        ...payload,
-                        id: resp.data.insertId
-                    })
-                    
-                    user.value = {
-                        first_name: '',
-                        last_name: '',
+            if (user.value.id) {
+                fetch(`http://localhost:8002/api/users/${user.value.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    if (!resp.error) {
+                        const userIndex = userList.value.findIndex((item) => item.id === user.value.id)
+
+                        userList.value[userIndex] = {
+                            ...userList.value[userIndex],
+                            ...payload,
+                        }
+
+                        user.value = {
+                            first_name: "",
+                            last_name: "",
+                            id: null
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                fetch('http://localhost:8002/api/users', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    if (!resp.error) {
+                        userList.value.push({
+                            ...payload,
+                            id: resp.data.insertId
+                        })
+                        
+                        user.value = {
+                            first_name: '',
+                            last_name: '',
+                        }
+                    }
+                })
+            }
         }
 
         const onUserDelete = (userId) => {
@@ -90,12 +124,16 @@ export default defineComponent({
             })
         }
 
+        const fillUserForm = (tmpUser) => {
+            user.value = {...tmpUser};
+        }
 
         return {
             userList,
             onUserSave,
             user,
-            onUserDelete
+            onUserDelete,
+            fillUserForm
         }
     }
     
@@ -139,7 +177,8 @@ export default defineComponent({
     cursor: pointer; 
 }
 
-.user-list__user:hover {
+.user-list__user:hover,
+.user-list__user--active {
     background: rgba(33,33,144, 0.05);
 }
 

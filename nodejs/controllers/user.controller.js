@@ -37,7 +37,7 @@ exports.update = async function(request, response) {
    
     await app.db.query("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'edmunds.puce-users'", function(error, data) {
         var columns = data.map((column) => column.COLUMN_NAME)
-        var changeValues = '';
+        var changeValues = [];
         var errors = [];
 
         Object.keys(request.body).forEach((val) => {
@@ -51,17 +51,17 @@ exports.update = async function(request, response) {
         }
     
         if (first_name) {
-            changeValues += `first_name="`+first_name+`"`
+            changeValues.push(`first_name="${first_name}"`)
         }
         if (last_name) {
-            changeValues += `last_name="`+last_name+`"`
+            changeValues.push(`last_name="${last_name}"`)
         }
         if (email) {
-            changeValues += `email="`+email+`"`
+            changeValues.push(`email="${email}"`)
         }
     
         var sql = `UPDATE \`edmunds.puce-users\` 
-        SET `+changeValues+`
+        SET ${changeValues.join(',')}
         WHERE id=`+request.params.id;
     
         runSql(sql, response)
