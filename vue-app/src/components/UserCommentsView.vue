@@ -9,7 +9,7 @@
                     <input v-model="user.first_name">
                 </label>
 
-                <label >
+                <label>
                     Last name
 
                     <input v-model="user.last_name">
@@ -21,11 +21,15 @@
             </form>
 
             <div class="user-list">
-                <div v-for="user in userList" :key='user.id' class="user-list_user">
-                    {{ user.first_name }} {{ user.last_name }}    
+                <div v-for="user in userList" :key="user.id" class="user-list__user">
+                    {{ user.first_name }} {{ user.last_name }}
+
+                    <font-awesome-icon 
+                        icon="fa-trash"
+                        @click="onUserDelete(user.id)"
+                        class="user-list__delete" />
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -36,7 +40,7 @@ export default defineComponent({
     setup() {
         const user = ref({
             first_name: '',
-            last_name:'',
+            last_name: '',
             id: null
         })
         const userList = ref([])
@@ -50,12 +54,15 @@ export default defineComponent({
         const onUserSave = () => {
             const payload = {
                 first_name: user.value.first_name,
-                last_name: user.value.last_name
+                last_name: user.value.last_name,
             }
 
             fetch('http://localhost:8002/api/users', {
-                method: 'POST',
-                body: JSON.stringify(payload), 
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
             })
             .then(resp => resp.json())
             .then(resp => {
@@ -64,7 +71,7 @@ export default defineComponent({
                         ...payload,
                         id: resp.data.insertId
                     })
-
+                    
                     user.value = {
                         first_name: '',
                         last_name: '',
@@ -72,15 +79,31 @@ export default defineComponent({
                 }
             })
         }
-    
+
+        const onUserDelete = (userId) => {
+            fetch(`http://localhost:8002/api/users/${userId}`, {
+                method: 'DELETE'
+            })
+            .then(resp => resp.json())
+            .then(() => {
+                userList.value = userList.value.filter((user) => user.id !== userId)
+            })
+        }
+
+        const fillUserForm = (tmpUser) => {
+            user.value = {...tmpUser};
+        }
+
+
         return {
             userList,
             onUserSave,
             user,
-        
-
+            onUserDelete,
+            fillUserForm,
         }
     }
+    
 })
 </script>
 <style>
@@ -115,13 +138,27 @@ export default defineComponent({
     padding: 16px 0;
 }
 
-.user-list_user {
+.user-list__user {
+    padding: 2px 0;
     margin-bottom: 8px;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 .user-list__user:hover {
-    background: rgba(33,33,144, 0.05)
+    background: rgba(33,33,144, 0.05);
 }
 
+.user-list__user:hover .user-list__delete {
+    display: inline-block;
+}
+
+.user-list__delete path {
+    fill: rgba(0,0,0, 0.3)
+}
+
+.user-list__delete {
+    display: none;
+    float: right;
+    margin-right: 2px;
+}
 </style>
