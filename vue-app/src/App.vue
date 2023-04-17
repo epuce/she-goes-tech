@@ -16,16 +16,18 @@
       <router-view></router-view> -->
 
     <!-- <UserView/> -->
-    <TaskServerRequest />
-    <TaskServerRequestv2 />
+    <!-- <TaskServerRequest />
+    <TaskServerRequestv2 /> -->
+    <UserCommentsView/>
   </div>
 </template>
 
 <script>
 // import MainView from "./components/MainView.vue";
 // import UserSelect from "./components/UserSelect/UserSelect.vue";
-import TaskServerRequest from "./components/TaskServerRequest.vue";
-import TaskServerRequestv2 from "./components/TaskServerRequestv2.vue";
+//import TaskServerRequest from "./components/TaskServerRequest.vue";
+//import TaskServerRequestv2 from "./components/TaskServerRequestv2.vue";
+import UserCommentsView from "./components/UserCommentsView.vue";
 // import UserView from "./components/UserView.vue";
 
 export default {
@@ -34,8 +36,9 @@ export default {
     //MainView,
     // UserSelect,
     // UserView,
-    TaskServerRequest,
-    TaskServerRequestv2
+    //TaskServerRequest,
+    //TaskServerRequestv2,
+    UserCommentsView
 },
   // methods: {
   // //   addCount: function() {
@@ -99,12 +102,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin:0;
 }
 </style>

@@ -69,19 +69,20 @@ export default defineComponent({
             /*we return the data that we need from the object (we can see that we need the data key from DEV tools*/
         });
 
-        var fillForm = function(userId){
-            fetch("https://reqres.in/api/users/"+userId,{
+        var fillForm = async(userId) => {
+            let response = await fetch("https://reqres.in/api/users/"+userId,{
                 method: "GET"
                 /*GET is default method and technically we could skip specifying it*/
-            }).then(function(response){
-                return response.json()
-            }).then (function(returnData){
+            })
+            let returnData = await response.json()
+            
                 user.value = {
                     name: returnData.data.first_name,
                     id: returnData.data.id
                 }
-            })
         };
+
+        //this setup with async await is the same as the one above with .then, just newer and used with ES6 and preferable
 
         var saveUser = function() {
             isSavedDisabled.value = true;
