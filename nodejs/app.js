@@ -7,7 +7,11 @@ var sqlRoutes = require("./routes/sql.route");
 
 var app = new express();
 app.use(express.json());
-// app.use(cors)
+app.use(
+  cors({
+    origin: true,
+  })
+);
 
 var router = express.Router();
 

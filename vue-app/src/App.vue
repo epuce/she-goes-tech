@@ -38,28 +38,26 @@ export default {
 <template>
   <div>
     <!-- <MainView heading="Some cool text" btnType="'warning'"/>
-                                <MainView heading ='This also works'/>
-                                <MainView/> -->
+      <MainView heading ='This also works'/>
+      <MainView/> -->
     <!-- <UserSelect :users='userList' /> -->
-    <UserView />
+    <!-- <UserView /> -->
+    <UserCommentsView />
   </div>
-</template >
-
+</template>
 
 <script>
 // import MainView from './components/MainView.vue';
 // import UserSelect from './components/UserSelect/UserSelect.vue';
 // import UserView from './components/UserView.vue';
-import UserView from './components/UserView.vue';
+// import UserView from './components/UserView.vue';
+import UserCommentsView from './components/UserCommentsView.vue';
 export default {
   name: 'App',
   components: {
-    // MainView,
-    // UserSelect,
-    UserView
+    UserCommentsView
   },
   methods: {
-
   },
 
   data() {
@@ -104,12 +102,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0
 }
 </style> 
