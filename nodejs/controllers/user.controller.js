@@ -1,56 +1,100 @@
-var app = require('../app')
+var app = require("../app");
 
 function runSql(sql, response) {
-    app.db.query(sql, function (error, data) {
-      var returnData = {};
-  
-      if (error) {
-        returnData.error = error;
-      } else {
-        returnData.data = data;
-      }
-      response.send(JSON.stringify(returnData));
-    });
-  }
+  app.db.query(sql, function (error, data) {
+    var returnData = {};
 
-exports.list = function(request, response){
-    var sql = 'SELECT id, first_name AS name, CONCAT(first_name, " ", last_name) AS full_name FROM `KristePe-users`';
-    runSql(sql, response);
+    if (error) {
+      returnData.error = error;
+    } else {
+      returnData.data = data;
+    }
+    response.send(JSON.stringify(returnData));
+  });
 }
 
-exports.findUser = function(request, response){
-  var sql = 'SELECT * FROM `KristePe-users` WHERE id= ' +request.params.id;
+exports.list = function (request, response) {
+  var sql = "SELECT * FROM `KristePe-users`";
+
   runSql(sql, response);
-}
+};
 
-
-exports.delete = function (request, response){
-  var sql = "DELETE FROM `KristePe-users` WHERE id= " + request.params.id;
+exports.findUser = function (request, response) {
+  var sql = "SELECT * FROM `KristePe-users` WHERE id=" + request.params.id;
   runSql(sql, response);
-}
+};
 
-exports.update = function (request, response) {
+exports.delete = function (request, response) {
+  var sql = "DELETE FROM `KristePe-users` WHERE id=" + request.params.id;
+  runSql(sql, response);
+};
+
+exports.update = async function (request, response) {
   var { first_name, last_name, email } = request.body;
 
-  var sql = 'UPDATE `KristePe-users` SET first_name="'+first_name+'", last_name="'+last_name+'", email="'+email+'" WHERE id= '+request.params.id;
+  await app.db.query(
+    "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'KristePe-users'",
+    function (error, data) {
+      var columns = data.map((column) => column.COLUMN_NAME);
+      var changeValues = [];
+      var errors = [];
 
-  runSql(sql, response);
+      Object.keys(request.body).forEach((val) => {
+        if (!columns.includes(val)) {
+          errors.push(
+            "Column: '" +
+              val +
+              "' does not exist on entity you are trying to modify"
+          );
+        }
+      });
 
-//   response.send("Will update user with id: " + request.params.id + ". With data:" + JSON.stringify(request.body))
-}
+      if (errors.length > 0) {
+        response.send(JSON.stringify(errors));
+      }
 
+      if (first_name) {
+        changeValues.push(`first_name="${first_name}"`);
+      }
+      if (last_name) {
+        changeValues.push(`last_name="${last_name}"`);
+      }
+      if (email) {
+        changeValues.push(`email="${email}"`);
+      }
+
+      var sql =
+        `UPDATE \`KristePe-users\` SET ${changeValues.join(",")} WHERE id=` +
+        request.params.id;
+
+      runSql(sql, response);
+
+      //   response.send("Will update user with id: " + request.params.id + ". With data:" + JSON.stringify(request.body))
+    }
+  );
+};
 
 exports.save = function (request, response) {
   //   var first_name = request.body.first_name;
   //   var last_name = request.body.last_name;
   //   var email = request.body.email;
-  
-    var { first_name, last_name, email } = request.body;
-  
-    var sql ='INSERT INTO `KristePe-users`(first_name, last_name, email)VALUES("' +first_name +'","' +last_name +'","' +email +'")';
-  
-  
+
+  var { first_name, last_name, email } = request.body;
+
+  var sql =
+    `
+    INSERT INTO \`KristePe-users\`
+    (first_name, last_name, email)
+    VALUES("` +
+    first_name +
+    `","` +
+    last_name +
+    `","` +
+    email +
+    `")
+`;
+
+  runSql(sql, response);
+
   //   response.send(JSON.stringify(returnData))
-  
-    runSql(sql, response);
-  }
+};

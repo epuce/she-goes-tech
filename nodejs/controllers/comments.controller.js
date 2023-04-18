@@ -17,6 +17,10 @@ function runSql(sql, response) {
 exports.list = function(request, response) {
     var sql = 'SELECT * FROM `KristePe-comments`'
 
+    if (request.query.user_id) {
+        sql = sql + ` WHERE user_id="${request.query.user_id}"`
+    }
+
     runSql(sql, response)
 }
 
