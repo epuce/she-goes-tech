@@ -17,6 +17,10 @@ function runSQL(sql, response) {
 exports.list = function(request, response) {
     var sql = 'SELECT id, comments, user_id FROM `lindalejiete-comments`'
 
+    if (request.query.user_id) {
+        sql = sql + `WHERE user_id="${request.query.user_id}"`
+    }
+
     runSQL(sql, response)
 }
 
@@ -73,8 +77,8 @@ exports.save = function(request, response) {
 
     var sql = `
         INSERT INTO \`lindalejiete-comments\`
-        (id, comments, user_id)
-        VALUES("`+id+`","`+comments+`","`+user_id+`")
+        (comments, user_id)
+        VALUES("`+comments+`","`+user_id+`")
     `
 
     app.db.query(sql, function(error, data) {

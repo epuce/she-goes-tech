@@ -15,7 +15,7 @@ router.get('', function(request, response) {
     )` 
 
     var sql = `CREATE TABLE IF NOT EXISTS \`lindalejiete-comments\` (
-        comments TEXT,
+        comment TEXT,
         user_id INT,
         id INT NOT NULL AUTO_INCREMENT,
         PRIMARY KEY (id)
