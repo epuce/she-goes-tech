@@ -24,6 +24,7 @@
         * What did not go as planned
         * State some overall takeaways from the course
         * Be ready to show the final result
+* **Push the final result to github**
 
 ## Example (it's more like inspiration and visual task representation)
 ![Opened form, filled](img/task-1-open-form-filled.png)
