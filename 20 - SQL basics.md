@@ -112,4 +112,4 @@
 2. Insert 3 rows into the newly created table
 3. Retrieve the newly created rows
 4. Update an existing row
-5. Delete an existing row  
+5. Delete an existing row
