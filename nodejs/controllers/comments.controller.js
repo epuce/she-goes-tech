@@ -60,14 +60,13 @@ exports.update = function(request, response) {
     runSql(sql, response)
 }
 
-// TODO: change to have the correct logic
 exports.save = function(request, response) {
     var {comment, user_id} = request.body;
 
     var sql = `
         INSERT INTO \`edmunds.puce-comments\`
-        (first_name, last_name, email)
-        VALUES("`+first_name+`","`+last_name+`","`+email+`")
+        (comment, user_id)
+        VALUES("${comment}",${user_id})
     `
 
     runSql(sql, response)

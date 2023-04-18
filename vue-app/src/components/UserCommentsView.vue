@@ -18,7 +18,7 @@
             <div class="user-comments__textarea-wrapper" v-if="comment.user_id">
                 <textarea v-model="comment.data" class="user-comments__textarea"></textarea>
             
-                <button type="button" v-if="comment.data.length > 0">Save</button>
+                <button type="button" v-if="comment.data.length > 0" @click="onCommentSave()">Save</button>
             </div>
         
             <div class="comment-list">
@@ -83,7 +83,7 @@ export default defineComponent({
         })
         const userList = ref([])
 
-        fetch('http://localhost:8002/api/users')
+        fetch('http://localhost:8003/api/users')
         .then(resp => resp.json())
         .then(resp => {
             userList.value = resp.data
@@ -96,7 +96,7 @@ export default defineComponent({
             }
 
             if (user.value.id) {
-                fetch(`http://localhost:8002/api/users/${user.value.id}`, {
+                fetch(`http://localhost:8003/api/users/${user.value.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -121,7 +121,7 @@ export default defineComponent({
                     }
                 })
             } else {
-                fetch('http://localhost:8002/api/users', {
+                fetch('http://localhost:8003/api/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ export default defineComponent({
         }
 
         const onUserDelete = (userId) => {
-            fetch(`http://localhost:8002/api/users/${userId}`, {
+            fetch(`http://localhost:8003/api/users/${userId}`, {
                 method: 'DELETE'
             })
             .then(resp => resp.json())
@@ -162,10 +162,34 @@ export default defineComponent({
         const onUserSelect = (userId) => {
             comment.value.user_id = userId
 
-            fetch(`http://localhost:8002/api/comments?user_id=${userId}`)
+            fetch(`http://localhost:8003/api/comments?user_id=${userId}`)
             .then(resp => resp.json())
             .then(resp => {
                 comment.value.list = resp.data
+            })
+        }
+
+        const onCommentSave = () => {
+            const payload = {
+                comment: comment.value.data,
+                user_id: comment.value.user_id
+            }
+
+            fetch(`http://localhost:8003/api/comments`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                if (!resp.error) {
+                    comment.value.list.push({
+                        ...payload,
+                        id: resp.data.insertId
+                    })
+                }
             })
         }
 
@@ -177,6 +201,7 @@ export default defineComponent({
             fillUserForm,
             onUserSelect,
             comment,
+            onCommentSave
         }
     }
     

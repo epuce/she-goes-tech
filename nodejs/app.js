@@ -39,7 +39,7 @@ db.connect(function(error) {
     }
 })
 
-app.listen(8002, function() {
+app.listen(8003, function() {
     console.log('Server is up on http://localhost:8002')
 })
 
