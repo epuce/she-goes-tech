@@ -1,6 +1,32 @@
 <template>
     <div class="user-comments">
-        <div class="user-comments__comments"></div>
+        <div class="user-comments__comments">
+            <div class="user-comments__users">
+                <div v-for="user in userList"
+                    @click="onUserSelect(user.id)"
+                    :key="user.id"
+                    :title="user.first_name+' '+user.last_name"
+                    :class="{
+                        'user-comments__user-avatar--active': comment.user_id === user.id
+                    }"
+                    class="user-comments__user-avatar">
+               
+                    {{ user.first_name[0] }}{{ user.last_name[0] }}
+                </div>
+            </div>
+
+            <div class="user-comments__textarea-wrapper" v-if="comment.user_id">
+                <textarea v-model="comment.data" class="user-comments__textarea"></textarea>
+            
+                <button type="button" v-if="comment.data.length > 0">Save</button>
+            </div>
+        
+            <div class="comment-list">
+                <div v-for="item in comment.list" :key="item.id">
+                    {{ item.comment }}
+                </div> 
+            </div>
+        </div>
         <div class="user-comments__user">
             <form>
                 <label>
@@ -33,7 +59,7 @@
 
                     <font-awesome-icon 
                         icon="fa-trash"
-                        @click="onUserDelete(item.id)"
+                        @click.stop="onUserDelete(item.id)"
                         class="user-list__delete" />
                 </div>
             </div>
@@ -45,6 +71,11 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
     setup() {
+        const comment = ref({
+            user_id: null,
+            data: '',
+            list: []
+        })
         const user = ref({
             first_name: '',
             last_name: '',
@@ -128,12 +159,24 @@ export default defineComponent({
             user.value = {...tmpUser};
         }
 
+        const onUserSelect = (userId) => {
+            comment.value.user_id = userId
+
+            fetch(`http://localhost:8002/api/comments?user_id=${userId}`)
+            .then(resp => resp.json())
+            .then(resp => {
+                comment.value.list = resp.data
+            })
+        }
+
         return {
             userList,
             onUserSave,
             user,
             onUserDelete,
-            fillUserForm
+            fillUserForm,
+            onUserSelect,
+            comment,
         }
     }
     
@@ -194,5 +237,43 @@ export default defineComponent({
     display: none;
     float: right;
     margin-right: 2px;
+}
+
+.user-comments__users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.user-comments__user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.user-comments__user-avatar--active {
+    background: rgba(0,0,100, 0.2);
+}
+
+.user-comments__textarea {
+    margin-top: 16px;
+    width: 100%;
+    height: 150px;
+    resize: none;
+}
+
+.user-comments__textarea-wrapper {
+    position: relative;
+}
+
+.user-comments__textarea-wrapper button {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
 }
 </style>
