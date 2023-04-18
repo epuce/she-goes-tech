@@ -12,12 +12,12 @@
                 </div>
             </label>
         </div>
+        
         <div class="user-select__body">
             <div v-for="(user, index) in userList" :key="index">
-                <UserOption v-if="user.shouldShow" :user="user" @click="onClick(index)"/>
+                <UserOption v-if="user.shouldShow" :user="user" data-testId="user-option" @click="onClick(index)"/>
             </div>
         </div>
-
 
         <div class="user-select__footer">
             <button class="user-select__add-btn" @click="saveUsers()">Add</button>
