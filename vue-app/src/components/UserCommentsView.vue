@@ -6,13 +6,13 @@
                 <label>
                     First name
 
-                    <input v-modal="user.first_name">
+                    <input v-model="user.first_name">
                 </label>
 
                 <label>
                     Last name
 
-                    <input v-modal="user.last_name">
+                    <input v-model="user.last_name">
                 </label>
 
                 <div>
@@ -20,8 +20,18 @@
                 </div>
             </form>
             <div class="user-list">
-                <div v-for="user in userList" :key="user.id" class="user-list__user">
-                    {{ user.first_name }} {{ user.last_name }}
+                <div v-for="item in userList" :key="item.id" class="user-list__user" :class="{
+                    'user-list__user--active': user.id === item.id
+                }" @click="fillUserForm(item)">
+
+                    {{ item.first_name }} {{ item.last_name }}
+
+                    <!-- <font-awesome-icon 
+                        icon="fa-trash"
+                        @click="onUserDelete(user.id)"
+                        class="user-list__delete" /> -->
+                    <button @click="onUserDelete(item.id)" class="user-list__delete">Delete
+                    </button>
                 </div>
             </div>
 
@@ -46,38 +56,85 @@ export default defineComponent({
                 userList.value = resp.data
             })
 
-
         const onUserSave = () => {
             const payload = {
                 first_name: user.value.first_name,
                 last_name: user.value.last_name,
             }
 
-            fetch('http://localhost:8002/api/users', {
-                method: "POST",
-                body: JSON.stringify(payload),
-            })
-            .then(resp => resp.json())
-            .then(resp => {
-                if(!resp.error) {
-                    userList.value.push({
-                        ...payload,
-                        id: resp.data.insertId 
-                    })
-                    user.value = {
-                        first_name: '',
-                        last_name: '',
+            if (user.value.id) {
+                fetch(`http://localhost:8002/api/users/${user.value.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                    .then(resp => resp.json())
+                    .then(resp => {
+                        if (!resp.error) {
+                            const userIndex = userList.value.findIndex((item) => item.id === user.value.id)
+                         
+                            userList.value[userIndex] = {
+                            ...userList.value[userIndex],
+                            ...payload,
+                        }
+
+                        user.value = {
+                            first_name: "",
+                            last_name: "",
+                            id: null
+                        }
+
                     }
+                    })
+            } else {
+    fetch('http://localhost:8002/api/users', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://localhost:8002'
+        },
+        body: JSON.stringify(payload),
+    })
+        .then(resp => resp.json())
+        .then(resp => {
+            if (!resp.error) {
+                userList.value.push({
+                    ...payload,
+                    id: resp.data.insertId
+                })
+                user.value = {
+                    first_name: '',
+                    last_name: '',
                 }
-            })
+            }
+        })
+}
+
         }
 
+const onUserDelete = (userId) => {
+    fetch(`http://localhost:8002/api/users/${userId}`, {
+        method: "DELETE"
+    })
+        .then(resp => resp.json())
+        .then(() => {
+            userList.value = userList.value.filter((user) => user.id !== userId)
+        })
+}
 
-        return {
-            userList,
-            onUserSave,
-            user,
-        }
+const fillUserForm = (tmpUser) => {
+    user.value = { ...tmpUser };
+}
+
+return {
+    userList,
+    onUserSave,
+    user,
+    onUserDelete,
+    fillUserForm,
+}
     }
 })
 </script>
@@ -120,7 +177,23 @@ export default defineComponent({
     cursor: pointer;
 }
 
-.user-list__user:hover {
+.user-list__user:hover,
+.user-list__user--active {
     background-color: rgba(33, 33, 114, 0.05);
+}
+
+.user-list__delete {
+    display: none;
+    float: right;
+    margin-right: 2px;
+    /* padding:  */
+}
+
+.user-list__delete path {
+    fill: rgba(0, 0, 0, 0.3)
+}
+
+.user-list__user:hover .user-list__delete {
+    display: inline-block;
 }
 </style>

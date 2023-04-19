@@ -9,6 +9,7 @@ var app = new express()
 app.use(express.json())
 app.use(cors ({
     origin: 'http://localhost:8080'
+    // origin: true,
 }))
 // cors is used for security reasons. When someone is asking for data from a different server, then this allows to reach data
 
