@@ -1,6 +1,18 @@
 <template>
     <div class="user-comments">
-        <div class="user-comments__comments"></div>
+        <div class="user-comments__comments">
+            <div class="user-comments__users">
+                <div v-for="user in userList" 
+                @click="onUserSelect(user.id)"
+                :key="user.id" 
+                :title="user.first_name+' '+user.last_name"
+                class="user-comments__user-avatar">
+                
+                {{ user.first_name[0] }}{{ user.last_name[0] }}
+                <!-- or could use last_name.substr(0,1) -->
+                </div>
+            </div>
+        </div>
         <div class="user-comments__user">
             <form>
                 <label>
@@ -74,67 +86,82 @@ export default defineComponent({
                     .then(resp => {
                         if (!resp.error) {
                             const userIndex = userList.value.findIndex((item) => item.id === user.value.id)
-                         
+
                             userList.value[userIndex] = {
-                            ...userList.value[userIndex],
-                            ...payload,
-                        }
+                                ...userList.value[userIndex],
+                                ...payload,
+                            }
 
-                        user.value = {
-                            first_name: "",
-                            last_name: "",
-                            id: null
-                        }
+                            user.value = {
+                                first_name: "",
+                                last_name: "",
+                                id: null
+                            }
 
-                    }
+                        }
                     })
             } else {
-    fetch('http://localhost:8002/api/users', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://localhost:8002'
-        },
-        body: JSON.stringify(payload),
-    })
-        .then(resp => resp.json())
-        .then(resp => {
-            if (!resp.error) {
-                userList.value.push({
-                    ...payload,
-                    id: resp.data.insertId
+                fetch('http://localhost:8002/api/users', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': 'http://localhost:8002'
+                    },
+                    body: JSON.stringify(payload),
                 })
-                user.value = {
-                    first_name: '',
-                    last_name: '',
-                }
+                    .then(resp => resp.json())
+                    .then(resp => {
+                        if (!resp.error) {
+                            userList.value.push({
+                                ...payload,
+                                id: resp.data.insertId
+                            })
+                            user.value = {
+                                first_name: '',
+                                last_name: '',
+                            }
+                        }
+                    })
             }
-        })
-}
 
         }
 
-const onUserDelete = (userId) => {
-    fetch(`http://localhost:8002/api/users/${userId}`, {
-        method: "DELETE"
-    })
-        .then(resp => resp.json())
-        .then(() => {
-            userList.value = userList.value.filter((user) => user.id !== userId)
-        })
-}
+        const onUserDelete = (userId) => {
+            fetch(`http://localhost:8002/api/users/${userId}`, {
+                method: "DELETE"
+            })
+                .then(resp => resp.json())
+                .then(() => {
+                    userList.value = userList.value.filter((user) => user.id !== userId)
+                })
+        }
 
-const fillUserForm = (tmpUser) => {
-    user.value = { ...tmpUser };
-}
+        const fillUserForm = (tmpUser) => {
+            user.value = { ...tmpUser };
+        }
 
-return {
-    userList,
-    onUserSave,
-    user,
-    onUserDelete,
-    fillUserForm,
-}
+        const onUserSelect = (userId) => {
+            // comment.value.user_id = userId
+            fetch(`http://localhost:8002/api/comments?user_id=${userId}`)
+            .then(resp => resp.json())
+            .then(resp => {
+                // comment.value.list = resp.data
+
+            // fetch(`http://localhost:8002/api/comments?user_id=${userId}`)('')
+            // .then(resp => resp.json())
+            // .then(resp => {
+                console.log(resp)
+            })
+        }
+
+        return {
+            userList,
+            onUserSave,
+            user,
+            onUserDelete,
+            fillUserForm,
+            onUserSelect,
+        }
     }
 })
 </script>
@@ -196,4 +223,21 @@ return {
 .user-list__user:hover .user-list__delete {
     display: inline-block;
 }
+
+.user-comments__users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.user-comments__user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 </style>
