@@ -9,7 +9,8 @@ var sqlRoutes = require('./routes/sql.route')
 var app = new express()
 app.use(express.json())
 app.use(cors({
-origin: true,
+    origin: 'http://localhost:8080',
+    origin: true,
 }))
 
 var router = express.Router()

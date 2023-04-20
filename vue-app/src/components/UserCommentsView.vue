@@ -18,7 +18,7 @@
             <div class="user-comments__textarea-wrapper" v-if="comment.user_id">
                 <textarea v-model="comment.data" class="user-comments__textarea"></textarea>
             
-                <button type="button" v-if="comment.data.length > 0">Save</button>
+                <button type="button" v-if="comment.data.length > 0" @click="onCommentSave()">Save</button>
             </div>
         
             <div class="comment-list">
@@ -115,7 +115,7 @@ export default defineComponent({
                     }
                 })
             } else {
-                fetch('http://localhost:8002/api/users', {
+                fetch('http://localhost:8003/api/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -158,6 +158,28 @@ export default defineComponent({
                 comment.value.list = resp.data
             })
         }
+        const onCommentSave = () => {
+            const payload = {
+                comment: comment.value.data,
+                user_id: comment.value.user_id
+            }
+            fetch(`http://localhost:8002/api/comments`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                if (!resp.error) {
+                    comment.value.list.push({
+                        ...payload,
+                        id: resp.data.insertId
+                    })
+                }
+            })
+        }
         return {
             userList,
             onUserSave,
@@ -166,6 +188,7 @@ export default defineComponent({
             fillUserForm,
             onUserSelect,
             comment,
+            onCommentSave
         }
     }
     
