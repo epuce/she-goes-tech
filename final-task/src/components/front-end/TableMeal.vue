@@ -43,7 +43,7 @@ export default defineComponent({
             required: true,
         }
     },
-    setup(props) {
+    setup(props, {emit}) {
         const meal = ref({
             name: "",
             description: "",
@@ -52,12 +52,6 @@ export default defineComponent({
             id: null,
             // category_id: null
         });
-        // const mealList = ref([]);
-        // fetch("http://localhost:8002/api/meals")
-        //     .then(resp => resp.json())
-        //     .then(resp => {
-        //     mealList.value = resp.data;
-        // });
 
         var tmpMealList=ref(props.mealList)
         const onMealDelete = (mealId) => {
@@ -88,6 +82,7 @@ export default defineComponent({
                     .then(resp => resp.json())
                     .then(resp => {
                     if (!resp.error) {
+
                         const mealIndex = tmpMealList.value.findIndex((item) => item.id === meal.value.id);
                         tmpMealList.value[mealIndex] = {
                             ...tmpMealList.value[mealIndex],
@@ -101,6 +96,7 @@ export default defineComponent({
                             allergens: "",
                             price: null
                         };
+
                     }
                 });
             }
