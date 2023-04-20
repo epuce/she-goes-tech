@@ -17,6 +17,10 @@ function runSql(sql, response) {
 exports.list = function (request, response) {
   var sql = "SELECT * FROM `neringa1991-comments`";
 
+  // if this parameter is set we do string concatination
+  if (request.query.user_id) {
+    sql = sql + ` WHERE user_id="${request.query.user_id}"`;
+  }
   runSql(sql, response);
 };
 // we use prefix find when we don't know if the user exist or not. with "get"

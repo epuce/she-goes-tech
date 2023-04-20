@@ -18,7 +18,9 @@ app.use(express.json());
 app.use(
   cors({
     // we add vue app address
-    origin: "http://localhost:8082",
+    //we can specify regex for the different URLs to accept the same server
+    origin: "http://localhost:8080",
+    origin: true,
   })
 );
 

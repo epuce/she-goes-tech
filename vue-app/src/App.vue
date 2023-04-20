@@ -21,9 +21,9 @@
     <!-- <router-view></router-view>
     <UserView />
     <TaskServerRequest /> -->
-    <!-- <UserCommentsView /> -->
+    <UserCommentsView />
     <!-- <OpenForm /> -->
-    <LandingPage />
+    <!-- <LandingPage /> -->
   </div>
 </template>
 
@@ -33,17 +33,17 @@
 // import UserView from "./components/UserView.vue";
 // import TaskServerRequest from "./components/TaskServerRequest.vue";
 // import OpenForm from "./components/LandingPage/OpenForm.vue";
-import LandingPage from "./components/LandingPage/LandingPage.vue";
-// import UserCommentsView from "./components/UserCommentsView.vue";
+// import LandingPage from "./components/LandingPage/LandingPage.vue";
+import UserCommentsView from "./components/UserCommentsView.vue";
 export default {
   name: "App",
   components: {
-    // UserCommentsView,
+    UserCommentsView,
     // UserSelect,
     // UserView,
     // TaskServerRequest,
     // OpenForm,
-    LandingPage,
+    // LandingPage,
     // MainView,
   }, //it means that "hey, we will use it by adding it under components"
 
