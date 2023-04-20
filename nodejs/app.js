@@ -4,11 +4,14 @@ var cors = require('cors');
 var mysql = require('mysql');
 var userRoutes = require('./routes/user.route');
 var commentRoutes = require('./routes/comment.route');
+var mealRoutes = require('./routes/meal.route');
+var categoryRoutes = require('./routes/category.route');
 var sqlRoutes = require('./routes/sql.route');
 
 app.use(express.json());
 app.use(cors({
-    origin:'http://localhost:8080'
+    origin:'http://localhost:8080',
+    origin: true,
 }));
 
 var router = express.Router()
@@ -21,6 +24,8 @@ router.get('*', (reject, response) =>{
 app.use('/api/users', userRoutes);
 app.use('/api/sql', sqlRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/meals', mealRoutes);
+app.use('/api/categories', categoryRoutes);
 app.use(router);
 
 

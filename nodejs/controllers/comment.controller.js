@@ -14,10 +14,14 @@ function runSql(sql, response){
 
 exports.list = (request, response) =>{
     var sql = 'SELECT * FROM `VaidaLinkuviene-comments`'
+
+    if(request.query.user_id){
+        sql = sql + `WHERE user_id="${request.query.user_id}"`
+    }
     runSql(sql, response)
 }
 
-exports.findUser = (request, response) =>{
+exports.findComment = (request, response) =>{
     var sql = 'SELECT * FROM `VaidaLinkuviene-comments` WHERE id='+request.params.id
     runSql(sql, response)
 }
@@ -51,11 +55,10 @@ exports.update = (request, response) => {
     runSql(sql, response)
 }
 
-// TODO: change to have the correct logic
 exports.save= (request, response) => {
     var{comment, user_id} = request.body;
 
-    var sql = `INSERT INTO \`VaidaLinkuviene-comments\` (first_name, last_name, email)   VALUES(" `+first_name+`", "`+last_name+`", "`+email+`")`
+    var sql = `INSERT INTO \`VaidaLinkuviene-comments\` (comment, user_id) VALUES("${comment}", ${user_id})`
 
    runSql(sql, response)
 }

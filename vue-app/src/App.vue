@@ -26,6 +26,7 @@ export default {
   name: 'App',
   components: {
     UserCommentsView
+    // UserView
 },
   methods: {
 
