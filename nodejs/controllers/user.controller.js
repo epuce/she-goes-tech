@@ -31,33 +31,44 @@ exports.delete = function(request, response) {
     runSql(sql, response);
 }
 
-exports.update = function(request, response) {
+exports.update = async function(request, response) {
     var {first_name, last_name, email} = request.body;
 
-    var changeValues = '';
+   
+    await app.db.query("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'valda.naujok-users'", function(error, data) {
+        var columns = data.map((column) => column.COLUMN_NAME)
+        var changeValues = [];
+        var errors = [];
 
-    if (first_name) {
-        changeValues += `first_name="`+first_name+`"`
-    }
-    if (last_name) {
-        changeValues += `last_name="`+last_name+`"`
-    }
-    if (email) {
-        changeValues += `email="`+email+`"`
-    }
+        Object.keys(request.body).forEach((val) => {
+            if (!columns.includes(val)) {
+                errors.push("Column: '" +  val + "' does not exist on entity you are trying to modify")
+            }
+        })
 
-    var sql = `UPDATE \`valda.naujok-users\` 
-    SET `+changeValues+`
-    WHERE id=`+request.params.id;
-
-    runSql(sql, response)
+        if (errors.length > 0) {
+            response.send(JSON.stringify(errors))
+        }
+    
+        if (first_name) {
+            changeValues.push(`first_name="${first_name}"`)
+        }
+        if (last_name) {
+            changeValues.push(`last_name="${last_name}"`)
+        }
+        if (email) {
+            changeValues.push(`email="${email}"`)
+        }
+    
+        var sql = `UPDATE \`valda.naujok-users\` 
+        SET ${changeValues.join(',')}
+        WHERE id=`+request.params.id;
+    
+        runSql(sql, response)
+    })
 }
 
 exports.save = function(request, response) {
-    var first_name = request.body.first_name
-    var last_name = request.body.last_name
-    var email = request.body.email
-
     var {first_name, last_name, email} = request.body;
 
     var sql = `
