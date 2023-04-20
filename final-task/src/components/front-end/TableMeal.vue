@@ -13,7 +13,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody v-for="item in mealList" :key="item.id" class="meal-list__meal">
+                <tbody v-for="item in tmpMealList" :key="item.id" class="meal-list__meal">
                     <tr>
                         <td>{{ item.name }}</td>
                         <td>{{ item.description }}</td>
@@ -28,13 +28,22 @@
                 </tbody>
             </table>
 
+<FormSlideout />
+
            
     </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
+import FormSlideout from './FormSlideout.vue';
 export default defineComponent({
-    setup() {
+    props: {
+        mealList: {
+            type: Array,
+            required: true,
+        }
+    },
+    setup(props) {
         const meal = ref({
             name: "",
             description: "",
@@ -43,20 +52,82 @@ export default defineComponent({
             id: null,
             // category_id: null
         });
-        const mealList = ref([]);
-        fetch("http://localhost:8002/api/meals")
-            .then(resp => resp.json())
-            .then(resp => {
-            mealList.value = resp.data;
-        });
+        // const mealList = ref([]);
+        // fetch("http://localhost:8002/api/meals")
+        //     .then(resp => resp.json())
+        //     .then(resp => {
+        //     mealList.value = resp.data;
+        // });
+
+        var tmpMealList=ref(props.mealList)
         const onMealDelete = (mealId) => {
             fetch(`http://localhost:8002/api/meals/${mealId}`, {
                 method: "DELETE"
             })
                 .then(resp => resp.json())
                 .then(() => {
-                mealList.value = mealList.value.filter(meal => meal.id !== mealId);
+                    tmpMealList.value = tmpMealList.value.filter(meal => meal.id !== mealId);
             });
+        };
+        const onMealSave = () => {
+            const payload = {
+                name: meal.value.name,
+                description: meal.value.description,
+                price: meal.value.price,
+                // category_id: meal.value.category_id,
+                allergens: meal.value.allergens,
+            };
+            if (meal.value.id) {
+                fetch(`http://localhost:8002/api/meals/${meal.value.id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                })
+                    .then(resp => resp.json())
+                    .then(resp => {
+                    if (!resp.error) {
+                        const mealIndex = tmpMealList.value.findIndex((item) => item.id === meal.value.id);
+                        tmpMealList.value[mealIndex] = {
+                            ...tmpMealList.value[mealIndex],
+                            ...payload,
+                        };
+                        meal.value = {
+                            name: "",
+                            description: "",
+                            id: null,
+                            // category_id: null,
+                            allergens: "",
+                            price: null
+                        };
+                    }
+                });
+            }
+            else {
+                fetch("http://localhost:8002/api/meals", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                })
+                    .then(resp => resp.json())
+                    .then(resp => {
+                    if (!resp.error) {
+                        tmpMealList.value.push({
+                            ...payload,
+                            id: resp.data.insertId
+                        });
+                        meal.value = {
+                            name: "",
+                            description: "",
+                            allergens: "",
+                            price: null
+                        };
+                    }
+                });
+            }
         };
         // const fillMealForm = (tmpMeal) => {
         //     meal.value = { ...tmpMeal };
@@ -64,12 +135,15 @@ export default defineComponent({
         return {
             // openSlideout,
             meal,
-            mealList,
-            // onMealSave,
+            tmpMealList,
+            // mealList,
+            onMealSave,
             onMealDelete,
+            // onMealSave
             // fillMealForm,
         };
     },
+    components: { FormSlideout }
 })
     
 </script>

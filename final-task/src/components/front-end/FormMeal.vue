@@ -3,17 +3,17 @@
         <form>
             <label class="label name">
                 Name
-                <input type="text" placeholder="Add a name" v-model="name" required>
+                <input type="text" placeholder="Add a name" v-model="meal.name" required>
             </label>
 
             <label class="label description" >
                 Description
-                <textarea placeholder="Add a description" v-model="description" required></textarea>
+                <textarea placeholder="Add a description" v-model="meal.description" required></textarea>
             </label>
 
             <label class="label">
                 Price, &euro;
-   <input type="number" placeholder="Add a price" v-model="price" required>
+   <input type="number" placeholder="Add a price" v-model="meal.price" required>
             </label>
 
             <div class="form-check">
@@ -26,7 +26,7 @@
           
             <label v-if="isChecked" class="label allergens" >
                 Enter all allergens
-                <textarea placeholder="Add allergens" v-model="allergens"></textarea>
+                <textarea placeholder="Add allergens" v-model="meal.allergens"></textarea>
             </label>
 
             <div>

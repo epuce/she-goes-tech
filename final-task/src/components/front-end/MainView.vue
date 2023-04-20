@@ -2,9 +2,7 @@
     <div>
         <div class="header">
         <FormSlideout />
-        <TableMeal />
-        <!-- <FormCategory /> -->
-        <!-- <TableCategory /> -->
+        <TableMeal :mealList="mealList"/>
     </div>
 
     <div class="table">
@@ -15,13 +13,17 @@
 
 <script>
 
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import FormSlideout from './FormSlideout.vue';
 import TableMeal from './TableMeal.vue';
-// import FormCategory from './FormCategory.vue';
-// import TableCategory from './TableCategory.vue';
 export default defineComponent({
     setup(){
+        const mealList = ref([]);
+        fetch("http://localhost:8002/api/meals")
+            .then(resp => resp.json())
+            .then(resp => {
+            mealList.value = resp.data;
+        });
     
     },
     components: {
