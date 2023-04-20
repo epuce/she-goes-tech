@@ -12,7 +12,7 @@
         </div>
         <div class="user-select__body">
             <div v-for="(user, index) in tmpUsers" :key="index">
-                <UserOption v-if="user.isDisplayed" :user="user" @click="onUserClick(index)"/>
+                <UserOption v-if="user.isDisplayed" :user="user" @click="onUserClick(index)" data-testId="user-option"/>
             </div>
         </div>
         <div class="user-select__footer">
@@ -52,7 +52,7 @@ export default defineComponent({
         var onUserClick = function(index) {
             var user = tmpUsers.value[index]
 
-            user.isSelected = !user.isSelected; 
+            user.isSelected = !user.isSelected;
         }
 
         var onSearchChange = function() {

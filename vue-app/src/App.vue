@@ -3,7 +3,7 @@
     <!-- <MainView heading="Some cool text" btnType="warning" /> -->
     <!-- <MainView heading="This also works"/> -->
     <!-- <MainView/> -->
-    <!-- <UserSelect :users="userList"/> -->
+    <UserSelect :users="userList"/>
 
     <!-- <router-link to="/" >Main</router-link> -->
     <!-- <br /> -->
@@ -25,7 +25,7 @@
 
 <script>
 // import MainView from './components/MainView.vue'
-// import UserSelect from './components/UserSelect/UserSelect.vue'
+import UserSelect from './components/UserSelect/UserSelect.vue'
 // import TaskServerRequest from './components/TaskServerRequest.vue';
 // import UserView from './components/UserView.vue';
 
@@ -34,7 +34,8 @@ import UserCommentsView from './components/UserCommentsView.vue';
 export default {
   name: 'App',
   components: {
-    UserCommentsView
+    UserCommentsView,
+    UserSelect
 },
   methods: {
   },
