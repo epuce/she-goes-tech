@@ -1,1 +1,36 @@
-# she-goes-tech
+# she-goes-tech: Edmunds Pūce
+
+## Structure
+- Introduction
+- GIT + HTML tags
+- HTML attributes
+- CSS basics
+- CSS bo model (nav bar)
+- CSS flex
+- CSS grid, media queries, bootstrap
+- Landing page recreation
+- JavaScript data types, JavaScript comparisons
+- if/else if/else, switch
+- JavaScript loops and functions
+- DOM events
+- CRUD - CREATE and READ parts
+- CRUD - UPDATE and DELETE parts
+- JavaScript prototypes
+- HTML and CSS task
+- jQuery
+- jQuery plugins
+- Vue introduction part 1/2
+- Vue introduction part 2/2
+- Vue UserSelect part 1/2
+- Vue UserSelect part 2/2, Vue router
+- Server requests
+- NodeJs server with express
+- SQL introduction
+- Comments API
+- ES6, UserCommentsView part 1/3
+- UserCommentsView part 2/3
+- UserCommentsView part 3/3, automated testing
+- **final task**
+- **final task** consultation
+- **final task** consultation
+- Presenting the **final task**
