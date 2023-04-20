@@ -18,7 +18,9 @@
           v-if="user.isDisplayed"
           :user="user"
           @click="onUserClick(index)"
+          data-testId="user-option"
         />
+        <!-- for testing link with UserSelect.spec.js here -->
       </div>
     </div>
     <div class="user-select__footer">

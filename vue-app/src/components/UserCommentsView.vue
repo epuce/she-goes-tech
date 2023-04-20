@@ -2,58 +2,72 @@
     <div class="user-comments">
         <div class="user-comments__comments">
             <div class="user-comments__users">
-                <div v-for="user in userList" 
-                @click="onUserSelect(user.id)"
-                :key="user.id" 
-                :title="user.first_name+' '+user.last_name"
-                class="user-comments__user-avatar">
-                
-                {{ user.first_name[0] }}{{ user.last_name[0] }}
-                <!-- or could use last_name.substr(0,1) -->
+                <div v-for="user in userList" @click="onUserSelect(user.id)" :key="user.id"
+                    :title="user.first_name + ' ' + user.last_name" :class="{
+                        'user-comments__user-avatar--active': comment.user_id === user.id
+                    }" class="user-comments__user-avatar">
+
+                    {{ user.first_name[0] }}{{ user.last_name[0] }}
+                    <!-- or could use last_name.substr(0,1) -->
                 </div>
             </div>
+            <div class="user-comments__textarea-wrapper" v-if="comment.user_id">
+            <textarea v-model="comment.data"  class="user-comments__textarea"></textarea>
+
+            <button type="button" v-if="comment.data.length > 0" @click="onCommentSave()">Save</button>
         </div>
-        <div class="user-comments__user">
-            <form>
-                <label>
-                    First name
+        <div class="comment-list">
+            <div v-for="item in comment.list" :key="item.id">
+                {{ item.comment }}
+            </div>
+        </div>
 
-                    <input v-model="user.first_name">
-                </label>
+    </div>
+    <div class="user-comments__user">
+        <form>
+            <label>
+                First name
 
-                <label>
-                    Last name
+                <input v-model="user.first_name">
+            </label>
 
-                    <input v-model="user.last_name">
-                </label>
+            <label>
+                Last name
 
-                <div>
-                    <button type="button" @click="onUserSave()">Save</button>
-                </div>
-            </form>
-            <div class="user-list">
-                <div v-for="item in userList" :key="item.id" class="user-list__user" :class="{
-                    'user-list__user--active': user.id === item.id
-                }" @click="fillUserForm(item)">
+                <input v-model="user.last_name">
+            </label>
 
-                    {{ item.first_name }} {{ item.last_name }}
+            <div>
+                <button type="button" @click="onUserSave()">Save</button>
+            </div>
+        </form>
+        <div class="user-list">
+            <div v-for="item in userList" :key="item.id" class="user-list__user" :class="{
+                'user-list__user--active': user.id === item.id
+            }" @click="fillUserForm(item)">
 
-                    <!-- <font-awesome-icon 
+                {{ item.first_name }} {{ item.last_name }}
+
+                <!-- <font-awesome-icon 
                         icon="fa-trash"
                         @click="onUserDelete(user.id)"
                         class="user-list__delete" /> -->
-                    <button @click="onUserDelete(item.id)" class="user-list__delete">Delete
-                    </button>
-                </div>
+                <button @click.stop="onUserDelete(item.id)" class="user-list__delete">Delete</button>
             </div>
-
         </div>
     </div>
+</div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
     setup() {
+        const comment = ref({
+            user_id: null,
+            data: '',
+            list: []
+        })
+
         const user = ref({
             first_name: '',
             last_name: '',
@@ -141,17 +155,42 @@ export default defineComponent({
         }
 
         const onUserSelect = (userId) => {
-            // comment.value.user_id = userId
-            fetch(`http://localhost:8002/api/comments?user_id=${userId}`)
-            .then(resp => resp.json())
-            .then(resp => {
-                // comment.value.list = resp.data
+            comment.value.user_id = userId
 
-            // fetch(`http://localhost:8002/api/comments?user_id=${userId}`)('')
-            // .then(resp => resp.json())
-            // .then(resp => {
-                console.log(resp)
-            })
+            fetch(`http://localhost:8002/api/comments?user_id=${userId}`)
+                .then(resp => resp.json())
+                .then(resp => {
+                    comment.value.list = resp.data
+
+                    // fetch(`http://localhost:8002/api/comments?user_id=${userId}`)('')
+                    // .then(resp => resp.json())
+                    // .then(resp => {
+                    // console.log(resp)
+                })
+        }
+
+        const onCommentSave = () => {
+            const payload = {
+                comment: comment.value.data,
+                user_id: comment.value.user_id
+            }     
+            fetch('http://localhost:8002/api/comments', {
+                    method: "POST",
+                    headers: {
+                    'Content-Type': 'application/json',
+                },
+                    body: JSON.stringify(payload),
+                })
+                    .then(resp => resp.json())
+                    .then(resp => {
+                        if (!resp.error) {
+                            comment.value.list.push({
+                                ...payload,
+                                id: resp.data.insertId
+                            })
+                        }
+                    })
+
         }
 
         return {
@@ -161,6 +200,8 @@ export default defineComponent({
             onUserDelete,
             fillUserForm,
             onUserSelect,
+            comment,
+            onCommentSave,
         }
     }
 })
@@ -229,6 +270,7 @@ export default defineComponent({
     flex-wrap: wrap;
     gap: 8px;
 }
+
 .user-comments__user-avatar {
     display: flex;
     justify-content: center;
@@ -240,4 +282,24 @@ export default defineComponent({
     cursor: pointer;
 }
 
+.user-comments__user-avatar--active {
+    background-color: rgba(0, 0, 100, 0.2);
+}
+
+.user-comments__textarea {
+    margin-top: 16px;
+    width: 100%;
+    height: 150px;
+    resize: none;
+}
+
+.user-comments__textarea-wrapper {
+    position: relative;
+}
+
+.user-comments__textarea-wrapper button {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+}
 </style>
