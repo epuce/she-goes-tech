@@ -22,7 +22,7 @@ describe("components/UserSelect", () => {
     expect(isValidEmail("test@test")).toBe(false);
     expect(isValidEmail("test@test.")).toBe(false);
   });
-
+})
   const users = [
     {
       id: 1,

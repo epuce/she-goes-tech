@@ -66,9 +66,9 @@ exports.save = function(request, response) {
 
     var sql = `
         INSERT INTO \`buraityte-comments\`
-        (first_name, last_name, email)
-        VALUES("`+first_name+`","`+last_name+`","`+email+`")
-    `
+        (comment, user_id)
+        VALUES("${comment}",${user_id})
+        `
 
     runSql(sql, response)
 }
