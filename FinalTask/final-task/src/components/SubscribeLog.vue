@@ -1,20 +1,26 @@
 <template>
     <div class="subscribeWindow" id="myDiv">
       <div class="header">
-        <div id="text">
+        <div>
+            <div class="welcomeText" :style="{ display: showWelcomeText ? 'block' : 'none' }">
             <h2>Welcome!</h2>
-            To keep connected with us <br />
-            please fill out the form!
+            <p>To keep connected with us <br />
+            please fill out the form!</p></div>
+            <div :style="{ display: showThanxText ? 'block' : 'none' }" id="text"></div>
         </div>
       </div>
       <div class="footer">
         <button
           class="buttonSubscribe"
-          @click="toggleDivs()"
+          @click="toggleDivs(), toggleButtonSubscribe()"
           :style="{ display: showButtonSubscribe ? 'block' : 'none' }"
         >
           Subscribe
         </button>
+        <button class="buttonClose"
+        :style="{ display: showButtonClose ? 'block' : 'none' }"
+        @click="!toggleButtonClose(), !toggleButtonSubscribe(), !toggleWelcomeText(), toggleThanxText()"
+        >X</button>
       </div>
     </div>
   <div class="formWindow" id="formWindow">
@@ -26,22 +32,17 @@
       <form>
         <div class="headerForm">
           <label>Name</label>
-          <!--Jālabo v-model uz v-model="user.first_name"-->
-          <input v-model="user" id="name"/>
+          <input v-model="user.first_name" id="nameThx"/>
           <label>Surname</label>
-          <!--Jālabo v-model uz v-model="user.last_name"-->
-          <input v-model="user" />
+          <input v-model="user.last_name" />
           <label>Email</label>
-          <!--Jālabo v-model uz v-model="user.email"-->
-          <input v-model="user" />
+          <input v-model="user.email" />
           <div class="subscriptionRow">
             <CheckBox
               label="Subscribe"
-              v-model="isChecked"
-              @click="toggleDropdown"
-            />
+              @update-checkbox="toggleDropdown"/>
           </div>
-          <div :style="{ display: displayDropdown }">
+          <div :style="{ display: displayDropdown}">
             <VueDropdown>Dropdown</VueDropdown>
           </div>
         </div>
@@ -49,8 +50,7 @@
           <button
             type="button"
             class="buttonSubscribe"
-            @click="toggleColumnRight(), onUserSave(), updateText()"
-          >
+            @click="toggleColumnRight(), onUserSave(), updateText(), toggleButtonClose(), toggleWelcomeText()">
             Submit
           </button>
         </div>
@@ -115,12 +115,14 @@ export default defineComponent({
 
         const updateText = () => {
             const text = document.getElementById('text');
-            text.textContent = 'Thank you for subscribing ' + document.getElementById("name").value
+            text.textContent = 'Thank you for subscribing ' + document.getElementById("nameThx").value + ' !'
+            text.classList.add('textThx');
         }
 
         return {
             onUserSave,
-            updateText
+            updateText,
+            user
         }
     },
 
@@ -129,28 +131,44 @@ export default defineComponent({
             showButtonSubscribe: true,
             isChecked: false,
             displayDropdown: 'none',
+            showButtonClose: false,
+            showWelcomeText: true,
+            showThanxText: true
           }
         },
 
     methods: {
-            toggleDivs() {
+            toggleButtonSubscribe() {
                 this.showButtonSubscribe = !this.showButtonSubscribe
+            },
+            toggleDivs() {
                 const element = document.getElementById('myDiv');
                 element.classList.add('subscribeWindowTwo');
                 const formWindow = document.getElementById('formWindow');
                 formWindow.classList.add('formWindowTwo');
             },
 
-            toggleDropdown() {
-                this.displayDropdown = this.isChecked ? 'none' : 'block';
-                },
+            toggleDropdown(isChecked) {
+              this.displayDropdown = isChecked ? 'none' : 'block';
+            },
 
             toggleColumnRight() {
                 const element = document.getElementById('myDiv');
                 element.classList.remove('subscribeWindowTwo');
                 const formWindow = document.getElementById('formWindow');
                 formWindow.classList.remove('formWindowTwo');
+            },
+            toggleButtonClose() {
+                this.showButtonClose = !this.showButtonClose
+            },
+            toggleWelcomeText() {
+                this.showWelcomeText = !this.showWelcomeText
+            },
+            toggleThanxText() {
+                this.showThanxText = !this.showThanxText
             }
+
+
     },
 })
 </script>
@@ -159,8 +177,7 @@ export default defineComponent({
 .subscribeWindow {
   color: azure;
   width: 650px;
-  margin-left: 0;
-  background-color: rgba(24, 37, 37, 0.9);
+  background-color: rgba(24, 37, 37, 0.8);
   border-radius: 30px;
   box-shadow: 10px 25px 30px rgba(24, 37, 37, 0.8);
   position: absolute;
@@ -169,7 +186,6 @@ export default defineComponent({
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   display: block;
-  float: left;
   transition: width 0.5s linear, margin-left 0.5s linear;
 }
 
@@ -203,8 +219,8 @@ export default defineComponent({
 }
 
 .columnLeft {
-  float: left;
   width: 226px;
+  float: left;
   background-color: none;
   border-radius: 30px 0px 0px 30px;
 }
@@ -287,6 +303,23 @@ h1 {
   color: white;
   background: #fca26e;
 }
+.buttonClose {
+  padding: 10px 15px 10px 15px;
+  border-radius: 25px;
+  border: 2px solid #fca26e;
+  font-size: large;
+  color: #fca26e;
+  background: none;
+  float: right;
+  bottom: 0;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px #fca26e;
+  display: none;
+}
+.buttonClose:hover {
+  color: white;
+  background: #fca26e;
+}
 
 input:focus {
   outline: none !important;
@@ -299,5 +332,9 @@ input:focus {
   height: 30px;
   margin-bottom: 20px;
   color: azure;
+}
+
+.textThx {
+  font-size: x-large;
 }
 </style>
