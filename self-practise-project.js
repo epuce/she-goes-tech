@@ -76,50 +76,162 @@ const getMultiply = function (obj) {
   objValues = Object.values(obj);
   objkeys = Object.keys(obj);
   let arrValues = [];
+  let initialValue = 1;
 
   objValues.forEach((value) => {
     if (typeof value === "string" && value.includes("=MULTIPLY(")) {
       const matchRef = value.substring(10, value.length - 1);
-      console.log(matchRef);
       arrValues = matchRef.replace(/\s/g, "").split(",");
     }
   });
-  let initialValue = 1;
 
   const multiply = function (arrValues, objkeys) {
-    console.log(arrValues);
-    console.log(objkeys);
-
     arrValues.every((element) => {
       if (objkeys.includes(element) && typeof element === "string") {
-        initialValue = initialValue * obj[element];
+        if (typeof obj[element] === "number") {
+          initialValue = initialValue * obj[element];
+        } else {
+          console.log("#ERROR: type does not match");
+        }
       } else if (!objkeys.includes(element) && isNaN(parseInt(element, 10))) {
-        console.log("One of the arguments is wrong type");
+        console.log("#ERROR: type does not match");
       } else {
         console.log("not worked");
       }
 
-      return initialValue;
+      // return initialValue;
     });
     return initialValue;
   };
   // must be number type, adding all the simple numbers to the initialValue
   arrValues.forEach((item) => {
     if (parseInt(item, 10)) {
-      initialValue = initialValue + parseInt(item, 10);
+      initialValue = initialValue * parseInt(item, 10);
     }
   });
 
   const total = multiply(arrValues, objkeys);
-
   return total;
 };
 
-const getDivide = function () {};
+const getDivide = function (obj) {
+  objValues = Object.values(obj);
+  objkeys = Object.keys(obj);
+  let arrValues = [];
+  let dividend = null;
+  let devisor = null;
+  let result = null;
+  objValues.forEach((value) => {
+    if (typeof value === "string" && value.includes("=DIVIDE(")) {
+      const matchRef = value.substring(8, value.length - 1);
+      arrValues = matchRef.replace(/\s/g, "").split(",");
+    }
+  });
+
+  const divide = function (arrValues, objkeys) {
+    let calculation;
+
+    if (dividend && devisor) {
+      result = dividend / devisor;
+      calculation = parseFloat(result).toFixed(7);
+    } else if (dividend && devisor === null) {
+      if (objkeys.includes(arrValues[1]) && typeof arrValues[1] === "string") {
+        if (typeof obj[arrValues[1]] === "number") {
+          result = dividend / obj[arrValues[1]];
+          calculation = parseFloat(result).toFixed(7);
+        } else {
+          console.log("#ERROR: type does not match");
+        }
+      }
+    } else if (dividend === null && devisor) {
+      if (objkeys.includes(arrValues[0]) && typeof arrValues[0] === "string") {
+        if (typeof obj[arrValues[0]] === "number") {
+          result = obj[arrValues[0]] / devisor;
+          calculation = parseFloat(result).toFixed(7);
+        } else {
+          console.log("#ERROR: type does not match");
+        }
+      }
+    } else if (dividend === null && devisor === null) {
+      if (
+        objkeys.includes(arrValues[0]) &&
+        objkeys.includes(arrValues[1]) &&
+        typeof arrValues[1] === "string" &&
+        typeof arrValues[0] === "string"
+      ) {
+        if (
+          typeof obj[arrValues[0]] === "number" &&
+          typeof obj[arrValues[1]] === "number"
+        ) {
+          result = obj[arrValues[0]] / obj[arrValues[1]];
+
+          calculation = result.toFixed(7).replace(/\.?0+$/, "");
+        } else {
+          console.log("#ERROR: type does not match");
+        }
+      }
+    }
+
+    return +calculation;
+  };
+  // must be only 2 values
+  if (arrValues.length > 2) {
+    return console.log("#ERROR: only two arguments are required");
+  }
+  if (parseInt(arrValues[0], 10)) {
+    dividend = parseInt(arrValues[i]);
+  }
+  if (parseInt(arrValues[1], 10) && arrValues[1] !== 0) {
+    devisor = parseInt(arrValues[1], 10);
+  }
+
+  const total = divide(arrValues, objkeys);
+
+  return total;
+};
 const getFirstGreater = function () {};
 const getEqual = function () {};
 const getNot = function () {};
-const getAnd = function () {};
+const getAnd = function (obj) {
+  objValues = Object.values(obj);
+  objkeys = Object.keys(obj);
+  let arrValues = [];
+  let result;
+
+  objValues.forEach((value) => {
+    if (typeof value === "string" && value.includes("=AND(")) {
+      const matchRef = value.substring(5, value.length - 1);
+      arrValues = matchRef.replace(/\s/g, "").split(",");
+    }
+  });
+
+  const compare = function (arrValues) {
+    let list = [];
+
+    const isBoolean = arrValues.every((element) => {
+      console.log(obj[element]);
+      obj[element] === "boolean";
+    });
+
+    console.log(isBoolean);
+
+    if (isBoolean) {
+      arrValues.forEach((element) => {
+        list.push(obj[element]);
+      });
+    } else {
+      result = "#ERROR: type does not match";
+    }
+    console.log();
+    result = list.every((element) => {
+      element === true;
+    });
+    return result;
+  };
+
+  const isTrue = compare(arrValues, objkeys);
+  return isTrue;
+};
 const getOr = function () {};
 const getIf = function () {};
 const getConcat = function () {};
@@ -127,47 +239,63 @@ const getConcat = function () {};
 // CHOOSING THE RIGHT OPERATOR FUNCTION
 const evaluateData = function (obj) {
   console.log(obj);
-
+  let newObject = new Array();
   // console.log(Object.values(obj));
-  let newObject = [];
-  console.log(newObject);
+  const clonedObj = Object.assign({}, obj);
   const arr = [];
-  const keyNumb = Object.keys(obj).forEach((element) => {
+
+  Object.keys(obj).forEach((element) => {
     arr.push(parseInt(element[1], 10));
   });
   const arrLength = arr.reduce((a, b) => Math.max(a, b));
 
-  newObject = new Array(arrLength).fill([]);
-  console.log(newObject);
+  for (let i = 0; i < arrLength; i++) {
+    newObject[i] = Array();
+  }
 
+  const addToTheList = function (receivedKey, value) {
+    const arrIndex = parseInt(receivedKey[1], 10);
+    const index = arrIndex - 1;
+    newObject[index].push(value);
+  };
   // SUM
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       if (typeof obj[key] === "string" && obj[key].includes("=SUM(")) {
-        obj[key] = getSum(obj);
+        clonedObj[key] = getSum(obj);
       } else if (
         typeof obj[key] === "string" &&
         obj[key].includes("=MULTIPLY(")
       ) {
-        obj[key] = getMultiply(obj);
+        clonedObj[key] = getMultiply(obj);
+      } else if (
+        typeof obj[key] === "string" &&
+        obj[key].includes("=DIVIDE(")
+      ) {
+        clonedObj[key] = getDivide(obj);
+      } else if (typeof obj[key] === "string" && obj[key].includes("=GT(")) {
+        clonedObj[key] = getFirstGreater(obj);
+      } else if (typeof obj[key] === "string" && obj[key].includes("=AND(")) {
+        clonedObj[key] = getAnd(obj);
+      } else if (typeof obj[key] === "string" && obj[key].includes("=NOT(")) {
+        clonedObj[key] = getNot(obj);
+      } else if (typeof obj[key] === "string" && obj[key].includes("=EQ(")) {
+        clonedObj[key] = getEqual(obj);
       }
-      console.log(obj);
-      console.log(newObject);
-      console.log(parseInt(key[1], 10));
-      newObject[parseInt(key[1], 10) - 1].push(obj[key]);
-    }
-  }
-  console.log(newObject);
-  return newObject;
 
-  // MULTIPLY
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      if (typeof obj[key] === "string" && obj[key].includes("=MULTIPLY(")) {
-        obj[key] = getSum(obj);
-      }
+      addToTheList(key, clonedObj[key]);
     }
   }
+
+  return newObject;
+  // // MULTIPLY
+  // for (const key in obj) {
+  //   if (obj.hasOwnProperty(key)) {
+  //     if (typeof obj[key] === "string" && obj[key].includes("=MULTIPLY(")) {
+  //       obj[key] = getSum(obj);
+  //     }
+  //   }
+  // }
   // const keys = Object.keys(obj);
   // console.log(keys);
   // var result = Object.entries(obj).map((value) => value);
@@ -186,53 +314,53 @@ const evaluateData = function (obj) {
 
   // objValues = Object.values(obj);
   // console.log(objValues);
-  objValues.forEach((value) => {
-    // if (
-    //   typeof value === "string" &&
-    //   value.includes("=") &&
-    //   !value.includes("=SUM(") &&
-    //   !value.includes("=MULTIPLY(") &&
-    //   !value.includes("=DIVIDE(") &&
-    //   !value.includes("=GT(") &&
-    //   !value.includes("=EQ(") &&
-    //   !value.includes("=AND(") &&
-    //   !value.includes("=OR(") &&
-    //   !value.includes("=IF(") &&
-    //   !value.includes("=CONCAT(") &&
-    //   !value.includes("=NOT(")
-    // ) {
-    // }
-    // if (typeof value === "string" && value.includes("=SUM(")) {
-    //   console.log(obj[value]);
+  // objValues.forEach((value) => {
+  //   // if (
+  //   typeof value === "string" &&
+  //   value.includes("=") &&
+  //   !value.includes("=SUM(") &&
+  //   !value.includes("=MULTIPLY(") &&
+  //   !value.includes("=DIVIDE(") &&
+  //   !value.includes("=GT(") &&
+  //   !value.includes("=EQ(") &&
+  //   !value.includes("=AND(") &&
+  //   !value.includes("=OR(") &&
+  //   !value.includes("=IF(") &&
+  //   !value.includes("=CONCAT(") &&
+  //   !value.includes("=NOT(")
+  // ) {
+  // }
+  // if (typeof value === "string" && value.includes("=SUM(")) {
+  //   console.log(obj[value]);
 
-    //   getSum(obj);
-    // }
-    if (typeof value === "string" && value.includes("=MULTIPLY(")) {
-    }
-    if (typeof value === "string" && value.includes("=DIVIDE(")) {
-    }
-    if (typeof value === "string" && value.includes("=GT(")) {
-    }
-    if (typeof value === "string" && value.includes("=EQ(")) {
-    }
-    if (typeof value === "string" && value.includes("=AND(")) {
-    }
-    if (typeof value === "string" && value.includes("=OR(")) {
-    }
-    if (typeof value === "string" && value.includes("=IF(")) {
-    }
-    if (typeof value === "string" && value.includes("=CONCAT(")) {
-    }
-    if (typeof value === "string" && value.includes("=NOT(")) {
-    }
-    if (typeof value === "string" && !value.includes("=")) {
-    }
-  });
-  return newObject;
+  //   getSum(obj);
+  //   // }
+  //   if (typeof value === "string" && value.includes("=MULTIPLY(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=DIVIDE(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=GT(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=EQ(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=AND(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=OR(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=IF(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=CONCAT(")) {
+  //   }
+  //   if (typeof value === "string" && value.includes("=NOT(")) {
+  //   }
+  //   if (typeof value === "string" && !value.includes("=")) {
+  //   }
+  // });
+  // return newObject;
 };
 
 const loopingThroughCreatedArr = function () {
-  for (let i = 0; i < tempArr.length; i++) {
+  for (let i = 7; i < 8; i++) {
     if (Object.keys(tempArr[i].data).length === 0) {
       sheetsData = {
         id: tempArr[i].id,
@@ -242,8 +370,9 @@ const loopingThroughCreatedArr = function () {
     } else {
       sheetsData = {
         id: tempArr[i].id,
-        data: evaluateData(tempArr[7].data),
+        data: evaluateData(tempArr[14].data),
       };
+      console.log(sheetsData.data);
     }
   }
 };
@@ -269,15 +398,15 @@ const loopingThroughSheets = function () {
   loopingThroughCreatedArr();
 };
 
-loopingThroughSheets();
+// loopingThroughSheets();
 
-const calculateData = function (arr) {
-  if (arr.length === 0) {
-    return arr;
-  } else if (arr.length !== 0) {
-    evaluateData();
-  }
-};
+// const calculateData = function (arr) {
+//   if (arr.length === 0) {
+//     return arr;
+//   } else if (arr.length !== 0) {
+//     evaluateData();
+//   }
+// };
 
 //
 
