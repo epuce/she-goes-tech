@@ -1,12 +1,9 @@
 <template>
     <div>
-        <div class="header">
-        <FormSlideout />
-        <TableMeal :mealList="mealList" @add-to-list="addToList"/>
-    </div>
+        <FormMeal :mealList="mealList" @add-to-list="addToList"/>
 
     <div class="table">
-
+        <TableMeal :mealList="mealList"/>
     </div>
     </div>
 </template>
@@ -14,31 +11,26 @@
 <script>
 
 import { defineComponent, ref} from 'vue';
-import FormSlideout from './FormSlideout.vue';
 import TableMeal from './TableMeal.vue';
+import FormMeal from './FormMeal.vue';
 export default defineComponent({
     setup(){
+        
+        const mealList = ref([]);        
 
         const addToList = (data) => {
             mealList.value.push(data)
         }
         
-        const mealList = ref([]);
-
         return{
+            mealList,
             addToList,
-            mealList
         }
-        
-
     
     },
     components: {
-    // FormCategory,
-    // TableCategory
-    FormSlideout,
     TableMeal,
-    addToList
+    FormMeal
 },
 })
 </script>

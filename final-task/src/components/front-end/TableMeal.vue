@@ -43,7 +43,7 @@ export default defineComponent({
             required: true,
         }
     },
-    setup(props, {emit}) {
+    setup(props) {
         const meal = ref({
             name: "",
             description: "",
@@ -53,7 +53,12 @@ export default defineComponent({
             // category_id: null
         });
 
-        var tmpMealList=ref(props.mealList)
+        var tmpMealList=ref(props.mealList);
+        fetch("http://localhost:8002/api/meals")
+            .then(resp => resp.json())
+            .then(resp => {
+                tmpMealList.value = resp.data;
+        });
         const onMealDelete = (mealId) => {
             fetch(`http://localhost:8002/api/meals/${mealId}`, {
                 method: "DELETE"
@@ -63,80 +68,14 @@ export default defineComponent({
                     tmpMealList.value = tmpMealList.value.filter(meal => meal.id !== mealId);
             });
         };
-        const onMealSave = () => {
-            const payload = {
-                name: meal.value.name,
-                description: meal.value.description,
-                price: meal.value.price,
-                // category_id: meal.value.category_id,
-                allergens: meal.value.allergens,
-            };
-            if (meal.value.id) {
-                fetch(`http://localhost:8002/api/meals/${meal.value.id}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(payload)
-                })
-                    .then(resp => resp.json())
-                    .then(resp => {
-                    if (!resp.error) {
 
-                        const mealIndex = tmpMealList.value.findIndex((item) => item.id === meal.value.id);
-                        tmpMealList.value[mealIndex] = {
-                            ...tmpMealList.value[mealIndex],
-                            ...payload,
-                        };
-                        meal.value = {
-                            name: "",
-                            description: "",
-                            id: null,
-                            // category_id: null,
-                            allergens: "",
-                            price: null
-                        };
-
-                    }
-                });
-            }
-            else {
-                fetch("http://localhost:8002/api/meals", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload),
-                })
-                    .then(resp => resp.json())
-                    .then(resp => {
-                    if (!resp.error) {
-                        tmpMealList.value.push({
-                            ...payload,
-                            id: resp.data.insertId
-                        });
-                        meal.value = {
-                            name: "",
-                            description: "",
-                            allergens: "",
-                            price: null
-                        };
-                    }
-                });
-            }
-        };
         // const fillMealForm = (tmpMeal) => {
         //     meal.value = { ...tmpMeal };
         // }
         return {
-            // openSlideout,
             meal,
             tmpMealList,
-            // mealList,
-            onMealSave,
             onMealDelete,
-            // onMealSave
-            // fillMealForm,
         };
     },
     components: { FormSlideout }

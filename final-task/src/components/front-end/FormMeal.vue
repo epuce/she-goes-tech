@@ -1,5 +1,14 @@
 <template>
     <div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Add new meal</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+    
         <form>
             <label class="label name">
                 Name
@@ -35,15 +44,23 @@
             
         </form>
 
-        <MyPopup v-if="showPopup" @closePopup="showPopup=false"/>
-
+    </div>
+  </div>
+</div>
     </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
-import MyPopup from './MyPopup.vue';
 export default defineComponent({
-    setup(){
+    props:{
+        mealList:{
+            type: Array,
+            required: true,
+        }
+    },
+    setup(props, {emit}){
+
+
         var isChecked=ref(false); 
 
         var showPopup=ref(false);
@@ -59,12 +76,14 @@ export default defineComponent({
             // category_id: null
         });
 
-        const mealList = ref([]);
-        fetch("http://localhost:8002/api/meals")
-            .then(resp => resp.json())
-            .then(resp => {
-            mealList.value = resp.data;
-        });
+        // const mealList = ref([]);
+        // fetch("http://localhost:8002/api/meals")
+        //     .then(resp => resp.json())
+        //     .then(resp => {
+        //     mealList.value = resp.data;
+        // });
+
+        // var tmpMealList=ref(props.mealList)
         
         const onMealSave = () => {
            
@@ -75,34 +94,34 @@ export default defineComponent({
                 // category_id: meal.value.category_id,
                 allergens: meal.value.allergens,
             };
-            if (meal.value.id) {
-                fetch(`http://localhost:8002/api/meals/${meal.value.id}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(payload)
-                })
-                    .then(resp => resp.json())
-                    .then(resp => {
-                    if (!resp.error) {
-                        const mealIndex = mealList.value.findIndex((item) => item.id === meal.value.id);
-                        mealList.value[mealIndex] = {
-                            ...mealList.value[mealIndex],
-                            ...payload,
-                        };
-                        meal.value = {
-                            name: "",
-                            description: "",
-                            id: null,
-                            // category_id: null,
-                            allergens: "",
-                            price: null
-                        };
-                    }
-                });
-            }
-            else {
+            // if (meal.value.id) {
+            //     fetch(`http://localhost:8002/api/meals/${meal.value.id}`, {
+            //         method: "PUT",
+            //         headers: {
+            //             "Content-Type": "application/json"
+            //         },
+            //         body: JSON.stringify(payload)
+            //     })
+            //         .then(resp => resp.json())
+            //         .then(resp => {
+            //         if (!resp.error) {
+            //             const mealIndex = tmpMealList.value.findIndex((item) => item.id === meal.value.id);
+            //             tmpMealList.value[mealIndex] = {
+            //                 ...tmpMealList.value[mealIndex],
+            //                 ...payload,
+            //             };
+            //             meal.value = {
+            //                 name: "",
+            //                 description: "",
+            //                 id: null,
+            //                 // category_id: null,
+            //                 allergens: "",
+            //                 price: null
+            //             };
+            //         }
+            //     });
+            // }
+            // else {
                 fetch("http://localhost:8002/api/meals", {
                     method: "POST",
                     headers: {
@@ -112,11 +131,12 @@ export default defineComponent({
                 })
                     .then(resp => resp.json())
                     .then(resp => {
-                    if (!resp.error) {
-                        mealList.value.push({
-                            ...payload,
+                    // if (!resp.error) {
+                        emit('add-to-list', {
+                            data: {...payload,
                             id: resp.data.insertId
-
+                            }
+                        })
                         });
                         meal.value = {
                             name: "",
@@ -125,22 +145,20 @@ export default defineComponent({
                             price: null
                         };
                     }
-                });
-            }
-        };
+                // }
        
         return{
             isChecked,
             onMealSave,
             meal,
             showPopup,
-            userIsValid
+            userIsValid,
+            // tmpMealList
 
         }
     },
 
     components: {
-    MyPopup
 }
 
 })
@@ -194,6 +212,10 @@ input,textarea{
 
 .validation-error{
     border-color: red;
+}
+
+#offcanvasExample{
+  width: 300px;
 }
 
 </style>

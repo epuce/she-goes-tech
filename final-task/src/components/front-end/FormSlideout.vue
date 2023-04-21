@@ -8,7 +8,7 @@
   </div>
   <div class="offcanvas-body">
     <div>
-     <FormMeal />
+     <FormMeal :mealList="mealList"/>
     </div>
   </div>
 </div>
@@ -18,6 +18,12 @@
 import FormMeal from './FormMeal.vue';
 
 export default {
+  props:{
+    mealList:{
+      type: Array,
+      required: true,
+    }
+  },
     components: { FormMeal }
 }
 </script>
