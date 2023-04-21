@@ -2,25 +2,35 @@
   <div class="popup__wrapper">
     <div class="popup">
       <div class="signup__wrapper">
+        <alert show dismissible variant="danger" v-if="errors.length > 0" class="validation-error__wrapper">
+          <div v-for="error in errors" :key="error" class="validation-error__alert">
+            {{ error }}
+          </div>
+        </alert>
         <h2>Join a class:</h2>
         <form @submit.prevent="submitForm" class="signup-form">
-          <label>Name:
+          <label>First name:
 
-            <input id="name" v-model="name" type="text" name="name" /><br />
-            <div v-if="!nameIsValid" class="validation-error">Please enter a name</div>
+            <input id="firstName" v-model="firstName" type="text" name="firstName"
+              :class="{ 'validation-error__input': !firstName && showError }" /><br />
           </label>
 
-          <!-- <label>Last name:
-            <input type="text" name="last-name" /><br />
-          </label> -->
+          <label>Last name:
+
+            <!-- <input id="lastName" v-model="lastName" type="text" name="lastName" :class="!lastName ? 'validation-error__input' : ''"/><br /> -->
+            <!-- <input id="lastName" v-model="lastName" type="text" name="lastName" :class="{ 'validation-error__input': showError}"/><br /> -->
+            <input id="lastName" v-model="lastName" type="text" name="lastName"
+              :class="{ 'validation-error__input': !lastName && showError }" /><br />
+
+          </label>
 
           <label>Email:
 
-            <input type="email" name="email" v-model="email"/><br />
-            <div v-if="!emailIsValid" class="validation-error">Please enter a valid email</div>
+            <input type="email" name="email" v-model="email"
+              :class="{ 'validation-error__input': !email && showError }" /><br />
           </label>
 
-          <label>Class:
+          <label>Class type:
             <br>
             <select>
               <option value="beginner">Beginner</option>
@@ -31,7 +41,7 @@
 
           <label>Date:
             <br>
-            <input type="date" name="date" min="2023-04-20" max="2023-05-31" />
+            <input type="date" name="date" min="2023-04-27" max="2023-05-31" />
             <!-- can we show only a limited amount of days?  is there a prettier solution in VUE or other -->
           </label>
 
@@ -45,7 +55,7 @@
             <input type="tel" name="phone" /><br>
           </label>
 
-          <button class="btn__submit" @click="submitForm = true" type="button">Submit</button>
+          <button class="btn__submit" @click="submitForm" type="button">Submit</button>
           <!-- <button class="btn__submit"  @click="showSuccess = true" type="button">Submit</button> -->
         </form>
       </div>
@@ -73,62 +83,56 @@ export default defineComponent({
   data() {
     return {
       checked: false,
-      name: '',
+      errors: [],
+      firstName: '',
+      lastName: '',
       email: '',
-      nameIsValid: true,
-      emailIsValid: true,
-      // If isEmailValid = false, a message appears
+      showValidation: false,
     }
   },
-  
-    methods: {
-      validateForm() {
-      if (name.value.length < 3) {
-        nameIsValid.value = false;
-      } else {
-        nameIsValid.value = true;
-      }
-      if (!emailRegEx.test(email.value)) {
-        emailIsValid.value = false;
-      } else {
-        emailIsValid.value = true;
-      }
 
-      if (isNameValid.value && isEmailValid.value) {
-        //return this.emailIsValid && this.nameIsValid
+  methods: {
+    submitForm() {
+      this.errors = [];
+      if (!this.firstName) {
+        this.errors.push('First name is required');
       }
-    },
-      submitForm() {
-        if(validateForm()) {
-          console.log('FORM OK')
-          // TODO: submit data
-        } else {
-          console.log('INVALID FORM')
-        }
+      if (!this.lastName) {
+        this.errors.push('Last name is required');
+        this.showError = true
+      }
+      if (!this.email) {
+        this.errors.push('Email is required');
+      } else {
+        var emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!emailRegEx.test(this.email)) {
+          this.errors.push("Invalid email address");
+        } 
+      }
+      if (this.errors.length === 0 && this.firstName && this.lastName && this.email) {
+        this.showError = false
+        this.showSuccess = true
       }
     },
 
-
-
+  },
 
   setup(props, { emit }) {
-      var onClose = function () {
-        emit("close-signup-popup");
-      };
-      var showSuccess = ref(false)
-      var showPhone = ref(false)
+    var onClose = function () {
+      emit("close-signup-popup");
+    };
+    var showSuccess = ref(false)
+    var showPhone = ref(false)
 
-      return {
-        onClose,
-        // onSubmit,
-        showSuccess,
-        showPhone,
-  
-      };
-    },
+    return {
+      onClose,
+      showSuccess,
+      showPhone,
+    };
+  },
 
 
-  });
+});
 </script>
 <style>
 .popup__wrapper {
@@ -151,7 +155,6 @@ export default defineComponent({
 
 }
 
-/* <!-- TODO button and input alignment --> */
 
 .btn__close {
   position: absolute;
@@ -188,23 +191,9 @@ export default defineComponent({
 
 .signup-form input,
 select {
-  /* display: block; */
-  /* width: 100%;  */
-  /* /* margin: 0;  */
   padding: 5px;
 }
 
-/* .signup-from input,
-select {
-  /* padding: 10px 20px; 
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid gray;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: white;
-  /* width: 90%; 
-} */
 
 .signup-form select {
   display: inline-block;
@@ -234,13 +223,24 @@ select {
   background-color: #2a2a29;
 }
 
-.validation-error {
-  color: red;
-  font-size: 12px;
+.validation-error__wrapper {
+  display: block;
+  border-radius: 4px;
+  border: 2px solid darkred;
+  padding: 7px;
+  margin-bottom: 25px;
+  background-color: rgb(253, 221, 226);
 }
 
-/* .signup-form input {
-  border-color: red;
-} */
+.validation-error__alert {
+  color: darkred;
+  font-size: 15px;
+}
+
+
+.validation-error__input {
+  border: 2px solid darkred;
+  border-radius: 4px;
+}
 </style>
   

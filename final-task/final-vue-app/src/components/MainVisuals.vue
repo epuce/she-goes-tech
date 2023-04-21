@@ -269,7 +269,5 @@ export default {
         height: auto;
         margin-left: 25px;
     }
-
-
-   
+ 
 </style>

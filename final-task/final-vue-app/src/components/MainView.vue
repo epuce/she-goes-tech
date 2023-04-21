@@ -12,7 +12,6 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-// import SignupBtn from "./SignupBtn.vue"
 import SignupPopup from "./SignupPopup.vue"
 // import MainVisuals from "./MainVisuals.vue"
 // import MainFooter from "./MainFooter.vue"
@@ -20,15 +19,14 @@ import FrontTable from "./FrontTable.vue"
 
 export default defineComponent({
   components: {
-    // SignupBtn,
     SignupPopup,
     // MainVisuals,
     // MainFooter,
     FrontTable,
   },
   setup() {
-    // var showForm = ref(false) REMOVE TO NOT SHOW FORM ALL THE TIME
-    var showForm = ref(true)
+    var showForm = ref(false) 
+       // var showForm = ref(true)  // ADD/REMOVE TO SHOW FORM ALL THE TIME
 
     return {
       showForm,

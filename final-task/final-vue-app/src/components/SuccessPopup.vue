@@ -2,7 +2,7 @@
  <div class="successPopup__wrapper">
     <div class="successPopup">
       <button class="successBtn__close" @click="onClose()">X</button>
-      <h2>Success, {{ name }}</h2>
+      <h2>Success, {{ firstName }}</h2>
       <!-- // TODO: link with input of name -->
 
       <p>
@@ -38,7 +38,6 @@ export default defineComponent({
 <style>
 .successBtn__close {
   float: right;
-  /* margin: 0; */
   font-weight: bold;
   cursor: pointer;
   border: none;
