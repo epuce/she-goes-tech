@@ -11,20 +11,20 @@
         <form @submit.prevent="submitForm" class="signup-form">
           <label>First name:
 
-            <input id="firstName" v-model="participant.first_name" type="text" name="firstName"
-              :class="{ 'validation-error__input': !first_name && showError }" /><br />
+            <input id="first_name" v-model="participant.first_name" type="text" name="first_name"
+              :class="{ 'validation-error__input': !participant.first_name && showError }" /><br />
           </label>
 
           <label>Last name:
 
-            <input id="lastName" v-model="participant.last_name" type="text" name="lastName"
-              :class="{ 'validation-error__input': !last_name && showError }" /><br />
+            <input id="last_name" v-model="participant.last_name" type="text" name="last_name"
+              :class="{ 'validation-error__input': !participant.last_name && showError }" /><br />
             <!-- HERE MIGHT NEED TO UPDATE TO !participant.last_name for validation -->
           </label>
 
           <label>Email:
 
-            <input type="email" name="email" v-model="email"
+            <input type="email" name="email" v-model="participant.email"
               :class="{ 'validation-error__input': !email && showError }" /><br />
           </label>
 
@@ -52,7 +52,8 @@
             <input type="tel" name="phone" /><br>
           </label>
 
-          <button class="btn__submit" @click="submitForm" type="button">Submit</button>
+          <!-- <button class="btn__submit" @click="submitForm" type="button">Submit</button> -->
+          <button class="btn__submit" @click="validateForm" type="button">Submit</button>
           <!-- <button class="btn__submit"  @click="showSuccess = true" type="button">Submit</button> -->
         </form>
       </div>
@@ -82,9 +83,9 @@ export default defineComponent({
     return {
       checked: false,
       errors: [],
-      firstName: '',
-      lastName: '',
-      email: '',
+      // firstName: '',
+      // lastName: '',
+      // email: '',
       showValidation: false,
     }
   },
@@ -92,30 +93,30 @@ export default defineComponent({
   methods: {
     validateForm() {
       this.errors = [];
-      if (!this.firstName) {
+      if (!this.participant.first_name) {
         this.errors.push('First name is required');
       }
-      if (!this.lastName) {
+      // if (!this.lastName) {
+      if (!this.participant.last_name) {
         this.errors.push('Last name is required');
         this.showError = true
       }
-      if (!this.email) {
+      if (!this.participant.email) {
         this.errors.push('Email is required');
       } else {
         var emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!emailRegEx.test(this.email)) {
+        if (!emailRegEx.test(this.participant.email)) {
           this.errors.push("Invalid email address");
         }
       }
-      if (this.errors.length === 0 && this.firstName && this.lastName && this.email) {
+      if (this.errors.length === 0 && this.participant.first_name && this.participant.last_name && this.participant.email) {
         this.showError = false
+        // submitForm()
         this.showSuccess = true
       }
-    },
-    // TODO: review to not have this maybe?
-
+    }
+    // // TODO: review to not have this maybe?
   },
-
   setup(props, { emit }) {
     var onClose = function () {
       emit("close-signup-popup");
@@ -143,7 +144,7 @@ export default defineComponent({
       var payload = {
         first_name: participant.value.first_name,
         last_name: participant.value.last_name,
-        email: participant.value.email
+        email: participant.value.email,
       }
 
       fetch('http://localhost:8002/api/participants', {
@@ -159,7 +160,6 @@ export default defineComponent({
           if (!resp.error) {
               participantList.value.push({
               ...payload,
-              // id: resp.data.insertId
             })
 
             participant.value = {
@@ -167,6 +167,8 @@ export default defineComponent({
               last_name: '',
               email: '',
             }
+            // this.showSuccess = true
+
           }
         })
     }

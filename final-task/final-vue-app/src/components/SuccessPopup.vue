@@ -1,13 +1,16 @@
 <template>
- <div class="successPopup__wrapper">
+  <div class="successPopup__wrapper">
     <div class="successPopup">
       <button class="successBtn__close" @click="onClose()">X</button>
-      <h2>Success, {{ firstName }}</h2>
+      <h2>Success, {{ first_name }}</h2>
       <!-- // TODO: link with input of name -->
+      <!-- Can we refresh page upon pressing close button? Maybe add a function here -->
+
+      <!-- <p>{{ participant.first_name }}</p> -->
 
       <p>
-      Thank you for signing up to a class!
-    </p>
+        Thank you for signing up to a class!
+      </p>
 
     </div>
   </div>
@@ -17,11 +20,9 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
-    text: {
+    first_name: {
       type: String,
-      required: true,
     },
-   
   },
   setup(props, { emit }) {
     var onClose = function () {
@@ -47,7 +48,8 @@ export default defineComponent({
 .successBtn__close:hover {
   color: darkred;
 }
- .successPopup__wrapper {
+
+.successPopup__wrapper {
   position: fixed;
   top: 0;
   right: 0;

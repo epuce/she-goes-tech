@@ -51,12 +51,12 @@ export default defineComponent({
         SignupPopup,
     },
     setup() {
-        var participant = ref({
-            first_name: '',
-            last_name: '',
-            email: '',
-            id: null
-        })
+        // var participant = ref({
+        //     first_name: '',
+        //     last_name: '',
+        //     email: '',
+        //     id: null
+        // })
 
         // var participantList = ref([])
         var participantList = ref([
@@ -80,17 +80,15 @@ export default defineComponent({
 
         var showForm = ref(false)
 
-        var fillParticipantForm = (tmpParticipant) => {
-            showForm = true
-            participant.value = { ...tmpParticipant }
-        }
-
-
+        // var fillParticipantForm = (tmpParticipant) => {
+        //     showForm = true
+        //     participant.value = { ...tmpParticipant }
+        // }
 
         return {
             participantList,
             deleteParticipant,
-            fillParticipantForm,
+            // fillParticipantForm,
             showForm,
         };
 
