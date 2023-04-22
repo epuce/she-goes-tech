@@ -21,12 +21,14 @@
                         <td>{{ participant.first_name }}</td>
                         <td>{{ participant.last_name }}</td>
                         <td>{{ participant.email }}</td>
-                        <!-- <td> <button>Delete</button></td> -->
-                        <td> <button @click.stop="onParticipantUpdate(item.id)" class="participant-list__btn"><img
-                                    class="participant-list__btn-icon"
+                        <!-- <td> <button @click="showForm = true"  class="participant-list__btn"><img>  -->
+                        <!-- <td> <button  @click="fillParticipantForm()" class="participant-list__btn"><img -->
+                        <td> <button @click="showForm = true; fillParticipantForm(participant)"
+                                class="participant-list__btn"><img class="participant-list__btn-icon"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/640px-OOjs_UI_icon_edit-ltr.svg.png" /></button>
                         </td>
-                        <td> <button @click.stop="onParticipantDelete(item.id)" class="participant-list__btn"><img
+                        <!-- <td> <button @click.stop="onParticipantDelete(item.id)" class="participant-list__btn"><img -->
+                        <td> <button @click.stop="deleteParticipant(participant.id)" class="participant-list__btn"><img
                                     class="participant-list__btn-icon"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/OOjs_UI_icon_trash.svg/640px-OOjs_UI_icon_trash.svg.png" /></button>
                         </td>
@@ -34,25 +36,65 @@
                     </tr>
                 </tbody>
             </table>
+            <SignupPopup v-if="showForm" @close-signup-popup="showForm = false" />
         </div>
 
     </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
+import SignupPopup from "./SignupPopup.vue"
+
 
 export default defineComponent({
+    components: {
+        SignupPopup,
+    },
     setup() {
+        var participant = ref({
+            first_name: '',
+            last_name: '',
+            email: '',
+            id: null
+        })
+
+        // var participantList = ref([])
         var participantList = ref([
             fetch('http://localhost:8002/api/participants')
                 .then(resp => resp.json())
                 .then(resp => {
                     participantList.value = resp.data
                 })
+            // TODO: auto-refresh?
         ])
+
+        var deleteParticipant = (participantId) => {
+            fetch(`http://localhost:8002/api/participants/${participantId}`, {
+                method: 'DELETE'
+            })
+                .then(resp => resp.json())
+                .then(() => {
+                    participantList.value = participantList.value.filter((participant) => participant.id !== participantId)
+                })
+        }
+
+        var showForm = ref(false)
+
+        var fillParticipantForm = (tmpParticipant) => {
+            showForm = true
+            participant.value = { ...tmpParticipant }
+        }
+
+
+
         return {
             participantList,
+            deleteParticipant,
+            fillParticipantForm,
+            showForm,
         };
+
+
     }
 })
 </script>
@@ -103,7 +145,7 @@ table {
 
 .participant-list__btn-icon {
     height: 25px;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .participant-list__btn-icon:hover {

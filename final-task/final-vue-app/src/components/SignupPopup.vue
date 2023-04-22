@@ -150,7 +150,7 @@ export default defineComponent({
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          // 'Access-Control-Allow-Origin': 'http://localhost:8002'
+          'Access-Control-Allow-Origin': 'http://localhost:8002'
         },
         body: JSON.stringify(payload),
       })
@@ -171,6 +171,10 @@ export default defineComponent({
         })
     }
 
+    // var fillParticipantForm = (tmpParticipant) => {
+    //         participant.value = { ...tmpParticipant }
+    //     }
+
     return {
       onClose,
       showSuccess,
@@ -179,6 +183,7 @@ export default defineComponent({
       submitForm,
       participant,
       participantList,
+      // fillParticipantForm,
     };
   },
 
