@@ -5,6 +5,7 @@ $(function () {
     function saveForm() {
         if ($nameInput.val().length < 3) {
             $nameInput.toggleClass("valid-err")
+        
         } else {
             showPopup();
         }

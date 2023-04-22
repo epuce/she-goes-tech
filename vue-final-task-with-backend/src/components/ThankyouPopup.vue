@@ -1,7 +1,7 @@
 <template>
     <div class="popup-overlay">
       <div class="popup">
-        <p class="popup__text">Thank you for subscribing, {{ userName }}!</p>
+        <p class="popup__text">Thank you for subscribing, {{ username }}!</p>
         <button class="popup__close-btn" @click="closePopup()">Close</button>
       </div>
     </div>
@@ -10,7 +10,7 @@
   import { defineComponent } from "vue";
   export default defineComponent({
     props: {
-      userName: {
+      username: {
         type: String,
       },
     },

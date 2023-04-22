@@ -97,7 +97,12 @@
       const isEmailValid = ref(true);
       const emailRegEx =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const subscriber = ref({});
+      const subscriber = ref({
+        username: "",
+        email: "",
+        special_deals: false,
+        offer_cycle: "",
+      });
   
       const openForm = () => {
         isFormOpen.value = !isFormOpen.value;
@@ -117,14 +122,15 @@
         }
   
         if (isNameValid.value && isEmailValid.value) {
-          var subscriber = {
-            name: nameInput.value,
+          subscriber.value = {
+            username: nameInput.value,
             email: emailInput.value,
-            specialDeals: agreeToSpecialDeals.value,
-            offerCycle: offerFrequency.value,
+            special_deals: agreeToSpecialDeals.value,
+            offer_cycle: offerFrequency.value,
           };
-          emit("save-subscriber", subscriber);
           emit("show-popup");
+          emit("save-subscriber", subscriber.value);
+          
   
           nameInput.value = "";
           emailInput.value = "";

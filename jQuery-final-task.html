@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./jQuery-final-task.js"></script>
+  </head>
+
+  <link rel="stylesheet" href="./jQuery-final-task.css" />
+
+  <body>
+    <div class="main-view-wrapper">
+      <div
+        class="user-form-container"
+      >
+        <div class="user-form">
+          <div class="username-form-field">
+            <label for="username" class="username-form-field__label"
+              >Username</label
+            >
+            <input
+              name="username"
+              type="text"
+              class="username-form-field__input"
+            />
+          </div>
+          <div class="error-message-username">
+            <p>PLEASE ENTER A VALID USERNAME</p>
+          </div>
+          <div class="email-form-field">
+            <label for="email" class="email-form-field__label">Email</label>
+            <br />
+            <input
+              name="email"
+              type="text"
+              class="email-form-field__input"
+            />
+          </div>
+          <div class="error-message-email">
+            <p>PLEASE ENTER A VALID EMAIL</p>
+          </div>
+          <div class="checkbox-form-field">
+            <input
+              id="checkbox"
+              name="checkbox"
+              type="checkbox"
+              class="checkbox-form-field__input"
+            />
+            <label for="checkbox" class="checkbox-form-field__label"
+              >Send me special deals</label
+            >
+            <br />
+            <transition name="fade">
+              <div class="select-form-field">
+                <label for="select" class="select-form-field__label"
+                  >I'm willing to receive them every:</label
+                >
+                <select
+                  name="select"
+                  type="select"
+                  class="select-form-field__input"
+                >
+                  <option value="Hour">Hour</option>
+                  <option value="Day">Day</option>
+                  <option value="Week">Week</option>
+                  <option value="Month">Month</option>
+                </select>
+              </div>
+            </transition>
+          </div>
+          <div class="subscribe-btn-container">
+            <button class="subscribe-btn">Subscribe</button>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="open-form-btn"
+        >
+          <span class="open-form-btn__txt"> Open Form </span>
+        </button>
+      </div>
+      <div class="subscriber-table-wrapper">
+        <table class="subscriber-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>E-mail</th>
+              <th>Special offers</th>
+              <th>Offer cycle</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="js-user-table">
+            <template class="js-row-template">
+                <tr>
+                    <td class="js-index"></td>
+                    <td class="js-username"></td> 
+                    <td class="js-email"></td>
+                    <td class="js-special-offers"></td>
+                    <td class="js-offer-cycle"></td>
+                    <td> 
+                        <button class="js-delete" >Delete</button> 
+                    </td>
+                    </tr>
+                </template>
+          </tbody>
+        </table>
+      </div>
+      <div class="popup-overlay">
+        <div class="popup">
+          <p class="popup__text"></p>
+          <button class="popup__close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

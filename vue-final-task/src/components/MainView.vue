@@ -6,7 +6,7 @@
       @save-subscriber="saveSubscriber"
     />
     <div class="subscriber-table-wrapper">
-      <table>
+      <table class="subscriber-table">
         <thead>
           <tr>
             <th>#</th>
@@ -25,7 +25,12 @@
             <td>{{ user.specialDeals }}</td>
             <td>{{ user.offerCycle }}</td>
             <td>
-              <button class="delete-btn" @click="deleteUser(index)">x</button>
+              <button
+                class="subscriber-table__delete-btn"
+                @click="deleteUser(index)"
+              >
+                x
+              </button>
             </td>
           </tr>
         </tbody>
@@ -50,23 +55,23 @@ export default defineComponent({
   },
 
   setup() {
-    var isSubscribed = ref(false);
-    var UserFormContainer = ref();
-    var list = ref(getUserList());
+    const isSubscribed = ref(false);
+    const UserFormContainer = ref();
+    const list = ref(getUserList());
 
-    function showPopup() {
+    const showPopup = () => {
       isSubscribed.value = !isSubscribed.value;
-    }
+    };
 
-    function closePopup() {
+    const closePopup = () => {
       isSubscribed.value = false;
       UserFormContainer.value.openForm();
-    }
+    };
 
-    function saveSubscriber(user) {
+    const saveSubscriber = (user) => {
       list.value.push(user);
       localStorage.list = JSON.stringify(list.value);
-    }
+    };
 
     function getUserList() {
       try {
@@ -80,10 +85,10 @@ export default defineComponent({
       return list;
     }
 
-    function deleteUser(index) {
+    const deleteUser = (index) => {
       list.value.splice(index, 1);
       localStorage.list = JSON.stringify(list.value);
-    }
+    };
 
     return {
       isSubscribed,
@@ -101,6 +106,7 @@ export default defineComponent({
 <style>
 body {
   margin: 0;
+  
 }
 .main-view-wrapper {
   display: flex;
@@ -108,7 +114,7 @@ body {
   height: 100vh;
 }
 
-.subscriber-table-wrapper  {
+.subscriber-table-wrapper {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -118,9 +124,9 @@ body {
   min-width: fit-content;
 }
 
-.subscriber-table-wrapper table,
-th,
-td {
+.subscriber-table,
+.subscriber-table th,
+.subscriber-table td {
   border: 1px solid #bcb8b8;
   border-collapse: collapse;
 }
@@ -135,17 +141,17 @@ td {
   white-space: nowrap;
 }
 
-.subscriber-table-wrapper thead {
+.subscriber-table thead {
   background-color: #dfdada;
   font-family: sans-serif;
   font-size: small;
 }
 
-.subscriber-table-wrapper table {
+.subscriber-table {
   box-shadow: -1px 3px 26px -7px rgba(0, 0, 0, 0.45);
 }
 
-.delete-btn {
+.subscriber-table__delete-btn {
   border: none;
   background: none;
   font-weight: bold;

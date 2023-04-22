@@ -6,13 +6,13 @@
   >
     <div class="user-form">
       <div class="username-form-field">
-        <label for="username-form-field" class="username-form-field_label"
+        <label for="username" class="username-form-field__label"
           >Username</label
         >
         <input
           name="username"
           type="text"
-          class="username-form-field_input"
+          class="username-form-field__input"
           v-model="nameInput"
           :class="!isNameValid ? 'form-not-valid' : ''"
         />
@@ -21,12 +21,12 @@
         <p>PLEASE ENTER A VALID USERNAME</p>
       </div>
       <div class="email-form-field">
-        <label for="email" class="email-form-field_label">Email</label>
+        <label for="email" class="email-form-field__label">Email</label>
         <br />
         <input
           name="email"
           type="text"
-          class="email-form-field_input"
+          class="email-form-field__input"
           v-model="emailInput"
           :class="!isEmailValid ? 'form-not-valid' : ''"
         />
@@ -36,24 +36,25 @@
       </div>
       <div class="checkbox-form-field">
         <input
+          id="checkbox"
           name="checkbox"
           type="checkbox"
-          class="checkbox-form-field_input"
+          class="checkbox-form-field__input"
           v-model="agreeToSpecialDeals"
         />
-        <label for="checkbox" class="checkbox-form-field_label"
+        <label for="checkbox" class="checkbox-form-field__label"
           >Send me special deals</label
         >
         <br />
         <transition name="fade">
           <div class="select-form-field" v-if="agreeToSpecialDeals">
-            <label for="select" class="select-form-field_label"
+            <label for="select" class="select-form-field__label"
               >I'm willing to receive them every:</label
             >
             <select
               name="select"
               type="select"
-              class="select-form-field_input"
+              class="select-form-field__input"
               v-model="offerFrequency"
             >
               <option value="Hour">Hour</option>
@@ -87,22 +88,22 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
-    var isFormOpen = ref(false);
-    var nameInput = ref("");
-    var emailInput = ref("");
-    var agreeToSpecialDeals = ref(false);
-    var offerFrequency = ref("Hour");
-    var isNameValid = ref(true);
-    var isEmailValid = ref(true);
-    var emailRegEx =
+    const isFormOpen = ref(false);
+    const nameInput = ref("");
+    const emailInput = ref("");
+    const agreeToSpecialDeals = ref(false);
+    const offerFrequency = ref("Hour");
+    const isNameValid = ref(true);
+    const isEmailValid = ref(true);
+    const emailRegEx =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var subscriber = ref({});
+    const subscriber = ref({});
 
-    function openForm() {
+    const openForm = () => {
       isFormOpen.value = !isFormOpen.value;
     }
 
-    function saveForm() {
+    const saveForm = () => {
       if (nameInput.value.length < 3) {
         isNameValid.value = false;
       } else {
@@ -194,18 +195,18 @@ export default defineComponent({
   margin-left: 0;
 }
 
-.username-form-field_label,
-.email-form-field_label,
-.checkbox-form-field_label,
-.select-form-field_label {
+.username-form-field__label,
+.email-form-field__label,
+.checkbox-form-field__label,
+.select-form-field__label {
   color: white;
   font-family: sans-serif;
   font-size: small;
 }
 
-.username-form-field_input,
-.email-form-field_input,
-.select-form-field_input {
+.username-form-field__input,
+.email-form-field__input,
+.select-form-field__input {
   border-radius: 5px;
   border: transparent;
   width: 100%;
@@ -224,7 +225,7 @@ export default defineComponent({
   flex-wrap: wrap;
 }
 
-.checkbox-form-field_input {
+.checkbox-form-field__input {
   border-radius: 5px;
   border: transparent;
 }

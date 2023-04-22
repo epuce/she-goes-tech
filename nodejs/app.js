@@ -23,8 +23,12 @@ var app = new express()
 /*we create a new server with this command*/
 
 app.use(express.json())
-//app.use(cors)
-/*commenting out just for a while*/
+app.use(cors({
+    origin: 'http://localhost:8080'
+}))
+//we indicate the vue app address, without the slash at the end!!
+// if we change the origin to true, then it should work with multiple vue apps, as well as with Insomnia
+
 
 
 var router = express.Router()

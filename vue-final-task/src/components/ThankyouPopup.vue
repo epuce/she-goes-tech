@@ -1,8 +1,8 @@
 <template>
   <div class="popup-overlay">
     <div class="popup">
-      <p class="popup_text">Thank you for subscribing, {{ userName }}!</p>
-      <button class="popup_close-btn" @click="closePopup()">Close</button>
+      <p class="popup__text">Thank you for subscribing, {{ userName }}!</p>
+      <button class="popup__close-btn" @click="closePopup()">Close</button>
     </div>
   </div>
 </template>
@@ -50,12 +50,12 @@ export default defineComponent({
   border-radius: 5px;
   box-shadow: -1px 3px 26px -7px rgba(0, 0, 0, 0.45);
 }
-.popup_text {
+.popup__text {
   width: 100%;
   text-align: center;
 }
 
-.popup_close-btn {
+.popup__close-btn {
   margin-right: 10px;
 }
 </style>

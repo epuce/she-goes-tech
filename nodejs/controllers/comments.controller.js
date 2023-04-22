@@ -16,7 +16,9 @@ function runSql(sql, response){
 
 exports.list = function(request, response){
     var sql = 'SELECT * FROM `IevaZR-comments`'
-    
+    if (request.query.user_id) {
+        sql = sql + `WHERE user_id="${request.query.user_id}"`
+    }
     runSql(sql, response)
 }
 //we moved the function body here from user.route.js
@@ -60,7 +62,7 @@ exports.save = function(request, response){
 
     var {comment, user_id} = request.body
 
-    var sql = 'INSERT INTO `IevaZR-comments` (first_name, last_name, email) VALUES("'+first_name+'", "'+last_name+'", "'+email+'")'
+    var sql = `INSERT INTO \`IevaZR-comments\` (comment, user_id) VALUES("${comment}", ${user_id})`
 
     app.db.query(sql, function(error, data){
         var returnData = {}
