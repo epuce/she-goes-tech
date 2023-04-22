@@ -190,49 +190,165 @@ const getDivide = function (obj) {
   return total;
 };
 const getFirstGreater = function () {};
-const getEqual = function () {};
-const getNot = function () {};
-const getAnd = function (obj) {
-  objValues = Object.values(obj);
+
+const getNot = function (obj, objValue) {
   objkeys = Object.keys(obj);
   let arrValues = [];
-  let result;
 
-  objValues.forEach((value) => {
-    if (typeof value === "string" && value.includes("=AND(")) {
-      const matchRef = value.substring(5, value.length - 1);
-      arrValues = matchRef.replace(/\s/g, "").split(",");
-    }
-  });
+  const matchRef = objValue
+    .substring(5, objValue.length - 1)
+    .replace(/\s/g, "");
+  const subString = matchRef.split(",");
 
-  const compare = function (arrValues) {
+  arrValues.push(subString);
+
+  const negate = function (values) {
     let list = [];
+    let result;
 
-    const isBoolean = arrValues.every((element) => {
-      console.log(obj[element]);
-      obj[element] === "boolean";
-    });
+    console.log(values);
 
-    console.log(isBoolean);
-
-    if (isBoolean) {
-      arrValues.forEach((element) => {
-        list.push(obj[element]);
+    values.forEach((element) => {
+      element.forEach((el) => {
+        if (obj[el] === true || obj[el] === false) {
+          result = !obj[el];
+        } else {
+          result = "#ERROR: type does not match";
+        }
       });
-    } else {
-      result = "#ERROR: type does not match";
-    }
-    console.log();
-    result = list.every((element) => {
-      element === true;
     });
     return result;
   };
 
-  const isTrue = compare(arrValues, objkeys);
+  const isNegatedValue = negate(arrValues);
+  return isNegatedValue;
+};
+const getAnd = function (obj, objValue) {
+  objkeys = Object.keys(obj);
+  let arrValues = [];
+
+  // const matchRef = value.substring(5, value.indexOf(","));
+  const matchRef = objValue
+    .substring(5, objValue.length - 1)
+    .replace(/\s/g, "");
+  const subString = matchRef.split(",");
+
+  arrValues.push(subString);
+
+  const compare = function (values) {
+    let list = [];
+    let result;
+    let finalResult;
+
+    values.forEach((element) => {
+      element.forEach((el) => {
+        list.push(obj[el]);
+      });
+    });
+
+    let isTrueOrFalse = list.every((el) => {
+      return el.toString().includes("true") || el.toString().includes("false");
+    });
+
+    result = list.every((el) => {
+      return el === true;
+    });
+
+    if (result) {
+      finalResult = result;
+    } else if (isTrueOrFalse) {
+      finalResult = false;
+    } else {
+      finalResult = "#ERROR: type does not match";
+    }
+
+    return finalResult;
+  };
+
+  const isTrue = compare(arrValues);
   return isTrue;
 };
-const getOr = function () {};
+const getOr = function (obj, objValue) {
+  objkeys = Object.keys(obj);
+  let arrValues = [];
+
+  // const matchRef = value.substring(5, value.indexOf(","));
+  const matchRef = objValue
+    .substring(4, objValue.length - 1)
+    .replace(/\s/g, "");
+  const subString = matchRef.split(",");
+
+  arrValues.push(subString);
+
+  const compare = function (values) {
+    console.log(values);
+    let list = [];
+    let result;
+    let finalResult;
+
+    values.forEach((element) => {
+      element.forEach((el) => {
+        list.push(obj[el]);
+      });
+    });
+    console.log(list);
+
+    let isTrue = list.some((el) => {
+      return el.toString().includes("true");
+    });
+    let isWrongType = list.some((el) => {
+      return (
+        !el.toString().includes("false") && !el.toString().includes("true")
+      );
+    });
+
+    if (isTrue && !isWrongType) {
+      result = true;
+    } else if (isWrongType) {
+      result = "#ERROR: type does not match";
+    } else {
+      result = false;
+    }
+
+    return result;
+  };
+
+  const isOneTrue = compare(arrValues);
+  return isOneTrue;
+};
+const getEqual = function (obj, objValue) {
+  objkeys = Object.keys(obj);
+  let arrValues = [];
+
+  const matchRef = objValue
+    .substring(4, objValue.length - 1)
+    .replace(/\s/g, "");
+  const subString = matchRef.split(",");
+
+  arrValues.push(subString);
+
+  const compare = function (values) {
+    let list = [];
+    console.log(values);
+
+    values.forEach((element) => {
+      element.forEach((el) => {
+        if (typeof obj[el] === "number") {
+          list.push(obj[el]);
+        } else {
+          console.log("#ERROR: type does not match");
+        }
+      });
+    });
+
+    let result = list[0] === list[1];
+
+    return result;
+  };
+
+  const isEqual = compare(arrValues);
+  return isEqual;
+};
 const getIf = function () {};
 const getConcat = function () {};
 
@@ -258,7 +374,7 @@ const evaluateData = function (obj) {
     const index = arrIndex - 1;
     newObject[index].push(value);
   };
-  // SUM
+  // OPERATOR FUNCTIONS INITIATION
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       if (typeof obj[key] === "string" && obj[key].includes("=SUM(")) {
@@ -274,13 +390,16 @@ const evaluateData = function (obj) {
       ) {
         clonedObj[key] = getDivide(obj);
       } else if (typeof obj[key] === "string" && obj[key].includes("=GT(")) {
-        clonedObj[key] = getFirstGreater(obj);
+        clonedObj[key] = getFirstGreater(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=AND(")) {
-        clonedObj[key] = getAnd(obj);
+        clonedObj[key] = getAnd(obj, obj[key]);
+      } else if (typeof obj[key] === "string" && obj[key].includes("=OR(")) {
+        clonedObj[key] = getOr(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=NOT(")) {
-        clonedObj[key] = getNot(obj);
+        clonedObj[key] = getNot(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=EQ(")) {
-        clonedObj[key] = getEqual(obj);
+        console.log("INITIATED OPERATOR FUNCTION");
+        clonedObj[key] = getEqual(obj, obj[key]);
       }
 
       addToTheList(key, clonedObj[key]);
@@ -370,7 +489,7 @@ const loopingThroughCreatedArr = function () {
     } else {
       sheetsData = {
         id: tempArr[i].id,
-        data: evaluateData(tempArr[14].data),
+        data: evaluateData(tempArr[12].data),
       };
       console.log(sheetsData.data);
     }
