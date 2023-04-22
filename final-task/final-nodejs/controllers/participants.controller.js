@@ -11,11 +11,7 @@ function runSql(sql, response) {
     }
 
     console.log(returnData);
-
-    // response.send(JSON.stringify(returnData))
-
     response.send(JSON.stringify(returnData));
-    // response.send("test")
   });
 }
 
@@ -76,8 +72,6 @@ exports.update = async function (request, response) {
         `UPDATE \`buraityte-participants\` 
     SET ${changeValues.join(",")}    
     WHERE id=` + request.params.id;
-
-      //   response.send(sql);
       runSql(sql, response);
     }
   );
@@ -85,8 +79,6 @@ exports.update = async function (request, response) {
 
 exports.save = function (request, response) {
   var { first_name, last_name, email } = request.body;
-
-  //  response.send(request.body)
 
   var sql =
     `
@@ -101,6 +93,5 @@ exports.save = function (request, response) {
     `")
     `;
 
-  // response.send(sql)
   runSql(sql, response);
 };
