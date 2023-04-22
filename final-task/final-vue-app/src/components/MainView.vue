@@ -1,7 +1,8 @@
-<template lang="">
+<template>
   <div>
       <!-- <MainVisuals/> -->
-      <FrontTable/>
+      <!-- <FrontTable/> -->
+      <ParticipantTable/>
       <!-- <MainFooter/> -->
       <button class="btn__signup" @click="showForm = true">Sign up form</button>
 
@@ -15,19 +16,20 @@ import { defineComponent, ref } from 'vue';
 import SignupPopup from "./SignupPopup.vue"
 // import MainVisuals from "./MainVisuals.vue"
 // import MainFooter from "./MainFooter.vue"
-import FrontTable from "./FrontTable.vue"
+// import FrontTable from "./FrontTable.vue"
+import ParticipantTable from "./ParticipantTable.vue"
 
 export default defineComponent({
   components: {
     SignupPopup,
     // MainVisuals,
     // MainFooter,
-    FrontTable,
+    // FrontTable,
+    ParticipantTable,
   },
   setup() {
     var showForm = ref(false) 
        // var showForm = ref(true)  // ADD/REMOVE TO SHOW FORM ALL THE TIME
-
     return {
       showForm,
     }
@@ -36,7 +38,6 @@ export default defineComponent({
 </script>
 
 <style>
-
 .btn__signup {
   position: fixed;
   bottom: 40px;
@@ -49,6 +50,7 @@ export default defineComponent({
   box-shadow: 0 0 5px grey;
   border: 1px solid #f6f4f3;
   margin: 0;
+  cursor: pointer;
   /* left: 50%;
   transform: translate(-50%, -50%);
   opacity: 1; */

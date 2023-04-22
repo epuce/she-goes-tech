@@ -7,9 +7,7 @@
 
       <p>
       Thank you for signing up to a class!
-      {{ text }}
     </p>
-      <!-- <button class="successBtn__close" @click="onClose()">OK</button> -->
 
     </div>
   </div>
@@ -59,7 +57,6 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
-  /* backdrop-filter: blur(3px);  */
 }
 
 .successPopup {

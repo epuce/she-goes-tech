@@ -2,26 +2,24 @@
   <div class="popup__wrapper">
     <div class="popup">
       <div class="signup__wrapper">
-        <alert show dismissible variant="danger" v-if="errors.length > 0" class="validation-error__wrapper">
+        <div show dismissible variant="danger" v-if="errors.length > 0" class="validation-error__wrapper">
           <div v-for="error in errors" :key="error" class="validation-error__alert">
             {{ error }}
           </div>
-        </alert>
+        </div>
         <h2>Join a class:</h2>
         <form @submit.prevent="submitForm" class="signup-form">
           <label>First name:
 
-            <input id="firstName" v-model="firstName" type="text" name="firstName"
-              :class="{ 'validation-error__input': !firstName && showError }" /><br />
+            <input id="firstName" v-model="participant.first_name" type="text" name="firstName"
+              :class="{ 'validation-error__input': !first_name && showError }" /><br />
           </label>
 
           <label>Last name:
 
-            <!-- <input id="lastName" v-model="lastName" type="text" name="lastName" :class="!lastName ? 'validation-error__input' : ''"/><br /> -->
-            <!-- <input id="lastName" v-model="lastName" type="text" name="lastName" :class="{ 'validation-error__input': showError}"/><br /> -->
-            <input id="lastName" v-model="lastName" type="text" name="lastName"
-              :class="{ 'validation-error__input': !lastName && showError }" /><br />
-
+            <input id="lastName" v-model="participant.last_name" type="text" name="lastName"
+              :class="{ 'validation-error__input': !last_name && showError }" /><br />
+            <!-- HERE MIGHT NEED TO UPDATE TO !participant.last_name for validation -->
           </label>
 
           <label>Email:
@@ -42,7 +40,6 @@
           <label>Date:
             <br>
             <input type="date" name="date" min="2023-04-27" max="2023-05-31" />
-            <!-- can we show only a limited amount of days?  is there a prettier solution in VUE or other -->
           </label>
 
           <label>
@@ -60,7 +57,7 @@
         </form>
       </div>
 
-      <SuccessPopup v-if="showSuccess" @close-success-popup="showSuccess = false" />
+      <SuccessPopup v-if="showSuccess" @close-success-popup="showSuccess = false" text="{{ firstName }}" />
       <button class="btn__close" @click="onClose()">X</button>
 
     </div>
@@ -69,6 +66,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import SuccessPopup from "./SuccessPopup.vue"
+// import { userInfo } from "os";
 
 export default defineComponent({
   components: {
@@ -92,7 +90,7 @@ export default defineComponent({
   },
 
   methods: {
-    submitForm() {
+    validateForm() {
       this.errors = [];
       if (!this.firstName) {
         this.errors.push('First name is required');
@@ -107,13 +105,14 @@ export default defineComponent({
         var emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!emailRegEx.test(this.email)) {
           this.errors.push("Invalid email address");
-        } 
+        }
       }
       if (this.errors.length === 0 && this.firstName && this.lastName && this.email) {
         this.showError = false
         this.showSuccess = true
       }
     },
+    // TODO: review to not have this maybe?
 
   },
 
@@ -122,15 +121,66 @@ export default defineComponent({
       emit("close-signup-popup");
     };
     var showSuccess = ref(false)
+    var showError = ref(false)
     var showPhone = ref(false)
+
+    var participant = ref({
+      first_name: '',
+      last_name: '',
+      email: '',
+      id: null
+    })
+
+    var participantList = ref([])
+
+    fetch('http://localhost:8002/api/participants')
+      .then(resp => resp.json())
+      .then(resp => {
+        participantList.value = resp.data
+      })
+
+    var submitForm = () => {
+      var payload = {
+        first_name: participant.value.first_name,
+        last_name: participant.value.last_name,
+        email: participant.value.email
+      }
+
+      fetch('http://localhost:8002/api/participants', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Access-Control-Allow-Origin': 'http://localhost:8002'
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(resp => resp.json())
+        .then(resp => {
+          if (!resp.error) {
+              participantList.value.push({
+              ...payload,
+              // id: resp.data.insertId
+            })
+
+            participant.value = {
+              first_name: '',
+              last_name: '',
+              email: '',
+            }
+          }
+        })
+    }
 
     return {
       onClose,
       showSuccess,
+      showError,
       showPhone,
+      submitForm,
+      participant,
+      participantList,
     };
   },
-
 
 });
 </script>
@@ -236,7 +286,6 @@ select {
   color: darkred;
   font-size: 15px;
 }
-
 
 .validation-error__input {
   border: 2px solid darkred;

@@ -55,13 +55,6 @@ footer a {
     padding: 0px 20px;
 }
 
-/* footer a i {
-        font-size: 20px;
-        margin: 0% 1%;
-        padding: 0px -10px;
-        color:red;
-    } */
-
 .icon {
     height: 25px;
     opacity: 0.5;
