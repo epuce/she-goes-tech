@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <a class="btn btn-primary btn-add" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
   Add a meal </a>
         
         <table class="meal-table">
@@ -28,14 +28,14 @@
                 </tbody>
             </table>
 
-<FormSlideout />
+<FormMeal />
 
            
     </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
-import FormSlideout from './FormSlideout.vue';
+import FormMeal from './FormMeal.vue';
 export default defineComponent({
     props: {
         mealList: {
@@ -69,20 +69,25 @@ export default defineComponent({
             });
         };
 
-        // const fillMealForm = (tmpMeal) => {
-        //     meal.value = { ...tmpMeal };
-        // }
+        const fillMealForm = (tmpMeal) => {
+            meal.value = { ...tmpMeal };
+        }
         return {
             meal,
             tmpMealList,
             onMealDelete,
+            fillMealForm,
         };
     },
-    components: { FormSlideout }
+    components: { FormMeal }
 })
     
 </script>
 <style>
+
+.btn-add{
+margin-left: 16px;
+}
 
 label,
 input {

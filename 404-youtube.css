@@ -4,6 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    font-family: sans-serif;
 }
 
 .wrapper-404 {
@@ -42,5 +43,6 @@ body {
     border: none;
     border-left: 1px solid gray;
     width: 60px;
+    cursor: pointer;
 }
 

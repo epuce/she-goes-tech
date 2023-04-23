@@ -1,10 +1,13 @@
 <template>
     <div>
-        <FormMeal :mealList="mealList" @add-to-list="addToList"/>
+        <FormMeal :mealList="mealList" @add-to-list="addToList()"/>
 
-    <div class="table">
         <TableMeal :mealList="mealList"/>
-    </div>
+
+        <button @click="isOpen=true">popup</button>
+
+        <MyPopup v-if="isOpen" @close-component="isOpen=false"/>
+    
     </div>
 </template>
 
@@ -13,10 +16,13 @@
 import { defineComponent, ref} from 'vue';
 import TableMeal from './TableMeal.vue';
 import FormMeal from './FormMeal.vue';
+import MyPopup from './MyPopup.vue';
 export default defineComponent({
     setup(){
         
-        const mealList = ref([]);        
+        var mealList = ref([]);   
+
+        var isOpen = ref(false);
 
         const addToList = (data) => {
             mealList.value.push(data)
@@ -25,13 +31,20 @@ export default defineComponent({
         return{
             mealList,
             addToList,
+            isOpen,
         }
     
     },
     components: {
     TableMeal,
-    FormMeal
+    FormMeal,
+    MyPopup
 },
 })
 </script>
-<style></style>
+
+<style>
+.btn-popup{
+    float: right;
+}
+</style>

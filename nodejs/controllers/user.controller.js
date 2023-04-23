@@ -8,6 +8,7 @@ function runSql(sql, response){
         }else{
             returnData.data = data
         }
+
         response.send(JSON.stringify(returnData))
     })
 }
@@ -47,12 +48,13 @@ exports.update = (request, response) => {
 }
 
 exports.save= (request, response) => {
-    var first_name = request.body.first_name;
-    var last_name = request.body.last_name;
-    var email = request.body.email;
-    // var {first_name, last_name, email} = request.body ;
+    // var first_name = request.body.first_name;
+    // var last_name = request.body.last_name;
+    // var email = request.body.email;
+    var {first_name, last_name, email} = request.body;
+    // response.send(request.body)
 
-    var sql = `INSERT INTO \`VaidaLinkuviene-users\` (first_name, last_name, email)   VALUES(" `+first_name+`", "`+last_name+`", "`+email+`")`
+    var sql = `INSERT INTO \`VaidaLinkuviene-users\` (first_name, last_name, email)   VALUES("`+first_name+`", "`+last_name+`", "`+email+`")`
 
    runSql(sql, response)
 }

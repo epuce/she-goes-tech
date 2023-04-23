@@ -1,0 +1,28 @@
+form{
+    display: block;
+    /* flex-direction: center;
+    justify-content: center; */
+}
+
+label, input{
+    display: block;
+    margin-bottom: 5px;
+}
+
+button{
+    margin-top: 6px;
+}
+
+table{
+    margin-top: 20px;
+    display: none;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 1px solid grey;
+}
+
+.validation-error{
+    border: 1px solid red;
+}

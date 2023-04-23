@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<style>
+    .resize{
+        display: inline-block;
+        width: 500px;
+        height: 100px;
+        border: 1px solid black;
+        padding: 8px;
+    }
+
+    .resize h1{
+        background: rgba(0,0,0, .4);
+        margin: 0;
+    }
+
+    .sort div{
+        width: 50%;
+        background-color: rgba(0,0,0,.4);
+        margin-bottom: 4px;
+    }
+
+    .drag div{
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2px;
+        background: rgba(0,0,0,.4);
+    }
+
+    .drag, .drop{
+        width: 50%;
+    }
+
+    .drop{
+        background: #555555;
+    }
+
+    .flex-container{
+        display: flex;
+    }
+
+    .ui-selected{
+        background-color: red !important;
+    }
+</style>
+<script>
+    $(function(){
+        $('.js-date-picker').datepicker()
+
+        $('.js-auto-suggest').autocomplete({
+            source: ["Pizza", "Burger", "Hot dog", "BBQ", "Pasta"]
+        })
+
+        $('.js-resize').resizable();
+
+        $(".js-sort").sortable();
+
+        $(".js-drag").draggable({
+            containment: '.js-drag-container'
+        });
+
+        $(".js-drop").droppable({
+            drop: function(){
+                $(".js-drop").css("background", '#'+Math.floor(Math.random()*16777215).toString(16))
+            }
+        })
+
+        $('.js-select').selectable();
+        $('.js-sort').selectable();
+        
+    })
+</script>
+<body>
+    <input type="date">
+    <input class="js-date-picker">
+
+    <input class="js-auto-suggest">
+
+    <div class="resize js-resize">
+        <h1>Some cool text</h1>
+    </div>
+
+    <div class="js-sort sort">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
+
+    <div class="flex-container js-drag-container">
+        <div class="drag">
+            <div class="js-drag">Item 1</div>
+            <div class="js-drag">Item 2</div>
+            <div class="js-drag">Item 3</div>
+            <div class="js-drag">Item 4</div>
+            <div class="js-drag">Item 5</div>
+        </div>
+        <div class="drop js-drop"></div>
+    </div>
+
+    <div class="js-select sort">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
+</body>
+</html>

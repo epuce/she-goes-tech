@@ -10,9 +10,12 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+    props:{
+
+    },
     setup(props, {emit}){
         var onClose =function(){
-            emit('close-popup')
+            emit('close-component')
         }
             return{
                 onClose,

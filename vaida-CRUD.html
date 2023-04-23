@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="./vaida-CRUD.css">
+
+<body>
+    <!-- <h3>User's information</h3> -->
+    <form>
+        <label>
+            Username
+            <input placeholder="Enter your username" class="js-username">
+        </label>
+
+        <label>
+            Email
+            <input type="email" placeholder="Enter your email" class="js-email">
+        </label>
+
+        <label>
+            Password
+            <input type="password" placeholder="Enter your password" class="js-password">
+        </label>
+        <button type="button" class="js-save">Save</button>
+    </form>
+
+    <table class="user-table-wrapper">
+        <thead>
+            <th>No.</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th></th>
+        </thead>
+        <tbody class="js-user-table">
+        </tbody>
+    </table>
+
+    
+</body>
+<script src="./vaida-CRUD.js"></script>
+</html>
