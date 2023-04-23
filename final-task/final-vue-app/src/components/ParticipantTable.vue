@@ -23,7 +23,8 @@
                         <td>{{ participant.email }}</td>
                         <!-- <td> <button @click="showForm = true"  class="participant-list__btn"><img>  -->
                         <!-- <td> <button  @click="fillParticipantForm()" class="participant-list__btn"><img -->
-                        <td> <button @click="showForm = true; fillParticipantForm(participant)"
+                        <!-- <td> <button @click="showForm = true; fillParticipantForm(participant)" -->
+                        <td> <button @click="fillParticipantForm(participant)"
                                 class="participant-list__btn"><img class="participant-list__btn-icon"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/640px-OOjs_UI_icon_edit-ltr.svg.png" /></button>
                         </td>
@@ -58,7 +59,6 @@ export default defineComponent({
         //     id: null
         // })
 
-        // var participantList = ref([])
         var participantList = ref([
             fetch('http://localhost:8002/api/participants')
                 .then(resp => resp.json())
@@ -80,15 +80,27 @@ export default defineComponent({
 
         var showForm = ref(false)
 
-        // var fillParticipantForm = (tmpParticipant) => {
-        //     showForm = true
-        //     participant.value = { ...tmpParticipant }
+        // Seems like filling should be here, but updating in sign-up form
+        var fillParticipantForm = (participant) => {
+            participant.value = { ...participant }
+            showForm.value = true
+        }
+
+        // var fillParticipantForm = (participantId) => {
+        //     // need to perform a request from the server to retrieve the participant 
+        //     fetch ('', {
+        //         method: 'GET'
+        //     })
+        //     .then(resp => resp.json())
+        //         .then(() => { 
+        //         })
         // }
+
 
         return {
             participantList,
             deleteParticipant,
-            // fillParticipantForm,
+            fillParticipantForm,
             showForm,
         };
 
@@ -132,6 +144,8 @@ table {
     margin-top: 24px;
     width: 100%;
     /* border: solid gray 1px; */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+
 }
 
 .participant-list__btn {

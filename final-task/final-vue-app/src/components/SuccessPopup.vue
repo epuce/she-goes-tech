@@ -28,6 +28,8 @@ export default defineComponent({
     var onClose = function () {
       emit("close-success-popup");
     };
+
+    
     return {
       onClose,
     };

@@ -19,13 +19,13 @@
 
             <input id="last_name" v-model="participant.last_name" type="text" name="last_name"
               :class="{ 'validation-error__input': !participant.last_name && showError }" /><br />
-            <!-- HERE MIGHT NEED TO UPDATE TO !participant.last_name for validation -->
           </label>
 
           <label>Email:
 
             <input type="email" name="email" v-model="participant.email"
-              :class="{ 'validation-error__input': !email && showError }" /><br />
+              :class="{ 'validation-error__input': !participant.email && showError }" /><br />
+            <!-- here participant.email and email can work - decide when to show/hide error -->
           </label>
 
           <label>Class type:
@@ -45,29 +45,24 @@
           <label>
             <input type="checkbox" name="checkbox" v-model="checked" @click="showPhone = true" />
             Send a reminder
-
           </label>
 
           <label v-if="checked">Phone:
             <input type="tel" name="phone" /><br>
           </label>
 
-          <!-- <button class="btn__submit" @click="submitForm" type="button">Submit</button> -->
           <button class="btn__submit" @click="validateForm" type="button">Submit</button>
-          <!-- <button class="btn__submit"  @click="showSuccess = true" type="button">Submit</button> -->
         </form>
       </div>
 
       <SuccessPopup v-if="showSuccess" @close-success-popup="showSuccess = false" text="{{ firstName }}" />
       <button class="btn__close" @click="onClose()">X</button>
-
     </div>
   </div>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
 import SuccessPopup from "./SuccessPopup.vue"
-// import { userInfo } from "os";
 
 export default defineComponent({
   components: {
@@ -96,7 +91,6 @@ export default defineComponent({
       if (!this.participant.first_name) {
         this.errors.push('First name is required');
       }
-      // if (!this.lastName) {
       if (!this.participant.last_name) {
         this.errors.push('Last name is required');
         this.showError = true
@@ -111,15 +105,16 @@ export default defineComponent({
       }
       if (this.errors.length === 0 && this.participant.first_name && this.participant.last_name && this.participant.email) {
         this.showError = false
-        // submitForm()
+        this.submitForm()
         this.showSuccess = true
       }
     }
-    // // TODO: review to not have this maybe?
+    // // TODO: review for easier readability
   },
   setup(props, { emit }) {
     var onClose = function () {
       emit("close-signup-popup");
+
     };
     var showSuccess = ref(false)
     var showError = ref(false)
@@ -134,11 +129,11 @@ export default defineComponent({
 
     var participantList = ref([])
 
-    fetch('http://localhost:8002/api/participants')
-      .then(resp => resp.json())
-      .then(resp => {
-        participantList.value = resp.data
-      })
+    // fetch('http://localhost:8002/api/participants')
+    //   .then(resp => resp.json())
+    //   .then(resp => {
+    //     participantList.value = resp.data
+    //   })
 
     var submitForm = () => {
       var payload = {
@@ -158,7 +153,7 @@ export default defineComponent({
         .then(resp => resp.json())
         .then(resp => {
           if (!resp.error) {
-              participantList.value.push({
+            participantList.value.push({
               ...payload,
             })
 
@@ -168,7 +163,6 @@ export default defineComponent({
               email: '',
             }
             // this.showSuccess = true
-
           }
         })
     }
@@ -205,11 +199,9 @@ export default defineComponent({
 }
 
 .popup {
-  /* padding: 40px; */
   width: 30%;
   background: #ffffff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-
 }
 
 
@@ -221,7 +213,6 @@ export default defineComponent({
   cursor: pointer;
   border: none;
   background: transparent;
-  /* border-radius: 4px; */
   padding: 5px;
 }
 

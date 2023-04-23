@@ -12,6 +12,12 @@ var router = VueRouter.createRouter({
             }
         },
         {
+            path: '/ParticipantTable',
+            component: function() {
+                return import('./components/ParticipantTable.vue')
+            }
+        },
+        {
             path: '/:pathMatch(.*)*', // 404 page not found
             redirect: '/'
         }
