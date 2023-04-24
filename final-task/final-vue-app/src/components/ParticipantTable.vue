@@ -21,7 +21,6 @@
                         <td>{{ participant.first_name }}</td>
                         <td>{{ participant.last_name }}</td>
                         <td>{{ participant.email }}</td>
-                        <!-- <td> <button @click="showForm = true"  class="participant-list__btn"><img>  -->
                         <!-- <td> <button  @click="fillParticipantForm()" class="participant-list__btn"><img -->
                         <!-- <td> <button @click="showForm = true; fillParticipantForm(participant)" -->
                         <td> <button @click="fillParticipantForm(participant)"
@@ -51,7 +50,8 @@ export default defineComponent({
     components: {
         SignupPopup,
     },
-    setup() {
+    setup(props, { emit }) {
+        
         // var participant = ref({
         //     first_name: '',
         //     last_name: '',
@@ -80,16 +80,15 @@ export default defineComponent({
 
         var showForm = ref(false)
 
-        // Seems like filling should be here, but updating in sign-up form
-        var fillParticipantForm = (participant) => {
-            participant.value = { ...participant }
+        // Seems like filling should be here or in parent, but updating in sign-up form
+        var fillParticipantForm  =    (tmpParticipant) => {
+            emit('fillForm', tmpParticipant)
             showForm.value = true
         }
 
         // var fillParticipantForm = (participantId) => {
-        //     // need to perform a request from the server to retrieve the participant 
-        //     fetch ('', {
-        //         method: 'GET'
+        //     // do i need to perform a request from the server to retrieve the participant 
+        //     fetch ('http://localhost:8002/api/participants/', {
         //     })
         //     .then(resp => resp.json())
         //         .then(() => { 

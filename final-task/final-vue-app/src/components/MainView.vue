@@ -1,33 +1,45 @@
 <template>
   <div>
-    <MainVisuals />
+    <!-- <MainVisuals /> -->
     <!-- <FrontTable/> -->
-    <ParticipantTable />
+    <ParticipantTable @fillForm="fillForm"/>
     <!-- <MainFooter/> -->
     <button class="btn__signup" @click="showForm = true">Sign up form</button>
-    <SignupPopup v-if="showForm" @close-signup-popup="showForm = false" />
+   {{ participant }}
+    <SignupPopup :user="participant" v-if="showForm" @close-signup-popup="showForm = false" />
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue';
 import SignupPopup from "./SignupPopup.vue"
-import MainVisuals from "./MainVisuals.vue"
+// import MainVisuals from "./MainVisuals.vue"
 // import MainFooter from "./MainFooter.vue"
 import ParticipantTable from "./ParticipantTable.vue"
 
 export default defineComponent({
   components: {
     SignupPopup,
-    MainVisuals,
+    // MainVisuals,
     // MainFooter,
     ParticipantTable,
   },
   setup() {
     var showForm = ref(false) // True to show form all the time
+
+    var participant = ref('')
+    var fillForm = (user) => {
+      participant.value = user
+      // console.log(user)
+    }
+
     return {
       showForm,
+      fillForm,
+      participant
     }
+
+    
   }
 })
 </script>

@@ -63,17 +63,14 @@
 <script>
 import { defineComponent, ref } from "vue";
 import SuccessPopup from "./SuccessPopup.vue"
+import { watch } from 'vue';
 
 export default defineComponent({
   components: {
     SuccessPopup,
   },
-  // props: {
-  //   text: {
-  //     type: String,
-  //     required: true,
-  //   },
-  // },
+
+
   data() {
     return {
       checked: false,
@@ -84,7 +81,6 @@ export default defineComponent({
       showValidation: false,
     }
   },
-
   methods: {
     validateForm() {
       this.errors = [];
@@ -111,11 +107,24 @@ export default defineComponent({
     }
     // // TODO: review for easier readability
   },
+  props: {
+    user: {
+      type: Object
+    }
+  },
+  
   setup(props, { emit }) {
+
+    watch(() => props.user, (value) => {
+      participant.value = value
+      console.log(value)
+    })
+
+
     var onClose = function () {
       emit("close-signup-popup");
-
     };
+
     var showSuccess = ref(false)
     var showError = ref(false)
     var showPhone = ref(false)
@@ -129,12 +138,7 @@ export default defineComponent({
 
     var participantList = ref([])
 
-    // fetch('http://localhost:8002/api/participants')
-    //   .then(resp => resp.json())
-    //   .then(resp => {
-    //     participantList.value = resp.data
-    //   })
-
+    // EDIT TO SAVE UPDATING
     var submitForm = () => {
       var payload = {
         first_name: participant.value.first_name,
@@ -167,9 +171,7 @@ export default defineComponent({
         })
     }
 
-    // var fillParticipantForm = (tmpParticipant) => {
-    //         participant.value = { ...tmpParticipant }
-    //     }
+ 
 
     return {
       onClose,
@@ -184,6 +186,8 @@ export default defineComponent({
   },
 
 });
+
+
 </script>
 <style>
 .popup__wrapper {
