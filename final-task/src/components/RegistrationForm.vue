@@ -1,15 +1,15 @@
 <template>
     <div>
         <form class="registration-form">
-            <div>
+            <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id='name' />
             </div>
-            <div>
+            <div class="form-group">
                 <label for="Surname">Surname</label>
                 <input type="text" />
             </div>
-            <div>
+            <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" />
             </div>
@@ -18,7 +18,7 @@
                 <input type="checkbox" id="checkbox" v-model="isChecked" />
                 <label for="checkbox">I want to receive a free catalog</label>
             </div>
-            <div v-if="isChecked">
+            <div class="form-group" v-if="isChecked">
                 <label for="address">Address</label>
                 <input type="text" />
             </div>
@@ -60,10 +60,14 @@ export default defineComponent({
 }
 
 label {
-    font-size: 20px;
+    font-size: 15px;
     padding-right: 10px;
 }
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
 
 
 .checkbox-container {
