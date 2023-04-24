@@ -13,7 +13,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody v-for="item in tmpMealList" :key="item.id" class="meal-list__meal">
+                <tbody v-for="item in mealList" :key="item.id" class="meal-list__meal">
                     <tr>
                         <td>{{ item.name }}</td>
                         <td>{{ item.description }}</td>
@@ -43,7 +43,7 @@ export default defineComponent({
             required: true,
         }
     },
-    setup(props) {
+    setup(props, {emit}) {
         const meal = ref({
             name: "",
             description: "",
@@ -51,32 +51,25 @@ export default defineComponent({
             allergens: "",
             id: null,
             // category_id: null
-        });
+        });        
 
-        var tmpMealList=ref(props.mealList);
-        fetch("http://localhost:8002/api/meals")
-            .then(resp => resp.json())
-            .then(resp => {
-                tmpMealList.value = resp.data;
-        });
         const onMealDelete = (mealId) => {
             fetch(`http://localhost:8002/api/meals/${mealId}`, {
                 method: "DELETE"
             })
                 .then(resp => resp.json())
                 .then(() => {
-                    tmpMealList.value = tmpMealList.value.filter(meal => meal.id !== mealId);
+                   emit('on-meal-delete', {mealId})
             });
         };
 
-        const fillMealForm = (tmpMeal) => {
-            meal.value = { ...tmpMeal };
-        }
+        // const fillMealForm = (tmpMeal) => {
+        //     meal.value = { ...tmpMeal };
+        // }
         return {
             meal,
-            tmpMealList,
             onMealDelete,
-            fillMealForm,
+            // fillMealForm,
         };
     },
     components: { FormMeal }

@@ -4,7 +4,8 @@
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Add new meal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" 
+                ></button>
             </div>
             <div class="offcanvas-body">
                 <div>
@@ -65,12 +66,8 @@ export default defineComponent({
         }
     },
     setup(props, { emit }) {
-        var nameInput = document.querySelector(".input-name");
         var isChecked = ref(false);
 
-        var onClose = () => {
-            emit("close-component");
-        };
 
         const meal = ref({
             name: "",
@@ -81,10 +78,10 @@ export default defineComponent({
             // category_id: null
         });
         const validateForm = () => {
-            var inputIsValid = meal.value.name.length > 3 && meal.value.name.trim() !== "" && meal.value.description.length > 3 && meal.value.description.trim() !== "" && meal.value.price;
+            var inputIsValid = meal.value.name.length > 3 && meal.value.name.trim() !== "" && meal.value.description.length > 3 && meal.value.description.trim() !== "" && meal.value.price && meal.value.price>0;
             return inputIsValid;
         };
-        // var tmpMealList=ref(props.mealList)
+
         const onMealSave = () => {
             if (validateForm()) {
                 const payload = {
@@ -133,20 +130,22 @@ export default defineComponent({
                     .then(resp => {
                     if (!resp.error) {
                         emit("add-to-list", {
-                            data: {
                                 ...payload,
                                 id: resp.data.insertId
-                            }
-                        });
-                        // meal.value = {
-                        //     name: "",
-                        //     description: "",
-                        //     allergens: "",
-                        //     price: null
-                        // };
+                        }
+                        );
+                        meal.value = {
+                            name: "",
+                            description: "",
+                            allergens: "",
+                            price: null
+                        };
+                        
                     }
+                    
                 });
-                // onClose();
+                // document.querySelector('.offcanvas').classList.add("close-slideout")
+                // console.log("Closing",onClose())
             }
             if (meal.value.name.trim() === "" || meal.value.name.length <= 3) {
                 document.querySelector(".name-error").innerHTML = "Please enter at least 4 characters";
@@ -164,8 +163,8 @@ export default defineComponent({
                 document.querySelector(".description-error").innerHTML = "";
                 document.querySelector(".input-description").classList.remove("validation-error");
             }
-            if (!meal.value.price) {
-                document.querySelector(".price-error").innerHTML = "Please enter a price";
+            if (!meal.value.price || meal.value.price<=0) {
+                document.querySelector(".price-error").innerHTML = "Please enter a price more than 0";
                 document.querySelector(".input-price").classList.add("validation-error");
             }
             else {
@@ -175,15 +174,19 @@ export default defineComponent({
         };
         // }
         // }
+
+//         document.querySelector(".btn-save").addEventListener("keypress", function (event) {
+//     if (event.keyCode === 13) {
+//       onMealSave();
+//     }
+//   });
+
+
         return {
             isChecked,
             onMealSave,
             meal,
-            nameInput,
             validateForm,
-            onClose,
-            // formIsValid
-            // tmpMealList
         };
     },
 })
@@ -250,5 +253,9 @@ textarea {
     color: red;
     font-size: 14px;
     margin-bottom: 0px;
+}
+
+.close-slideout{
+    display: none;
 }
 </style>

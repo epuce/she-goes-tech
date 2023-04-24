@@ -1,8 +1,8 @@
 <template>
     <div>
-        <FormMeal :mealList="mealList" @add-to-list="addToList()"/>
+        <FormMeal :meal-list="mealList" @add-to-list="addToList" />
 
-        <TableMeal :mealList="mealList"/>
+        <TableMeal :meal-list="mealList"/>
 
         <button @click="isOpen=true">popup</button>
 
@@ -21,12 +21,20 @@ export default defineComponent({
     setup(){
         
         var mealList = ref([]);   
+        fetch("http://localhost:8002/api/meals")
+            .then(resp => resp.json())
+            .then(resp => {
+                mealList.value = resp.data;
+        });
 
         var isOpen = ref(false);
 
         const addToList = (data) => {
+            console.log("AddToList", data)
             mealList.value.push(data)
         }
+
+        
         
         return{
             mealList,

@@ -1,7 +1,7 @@
 <template>
     <div class="popup__wrapper">
-        <div class="popup">"New meal was added"
-        <button class="btn__close" @click="onClose()"> Close</button>
+        <div class="popup">New meal was added
+        <button class="btn__close" @click="onClose()"> <font-awesome-icon icon="fa-solid fa-xmark" /></button>
     </div>
     </div>
 </template>
@@ -14,8 +14,8 @@ export default defineComponent({
 
     },
     setup(props, {emit}){
-        var onClose =function(){
-            emit('close-component')
+        const onClose =()=>{
+            emit('closeComponent')
         }
             return{
                 onClose,
@@ -36,14 +36,22 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
     background: rgba(0,0,0,0.4);
+    float: center;
 }
 .popup{
+    position: relative;
     padding: 32px;
     width: 70%;
     background: #fff;
+    text-align: center;
+    font-weight: 700;
 }
 
 .btn__close {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    padding-right: 18px;
 }
 </style>
