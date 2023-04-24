@@ -1,0 +1,17 @@
+{
+  "name": "final-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "vue-cli-service serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  }
+}
