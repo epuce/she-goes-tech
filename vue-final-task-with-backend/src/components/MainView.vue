@@ -4,6 +4,7 @@
       @show-popup="showPopup()"
       ref="UserFormContainer"
       @save-subscriber="saveSubscriber"
+      :user="user"
     />
     <div class="subscriber-table-wrapper">
       <table class="subscriber-table">
@@ -26,6 +27,14 @@
             <td>{{ user.offer_cycle }}</td>
             <td>
               <button
+                class="subscriber-table__update-btn"
+                @click="fillUserForm(user)"
+              >
+                x
+              </button>
+            </td>
+            <td>
+              <button
                 class="subscriber-table__delete-btn"
                 @click="deleteUser(user.id)"
               >
@@ -36,11 +45,7 @@
         </tbody>
       </table>
     </div>
-    <ThankyouPopup
-      v-if="isSubscribed"
-      @close-popup="closePopup()"
-    />
-    
+    <ThankyouPopup v-if="isSubscribed" @close-popup="closePopup()" />
   </div>
 </template>
 <script>
@@ -58,16 +63,16 @@ export default defineComponent({
     const isSubscribed = ref(false);
     const UserFormContainer = ref();
     const userList = ref([]);
-    const payload = ref({
+    var user = ref({
       username: "",
       email: "",
-      special_deals: false,
+      special_deals: ref(false),
       offer_cycle: "",
     });
 
-    function showPopup () {
+    function showPopup() {
       isSubscribed.value = !isSubscribed.value;
-    };
+    }
 
     const closePopup = () => {
       isSubscribed.value = false;
@@ -81,7 +86,7 @@ export default defineComponent({
       });
 
     function saveSubscriber(subscriber) {
-      payload.value = {
+      user.value = {
         username: subscriber.username,
         email: subscriber.email,
         special_deals: subscriber.special_deals,
@@ -93,14 +98,17 @@ export default defineComponent({
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://localhost:8003",
         },
-        body: JSON.stringify(payload.value),
+        body: JSON.stringify(user.value),
       })
         .then((resp) => resp.json())
         .then((resp) => {
           if (!resp.error) {
-            subscriber.value.id = resp.data.insertId;
+            console.log(user)
+            user.value.id = resp.data.insertId;
             userList.value.push({
-              ...payload});
+              ...user.value,
+            });
+            console.log(userList.value)
           }
         });
     }
@@ -115,6 +123,13 @@ export default defineComponent({
         });
     }
 
+    function fillUserForm (tmpUser) {
+      user.value = tmpUser ;
+      UserFormContainer.value.openForm()
+
+      console.log(user.value)
+    }
+
     return {
       isSubscribed,
       showPopup,
@@ -123,6 +138,8 @@ export default defineComponent({
       userList,
       saveSubscriber,
       deleteUser,
+      fillUserForm,
+      user
     };
   },
 });
