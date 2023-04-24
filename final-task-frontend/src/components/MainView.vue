@@ -2,30 +2,31 @@
     <div>
         <FormMeal :meal-list="mealList" @add-to-list="addToList" />
 
-        <TableMeal :meal-list="mealList"/>
+        <TableMeal :meal-list="mealList" />
 
-        <button @click="isOpen=true">popup</button>
+        <button @click="isOpen = true">popup</button>
 
-        <MyPopup v-if="isOpen" @close-component="isOpen=false"/>
-    
+        <MyPopup v-if="isOpen" @close-component="isOpen = false" />
+
     </div>
 </template>
 
 <script>
 
-import { defineComponent, ref} from 'vue';
+import { defineComponent, ref } from 'vue';
 import TableMeal from './TableMeal.vue';
 import FormMeal from './FormMeal.vue';
 import MyPopup from './MyPopup.vue';
 export default defineComponent({
-    setup(){
+    setup() {
+
+        var mealList = ref([]);
         
-        var mealList = ref([]);   
         fetch("http://localhost:8002/api/meals")
             .then(resp => resp.json())
             .then(resp => {
                 mealList.value = resp.data;
-        });
+            });
 
         var isOpen = ref(false);
 
@@ -34,25 +35,24 @@ export default defineComponent({
             mealList.value.push(data)
         }
 
-        
-        
-        return{
+
+        return {
             mealList,
             addToList,
             isOpen,
         }
-    
+
     },
     components: {
-    TableMeal,
-    FormMeal,
-    MyPopup
-},
+        TableMeal,
+        FormMeal,
+        MyPopup
+    },
 })
 </script>
 
 <style>
-.btn-popup{
+.btn-popup {
     float: right;
 }
 </style>

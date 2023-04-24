@@ -1,36 +1,37 @@
 <template>
     <div>
-        <a class="btn btn-primary btn-add" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  Add a meal </a>
-        
+        <a class="btn btn-primary btn-add" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+            aria-controls="offcanvasExample">
+            Add a meal </a>
+
         <table class="meal-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Allergens</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody v-for="item in mealList" :key="item.id" class="meal-list__meal">
-                    <tr>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.description }}</td>
-                        <td>{{ item.price }}</td>
-                        <td>{{ item.allergens }}</td>
-                        <td>
-                            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"> <font-awesome-icon :icon="['fas', 'pen']" class="icon-edit" 
-                                :class="{ 'meal-list__meal--active': meal.id === item.id }"/></a>
-                            <font-awesome-icon icon="fa-trash" class="icon-delete" @click="onMealDelete(item.id)" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Allergens</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody v-for="item in mealList" :key="item.id" class="meal-list__meal">
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.allergens }}</td>
+                    <td>
+                        <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                            aria-controls="offcanvasExample"> <font-awesome-icon :icon="['fas', 'pen']" class="icon-edit"
+                                :class="{ 'meal-list__meal--active': meal.id === item.id }" /></a>
+                        <font-awesome-icon icon="fa-trash" class="icon-delete" @click="onMealDelete(item.id)" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-<FormMeal />
+        <FormMeal />
 
-           
     </div>
 </template>
 <script>
@@ -43,7 +44,7 @@ export default defineComponent({
             required: true,
         }
     },
-    setup(props, {emit}) {
+    setup(props, { emit }) {
         const meal = ref({
             name: "",
             description: "",
@@ -51,7 +52,7 @@ export default defineComponent({
             allergens: "",
             id: null,
             // category_id: null
-        });        
+        });
 
         const onMealDelete = (mealId) => {
             fetch(`http://localhost:8002/api/meals/${mealId}`, {
@@ -59,8 +60,8 @@ export default defineComponent({
             })
                 .then(resp => resp.json())
                 .then(() => {
-                   emit('on-meal-delete', {mealId})
-            });
+                    emit('on-meal-delete', { mealId })
+                });
         };
 
         // const fillMealForm = (tmpMeal) => {
@@ -74,12 +75,11 @@ export default defineComponent({
     },
     components: { FormMeal }
 })
-    
+
 </script>
 <style>
-
-.btn-add{
-margin-left: 16px;
+.btn-add {
+    margin-left: 16px;
 }
 
 label,
@@ -105,6 +105,7 @@ input {
     padding-bottom: 10px !important;
     padding-top: 1px !important;
 }
+
 table {
     margin: auto;
     margin-top: 50px;
@@ -146,5 +147,9 @@ button {
 
 .meal-list__meal--active path {
     fill: lightgray;
+}
+
+th{
+    background-color: #f5f5f5;
 }
 </style>

@@ -4,8 +4,7 @@
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Add new meal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" 
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div>
@@ -43,8 +42,7 @@
                         </label>
 
                         <div>
-                            <button class="btn btn-primary btn-save" @click="onMealSave()"
-                                type="button">Save</button>
+                            <button class="btn btn-primary btn-save" @click="onMealSave()" type="button">Save</button>
                         </div>
 
                     </form>
@@ -78,7 +76,7 @@ export default defineComponent({
             // category_id: null
         });
         const validateForm = () => {
-            var inputIsValid = meal.value.name.length > 3 && meal.value.name.trim() !== "" && meal.value.description.length > 3 && meal.value.description.trim() !== "" && meal.value.price && meal.value.price>0;
+            var inputIsValid = meal.value.name.length > 3 && meal.value.name.trim() !== "" && meal.value.description.length > 3 && meal.value.description.trim() !== "" && meal.value.price && meal.value.price > 0;
             return inputIsValid;
         };
 
@@ -128,22 +126,22 @@ export default defineComponent({
                 })
                     .then(resp => resp.json())
                     .then(resp => {
-                    if (!resp.error) {
-                        emit("add-to-list", {
+                        if (!resp.error) {
+                            emit("add-to-list", {
                                 ...payload,
                                 id: resp.data.insertId
+                            }
+                            );
+                            meal.value = {
+                                name: "",
+                                description: "",
+                                allergens: "",
+                                price: null
+                            };
+
                         }
-                        );
-                        meal.value = {
-                            name: "",
-                            description: "",
-                            allergens: "",
-                            price: null
-                        };
-                        
-                    }
-                    
-                });
+
+                    });
                 // document.querySelector('.offcanvas').classList.add("close-slideout")
                 // console.log("Closing",onClose())
             }
@@ -163,7 +161,7 @@ export default defineComponent({
                 document.querySelector(".description-error").innerHTML = "";
                 document.querySelector(".input-description").classList.remove("validation-error");
             }
-            if (!meal.value.price || meal.value.price<=0) {
+            if (!meal.value.price || meal.value.price <= 0) {
                 document.querySelector(".price-error").innerHTML = "Please enter a price more than 0";
                 document.querySelector(".input-price").classList.add("validation-error");
             }
@@ -175,11 +173,11 @@ export default defineComponent({
         // }
         // }
 
-//         document.querySelector(".btn-save").addEventListener("keypress", function (event) {
-//     if (event.keyCode === 13) {
-//       onMealSave();
-//     }
-//   });
+        //         document.querySelector(".btn-save").addEventListener("keypress", function (event) {
+        //     if (event.keyCode === 13) {
+        //       onMealSave();
+        //     }
+        //   });
 
 
         return {
@@ -255,7 +253,7 @@ textarea {
     margin-bottom: 0px;
 }
 
-.close-slideout{
+.close-slideout {
     display: none;
 }
 </style>
