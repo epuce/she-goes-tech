@@ -43,12 +43,12 @@ exports.update = function(request, response) {
 }
 
 exports.save = function(request, response) {
-    var {first_name, last_name, email} = request.body;
+    var {first_name, last_name, email, cycle} = request.body;
 
     var sql = `
         INSERT INTO \`lindalejiete-users\`
-        (first_name, last_name, email)
-        VALUES("`+first_name+`","`+last_name+`","`+email+`")
+        (first_name, last_name, email, cycle)
+        VALUES("`+first_name+`","`+last_name+`","`+email+`","`+cycle+`")
     `
 
     runSQL(sql, response)

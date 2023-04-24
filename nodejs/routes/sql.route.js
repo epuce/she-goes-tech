@@ -41,13 +41,9 @@ router.get('', function(request, response) {
 
     var sql = 'DELETE FROM `lindalejiete-comments` WHERE user_id=1'
 
-    var sql = `CREATE TABLE IF NOT EXISTS \`lindalejiete-users\` (
-        first_name VARCHAR(255),
-        last_name VARCHAR(255),
-        email VARCHAR(255),
-        id INT NOT NULL AUTO_INCREMENT,
-        PRIMARY KEY (id)
-    )`
+    var sql = `ALTER TABLE \`lindalejiete-users\` ADD (
+        cycle VARCHAR(255)
+    )` 
     
 
     app.db.query(sql, function(error, data) {
