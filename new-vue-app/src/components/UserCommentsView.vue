@@ -39,6 +39,17 @@
                     <input v-model="user.last_name">
                 </label>
 
+                <label>
+                    Email
+
+                    <input v-model="user.email">
+                </label>
+
+                <label>
+                    Cycle
+
+                    <input v-model="user.cycle">
+                </label>
                 <div>
                     <button type="button" @click="onUserSave()">Save</button>
                 </div>
@@ -53,10 +64,9 @@
                     }"
                     @click="fillUserForm(item)">
                     
-                    {{ item.first_name }} {{ item.last_name }}
+                    {{ item.first_name }} {{ item.last_name }} {{ item.email }} {{ item.cycle }}
 
                     <img src="../assets/Trash-Icon-SVG-psofds.svg" 
-                        icon="fa-trash"
                         @click.stop="onUserDelete(item.id)"
                         class="user-list__delete" />
                 </div>
@@ -77,6 +87,7 @@ export default defineComponent({
         const user = ref({
             first_name: '',
             last_name: '',
+            cycle: '',
             id: null
         })
 
@@ -91,6 +102,8 @@ export default defineComponent({
             const payload = {
                 first_name: user.value.first_name,
                 last_name: user.value.last_name,
+                email: user.value.email,
+                cycle: user.value.cycle
             }
             if (user.value.id) {
                 fetch(`http://localhost:8002/api/users/${user.value.id}`, {
@@ -111,6 +124,8 @@ export default defineComponent({
                         user.value = {
                             first_name: "",
                             last_name: "",
+                            email: "",
+                            cycle: "",
                             id: null
                         }
                     }
@@ -134,6 +149,8 @@ export default defineComponent({
                         user.value = {
                             first_name: '',
                             last_name: '',
+                            email: '',
+                            cycle: ''
                         }
                     }
                 })
