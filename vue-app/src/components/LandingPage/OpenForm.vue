@@ -24,16 +24,22 @@
         <label for="checkbox">Send me special deals</label>
       </div>
       <div v-if="checkboxClicked">
-        <label for="select-time">I'm willing to received them every:</label>
-        <select id="select-time" :required="checkboxClicked">
-          <option value>Please choose one option:</option>
-          <option value="hour">Hour</option>
-          <option value="day">Day</option>
-          <option value="week">Week</option>
-          <option value="month">Month</option>
-        </select>
+        <div class="select-wrapper">
+          <label for="select-time">I'm willing to received them every:</label>
+          <select id="select-time" :required="checkboxClicked">
+            <option value>Please choose one option:</option>
+            <option value="hour">Hour</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+          </select>
+        </div>
       </div>
-      <button class="subscribe-btn" @click="onSubmit()">Subscribe</button>
+      <div class="button-wrapper">
+        <button class="subscribe-btn" type="button" @click="onSubmit()">
+          Subscribe
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -42,7 +48,25 @@
 import {defineComponent, ref} from "vue";
 
 export default defineComponent({
-  setup() {
+  // data() {
+  //   return {
+  //     userEmail: "",
+  //     userName: "",
+  //   };
+  // },
+  watch: {
+    userName(value) {
+      this.userName = value;
+      this.validateUsername(value);
+    },
+    userEmail(value) {
+      this.userEmail = value;
+      this.validateEmail(value);
+    },
+
+    // immediate: true,
+  },
+  setup(props, {emit}) {
     const userName = ref("");
     const userEmail = ref("");
     const checkboxClicked = ref(false);
@@ -54,8 +78,11 @@ export default defineComponent({
     // /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const validateEmail = function () {
-      if (!emailRegEx.test(userEmail.value) && userEmail.value.length > 0) {
+      if (!emailRegEx.test(userEmail.value) && userEmail.value.length !== 0) {
         errorMessageEmail.value = "Email is invalid";
+        isValidEmail.value = false;
+      } else if (userEmail.value.length === 0) {
+        errorMessageEmail.value = "Required";
         isValidEmail.value = false;
       } else {
         errorMessageEmail.value = "";
@@ -63,17 +90,30 @@ export default defineComponent({
       }
     };
 
-    const validateInput = function () {
-      if (userName.value.length < 4 && userName.value.length > 0) {
+    const validateUsername = function () {
+      if (userName.value.length < 4 && userName.value.length !== 0) {
         errorMessageUser.value = "User name requires at least 4 characters";
         isValidUser.value = false;
-        validateEmail();
+      } else if (userName.value.length === 0) {
+        errorMessageUser.value = "Required";
+        isValidUser.value = false;
       } else {
         errorMessageUser.value = "";
         isValidUser.value = true;
-        validateEmail();
       }
     };
+
+    // const validateInput = function () {
+    //   if (userName.value.length < 4 && userName.value.length > 0) {
+    //     errorMessageUser.value = "User name requires at least 4 characters";
+    //     isValidUser.value = false;
+    //     // validateEmail();
+    //   } else {
+    //     errorMessageUser.value = "";
+    //     isValidUser.value = true;
+    //     // validateEmail();
+    //   }
+    // };
     // const getUserList = function () {
     //   if (isValidUser.value && isValidEmail.value) {
     //     try {
@@ -85,12 +125,17 @@ export default defineComponent({
     //   }
     // };
 
-    const onSubmit = function (event) {
-      event.preventDefault();
-
-      validateInput();
+    const onSubmit = function () {
+      validateUsername();
       validateEmail();
+
+      if (isValidUser.value && isValidEmail.value) {
+        emit("open-popup"); //we emit "close-popup" value
+
+        console.log("SEND DATA TO THE SERVER");
+      }
     };
+
     //   let list = getUserList();
 
     //   // if (saveBtn.dataset.index) {
@@ -111,7 +156,8 @@ export default defineComponent({
       userName,
       userEmail,
       checkboxClicked,
-      validateInput,
+      validateUsername,
+      validateEmail,
       errorMessageUser,
       errorMessageEmail,
       onSubmit,
@@ -119,12 +165,6 @@ export default defineComponent({
       isValidEmail,
     };
   },
-  // watch: {
-  //   email(value) {
-  //     userEmail.value = value;
-  //     validateEmail(value);
-  //   },
-  // },
 });
 </script>
 <style>
@@ -136,32 +176,37 @@ export default defineComponent({
   font-weight: 400;
   color: #45260a;
   font-size: 62.5%;
-  overflow-x: hidden;
 }
 
 .form-wrapper {
   height: 100vh;
   min-width: 30rem;
+  max-width: 50rem;
   padding: 2.4rem;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-  background-image: linear-gradient(to right bottom, #eb984e, #e67e22);
-  /* transform: translateX(0); */
+  background-color: #fdf2e9;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(242, 179, 128, 0.919),
+    #e67e22
+  );
   transition: all 0.5s ease-in;
-  /* display: none;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transform: translateX(100%); */
+}
+.input-wrapper,
+.select-wrapper,
+.special-deals-wrapper,
+.button-wrapper {
+  padding: 0.8rem;
 }
 .login-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  row-gap: 2.4rem;
+  row-gap: 1.8rem;
 }
 label {
   display: block;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
 }
@@ -189,7 +234,8 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.2rem;
+  /* margin-bottom: 1.2rem;
+  margin-left: 1.2rem; */
 }
 .special-deals-wrapper label {
   margin: 0;
@@ -201,6 +247,7 @@ input[type="checkbox"]:focus {
 .subscribe-btn {
   display: inline-block;
   text-decoration: none;
+  width: 100%;
   font-size: 2rem;
   font-weight: 600;
   padding: 1.2rem;
@@ -221,7 +268,7 @@ option {
   color: #45260a;
 }
 p {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-family: inherit;
   color: red;
   font-weight: 600;

@@ -1,21 +1,49 @@
 <template>
   <div class="button-container">
-    <button class="open-button">Open Form</button>
+    <button
+      :class="{
+        'open-button': name === 'open',
+        'subscribe-button': name === 'subscribe',
+      }"
+      type="type"
+    >
+      {{ text }}
+    </button>
   </div>
 </template>
 <script>
 import {defineComponent} from "vue";
-export default defineComponent({});
+export default defineComponent({
+  props: {
+    text: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: false,
+      default: "open",
+    },
+    type: {
+      type: String,
+      required: false,
+      default: "button",
+    },
+  },
+});
 </script>
 <style>
 .button-container {
   height: 100vh;
+  position: relative;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 .open-button {
+  position: absolute;
+  top: 100px;
   display: inline-block;
-  height: 4.7rem;
+  height: 4.5rem;
   width: 18rem;
   text-decoration: none;
   font-size: 2rem;
@@ -23,7 +51,7 @@ export default defineComponent({});
   padding: 1.2rem;
   color: #fff;
   background-color: #e67e22;
-  border-radius: 9px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
   font-family: inherit;
@@ -33,5 +61,7 @@ export default defineComponent({});
 
 .open-button:hover {
   background-color: #cf711f;
+}
+.subscribe-button {
 }
 </style>

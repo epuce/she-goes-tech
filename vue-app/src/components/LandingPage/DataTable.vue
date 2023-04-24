@@ -20,24 +20,37 @@ export default defineComponent({});
 <style>
 .table-container {
   height: 100vh;
-  width: 50%;
+  width: 100%;
   display: flex;
-  align-items: center;
+  /* margin-top: 100px; */
+  /* align-items: center; */
   justify-content: center;
 }
 
 table {
-  display: inline-table;
+  /* display: inline-table; */
 }
 .user-table {
-  /* display: none; */
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  margin-top: 100px;
+  min-width: 70%;
+  height: 50px;
   border-spacing: 0;
-
-  /* to use border only on one side between cells: */
   border-collapse: collapse;
 }
 .user-table td,
 .user-table th {
+  padding: 10px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  color: #45260a;
+  font-size: 1.4rem;
+}
+.user-table th {
+  background-color: #fdf2e9;
   border: 1px solid #999999;
+}
+.js-user-table {
+  display: none;
 }
 </style>

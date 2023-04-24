@@ -1,8 +1,13 @@
+"use strict";
+
 let sheetsArr = [];
 let sheetsData = {id: "", data: []};
 let computedResults = [];
 let tempObjt = {};
 let tempArr = [];
+let submissionURL;
+
+fetchData();
 
 async function fetchData() {
   const response = await fetch(
@@ -11,172 +16,145 @@ async function fetchData() {
       method: "GET",
     }
   );
-  const data = await response.json();
 
-  return data;
-  // .then((response) => response.json())
-  // .then(function (data) {
-  //   sheetsArr = data.sheets;
-  //   console.log(sheetsArr);
-  // });
+  if (!response.ok) {
+    const message = `An error has occured: ${response.status}`;
+    throw new Error(message);
+  }
+
+  const data = await response.json();
+  submissionURL = data.submissionUrl;
+  sheetsArr = data.sheets;
+
+  convertToArrOfObj();
 }
 
-fetchData().then((data) => {
-  sheetsArr = data.sheets;
-  loopingThroughSheets();
-});
-
-// OPERATORS FUNCTIONS
-const getSum = function (obj) {
-  objValues = Object.values(obj);
-  objkeys = Object.keys(obj);
+const getSum = function (obj, objValue) {
+  const objkeys = Object.keys(obj);
   let arrValues = [];
+  let result = 0;
 
-  objValues.forEach((value) => {
-    if (typeof value === "string" && value.includes("=SUM(")) {
-      let keys = [];
-      const matchRef = value.substring(5, value.length - 1);
-      arrValues = matchRef.replace(/\s/g, "").split(",");
-    }
-  });
-  let initialValue = 0;
+  const matchRef = objValue.substring(5, objValue.length - 1);
+  arrValues = matchRef.replace(/\s/g, "").split(",");
 
-  const sum = function (arrValues, objkeys) {
-    // let initialValue = 0;
-    console.log(arrValues);
-    console.log(objkeys);
-
-    arrValues.every((element) => {
-      console.log(initialValue);
-      if (objkeys.includes(element) && typeof element === "string") {
-        initialValue = initialValue + obj[element];
+  const sum = function () {
+    arrValues.forEach((element) => {
+      if (objkeys.includes(element) && typeof obj[element] === "number") {
+        result = result + obj[element];
       } else if (!objkeys.includes(element) && isNaN(parseInt(element, 10))) {
-        console.log("One of the arguments is wrong type");
-      } else {
-        console.log("not worked");
-      }
-
-      return initialValue;
+        result = "#ERROR: one of the arguments refers to non-existing cell";
+      } else if (objkeys.includes(element) && typeof obj[element] !== "number")
+        result = "#ERROR: type does not match";
     });
-    return initialValue;
+    return result;
   };
-  // must be number type, adding all the simple numbers to the initialValue
+
   arrValues.forEach((item) => {
     if (parseInt(item, 10)) {
-      initialValue = initialValue + parseInt(item, 10);
+      result = result + parseInt(item, 10);
     }
   });
 
-  const total = sum(arrValues, objkeys);
-
-  return total;
+  const totalSum = sum();
+  return totalSum;
 };
 
-const getMultiply = function (obj) {
-  objValues = Object.values(obj);
-  objkeys = Object.keys(obj);
+const getMultiply = function (obj, objValue) {
+  const objkeys = Object.keys(obj);
   let arrValues = [];
-  let initialValue = 1;
+  let result = 1;
 
-  objValues.forEach((value) => {
-    if (typeof value === "string" && value.includes("=MULTIPLY(")) {
-      const matchRef = value.substring(10, value.length - 1);
-      arrValues = matchRef.replace(/\s/g, "").split(",");
-    }
-  });
+  const matchRef = objValue.substring(10, objValue.length - 1);
+  arrValues = matchRef.replace(/\s/g, "").split(",");
 
-  const multiply = function (arrValues, objkeys) {
-    arrValues.every((element) => {
-      if (objkeys.includes(element) && typeof element === "string") {
+  const multiply = function () {
+    arrValues.forEach((element) => {
+      if (objkeys.includes(element)) {
         if (typeof obj[element] === "number") {
-          initialValue = initialValue * obj[element];
+          result *= obj[element];
         } else {
-          console.log("#ERROR: type does not match");
+          result = "#ERROR: type does not match";
         }
       } else if (!objkeys.includes(element) && isNaN(parseInt(element, 10))) {
-        console.log("#ERROR: type does not match");
-      } else {
-        console.log("not worked");
+        result = "#ERROR: one of the arguments refers to non-existing cell";
       }
-
-      // return initialValue;
     });
-    return initialValue;
+
+    return result;
   };
-  // must be number type, adding all the simple numbers to the initialValue
+
   arrValues.forEach((item) => {
     if (parseInt(item, 10)) {
-      initialValue = initialValue * parseInt(item, 10);
+      result = result * parseInt(item, 10);
     }
   });
 
-  const total = multiply(arrValues, objkeys);
+  const total = multiply();
   return total;
 };
 
-const getDivide = function (obj) {
-  objValues = Object.values(obj);
-  objkeys = Object.keys(obj);
+const getDivide = function (obj, objValue) {
+  const objkeys = Object.keys(obj);
   let arrValues = [];
   let dividend = null;
   let devisor = null;
-  let result = null;
-  objValues.forEach((value) => {
-    if (typeof value === "string" && value.includes("=DIVIDE(")) {
-      const matchRef = value.substring(8, value.length - 1);
-      arrValues = matchRef.replace(/\s/g, "").split(",");
-    }
-  });
+  let result;
+  let calculation;
 
-  const divide = function (arrValues, objkeys) {
-    let calculation;
+  const matchRef = objValue.substring(8, objValue.length - 1);
+  arrValues = matchRef.replace(/\s/g, "").split(",");
 
+  const divide = function () {
     if (dividend && devisor) {
       result = dividend / devisor;
-      calculation = parseFloat(result).toFixed(7);
+      calculation = +parseFloat(result).toFixed(7);
     } else if (dividend && devisor === null) {
-      if (objkeys.includes(arrValues[1]) && typeof arrValues[1] === "string") {
+      if (objkeys.includes(arrValues[1])) {
         if (typeof obj[arrValues[1]] === "number") {
           result = dividend / obj[arrValues[1]];
-          calculation = parseFloat(result).toFixed(7);
+          calculation = +parseFloat(result).toFixed(7);
         } else {
-          console.log("#ERROR: type does not match");
+          calculation = "#ERROR: type does not match";
         }
+      } else {
+        calculation =
+          "#ERROR: one of the arguments refers to non-existing cell";
       }
     } else if (dividend === null && devisor) {
-      if (objkeys.includes(arrValues[0]) && typeof arrValues[0] === "string") {
+      if (objkeys.includes(arrValues[0])) {
         if (typeof obj[arrValues[0]] === "number") {
           result = obj[arrValues[0]] / devisor;
-          calculation = parseFloat(result).toFixed(7);
+          calculation = +parseFloat(result).toFixed(7);
         } else {
-          console.log("#ERROR: type does not match");
+          calculation = "#ERROR: type does not match";
         }
+      } else {
+        calculation =
+          "#ERROR: one of the arguments refers to non-existing cell";
       }
     } else if (dividend === null && devisor === null) {
-      if (
-        objkeys.includes(arrValues[0]) &&
-        objkeys.includes(arrValues[1]) &&
-        typeof arrValues[1] === "string" &&
-        typeof arrValues[0] === "string"
-      ) {
+      if (objkeys.includes(arrValues[0]) && objkeys.includes(arrValues[1])) {
         if (
           typeof obj[arrValues[0]] === "number" &&
           typeof obj[arrValues[1]] === "number"
         ) {
           result = obj[arrValues[0]] / obj[arrValues[1]];
-
-          calculation = result.toFixed(7).replace(/\.?0+$/, "");
+          calculation = +result.toFixed(7).replace(/\.?0+$/, "");
         } else {
-          console.log("#ERROR: type does not match");
+          calculation = "#ERROR: type does not match";
         }
+      } else {
+        calculation =
+          "#ERROR: one of the arguments refers to non-existing cell";
       }
     }
 
-    return +calculation;
+    return calculation;
   };
-  // must be only 2 values
+
   if (arrValues.length > 2) {
-    return console.log("#ERROR: only two arguments are required");
+    result = "#ERROR: only two arguments are required";
+    return result;
   }
   if (parseInt(arrValues[0], 10)) {
     dividend = parseInt(arrValues[i]);
@@ -185,64 +163,62 @@ const getDivide = function (obj) {
     devisor = parseInt(arrValues[1], 10);
   }
 
-  const total = divide(arrValues, objkeys);
-
-  return total;
+  result = divide();
+  return result;
 };
-const getFirstGreater = function () {};
 
-const getNot = function (obj, objValue) {
-  objkeys = Object.keys(obj);
+function not(obj, objValue) {
   let arrValues = [];
+  let result;
 
   const matchRef = objValue
     .substring(5, objValue.length - 1)
     .replace(/\s/g, "");
   const subString = matchRef.split(",");
-
   arrValues.push(subString);
 
-  const negate = function (values) {
-    let list = [];
-    let result;
-
-    console.log(values);
-
-    values.forEach((element) => {
+  const negate = function () {
+    arrValues.forEach((element) => {
       element.forEach((el) => {
         if (obj[el] === true || obj[el] === false) {
           result = !obj[el];
-        } else {
+        } else if (
+          obj[el] !== true ||
+          (obj[el] !== false && typeof obj[el] !== "undefined")
+        ) {
           result = "#ERROR: type does not match";
+        } else {
+          result = "#ERROR: one of the arguments refers to non-existing cell";
         }
       });
     });
     return result;
   };
-
-  const isNegatedValue = negate(arrValues);
+  const isNegatedValue = negate();
   return isNegatedValue;
-};
-const getAnd = function (obj, objValue) {
-  objkeys = Object.keys(obj);
-  let arrValues = [];
+}
 
-  // const matchRef = value.substring(5, value.indexOf(","));
+function and(obj, objValue) {
+  let arrValues = [];
+  let result;
+  let finalResult;
   const matchRef = objValue
     .substring(5, objValue.length - 1)
     .replace(/\s/g, "");
   const subString = matchRef.split(",");
-
   arrValues.push(subString);
 
-  const compare = function (values) {
+  const compare = function () {
     let list = [];
-    let result;
-    let finalResult;
 
-    values.forEach((element) => {
+    arrValues.forEach((element) => {
       element.forEach((el) => {
-        list.push(obj[el]);
+        if (obj[el] !== "undefined") {
+          list.push(obj[el]);
+        } else {
+          return (result =
+            "#ERROR: one of the arguments refers to non-existing cell");
+        }
       });
     });
 
@@ -265,41 +241,45 @@ const getAnd = function (obj, objValue) {
     return finalResult;
   };
 
-  const isTrue = compare(arrValues);
+  const isTrue = compare();
   return isTrue;
-};
-const getOr = function (obj, objValue) {
-  objkeys = Object.keys(obj);
-  let arrValues = [];
+}
 
-  // const matchRef = value.substring(5, value.indexOf(","));
+function or(obj, objValue) {
+  let arrValues = [];
+  let result;
+
   const matchRef = objValue
     .substring(4, objValue.length - 1)
     .replace(/\s/g, "");
   const subString = matchRef.split(",");
-
   arrValues.push(subString);
 
-  const compare = function (values) {
-    console.log(values);
+  const compare = function () {
     let list = [];
-    let result;
-    let finalResult;
 
-    values.forEach((element) => {
+    arrValues.forEach((element) => {
       element.forEach((el) => {
-        list.push(obj[el]);
+        if (obj[el] !== "undefined") {
+          list.push(obj[el]);
+        } else {
+          return (result =
+            "#ERROR: one of the arguments refers to non-existing cell");
+        }
       });
     });
-    console.log(list);
 
-    let isTrue = list.some((el) => {
+    const isTrue = list.some((el) => {
       return el.toString().includes("true");
     });
-    let isWrongType = list.some((el) => {
+
+    const isWrongType = list.some((el) => {
       return (
         !el.toString().includes("false") && !el.toString().includes("true")
       );
+    });
+    const notExists = list.some((el) => {
+      return typeof obj[el] === "undefined";
     });
 
     if (isTrue && !isWrongType) {
@@ -313,51 +293,176 @@ const getOr = function (obj, objValue) {
     return result;
   };
 
-  const isOneTrue = compare(arrValues);
+  const isOneTrue = compare();
   return isOneTrue;
+}
+
+function eq(obj, objValue) {
+  let arrValues = [];
+  let result;
+  const matchRef = objValue
+    .substring(4, objValue.length - 1)
+    .replace(/\s/g, "");
+  const subString = matchRef.split(",");
+  arrValues.push(subString);
+
+  const compare = function () {
+    let list = [];
+
+    arrValues.forEach((element) => {
+      element.forEach((el) => {
+        if (typeof obj[el] === "number") {
+          list.push(obj[el]);
+        } else if (
+          typeof obj[el] !== "number" &&
+          typeof obj[el] !== "undefined"
+        ) {
+          result = "#ERROR: type does not match";
+        } else {
+          result = "#ERROR: one of the arguments refers to non-existing cell";
+        }
+      });
+    });
+
+    result = list[0] === list[1];
+    return result;
+  };
+
+  const isEqual = compare();
+  return isEqual;
+}
+
+const getConcatination = function (obj, objValue) {
+  let finalArr = [];
+  let result;
+  const objkeys = Object.keys(obj);
+  const matchRef = objValue.substring(8, objValue.length - 1);
+  const matchArr = matchRef.split(",");
+
+  const concatinate = function () {
+    const isIncluded = matchArr.some((el) => {
+      el = el.replace(/ /g, "");
+      return objkeys.includes(el);
+    });
+
+    if (isIncluded) {
+      matchArr.forEach((el, index) => {
+        el = el.replace(/ /g, "");
+        if (objkeys.includes(el) && typeof obj[el] === "string") {
+          finalArr[index] = obj[el];
+        } else if (objkeys.includes(el) && typeof obj[el] !== "string") {
+          finalArr[index] = "#ERROR: type does not match";
+        } else {
+          finalArr[index] = matchArr[index]
+            .replaceAll('"', "")
+            .replace(" ", "");
+        }
+      });
+    } else {
+      finalArr = JSON.parse("[" + matchRef + "]");
+    }
+
+    result = finalArr.join("");
+    return result;
+  };
+
+  const concatinatedVal = concatinate();
+  return concatinatedVal;
 };
-const getEqual = function (obj, objValue) {
-  objkeys = Object.keys(obj);
+
+const getReference = function (obj, objValue) {
+  const objkeys = Object.keys(obj);
+  const key = objValue.substring(1);
+  let result;
+
+  const returnValue = function (key) {
+    if (objkeys.includes(key) && !obj[key].toString().includes("=")) {
+      return obj[key];
+    } else if (objkeys.includes(key) && obj[key].includes("=")) {
+      return getReference(obj, obj[key]);
+    } else {
+      result = "#ERROR: one of the arguments refers to non-existing cell";
+    }
+  };
+
+  result = returnValue(key);
+  return result;
+};
+
+function gt(obj, objValue) {
   let arrValues = [];
 
   const matchRef = objValue
     .substring(4, objValue.length - 1)
     .replace(/\s/g, "");
   const subString = matchRef.split(",");
-
   arrValues.push(subString);
 
-  const compare = function (values) {
+  const compare = function () {
     let list = [];
-    console.log(values);
 
-    values.forEach((element) => {
+    arrValues.forEach((element) => {
       element.forEach((el) => {
         if (typeof obj[el] === "number") {
           list.push(obj[el]);
+        } else if (typeof obj[el] === "undefined") {
+          result = "#ERROR: one of the arguments refers to non-existing cell";
         } else {
-          console.log("#ERROR: type does not match");
+          result = "#ERROR: type does not match";
         }
       });
     });
 
-    let result = list[0] === list[1];
+    let result = list[0] > list[1];
+    return result;
+  };
+
+  const isGreater = compare();
+  return isGreater;
+}
+const getIf = function (obj, objValue) {
+  let arrValues = [];
+  let result;
+  const matchRef = objValue
+    .substring(4, objValue.length - 1)
+    .replace(/\s/g, "");
+  const subString = matchRef.split(")");
+  arrValues.push(subString);
+
+  const compare = function () {
+    arrValues.forEach((element) => {
+      if (element[0].includes("(")) {
+        const secondFunc = element[0]
+          .substring(0, element[0].indexOf("("))
+          .toLowerCase();
+
+        const parameters = "=" + element[0] + ")";
+        const condition = window[secondFunc](obj, parameters);
+
+        if (condition === true || condition === false) {
+          if (condition) {
+            const keysArr = element[1].substring(1).split(",");
+            result = obj[keysArr[0]];
+          } else {
+            result = obj[keysArr[1]];
+          }
+        } else {
+          result = "#ERROR: type does not match";
+        }
+      } else {
+        result = "#ERROR: condition function is not chosen";
+      }
+    });
 
     return result;
   };
 
-  const isEqual = compare(arrValues);
-  return isEqual;
+  const conditionValue = compare();
+  return conditionValue;
 };
-const getIf = function () {};
-const getConcat = function () {};
 
-// CHOOSING THE RIGHT OPERATOR FUNCTION
-const evaluateData = function (obj) {
-  console.log(obj);
-  let newObject = new Array();
-  // console.log(Object.values(obj));
-  const clonedObj = Object.assign({}, obj);
+const createResultsArr = function (obj) {
+  let resultsArr = new Array();
   const arr = [];
 
   Object.keys(obj).forEach((element) => {
@@ -366,120 +471,71 @@ const evaluateData = function (obj) {
   const arrLength = arr.reduce((a, b) => Math.max(a, b));
 
   for (let i = 0; i < arrLength; i++) {
-    newObject[i] = Array();
+    resultsArr[i] = Array();
   }
+  return resultsArr;
+};
 
-  const addToTheList = function (receivedKey, value) {
-    const arrIndex = parseInt(receivedKey[1], 10);
+const evaluateData = function (obj) {
+  let resultsArr;
+  const clonedObj = Object.assign({}, obj);
+  resultsArr = createResultsArr(obj);
+
+  const addToTheList = function (key, value) {
+    const arrIndex = parseInt(key[1], 10);
     const index = arrIndex - 1;
-    newObject[index].push(value);
+    resultsArr[index].push(value);
   };
-  // OPERATOR FUNCTIONS INITIATION
+
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       if (typeof obj[key] === "string" && obj[key].includes("=SUM(")) {
-        clonedObj[key] = getSum(obj);
+        clonedObj[key] = getSum(obj, obj[key]);
       } else if (
         typeof obj[key] === "string" &&
         obj[key].includes("=MULTIPLY(")
       ) {
-        clonedObj[key] = getMultiply(obj);
+        clonedObj[key] = getMultiply(obj, obj[key]);
       } else if (
         typeof obj[key] === "string" &&
         obj[key].includes("=DIVIDE(")
       ) {
-        clonedObj[key] = getDivide(obj);
+        clonedObj[key] = getDivide(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=GT(")) {
-        clonedObj[key] = getFirstGreater(obj, obj[key]);
+        clonedObj[key] = gt(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=AND(")) {
-        clonedObj[key] = getAnd(obj, obj[key]);
+        clonedObj[key] = and(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=OR(")) {
-        clonedObj[key] = getOr(obj, obj[key]);
+        clonedObj[key] = or(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=NOT(")) {
-        clonedObj[key] = getNot(obj, obj[key]);
+        clonedObj[key] = not(obj, obj[key]);
       } else if (typeof obj[key] === "string" && obj[key].includes("=EQ(")) {
-        console.log("INITIATED OPERATOR FUNCTION");
-        clonedObj[key] = getEqual(obj, obj[key]);
+        clonedObj[key] = eq(obj, obj[key]);
+      } else if (typeof obj[key] === "string" && obj[key].includes("=IF(")) {
+        clonedObj[key] = getIf(obj, obj[key]);
+      } else if (
+        typeof obj[key] === "string" &&
+        obj[key].includes("=CONCAT(")
+      ) {
+        clonedObj[key] = getConcatination(obj, obj[key]);
+      } else if (
+        typeof obj[key] === "string" &&
+        obj[key].includes("=") &&
+        !obj[key].includes("(")
+      ) {
+        clonedObj[key] = getReference(clonedObj, obj[key]);
+      } else {
+        clonedObj[key] = obj[key];
       }
 
       addToTheList(key, clonedObj[key]);
     }
   }
-
-  return newObject;
-  // // MULTIPLY
-  // for (const key in obj) {
-  //   if (obj.hasOwnProperty(key)) {
-  //     if (typeof obj[key] === "string" && obj[key].includes("=MULTIPLY(")) {
-  //       obj[key] = getSum(obj);
-  //     }
-  //   }
-  // }
-  // const keys = Object.keys(obj);
-  // console.log(keys);
-  // var result = Object.entries(obj).map((value) => value);
-  // console.log(obj);
-
-  // for (let [key, value] of Object.entries(obj)) {
-  //   console.log(Object.entries(obj));
-  //   console.log(`${key}: ${value}`);
-  //   if (typeof value === "string" && value.includes("=SUM(")) {
-  //     value = getSum(obj);
-  //     console.log({...obj, value});
-
-  //     // console.log(value);
-  //   }
-  // }
-
-  // objValues = Object.values(obj);
-  // console.log(objValues);
-  // objValues.forEach((value) => {
-  //   // if (
-  //   typeof value === "string" &&
-  //   value.includes("=") &&
-  //   !value.includes("=SUM(") &&
-  //   !value.includes("=MULTIPLY(") &&
-  //   !value.includes("=DIVIDE(") &&
-  //   !value.includes("=GT(") &&
-  //   !value.includes("=EQ(") &&
-  //   !value.includes("=AND(") &&
-  //   !value.includes("=OR(") &&
-  //   !value.includes("=IF(") &&
-  //   !value.includes("=CONCAT(") &&
-  //   !value.includes("=NOT(")
-  // ) {
-  // }
-  // if (typeof value === "string" && value.includes("=SUM(")) {
-  //   console.log(obj[value]);
-
-  //   getSum(obj);
-  //   // }
-  //   if (typeof value === "string" && value.includes("=MULTIPLY(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=DIVIDE(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=GT(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=EQ(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=AND(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=OR(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=IF(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=CONCAT(")) {
-  //   }
-  //   if (typeof value === "string" && value.includes("=NOT(")) {
-  //   }
-  //   if (typeof value === "string" && !value.includes("=")) {
-  //   }
-  // });
-  // return newObject;
+  return resultsArr;
 };
 
-const loopingThroughCreatedArr = function () {
-  for (let i = 7; i < 8; i++) {
+const loopThroughCreatedArr = function () {
+  for (let i = 0; i < tempArr.length; i++) {
     if (Object.keys(tempArr[i].data).length === 0) {
       sheetsData = {
         id: tempArr[i].id,
@@ -489,14 +545,16 @@ const loopingThroughCreatedArr = function () {
     } else {
       sheetsData = {
         id: tempArr[i].id,
-        data: evaluateData(tempArr[12].data),
+        data: evaluateData(tempArr[i].data),
       };
-      console.log(sheetsData.data);
+      computedResults.push(sheetsData);
     }
   }
+
+  fetchDataBack(computedResults);
 };
 
-const loopingThroughSheets = function () {
+const convertToArrOfObj = function () {
   let obj = {};
   let obj2 = {};
 
@@ -513,40 +571,24 @@ const loopingThroughSheets = function () {
     obj = {id: sheetsArr[i].id, data: obj2};
     tempArr.push(obj);
   }
-  console.log(tempArr);
-  loopingThroughCreatedArr();
+  loopThroughCreatedArr();
 };
 
-// loopingThroughSheets();
-
-// const calculateData = function (arr) {
-//   if (arr.length === 0) {
-//     return arr;
-//   } else if (arr.length !== 0) {
-//     evaluateData();
-//   }
-// };
-
-//
-
-// if arr.length yra
-// const calculateData=function(){
-//   if()
-// }
-// results.push(sheetsData)
-
-// const data = JSON.stringify({
-//   email: "neringa1991@yahoo.com",
-//   results: computedValue,
-// });
-
-// fetch("https://reqres.in/api/users", {
-//   method: "POST",
-//   body: data,
-//   // other params
-// })
-//   .then((response) => response.json())
-//   .then(function (data) {
-//     // returns id, and crated timestamp together with other data
-//     console.log(data);
-//   });
+const fetchDataBack = function (data) {
+  fetch(`${submissionURL}`, {
+    method: "POST",
+    body: JSON.stringify({
+      email: "neringa1991@yahoo.com",
+      results: data,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      "Access-Control-Allow-Origin": `${submissionURL}`,
+    },
+  })
+    .then((response) => response.json())
+    .then(function (data) {
+      console.log(data);
+    })
+    .catch((error) => console.error("Error:", error));
+};
