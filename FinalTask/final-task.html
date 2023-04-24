@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final Task</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
+  <link href="final-task.css" rel="stylesheet" />
+  <script src="final-task.js"></script>
+  <body>
+    <div class="wrapper">
+      <div class="first-page">
+        <div class="first-page-content">
+          <h1>Welcome</h1>
+          <button type="button" class="open-form-button">Open Form</button>
+        </div>
+        <div class="form-popup-container hide">
+    
+          <form class="form-popup">
+              <label>
+                Username
+      
+                <input class="username-input" type="string" required/>
+              </label>
+              <label>
+                E-mail
+      
+                <input class="email-input" type="email" required/>
+              </label>
+              <label>
+                <input class="offer-checkbox" type="checkbox" />
+      
+                Subscribe
+              </label>
+              <div class="offer-cycle hide">
+                <label>Receive cycle:</label>
+                <select>
+                  <option>Monthly</option>
+                  <option>Yearly</option>
+                </select>
+              </div>
+              <button type="button" class="subscribe-button">Subscribe</button>
+              <button type="button" class="close-form-button">x</button>
+            </form>
+          
+        </div>
+        <div class="img-wrapper">
+          <div
+            class="background-img"
+            style="background-image: url(img/base\ exp.png)"
+          ></div>
+          <div
+            class="middle-img"
+            style="background-image: url(img/middle\ exp.png)"
+          ></div>
+          <div
+            class="front-img"
+            style="background-image: url(img/front.png)"
+          ></div>
+        </div>
+      </div>
+      <div class="second-page">
+      <div class="second-page-content">
+    <div class="user-table-wrapper">
+    <table class="user-table">
+      <thead>
+        <button type="button" class="refresh-button">Refresh</button>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>E-mail</th>
+          <th>Special offers</th>
+          <th>Offer cycle</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <template class="row-template">
+        <tr>
+        <td class="table-id"></td>
+        <td class="table-username"></td>
+        <td class="table-email"></td>
+        <td class="table-offers"></td>
+        <td class="table-offers-cycle"></td>
+        <td class="table-delete-button" type="button"></td>
+      </tr>
+    </template>
+      </tbody>
+  </table>
+  </div>
+</div>
+    <div class="img-wrapper">
+      <div
+        class="background-img"
+        style="
+          background-image: url(img/wp5711492-life-is-strange-2-wallpapers.jpg);
+        "
+      ></div>
+    </div>
+  </div>
+  <div class="test-page">
+    <ul id="orders">
+      
+    </ul>
+  </div>
+  </body>
+</html

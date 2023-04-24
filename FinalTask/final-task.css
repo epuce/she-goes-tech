@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.img-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* overflow: hidden; */
+    position: relative;
+}
+
+.background-img, .middle-img, .front-img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.first-page-content, .second-page-content {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+}
+
+.form-popup-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 3;
+}
+
+.form-popup {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 320px;
+    height: 480px;
+    background: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 10px;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+}
+
+.user-table-wrapper {
+    width: 100vh;
+    height: 80vh;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    z-index: 3;
+}
+
+.user-table {
+    width: 95%;
+    height: 95%;
+    background-color: #fffb;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 15px;
+    overflow: auto;
+    overflow: overlay;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+}
+
+
+thead th {
+    background-color: #a6735873;
+    cursor: pointer;
+}
+
+tbody tr:hover {
+    background: rgba(0, 0, 0, 0.15)
+}
+
+.hide {
+    display: none;
+}
+
+.close-form-button {
+    position: absolute;
+    left: 90%;
+    top: 3%;
+    width: 20px;
+    height: 20px;
+}
+
+.validation-error {
+    border: red solid;
+
+}
+

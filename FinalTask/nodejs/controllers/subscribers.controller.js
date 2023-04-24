@@ -1,0 +1,62 @@
+var app = require('../app')
+
+function runSql(sql, response) {
+    app.db.query(sql, function(error, data) {
+        var returnData = {}
+
+        if (error) {
+            returnData.error = error
+        } else {
+            returnData.data = data
+        }
+        response.send(JSON.stringify(returnData))
+    })
+}
+
+
+exports.list = function(request, response) {
+    var sql = 'SELECT * FROM `moharso-subscribers`'
+
+    runSql(sql, response)
+}
+
+// /api/users/ -> :id -> GET
+exports.findUser = function(request, response) {
+    var sql = 'SELECT * FROM `moharso-subscribers` WHERE id='+request.params.id
+
+    runSql(sql, response)
+}
+
+// /api/users/ -> :id -> DELETE
+exports.delete = function(request, response) {
+    var sql = 'DELETE FROM `moharso-subscribers` WHERE id='+request.params.id
+
+    runSql(sql, response)
+}
+
+// /api/users/ -> :id -> PUT
+exports.update = function(request, response) {
+    var {username, email} = request.body
+
+    var sql = `UPDATE \`moharso-subscribers\` SET username="`+username+`", email="`+email+`" WHERE id=`+request.params.id
+
+    runSql(sql, response)
+}
+
+// /api/users/ -> POST
+exports.save = function(request, response) {
+    // the same as var {first_name, last_name, email} = request.body;
+    //var first_name = request.body.first_name
+    //var last_name = request.body.last_name
+    //var email = request.body.email
+
+    var {username, email} = request.body;
+
+    //response.send(request.body)
+
+    var sql = 'INSERT INTO `moharso-subscribers` (username, email) VALUES("'+username+'","'+email+'")'
+
+    runSql(sql, response)
+
+    }
+    
