@@ -1,13 +1,11 @@
 <template>
-    <div class="subscribeWindow" id="myDiv">
+    <div class="subscribeWindow" id="subscribeWindow">
       <div class="header">
-        <div>
-            <div class="welcomeText" :style="{ display: showWelcomeText ? 'block' : 'none' }">
+            <div :style="{ display: showWelcomeText ? 'block' : 'none' }">
             <h2>Welcome!</h2>
             <p>To keep connected with us <br />
             please fill out the form!</p></div>
             <div :style="{ display: showThanxText ? 'block' : 'none' }" id="text"></div>
-        </div>
       </div>
       <div class="footer">
         <button
@@ -19,7 +17,7 @@
         </button>
         <button class="buttonClose"
         :style="{ display: showButtonClose ? 'block' : 'none' }"
-        @click="!toggleButtonClose(), !toggleButtonSubscribe(), !toggleWelcomeText(), toggleThanxText()"
+        @click="!toggleButtonClose(), !toggleButtonSubscribe(), !toggleWelcomeText(), !toggleThanxText()"
         >X</button>
       </div>
     </div>
@@ -40,17 +38,24 @@
           <div class="subscriptionRow">
             <CheckBox
               label="Subscribe"
-              @update-checkbox="toggleDropdown"/>
+              @update-checkbox="toggleDropdown()"/>
           </div>
-          <div :style="{ display: displayDropdown}">
-            <VueDropdown>Dropdown</VueDropdown>
+          <!--uz datu bāzi padot value "user.cycle"-->
+          <div class="VueDropdown" :style="{ display: displayDropdown}"
+              >
+            <VueDropdown class="my-dropdown-toggle"
+          :options="arrayOfObjects" 
+          :selected="object" 
+          v-on:updateOption="methodToRunOnSelect" 
+          :placeholder="'Select an Item'"
+          :closeOnOutsideClick="boolean"></VueDropdown>
           </div>
         </div>
         <div class="footer">
           <button
             type="button"
             class="buttonSubscribe"
-            @click="toggleColumnRight(), onUserSave(), updateText(), toggleButtonClose(), toggleWelcomeText()">
+            @click="toggleColumnRight(), onUserSave(), updateText(), toggleButtonClose(), toggleWelcomeText(), toggleThanxText()">
             Submit
           </button>
         </div>
@@ -73,6 +78,7 @@ export default defineComponent({
             first_name: '',
             last_name: '',
             email: '',
+            cycle: '', /* Value no array, kuras būs nefinētas dropdown komponentē, jāpārbauda sintakse */
             id: null
         })
 
@@ -88,6 +94,7 @@ export default defineComponent({
                 first_name: user.value.first_name,
                 last_name: user.value.last_name,
                 email: user.value.email,
+                cycle: user.value.cycle /* Value no array, jāpārbauda sintakse */
             }
 
             fetch('http://localhost:8002/api/users', {
@@ -107,7 +114,8 @@ export default defineComponent({
                   user.value = {
                     first_name: '',
                     last_name: '',
-                    email: ''
+                    email: '',
+                    cycle: '', /* Value no array, kuras būs nefinētas dropdown komponentē, jāpārbauda sintakse */
                   }
                 }
               })
@@ -129,20 +137,26 @@ export default defineComponent({
     data() {
           return {
             showButtonSubscribe: true,
-            isChecked: false,
             displayDropdown: 'none',
             showButtonClose: false,
             showWelcomeText: true,
-            showThanxText: true
+            showThanxText: false,
+            arrayOfObjects: [],
+            object: {
+              name: 'How often do you want to receive news?',
+            }
           }
         },
 
     methods: {
+            methodToRunOnSelect(payload) {
+              this.object = payload;
+            },
             toggleButtonSubscribe() {
                 this.showButtonSubscribe = !this.showButtonSubscribe
             },
             toggleDivs() {
-                const element = document.getElementById('myDiv');
+                const element = document.getElementById('subscribeWindow');
                 element.classList.add('subscribeWindowTwo');
                 const formWindow = document.getElementById('formWindow');
                 formWindow.classList.add('formWindowTwo');
@@ -153,7 +167,7 @@ export default defineComponent({
             },
 
             toggleColumnRight() {
-                const element = document.getElementById('myDiv');
+                const element = document.getElementById('subscribeWindow');
                 element.classList.remove('subscribeWindowTwo');
                 const formWindow = document.getElementById('formWindow');
                 formWindow.classList.remove('formWindowTwo');
@@ -167,8 +181,6 @@ export default defineComponent({
             toggleThanxText() {
                 this.showThanxText = !this.showThanxText
             }
-
-
     },
 })
 </script>
@@ -336,5 +348,10 @@ input:focus {
 
 .textThx {
   font-size: x-large;
+  display: none;
+}
+
+.VueDropdon {
+  display: none;
 }
 </style>
