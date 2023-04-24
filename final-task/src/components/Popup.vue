@@ -1,14 +1,62 @@
 <template>
     <div>
+        <div class="popup-wrapper">
+            <div class="popup">
+                Thank you, {{ name }}, for subscribing!
 
-
-
+                <button class="btn-close" @click="onClose()">Close</button>
+            </div>
+        </div>
     </div>
 </template>
 
+<script>
+import { defineComponent } from "vue";
 
-<script></script>
+export default defineComponent({
+    props: {
+        name: {
+            type: String,
+            required: true,
+        },
+    },
+    setup(props, { emit }) {
+        var onClose = function () {
+            emit("close-popup");
 
-<style></style>
+        };
+
+
+        return {
+            onClose,
+        };
+    },
+});
+
+</script>
+
+<style>
+.popup-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(180, 179, 179, 0.4);
+}
+
+.popup {
+    padding: 32px;
+    width: 70%;
+    background: #ffffff;
+}
+
+.btn-close {
+    float: right;
+}
+</style>
 
 

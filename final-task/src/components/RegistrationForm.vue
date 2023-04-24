@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form class="registration-form">
+        <form class="registration-form" @submit.prevent>
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id='name' />
@@ -25,6 +25,7 @@
 
 
             <button class="save-button" type="button" @click="save">Save</button>
+            <Popup v-if="isPopupVisible" @close-popup="closePopup" :name="name" />
 
         </form>
 
@@ -33,13 +34,25 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import Popup from './Popup.vue';
+
 export default defineComponent({
+    components: {
+        Popup,
+    },
     setup() {
         var isChecked = ref(false);
+        var isPopupVisible = ref(false);
+        var name = ref('');
+
         function save() {
             // save the data
+            isPopupVisible.value = true;
         }
-        return { isChecked, save };
+        function closePopup() {
+            isPopupVisible.value = false;
+        }
+        return { isChecked, save, isPopupVisible, closePopup, name };
     },
 });
 </script>
@@ -85,5 +98,11 @@ label {
     cursor: pointer;
     font-size: 16px;
     margin-top: 20px;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.save-button:hover {
+    background-color: #222;
 }
 </style>
