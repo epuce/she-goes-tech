@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: sans-serif;
+    font-family: sans-serif;}
 
 .wrapper-404 {
     display: flex;
@@ -42,3 +42,4 @@ body {
     cursor: pointer;
 
 }
+.
