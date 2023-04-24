@@ -1,0 +1,85 @@
+<template>
+    <div>
+        <form class="registration-form">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id='name' />
+            </div>
+            <div>
+                <label for="Surname">Surname</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label for="email">E-mail</label>
+                <input type="email" />
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="checkbox" v-model="isChecked" />
+                <label for="checkbox">I want to receive a free catalog</label>
+            </div>
+            <div v-if="isChecked">
+                <label for="address">Address</label>
+                <input type="text" />
+            </div>
+
+
+            <button class="save-button" type="button" @click="save">Save</button>
+
+        </form>
+
+    </div>
+</template>
+
+<script>
+import { defineComponent, ref } from 'vue';
+export default defineComponent({
+    setup() {
+        var isChecked = ref(false);
+        function save() {
+            // save the data
+        }
+        return { isChecked, save };
+    },
+});
+</script>
+
+<style>
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    gap: 10px;
+    font-family: sans-serif;
+    color: #333;
+}
+
+label {
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+
+
+.checkbox-container {
+    display: block;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.save-button {
+    color: white;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+</style>

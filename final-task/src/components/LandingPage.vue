@@ -1,74 +1,61 @@
 <template>
     <div class="landing-page">
-        <h1 class="CTA">Brighten up your week with our weekly flower bouquet delivery subscription!</h1>
-        <button @click="showForm">Subscribe</button>
+        <h1 class="cta">Spice up your week with our weekly flower delivery!</h1>
+        <button class="subscribe-button" @click="showRegistrationForm = true">Subscribe</button>
+        <RegistrationForm v-if="showRegistrationForm" @close="closeRegistrationForm = false" />
     </div>
 </template>
   
 <script>
 import { defineComponent } from 'vue';
-
-
+import RegistrationForm from './RegistrationForm.vue';
 
 export default {
-    methods: {
-        showForm() {
-            // code to show the form here
-        }
-    }
-}
-
-// export default defineComponent({
-//     components: {
-//         Form
-//     },
-// })
+    name: 'LandingPage',
+    components: {
+        RegistrationForm
+    },
+    data() {
+        return {
+            showRegistrationForm: false,
+        };
+    },
+};
 </script>
 
-  
 <style>
-body {
-    margin: 0;
-    background-color: #f5deb3;
-}
-
 .landing-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%;
-    transform: translateX(200px);
-    transition: transform 0.3s ease-in-out;
 }
 
 .cta {
+    font-size: 30px;
     text-align: center;
+    width: 500px;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    color: #333
 }
 
-button {
-    background-color: #998463;
-    color: white;
+.subscribe-button {
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    background-color: #998463;
+    font-weight: bold;
     cursor: pointer;
+    margin-top: 20px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    font-size: medium;
 }
 
-.form-container {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: left 0.5s;
-    z-index: 10;
+.subscribe-button:hover {
+    background-color: #6f5336;
 }
-
-.form-container.show {
-    left: 0;
-}
-</style>
-  
+</style >
