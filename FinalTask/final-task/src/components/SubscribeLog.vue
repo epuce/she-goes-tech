@@ -40,12 +40,12 @@
               label="Subscribe"
               @update-checkbox="toggleDropdown()"/>
           </div>
-          <!--uz datu bāzi padot value "user.cycle"-->
           <div class="VueDropdown" :style="{ display: displayDropdown}"
               >
             <VueDropdown class="my-dropdown-toggle"
           :options="arrayOfObjects" 
-          :selected="object" 
+          :selected="user.cycle"
+          @update-option="user.cycle=$event" 
           v-on:updateOption="methodToRunOnSelect" 
           :placeholder="'Select an Item'"
           :closeOnOutsideClick="boolean"></VueDropdown>
@@ -73,12 +73,13 @@ export default defineComponent({
         CheckBox,
         VueDropdown
     },
+
     setup() {
         const user = ref({
             first_name: '',
             last_name: '',
             email: '',
-            cycle: '', /* Value no array, kuras būs nefinētas dropdown komponentē, jāpārbauda sintakse */
+            cycle: '',
             id: null
         })
 
@@ -90,11 +91,15 @@ export default defineComponent({
         })
 
         const onUserSave = () => {
+            //var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            
+            
+            
             const payload = {
                 first_name: user.value.first_name,
                 last_name: user.value.last_name,
                 email: user.value.email,
-                cycle: user.value.cycle /* Value no array, jāpārbauda sintakse */
+                cycle: user.value.cycle.name
             }
 
             fetch('http://localhost:8002/api/users', {
@@ -115,7 +120,7 @@ export default defineComponent({
                     first_name: '',
                     last_name: '',
                     email: '',
-                    cycle: '', /* Value no array, kuras būs nefinētas dropdown komponentē, jāpārbauda sintakse */
+                    cycle: '',
                   }
                 }
               })
@@ -130,7 +135,8 @@ export default defineComponent({
         return {
             onUserSave,
             updateText,
-            user
+            user,
+            email: ''
         }
     },
 
@@ -141,7 +147,7 @@ export default defineComponent({
             showButtonClose: false,
             showWelcomeText: true,
             showThanxText: false,
-            arrayOfObjects: [],
+            arrayOfObjects: [{name: 'Monthly'},{name: 'Yearly'},{name: 'Most important'}],
             object: {
               name: 'How often do you want to receive news?',
             }
@@ -186,6 +192,10 @@ export default defineComponent({
 </script>
 
 <style>
+.invalid-email {
+  border-color: red;
+}
+
 .subscribeWindow {
   color: azure;
   width: 650px;

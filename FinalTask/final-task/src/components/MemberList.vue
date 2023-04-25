@@ -6,7 +6,6 @@
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Special offer</th>
           <th>Offer cycle</th>
           <th>Delete</th>
         </thead>
@@ -14,8 +13,7 @@
           <td>{{ user.id }}</td>
           <td>{{ user.first_name }} {{ user.last_name }}</td>
           <td>{{ user.email }}</td>
-          <td></td>
-          <td></td>
+          <td>{{ user.cycle }}</td>
           <td>
             <img
               src="../assets/Trash-Icon.svg"
@@ -90,7 +88,7 @@ table th {
 
 table td {
   font-size: large;
-  font-weight: 400;
+  font-weight: 500;
   border-bottom: 1px solid #fca26e;
   padding-top: 5px;
 }
