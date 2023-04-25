@@ -75,6 +75,8 @@
                 </div>
             </div>
 
+        
+
             <!-- CLASSES -->
             <div id="ourClasses">
                 <h2>Our Classes</h2>

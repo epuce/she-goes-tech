@@ -51,8 +51,6 @@ export default defineComponent({
     setup(props, { emit }) {
         // setup() {
         var showForm = ref(false)
-        // var participantList = ref([])
-
         var deleteParticipant = (participantId) => {
             fetch(`http://localhost:8002/api/participants/${participantId}`, {
                 method: 'DELETE'
@@ -60,11 +58,8 @@ export default defineComponent({
                 .then(resp => resp.json())
                 .then(() => {
                     emit("deleteParticipant", participantId)
-                    //    participantList.value = participantList.value.filter((participant) => participant.id !== participantId)
                 })
-
         }
-
         // TODO: UPDATING
         // var fillParticipantForm  =    (tmpParticipant) => {
         //     emit('fillForm', tmpParticipant)
@@ -93,7 +88,7 @@ export default defineComponent({
 }
 
 th {
-    background-color: #444442;
+    background-color: #494946;
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -108,15 +103,13 @@ td {
     border: none;
     border-collapse: collapse;
     padding: 8px;
-    border: solid gray 1px;
+    border: solid lightgray 1px;
     text-align: center;
 }
 
 table {
     margin-top: 24px;
     width: 100%;
-    /* border: solid gray 1px; */
-    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); */
 }
 
 .participant-list__btn {
