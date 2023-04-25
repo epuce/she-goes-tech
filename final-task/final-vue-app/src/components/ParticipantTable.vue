@@ -2,8 +2,6 @@
     <div class="table-wrapper">
         <h2> Participant table </h2>
         <div>
-
-            <!-- <table class="table" v-for="participant in participantList" :key="participant.id"> -->
             <table class="table">
                 <thead>
                     <tr>
@@ -11,7 +9,7 @@
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Email</th>
-                        <th>Update</th>
+                        <!-- <th>Update</th> -->
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -21,18 +19,14 @@
                         <td>{{ participant.first_name }}</td>
                         <td>{{ participant.last_name }}</td>
                         <td>{{ participant.email }}</td>
-                        <!-- <td> <button  @click="fillParticipantForm()" class="participant-list__btn"><img -->
-                        <!-- <td> <button @click="showForm = true; fillParticipantForm(participant)" -->
-                        <td> <button @click="fillParticipantForm(participant)"
-                                class="participant-list__btn"><img class="participant-list__btn-icon"
+                        <!-- <td> <button @click="fillParticipantForm(participant)" class="participant-list__btn"><img
+                                    class="participant-list__btn-icon"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/OOjs_UI_icon_edit-ltr.svg/640px-OOjs_UI_icon_edit-ltr.svg.png" /></button>
-                        </td>
-                        <!-- <td> <button @click.stop="onParticipantDelete(item.id)" class="participant-list__btn"><img -->
+                        </td> -->
                         <td> <button @click.stop="deleteParticipant(participant.id)" class="participant-list__btn"><img
                                     class="participant-list__btn-icon"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/OOjs_UI_icon_trash.svg/640px-OOjs_UI_icon_trash.svg.png" /></button>
                         </td>
-
                     </tr>
                 </tbody>
             </table>
@@ -45,28 +39,19 @@
 import { defineComponent, ref } from 'vue';
 import SignupPopup from "./SignupPopup.vue"
 
-
 export default defineComponent({
     components: {
         SignupPopup,
     },
+    props: {
+        participantList: {
+            type: Array
+        }
+    },
     setup(props, { emit }) {
-        
-        // var participant = ref({
-        //     first_name: '',
-        //     last_name: '',
-        //     email: '',
-        //     id: null
-        // })
-
-        var participantList = ref([
-            fetch('http://localhost:8002/api/participants')
-                .then(resp => resp.json())
-                .then(resp => {
-                    participantList.value = resp.data
-                })
-            // TODO: auto-refresh?
-        ])
+        // setup() {
+        var showForm = ref(false)
+        // var participantList = ref([])
 
         var deleteParticipant = (participantId) => {
             fetch(`http://localhost:8002/api/participants/${participantId}`, {
@@ -74,36 +59,24 @@ export default defineComponent({
             })
                 .then(resp => resp.json())
                 .then(() => {
-                    participantList.value = participantList.value.filter((participant) => participant.id !== participantId)
+                    emit("deleteParticipant", participantId)
+                    //    participantList.value = participantList.value.filter((participant) => participant.id !== participantId)
                 })
+
         }
 
-        var showForm = ref(false)
-
-        // Seems like filling should be here or in parent, but updating in sign-up form
-        var fillParticipantForm  =    (tmpParticipant) => {
-            emit('fillForm', tmpParticipant)
-            showForm.value = true
-        }
-
-        // var fillParticipantForm = (participantId) => {
-        //     // do i need to perform a request from the server to retrieve the participant 
-        //     fetch ('http://localhost:8002/api/participants/', {
-        //     })
-        //     .then(resp => resp.json())
-        //         .then(() => { 
-        //         })
+        // TODO: UPDATING
+        // var fillParticipantForm  =    (tmpParticipant) => {
+        //     emit('fillForm', tmpParticipant)
+        //     showForm.value = true
         // }
 
-
         return {
-            participantList,
+            // participantList,
             deleteParticipant,
-            fillParticipantForm,
+            // fillParticipantForm,
             showForm,
         };
-
-
     }
 })
 </script>
@@ -143,8 +116,7 @@ table {
     margin-top: 24px;
     width: 100%;
     /* border: solid gray 1px; */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); */
 }
 
 .participant-list__btn {

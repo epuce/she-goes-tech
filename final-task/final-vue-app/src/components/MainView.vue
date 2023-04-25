@@ -1,46 +1,62 @@
 <template>
   <div>
-    <!-- <MainVisuals /> -->
-    <!-- <FrontTable/> -->
-    <ParticipantTable @fillForm="fillForm"/>
-    <!-- <MainFooter/> -->
+    <MainVisuals />
+    <!-- <ParticipantTable @fillForm="fillForm" :participant-list="participantList"/> -->
+    <ParticipantTable :participant-list="participantList" @delete-participant="deleteParticipant" />
+    <MainFooter />
     <button class="btn__signup" @click="showForm = true">Sign up form</button>
-   {{ participant }}
-    <SignupPopup :user="participant" v-if="showForm" @close-signup-popup="showForm = false" />
+    <SignupPopup :user="participant" v-if="showForm" @close-signup-popup="showForm = false" @addToList="addToList" />
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue';
 import SignupPopup from "./SignupPopup.vue"
-// import MainVisuals from "./MainVisuals.vue"
-// import MainFooter from "./MainFooter.vue"
+import MainVisuals from "./MainVisuals.vue"
+import MainFooter from "./MainFooter.vue"
 import ParticipantTable from "./ParticipantTable.vue"
 
 export default defineComponent({
   components: {
     SignupPopup,
-    // MainVisuals,
-    // MainFooter,
+    MainVisuals,
+    MainFooter,
     ParticipantTable,
   },
-  setup() {
-    var showForm = ref(false) // True to show form all the time
 
+  setup() {
+    var showForm = ref(false)
     var participant = ref('')
-    var fillForm = (user) => {
-      participant.value = user
-      // console.log(user)
+    var participantList = ref([])
+
+    // var fillForm = (user) => {
+    //   participant.value = user
+    // }
+
+    fetch('http://localhost:8002/api/participants')
+      .then(resp => resp.json())
+      .then(resp => {
+        participantList.value = resp.data
+      })
+
+    var addToList = function (payload) {
+      participantList.value.push(payload)
+    }
+
+    var deleteParticipant = function (participantId) {
+      participantList.value = participantList.value.filter((participant) => participant.id !== participantId)
     }
 
     return {
       showForm,
-      fillForm,
-      participant
+      // fillForm,
+      participant,
+      addToList,
+      participantList,
+      deleteParticipant
     }
+  },
 
-    
-  }
 })
 </script>
 

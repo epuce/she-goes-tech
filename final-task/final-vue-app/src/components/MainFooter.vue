@@ -1,22 +1,16 @@
 
-<template lang="">
+<template>
     <div>
         <footer>
         <div>
             <a href="http://www.facebook.com" target=”_blank”> <img  class="icon" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Facebook%2BIcon%2BBlack.png?20200312232327"/> </a>
             <a href="https://www.instagram.com/" target=”_blank”><img class="icon"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/CIS-A2K_Instagram_Icon_%28Black%29.svg/640px-CIS-A2K_Instagram_Icon_%28Black%29.svg.png"/> </a>
-            <a href="https://www.youtube.com/"><img class="icon"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/CIS-A2K_Youtube_Icon_%28Black%29.svg/640px-CIS-A2K_Youtube_Icon_%28Black%29.svg.png"/> </a>
-    
-            <!-- <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
-            <a href="#"><i class="fa fa-youtube"></i></a> -->
+            <a href="https://www.youtube.com/" target=”_blank”><img class="icon"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/CIS-A2K_Youtube_Icon_%28Black%29.svg/640px-CIS-A2K_Youtube_Icon_%28Black%29.svg.png"/> </a>
         </div>
 
-
-    
         <div >
-            <a href="https://www.google.com/maps/place/Vilnius">Vilnius, Lithuania</a>
-                <a href="email@email.com">email@email.com</a>
+            <a href="https://www.google.com/maps/place/Vilnius" target=”_blank”>Vilnius, Lithuania</a>
+            <a  href = "mailto: abc@example.com" target=”_blank”>email@email.com</a>
         </div>
 
         <div >
@@ -28,12 +22,8 @@
 </template>
 <script>
 
-export default {
-
-}
 </script>
 <style>
-
 footer {
     width: 80vw;
     padding: 10px;
@@ -64,6 +54,7 @@ footer a {
     opacity: 0.8;
 
 }
+
 footer a:hover {
     color: #444442;
 }

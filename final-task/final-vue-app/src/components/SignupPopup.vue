@@ -25,7 +25,6 @@
 
             <input type="email" name="email" v-model="participant.email"
               :class="{ 'validation-error__input': !participant.email && showError }" /><br />
-            <!-- here participant.email and email can work - decide when to show/hide error -->
           </label>
 
           <label>Class type:
@@ -55,7 +54,7 @@
         </form>
       </div>
 
-      <SuccessPopup v-if="showSuccess" @close-success-popup="showSuccess = false" text="{{ firstName }}" />
+      <SuccessPopup v-if="showSuccess" @close-success-popup="showSuccess = false" :first-name="participant.first_name" />
       <button class="btn__close" @click="onClose()">X</button>
     </div>
   </div>
@@ -63,21 +62,16 @@
 <script>
 import { defineComponent, ref } from "vue";
 import SuccessPopup from "./SuccessPopup.vue"
-import { watch } from 'vue';
+// import { watch } from 'vue';
 
 export default defineComponent({
   components: {
     SuccessPopup,
   },
-
-
   data() {
     return {
       checked: false,
       errors: [],
-      // firstName: '',
-      // lastName: '',
-      // email: '',
       showValidation: false,
     }
   },
@@ -101,27 +95,29 @@ export default defineComponent({
       }
       if (this.errors.length === 0 && this.participant.first_name && this.participant.last_name && this.participant.email) {
         this.showError = false
-        this.submitForm()
         this.showSuccess = true
+        this.submitForm()
+        // this.updateParticipantList()
       }
     }
-    // // TODO: review for easier readability
   },
   props: {
     user: {
       type: Object
     }
   },
-  
   setup(props, { emit }) {
-
-    watch(() => props.user, (value) => {
-      participant.value = value
-      console.log(value)
-    })
-
+    // watch(() => props.user, (value) => {
+    //   participant.value = value
+    //   console.log(value)
+    // })
 
     var onClose = function () {
+      participant.value = {
+        first_name: '',
+        last_name: '',
+        email: '',
+      }
       emit("close-signup-popup");
     };
 
@@ -138,15 +134,14 @@ export default defineComponent({
 
     var participantList = ref([])
 
-    // EDIT TO SAVE UPDATING
     var submitForm = () => {
       var payload = {
         first_name: participant.value.first_name,
         last_name: participant.value.last_name,
         email: participant.value.email,
       }
-
-      fetch('http://localhost:8002/api/participants', {
+      // TODO: add updating  
+        fetch('http://localhost:8002/api/participants', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -157,21 +152,12 @@ export default defineComponent({
         .then(resp => resp.json())
         .then(resp => {
           if (!resp.error) {
-            participantList.value.push({
-              ...payload,
-            })
-
-            participant.value = {
-              first_name: '',
-              last_name: '',
-              email: '',
-            }
-            // this.showSuccess = true
+            payload.id = resp.data.insertId;
+            participantList.value.push(payload);
+            emit("addToList", payload)
           }
         })
     }
-
- 
 
     return {
       onClose,
@@ -184,10 +170,7 @@ export default defineComponent({
       // fillParticipantForm,
     };
   },
-
 });
-
-
 </script>
 <style>
 .popup__wrapper {
@@ -207,7 +190,6 @@ export default defineComponent({
   background: #ffffff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
-
 
 .btn__close {
   position: absolute;
