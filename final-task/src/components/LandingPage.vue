@@ -3,6 +3,7 @@
         <h1 class="cta">Spice up your week with our weekly flower delivery!</h1>
         <button class="subscribe-button" @click="showRegistrationForm = true">Subscribe</button>
         <RegistrationForm v-if="showRegistrationForm" @close="closeRegistrationForm = false" />
+
     </div>
 </template>
   

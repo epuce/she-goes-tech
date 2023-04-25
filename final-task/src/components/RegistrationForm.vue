@@ -26,7 +26,7 @@
             </div>
 
 
-            <button class="save-button" type="submit" @click.prevent="validateForm">Save</button>
+            <button class="saveBtn" type="submit" @click.prevent="validateForm">Save</button>
             <Popup v-if="isPopupVisible" @close-popup="closePopup" :name="name" />
 
 
@@ -46,43 +46,59 @@ export default defineComponent({
     setup() {
         var name = ref('');
         var surname = ref('');
+        var email = ref('');
+        var address = ref('');
         var isChecked = ref(false);
         var isPopupVisible = ref(false);
 
-
-
         function validateForm() {
+            var nameInput = document.getElementById('name');
+            var surnameInput = document.getElementById('surname');
+
             if (name.value.length >= 3 && surname.value.length >= 3) {
                 isPopupVisible.value = true;
+                nameInput.classList.remove('invalid');
+                surnameInput.classList.remove('invalid');
             } else {
-                var nameInput = document.getElementById('name');
-                var surnameInput = document.getElementById('surname');
-                nameInput.classList.add('invalid');
-                surnameInput.classList.add('invalid');
+                if (name.value.length < 3) {
+                    nameInput.classList.add('invalid');
+                } else {
+                    nameInput.classList.remove('invalid');
+                }
+
+                if (surname.value.length < 3) {
+                    surnameInput.classList.add('invalid');
+                } else {
+                    surnameInput.classList.remove('invalid');
+                }
             }
         }
+
         function save() {
-            // save the data
-            isPopupVisible.value = true;
+
         }
+
+
         function closePopup() {
             isPopupVisible.value = false;
         }
 
         return {
-
-            isChecked,
-            save,
-            isPopupVisible,
-            closePopup,
             name,
             surname,
-            validateForm
-        }
-    },
-})
-
+            email,
+            address,
+            isChecked,
+            isPopupVisible,
+            validateForm,
+            save,
+            closePopup,
+        };
+    }
+},
+);
 </script>
+
 
 <style>
 .registration-form {
@@ -116,7 +132,7 @@ label {
     margin-top: 10px;
 }
 
-.save-button {
+.saveBtn {
     color: white;
     background-color: #333;
     border: none;
@@ -129,7 +145,7 @@ label {
 
 }
 
-.save-button:hover {
+.saveBtn:hover {
     background-color: #222;
 }
 

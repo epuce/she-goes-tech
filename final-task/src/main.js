@@ -8,7 +8,7 @@ var router = VueRouter.createRouter({
     {
       path: "/",
       component: function () {
-        return import("./components/LandingPage.vue");
+        return import("./components/RegistrationForm.vue");
       },
     },
     {
