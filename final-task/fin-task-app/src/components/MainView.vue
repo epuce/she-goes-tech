@@ -7,11 +7,13 @@
             @click="isOpen = true"
             class="btn__open-form"
         />
-      <UserTable/>
+      <UserTable 
+            :user-list="userList"
+            @remove-user="removeUser"/>
       <FormPopup 
         v-if="isOpen" 
         @close-popup="isOpen = false"
-        @form-submit="onFormSubmit()"
+        @add-new-user="addNewUser"
       />
       <!-- @close-popup="isOpen = false" -->
     </main> 
@@ -34,14 +36,29 @@
       var onClose = function () {
         isOpen.value = false;
       }
-      var onFormSubmit = function () {
-        //isOpen.value = false;
-      }
+      var addNewUser = function (payload) {
+            //isOpen.value = false;
+            userList.value.push(payload)
+            console.log(userList.value)
+        }
+          
+      var removeUser = function (userId) {
+            userList.value = userList.value.filter((user) => user.id !== userId)
+        }
+
+      var userList = ref([])
+
+        //GET data from data base 
+        fetch('http://localhost:8003/api/users')
+        .then(resp => resp.json())
+        .then(resp => {userList.value = resp.data} )
   
       return {
         isOpen,
         onClose,
-        onFormSubmit
+        userList,
+        addNewUser,
+        removeUser
       }
     }
   })

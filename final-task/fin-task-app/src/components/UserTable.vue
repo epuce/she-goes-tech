@@ -14,8 +14,8 @@
     
             </thead>
             <tbody>
-                <tr v-for="(user, index) in users" :key="index">
-                    <td></td>
+                <tr v-for="(user) in userList" :key="user.id">
+                    <td> {{ user.id }} </td>
                     <td> {{ user.first_name }} </td>
                     <td> {{ user.last_name }} </td>
                     <td> {{ user.email }} </td>
@@ -26,7 +26,7 @@
                             icon="fa-trash-can" 
                             style="color:red;"
                             class="icon-delete"
-                            @click="handleDelete(index)"
+                            @click="handleDelete(user.id)"
                         />
                     </td>
                 </tr>
@@ -39,27 +39,27 @@
 import {defineComponent, ref} from 'vue';
 
 export default defineComponent({
-    
-    setup() {
-        //var users = ref([])
-        //should GET data from data base or localstorage
-        var users = JSON.parse(localStorage.userList)
-        
-        var handleDelete = function(index) {
-            console.log(index)
-            console.log(users)
+    props: {
+        userList:{
+            type: Array,
 
-            users.splice(index, 1)
-            //save data to localstorage
-            localStorage.userList = JSON.stringify(users)
-            //read data from localstorage
-            users = JSON.parse(localStorage.userList)
+        }
+    },
+    setup(props, {emit}) {
+        
+        const handleDelete = (userId) => {
+            fetch(`http://localhost:8003/api/users/${userId}`, {
+                method: 'DELETE'
+            })
+            .then(resp => resp.json())
+            .then(() => {
+                
+                emit('remove-user', userId )
+            })
+            console.log(userId)
         }
 
-        //users = JSON.parse(localStorage.userList)
-
         return {
-            users,
             handleDelete
         }
         

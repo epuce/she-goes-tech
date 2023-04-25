@@ -9,7 +9,7 @@ function runSql(sql, response) {
         } else {
             returnData.data = data
         }
-
+        
         response.send(JSON.stringify(returnData))
     })
 }

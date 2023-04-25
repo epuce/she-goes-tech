@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var app = require('../app')
+
 router.get('', function(request, response) {
     
     var sql = `CREATE TABLE IF NOT EXISTS \`kristiana.tatarcuka-final-task-users\` (
@@ -22,7 +23,7 @@ router.get('', function(request, response) {
     //     (" This is the last one comment ", 3)
     // '
 
-    app.db.query(sql, function(error, data) {
+    app.db.query('sql', function(error, data) {
         var responseData = {}
 
         if (error) {
@@ -34,7 +35,7 @@ router.get('', function(request, response) {
         response.send(JSON.stringify(responseData))
     })  
     
-    //response.send("SQL path works")
+    response.send("SQL path works")
 })
 
 module.exports = router;

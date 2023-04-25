@@ -75,7 +75,7 @@
                 <div class="btn-subscribe__container">
                     <ButtonDefault 
                         text="Subscribe"
-                        @click="onFormSubmit()"
+                        @click="onFormSubmit"
                         :type="btnType"
                     />
                     <!-- <button type="button" class="btn-subscribe" @click="onFormSubmit()">Subscribe</button> -->
@@ -105,7 +105,7 @@ export default defineComponent ({
             type: String,
             required: false,
             default: undefined,
-        }
+        },
     },
     setup(props, {emit}) {
         var userList = ref([])
@@ -129,19 +129,10 @@ export default defineComponent ({
         var isEmailValid = ref(true)
         
         var onFormSubmit = function() {
-            emit ('form-submit')
+            //emit ('form-submit')
             //emit ('close-popup')
-            saveForm()
-        }
-
-        // //getting data from database --> need to add right END POINT!!!
-        // fetch('')
-        // .then(resp => resp.json())
-        // .then(resp => {userList.value = resp.data} )
-
-        //saving new data to the Localstorage --> later to the database
-        function saveForm () {
             var payload = {
+                id: user.value.id,
                 first_name: user.value.first_name,
                 last_name: user.value.last_name,
                 email: user.value.email,
@@ -174,27 +165,61 @@ export default defineComponent ({
 
             if (isFormValid) {
                 showMessage.value = true
-
-                // saving part
-                // userList.push(payload)
-                // localStorage.userList = JSON.stringify(userList)
-
-                //create a new list in localstorage
-                try {
-                    var list = JSON.parse(localStorage.userList)
-                } catch {
-                    var list = []
-                }
-                //add data to the localstorage
-                list.push(payload)
-                //return data from localstorage
-                localStorage.userList = JSON.stringify(list)
                 
+                //saving part -> DATABASE LOGIC
+                if(user.value.id) {
+                fetch(`http://localhost:8003/api/users/${user.value.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    if (!resp.error) {
+                        
+
+                        user.value = {
+                            id: null,
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            sample_option: '',
+                            sample_product: ''
+                        }
+                    }
+                })
+            } else {
+                fetch ('http://localhost:8003/api/users', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': 'http://localhost:8003/api/users'
+                    },
+                    body: JSON.stringify(payload),
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    if (!resp.error) {
+
+                        emit ('add-new-user', user.value)
+                        
+
+                        user.value = {
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            sample_option: '',
+                            sample_product: ''
+                        }
+                    }
+                })
+
             }
-
-            
+            } 
         }
-
+        
         return {
             userList,
             user,
@@ -206,7 +231,6 @@ export default defineComponent ({
             isSurnameValid,
             isEmailValid,
             onFormSubmit,
-            saveForm
         }
     }
 })
