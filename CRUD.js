@@ -93,7 +93,7 @@ document.querySelectorAll("input").forEach(function (input) {
       // TODO: save form
     }
   });
-  // assign a button to save
+  // assign a button to save 
 });
 
 function renderTable() {

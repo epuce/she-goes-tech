@@ -8,37 +8,56 @@
   </head>
   <link rel="stylesheet" href="./Final-task.css" />
   <body>
+    <div class="page-wrapper">
+      <button type="button" class="btn-open">Open form</button>
 
-    <button type="button" class="btn-open">Open form</button>
-    
-    <div id='form-wrapper'>
+      <div id="form-wrapper">
+        <form class="registration-form">
+          <h1 class="reg-form-header">Registration form</h1>
 
-        <button type="button" class="btn-close">Close form</button>
+          <label class="input-name">
+            Name
+            <input class="js-name" placeholder="Name" />
+          </label>
 
-      <form class="login-form">
-        <h1 class="login-header">Log in</h1>
+          <label class="input-email">
+            Email
+            <input type="email" class="js-email" placeholder="Email" />
+          </label>
 
-        <label class="enter-email">Email</label>
-        <input type="email" class="input-email" placeholder="Email"/>
+          <div>
+            <label class="check-guests">
+            I will bring guests:
+              <input type="checkbox" class="js-checkbox" />
+            </label>
+          </div>
 
-        <label class="enter-password">Password</label>
-        <input type="password" class="input-password" placeholder="Password"/>
+          <label class="js-guest-number-list">
+            <select class="js-guest-number">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option> 
+              <option>4</option>
+            </select>
+          </label>
 
-        <div>
-        <label class="check-stay-signed-in">Stay signed in for:</label>
-        <input type="checkbox"/>
-        </div>
+          <button type="button" class="js-submit">Submit</button>
+        </form>
+      </div>
 
-        <ul>
-            <li>1 hour</li>
-            <li>5 hour</li>
-            <li>12 hour</li>
-        </ul>
-
-        <button class="btn-log-in">Log in</button>
-      </form>
+      <table class="guest-table js-guest-table-wrapper">
+      <thead>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Guest no.</th>
+        <th></th>
+      </thead>
+      <tbody class="js-guest-table"></tbody>
+      </table>
     </div>
 
-    <script src="./Final-task.js"></script>
+   
   </body>
+  <script src="./Final-task.js"></script>
 </html>
