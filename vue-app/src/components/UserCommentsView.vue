@@ -163,6 +163,7 @@ export default defineComponent({
         body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:8002",
         },
       })
         .then((resp) => resp.json())

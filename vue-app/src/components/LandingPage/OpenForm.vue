@@ -1,16 +1,16 @@
 <template>
-  <div class="form-wrapper">
+  <div class="form-container">
     <form class="login-form">
       <div class="input-wrapper">
         <label for="username">Username </label>
-        <input id="username" v-model="userName" type="text" required />
+        <input id="username" v-model="user.user_name" type="text" required />
         <p>
           {{ errorMessageUser }}
         </p>
       </div>
       <div class="input-wrapper">
         <label for="email">E-mail </label>
-        <input id="email" type="email" required v-model="userEmail" />
+        <input id="email" type="email" required v-model="user.email" />
         <p>
           {{ errorMessageEmail }}
         </p>
@@ -20,14 +20,19 @@
           id="checkbox"
           type="checkbox"
           @click="($event) => (checkboxClicked = !checkboxClicked)"
+          v-model="user.offers"
         />
         <label for="checkbox">Send me special deals</label>
       </div>
       <div v-if="checkboxClicked">
         <div class="select-wrapper">
           <label for="select-time">I'm willing to received them every:</label>
-          <select id="select-time" :required="checkboxClicked">
-            <option value>Please choose one option:</option>
+          <select
+            id="select-time"
+            :required="checkboxClicked"
+            v-model="user.cycle"
+          >
+            <option disabled value>Please choose one option:</option>
             <option value="hour">Hour</option>
             <option value="day">Day</option>
             <option value="week">Week</option>
@@ -48,40 +53,48 @@
 import {defineComponent, ref} from "vue";
 
 export default defineComponent({
-  // data() {
-  //   return {
-  //     userEmail: "",
-  //     userName: "",
-  //   };
+  // watch: {
+  //   userName(value) {
+  //     this.user.value.user_name = value;
+  //     this.validateUsername(value);
+  //   },
+  //   userEmail(value) {
+  //     this.user.value.email = value;
+  //     this.validateEmail(value);
+  //   },
   // },
   watch: {
-    userName(value) {
-      this.userName = value;
+    "user.user_name": function (value) {
+      this.user.user_name = value;
       this.validateUsername(value);
     },
-    userEmail(value) {
-      this.userEmail = value;
+    "user.email": function (value) {
+      this.user.email = value;
       this.validateEmail(value);
     },
-
-    // immediate: true,
   },
+
   setup(props, {emit}) {
-    const userName = ref("");
-    const userEmail = ref("");
     const checkboxClicked = ref(false);
     const errorMessageUser = ref("");
     const errorMessageEmail = ref("");
     const emailRegEx = new RegExp("[^@]+@[^@]+\\.[^@]+");
     const isValidUser = ref(null);
     const isValidEmail = ref(null);
-    // /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const userList = ref([]);
+    const user = ref({
+      user_name: "",
+      email: "",
+      offers: "",
+      cycle: "",
+      id: null,
+    });
 
     const validateEmail = function () {
-      if (!emailRegEx.test(userEmail.value) && userEmail.value.length !== 0) {
+      if (!emailRegEx.test(user.value.email) && user.value.email.length !== 0) {
         errorMessageEmail.value = "Email is invalid";
         isValidEmail.value = false;
-      } else if (userEmail.value.length === 0) {
+      } else if (user.value.email.length === 0) {
         errorMessageEmail.value = "Required";
         isValidEmail.value = false;
       } else {
@@ -91,10 +104,13 @@ export default defineComponent({
     };
 
     const validateUsername = function () {
-      if (userName.value.length < 4 && userName.value.length !== 0) {
+      if (
+        user.value.user_name.length < 4 &&
+        user.value.user_name.length !== 0
+      ) {
         errorMessageUser.value = "User name requires at least 4 characters";
         isValidUser.value = false;
-      } else if (userName.value.length === 0) {
+      } else if (user.value.user_name.length === 0) {
         errorMessageUser.value = "Required";
         isValidUser.value = false;
       } else {
@@ -103,58 +119,78 @@ export default defineComponent({
       }
     };
 
-    // const validateInput = function () {
-    //   if (userName.value.length < 4 && userName.value.length > 0) {
-    //     errorMessageUser.value = "User name requires at least 4 characters";
-    //     isValidUser.value = false;
-    //     // validateEmail();
-    //   } else {
-    //     errorMessageUser.value = "";
-    //     isValidUser.value = true;
-    //     // validateEmail();
-    //   }
-    // };
-    // const getUserList = function () {
-    //   if (isValidUser.value && isValidEmail.value) {
-    //     try {
-    //       let list = JSON.parse(localStorage.userList);
-    //     } catch {
-    //       listenerCount list = [];
-    //     }
-    //     return list;
-    //   }
-    // };
+    // fetch("http://localhost:8002/api/landingPage")
+    //   .then((resp) => resp.json())
+    //   .then((resp) => {
+    //     userList.value = resp.data;
+    //   });
 
     const onSubmit = function () {
       validateUsername();
       validateEmail();
 
       if (isValidUser.value && isValidEmail.value) {
-        emit("open-popup"); //we emit "close-popup" value
+        emit("open-popup", user.value.user_name);
 
-        console.log("SEND DATA TO THE SERVER");
+        const payload = {
+          user_name: user.value.user_name,
+          email: user.value.email,
+          special_offers: user.value.offers,
+          offer_cycle: user.value.cycle,
+        };
+
+        if (user.value.id) {
+          fetch(`http://localhost:8002/api/landingPage/${user.value.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((resp) => resp.json())
+            .then((resp) => {
+              if (!resp.error) {
+                const userIndex = userList.value.findIndex(
+                  (item) => item.id === user.value.id
+                );
+                userList.value[userIndex] = {
+                  ...userList.value[userIndex],
+                  ...payload,
+                };
+                user.value = {
+                  first_name: "",
+                  last_name: "",
+                  id: null,
+                };
+              }
+            });
+        } else {
+          fetch("http://localhost:8002/api/landingPage", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:8002",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((resp) => resp.json())
+            .then((resp) => {
+              console.log(resp);
+              if (!resp.error) {
+                userList.value.push({
+                  ...payload,
+                  id: resp.data.insertId,
+                });
+                // user.value = user.value;
+              }
+            });
+        }
       }
     };
 
-    //   let list = getUserList();
-
-    //   // if (saveBtn.dataset.index) {
-    //   //   list[saveBtn.dataset.index] = user.getUser(); //updates the existing one
-
-    //   //   delete saveBtn.dataset.index; //removed the index attribute
-    //   // } else {
-    //   //   //add a new item to the list
-    //   //   list.push(user.getUser());
-    //   // }
-
-    //   // localStorage.userList = JSON.stringify(list);
-
-    //   // nameInput.value = "";
-    //   // emailInput.value = "";
-    // };
     return {
-      userName,
-      userEmail,
+      // userName,
+      // userEmail,
       checkboxClicked,
       validateUsername,
       validateEmail,
@@ -163,6 +199,8 @@ export default defineComponent({
       onSubmit,
       isValidUser,
       isValidEmail,
+      userList,
+      user,
     };
   },
 });
@@ -178,7 +216,7 @@ export default defineComponent({
   font-size: 62.5%;
 }
 
-.form-wrapper {
+.form-container {
   height: 100vh;
   min-width: 30rem;
   max-width: 50rem;

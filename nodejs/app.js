@@ -6,6 +6,7 @@ var cors = require("cors");
 var mysql = require("mysql");
 var userRoutes = require("./routes/user.route");
 var commentRoutes = require("./routes/comments.route");
+var landingPageRoutes = require("./routes/landingPage.route");
 var sqlRoutes = require("./routes/sql.route");
 
 // we create a new server with this command:
@@ -74,10 +75,12 @@ router.get("*", function (reject, response) {
   response.send("You access the node server");
 });
 
-// gloueing together that's is coming from routes file, the beginning of url will be /api/users
+// gloueing together what is coming from routes file, the beginning of url will be /api/users
 app.use("/api/users", userRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/landingPage", landingPageRoutes);
 app.use("/api/sql", sqlRoutes);
+
 // our app will use the router in all the cases that will be performed. First argument of * means in what case (wild card value)
 app.use(router);
 

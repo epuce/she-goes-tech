@@ -41,7 +41,7 @@ export default defineComponent({
 }
 .open-button {
   position: absolute;
-  top: 100px;
+  top: 220px;
   display: inline-block;
   height: 4.5rem;
   width: 18rem;

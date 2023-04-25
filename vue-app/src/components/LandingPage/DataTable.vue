@@ -1,6 +1,6 @@
 <template>
   <div class="table-container">
-    <table class="user-table js-user-table-wrapper">
+    <table class="user-table">
       <thead>
         <th>#</th>
         <th>Username</th>
@@ -9,48 +9,129 @@
         <th>Offer cycle</th>
         <th></th>
       </thead>
-      <tbody class="js-user-table"></tbody>
+      <tbody class="user-table__body">
+        <tr
+          v-for="item in userList"
+          :key="item.id"
+          @click="onUserSelect(item.id)"
+          :class="{
+            'user-table__user--active': item.id === user.id,
+          }"
+        >
+          <td>{{ item.id }}</td>
+          <td>{{ item.user_name }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.special_offers }}</td>
+          <td>{{ item.offer_cycle }}</td>
+          <td>
+            <font-awesome-icon
+              icon="fa-solid fa-trash"
+              @click.stop="onUserDelete(item.id)"
+              class="user-list__delete"
+            />
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
 <script>
-import {defineComponent} from "vue";
-export default defineComponent({});
+import {defineComponent, ref} from "vue";
+export default defineComponent({
+  setup(props, {emit}) {
+    // const clickedUser = ref(false);
+    const userList = ref([]);
+    const user = ref({
+      user_name: "",
+      email: "",
+      offers: false,
+      cycle: "",
+      id: null,
+    });
+
+    fetch("http://localhost:8002/api/landingPage")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        userList.value = resp.data;
+      });
+
+    const onUserDelete = (userId) => {
+      fetch(`http://localhost:8002/api/landingPage/${userId}`, {
+        method: "DELETE",
+      })
+        .then((resp) => resp.json())
+        .then(() => {
+          userList.value = userList.value.filter((user) => user.id !== userId);
+        });
+    };
+
+    const onUserSelect = (userId) => {
+      emit("open-user", `${userId}`);
+
+      // comment.value.user_id = userId;
+      fetch(`http://localhost:8002/api/landingPage/${userId}`)
+        .then((resp) => resp.json())
+        .then((resp) => {
+          console.log(resp);
+        });
+    };
+
+    return {
+      userList,
+      user,
+      onUserDelete,
+      onUserSelect,
+      // clickedUser,
+    };
+  },
+});
 </script>
 <style>
 .table-container {
   height: 100vh;
   width: 100%;
   display: flex;
-  /* margin-top: 100px; */
-  /* align-items: center; */
+  align-items: start;
   justify-content: center;
 }
 
-table {
-  /* display: inline-table; */
-}
 .user-table {
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-  margin-top: 100px;
+  /* display: inline-table; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   min-width: 70%;
-  height: 50px;
+  margin-top: 80px;
+  /* max-width: 80%; */
   border-spacing: 0;
   border-collapse: collapse;
+  height: auto;
 }
 .user-table td,
 .user-table th {
   padding: 10px;
   font-family: "Rubik", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   color: #45260a;
-  font-size: 1.4rem;
+  border: 1px solid rgb(153, 153, 153, 0.3);
+  font-size: 1.6rem;
 }
 .user-table th {
-  background-color: #fdf2e9;
+  background-color: rgb(69, 38, 10, 0.9);
+  color: #fff;
   border: 1px solid #999999;
+  text-align: left;
 }
-.js-user-table {
-  display: none;
+
+.user-list__delete path {
+  fill: rgba(0, 0, 0, 0.8);
+}
+.user-list__delete {
+  /* display: none; */
+  /* float: right; */
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.user-table__user--active {
+  background: rgba(0, 0, 100, 0.2);
 }
 </style>

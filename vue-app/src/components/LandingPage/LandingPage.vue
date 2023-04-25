@@ -1,10 +1,7 @@
 <template>
   <div class="page-wrapper">
     <Transition>
-      <OpenForm
-        v-if="isOpenForm"
-        @open-popup="($event) => (isOpenPopup = true)"
-      />
+      <OpenForm v-if="isOpenForm" @open-popup="addUsername($event)" />
     </Transition>
     <OpenBtn
       name="open"
@@ -12,9 +9,12 @@
       type="button"
       text="Open form"
     />
-
-    <PopupSubscribe v-if="isOpenPopup" @close-popup="isOpenPopup = false" />
-    <DataTable />
+    <PopupSubscribe
+      v-if="isOpenPopup"
+      @close-popup="(isOpenPopup = false), (isOpenForm = false)"
+      :text="userName"
+    />
+    <DataTable @open-user="amendUser($event)" />
   </div>
 </template>
 <script>
@@ -34,9 +34,26 @@ export default defineComponent({
 
   setup() {
     const isOpenForm = ref(false);
-    var isOpenPopup = ref(false);
+    const isOpenPopup = ref(false);
+    const userName = ref("");
+    const selectedUserId = ref("");
+
+    const addUsername = function (name) {
+      userName.value = name;
+      isOpenPopup.value = !isOpenPopup.value;
+    };
+    const amendUser = function (userId) {
+      selectedUserId.value = userId;
+    };
     // var buttonText = ref("Open form");
-    return {isOpenForm, isOpenPopup};
+    return {
+      isOpenForm,
+      isOpenPopup,
+      userName,
+      addUsername,
+      selectedUserId,
+      amendUser,
+    };
   },
 });
 </script>

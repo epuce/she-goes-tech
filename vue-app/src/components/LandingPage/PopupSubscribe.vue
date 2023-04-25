@@ -2,7 +2,6 @@
   <div class="popup__wrapper">
     <div class="popup">
       Thank you for subscribing, {{ text }}!
-
       <button class="btn__close" @click="($event) => onClose()">CLOSE</button>
     </div>
   </div>

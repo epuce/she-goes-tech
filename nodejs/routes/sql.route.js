@@ -5,21 +5,21 @@ var app = require("../app");
 router.get("", function (request, response) {
   //we need to specify the column name and their restrictions (Max 255). First column is first_name. Default is for these columns to be empty. NOT NULL means not empty/The identifier of the user will be PRIMARY KEY (id column)
   var sql =
-    "CREATE TABLE IF NOT EXISTS `neringa1991-users`(first_name VARCHAR(255),email VARCHAR(255), id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (id))";
+    "CREATE TABLE IF NOT EXISTS `neringa1991-offers`(user_name VARCHAR(255),email VARCHAR(255), special_offers VARCHAR(255), offer_cycle VARCHAR (255), id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (id))";
 
   // To add a new column to the table
-  var sql = "ALTER TABLE `neringa1991-users` ADD (last_name VARCHAR(255))";
+  // var sql = "ALTER TABLE `neringa1991-users` ADD (last_name VARCHAR(255))";
 
   // -- Create a comments table that has 3 columns: id comment user_id. Make ID column as the primary column that auto increments
-  var sql =
-    "CREATE TABLE IF NOT EXISTS `neringa1991-comments`(id INT NOT NULL AUTO_INCREMENT, comment VARCHAR(255),user_id VARCHAR(255), PRIMARY KEY (id))";
+  // var sql =
+  //   "CREATE TABLE IF NOT EXISTS `neringa1991-comments`(id INT NOT NULL AUTO_INCREMENT, comment VARCHAR(255),user_id VARCHAR(255), PRIMARY KEY (id))";
 
-  var sql = "ALTER TABLE `neringa1991-comments` MODIFY COLUMN comment TEXT";
+  // var sql = "ALTER TABLE `neringa1991-comments` MODIFY COLUMN comment TEXT";
 
   // changed values to null
-  var sql = "UPDATE `neringa1991-comments` SET user_id=NULL";
+  // var sql = "UPDATE `neringa1991-comments` SET user_id=NULL";
 
-  var sql = "ALTER TABLE `neringa1991-comments` MODIFY COLUMN user_id INT";
+  // var sql = "ALTER TABLE `neringa1991-comments` MODIFY COLUMN user_id INT";
 
   // // Insert 3 rows into the newly created table
   // var sql = `INSERT INTO \`neringa1991-comments\`
