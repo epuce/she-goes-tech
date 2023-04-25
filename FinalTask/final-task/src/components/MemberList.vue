@@ -96,6 +96,7 @@ table td {
 .user-list__delete path {
   fill: #fca26e;
 }
+
 .user-list__delete {
   display: none;
   margin-right: 2px;
