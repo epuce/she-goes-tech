@@ -17,18 +17,9 @@
           <button type="button" class="open-form-button">Open Form</button>
         </div>
         <div class="form-popup-container hide">
-    
           <form class="form-popup">
-              <label>
-                Username
-      
-                <input class="username-input" type="string" required/>
-              </label>
-              <label>
-                E-mail
-      
-                <input class="email-input" type="email" required/>
-              </label>
+              <input class="username-input" type="string" placeholder="Username" required/>
+              <input class="email-input" type="email" placeholder="E-mail" required/>
               <label>
                 <input class="offer-checkbox" type="checkbox" />
       
@@ -44,7 +35,14 @@
               <button type="button" class="subscribe-button">Subscribe</button>
               <button type="button" class="close-form-button">x</button>
             </form>
-          
+        </div>
+        <div class="thanks-popup-container hide">
+          <div class="thanks-popup">
+            Thank you for subscribing,
+            <span class="popup-username"></span>
+            !
+            <button class="close-thanks-button" type="button">x</button>
+          </div>
         </div>
         <div class="img-wrapper">
           <div
@@ -66,7 +64,6 @@
     <div class="user-table-wrapper">
     <table class="user-table">
       <thead>
-        <button type="button" class="refresh-button">Refresh</button>
         <tr>
           <th>ID</th>
           <th>Username</th>
@@ -77,7 +74,7 @@
         </tr>
       </thead>
       <tbody class="table-body">
-        <template class="row-template">
+        <!-- <template class="row-template">
         <tr>
         <td class="table-id"></td>
         <td class="table-username"></td>
@@ -86,7 +83,7 @@
         <td class="table-offers-cycle"></td>
         <td class="table-delete-button" type="button"></td>
       </tr>
-    </template>
+    </template> -->
       </tbody>
   </table>
   </div>
@@ -99,11 +96,6 @@
         "
       ></div>
     </div>
-  </div>
-  <div class="test-page">
-    <ul id="orders">
-      
-    </ul>
   </div>
   </body>
 </html
