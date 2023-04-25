@@ -19,7 +19,7 @@ btnOpenForm.addEventListener("click", () => {
 
 guestsTrue.addEventListener("change", function () {
   if (this.checked) {
-    guestNumberList.style.display = "block";
+    guestNumberList.style.display = "inline-table";
   } else {
     guestNumberList.style.display = "none";
   }
@@ -39,12 +39,14 @@ function saveForm() {
     nameInput.classList.remove("validation-error")
   }
 
-  if (emailInput.value.length < 3) {
-    nameInput.classList.add("validation-error");
+  var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+  if (!emailRegEx.test(emailInput.value) ) {
+    emailInput.classList.add("validation-error");
     isFormValid = false;
-    alert("The name should be at least 3 letters!")
+    // alert("The name should be at least 3 letters!")
   } else {
-    nameInput.classList.remove("validation-error")
+    emailInput.classList.remove("validation-error")
   }
 
   if (isFormValid) {
@@ -87,7 +89,11 @@ function renderTable() {
   let list = getGuestList();
   let tableContent = "";
 
-  list.forEach(function (user, index) {
+  if (list.length > 0) {
+    document.querySelector('.js-guest-table-wrapper').style.display = 'inline-table'
+  }
+
+  list.forEach(function (user, index) {  
     var row =
       `
         <tr>
@@ -103,12 +109,27 @@ function renderTable() {
             <td>` +
       user.guestNumber +
       `</td>
+            <td>
+      <button class='js-delete' data-index='`+index+`'>Delete</button>
+        </td>
         </tr>
     `;
     tableContent = tableContent + row;
   });
 
   document.querySelector(".js-guest-table").innerHTML = tableContent;
+
+  document.querySelectorAll('.js-guest-table .js-delete').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var list = getGuestList();
+
+        list.splice(button.dataset.index, 1);
+
+        localStorage.guestList = JSON.stringify(list);
+
+        renderTable();
+    })
+  })
 }
 
 renderTable();
