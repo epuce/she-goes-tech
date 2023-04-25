@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, defineExpose } from "vue";
+import { defineComponent, ref, defineExpose, watch } from "vue";
 import SubscribeBtn from "./SubscribeBtn.vue";
 
 export default defineComponent({
@@ -115,6 +115,13 @@ export default defineComponent({
       special_deals: false,
       offer_cycle: "",
     });
+
+    watch(() => props.user, (user) => {
+      nameInput.value = user.username
+      emailInput.value = user.email
+      agreeToSpecialDeals.value = user.special_deals
+      offerFrequency.value = user.offer_cycle
+    })
 
     const openForm = () => {
       isFormOpen.value = !isFormOpen.value;
