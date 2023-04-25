@@ -3,13 +3,15 @@
         <form class="registration-form" @submit.prevent>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id='name' />
+                <input type="text" id="name" v-model="name" ref="nameInput" />
             </div>
-            <div class="form-group">
-                <label for="Surname">Surname</label>
-                <input type="text" />
+
+            <div class=" form-group">
+                <label for="surname">Surname</label>
+                <input type="text" id="surname" v-model="surname" ref="surnameInput" />
             </div>
-            <div class="form-group">
+
+            <div class=" form-group">
                 <label for="email">E-mail</label>
                 <input type="email" />
             </div>
@@ -24,8 +26,9 @@
             </div>
 
 
-            <button class="save-button" type="button" @click="save">Save</button>
+            <button class="save-button" type="submit" @click.prevent="validateForm">Save</button>
             <Popup v-if="isPopupVisible" @close-popup="closePopup" :name="name" />
+
 
         </form>
 
@@ -41,10 +44,23 @@ export default defineComponent({
         Popup,
     },
     setup() {
+        var name = ref('');
+        var surname = ref('');
         var isChecked = ref(false);
         var isPopupVisible = ref(false);
-        var name = ref('');
 
+
+
+        function validateForm() {
+            if (name.value.length >= 3 && surname.value.length >= 3) {
+                isPopupVisible.value = true;
+            } else {
+                var nameInput = document.getElementById('name');
+                var surnameInput = document.getElementById('surname');
+                nameInput.classList.add('invalid');
+                surnameInput.classList.add('invalid');
+            }
+        }
         function save() {
             // save the data
             isPopupVisible.value = true;
@@ -52,9 +68,20 @@ export default defineComponent({
         function closePopup() {
             isPopupVisible.value = false;
         }
-        return { isChecked, save, isPopupVisible, closePopup, name };
+
+        return {
+
+            isChecked,
+            save,
+            isPopupVisible,
+            closePopup,
+            name,
+            surname,
+            validateForm
+        }
     },
-});
+})
+
 </script>
 
 <style>
@@ -104,5 +131,9 @@ label {
 
 .save-button:hover {
     background-color: #222;
+}
+
+.invalid {
+    border: 1px solid red;
 }
 </style>

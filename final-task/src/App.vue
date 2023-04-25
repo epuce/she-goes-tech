@@ -13,11 +13,13 @@
 
 <script>
 import LandingPage from './components/LandingPage.vue';
+import Table from './components/Table.vue';
 
 export default {
     name: 'App',
     components: {
         LandingPage,
+        Table,
     }
 }
 </script>

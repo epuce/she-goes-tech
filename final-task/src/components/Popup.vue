@@ -50,7 +50,7 @@ export default defineComponent({
 
 .popup {
     padding: 32px;
-    width: 70%;
+    width: 40%;
     background: #ffffff;
 }
 
