@@ -5,13 +5,11 @@ $(function () {
   var $checkbox = $(".offer-checkbox");
   var $closeForm = $(".close-form-button");
   var $username = $(".username-input")
-  var $email = $(".email-input")
-  var $rowTemplate = $(".rowTemplate")
-  var $tableBody = $(".table-body")
-  var $closePopup = $(".close-thanks-button")
-  var $popupContainer = $(".thanks-popup-container")
+  var $email = $(".email-input");
+  var $tableBody = $(".table-body");
+  var $closePopup = $(".close-thanks-button");
+  var $popupContainer = $(".thanks-popup-container");
   
-
   $openForm.on("click", function () {
     $formPopup.removeClass("hide");
   });
@@ -32,43 +30,38 @@ $(function () {
 
   $closePopup.on("click", closePopup)
 
-
-function addSubscriber(subscriber) {
-  $tableBody.append('<td>'+ JSON.stringify(subscriber.username) + '</td>')
-}
-
-
-
-$.ajax({
+function GET() {$.ajax({
   method: "GET",
   url: "http://localhost:8005/api/subscribers",
   dataType: "json",
   contentType: "application/json",
   success: function(data) {
-    //   $.each(data, function(i, subscriber) {
-    //     var $tr = $('<tr>').append(
-    //       $('<td>').append(subscriber.data.id),
-    //       $('<td>').append(subscriber.data.username),
-    //       $('<td>').append(subscriber.data.email)
-    //    )
-    //     $tr.appendTo($tableBody)
-
-    //  })
-        $(data).each(function(i, subscriber){
-        $tableBody.append($("<tr class='row-template'>")
-         .append($("<td>").append(subscriber.data[0].id))
-        .append($("<td>").append(subscriber.data[0].username))
-        .append($("<td>").append(subscriber.data[0].email))
-        )
+        $(data.data).each(function(i, subscriber){
+        $tableBody.append($("<tr id= "+subscriber.id+">")
+        .append($("<td>").append(subscriber.id))
+        .append($("<td>").append(subscriber.username))
+        .append($("<td>").append(subscriber.email))
+        .append($("<td>")).append("")
+        .append($("<td>")).append($("<button type='button' id='delete-button"+subscriber.id+"'>x</button>"))
+        );
+        $("#delete-button"+subscriber.id+"").on('click', function(){
+          $("#"+subscriber.id+"").remove();
+          $.ajax({
+            method: "DELETE",
+            url: "http://localhost:8005/api/subscribers/"+subscriber.id+"",
+            dataType: "json",
+            contentType: "application/json",
+            success: function(data) {
+              console.log(data)
+            }
+          })
+        })
       })
-    //console.log(data.data[45].username)
-    console.log(data)
   }
 })
+}
 
-
-  
-  
+GET()  
 
 function POST() {
   var subscriber = {
@@ -88,7 +81,6 @@ function POST() {
     error: function() {
       alert('Error saving error')
     }
-  
 })
 }
 
@@ -102,9 +94,13 @@ function saveForm() {
     $popupContainer.removeClass("hide")
     $formPopup.addClass("hide")
     POST();
+    GET();
   }
 
-  $(".popup-username").html($username.val());;
+  $(".popup-username").html($username.val());
 }
-$(".subscribe-button").on("click", saveForm)
+
+$(".subscribe-button").on("click", saveForm);
+
+
 })
