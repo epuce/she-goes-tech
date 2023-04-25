@@ -7,36 +7,35 @@
         <table class="meal-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Price</th>
+                    <th>Price, &euro;</th>
                     <th>Allergens</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody v-for="item in mealList" :key="item.id" class="meal-list__meal">
                 <tr>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
+                    <td>{{ mealList.indexOf(item) + 1 }}</td>
+                    <td class="td-name">{{ item.name }}</td>
+                    <td class="td-description">{{ item.description }}</td>
                     <td>{{ item.price }}</td>
-                    <td>{{ item.allergens }}</td>
+                    <td class="td-allergens">{{ item.allergens }}</td>
                     <td>
-                        <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                        <!-- <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                             aria-controls="offcanvasExample"> <font-awesome-icon :icon="['fas', 'pen']" class="icon-edit"
-                                :class="{ 'meal-list__meal--active': meal.id === item.id }" /></a>
+                                :class="{ 'meal-list__meal--active': meal.id === item.id }" /></a> -->
                         <font-awesome-icon icon="fa-trash" class="icon-delete" @click="onMealDelete(item.id)" />
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <FormMeal />
-
     </div>
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
-import FormMeal from './FormMeal.vue';
 export default defineComponent({
     props: {
         mealList: {
@@ -45,6 +44,12 @@ export default defineComponent({
         }
     },
     setup(props, { emit }) {
+
+        // var idNumber =()=>{
+        //     mealList.length
+        // }
+
+
         const meal = ref({
             name: "",
             description: "",
@@ -53,6 +58,7 @@ export default defineComponent({
             id: null,
             // category_id: null
         });
+
 
         const onMealDelete = (mealId) => {
             fetch(`http://localhost:8002/api/meals/${mealId}`, {
@@ -67,13 +73,13 @@ export default defineComponent({
         // const fillMealForm = (tmpMeal) => {
         //     meal.value = { ...tmpMeal };
         // }
+
         return {
             meal,
             onMealDelete,
-            // fillMealForm,
+            // idNumber,
         };
     },
-    components: { FormMeal }
 })
 
 </script>
@@ -149,7 +155,11 @@ button {
     fill: lightgray;
 }
 
-th{
+th {
     background-color: #f5f5f5;
+}
+
+.td-name, .td-description, .td-allergens{
+    text-align: left !important;
 }
 </style>

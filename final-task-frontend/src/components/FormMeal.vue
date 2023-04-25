@@ -42,10 +42,11 @@
                         </label>
 
                         <div>
-                            <button class="btn btn-primary btn-save" @click="onMealSave()" type="button">Save</button>
+                            <button type="button" class="btn btn-primary btn-save" @click="onMealSave()"> Save</button>
                         </div>
-
                     </form>
+
+                   
 
                 </div>
             </div>
@@ -61,11 +62,15 @@ export default defineComponent({
         mealList: {
             type: Array,
             required: true,
-        }
+        },
     },
     setup(props, { emit }) {
         var isChecked = ref(false);
 
+        const onClose = () => {
+            emit('closeSlideout')
+            emit('showSlideout')
+        };
 
         const meal = ref({
             name: "",
@@ -77,9 +82,9 @@ export default defineComponent({
         });
         const validateForm = () => {
             var inputIsValid = meal.value.name.length > 3 && meal.value.name.trim() !== "" && meal.value.description.length > 3 && meal.value.description.trim() !== "" && meal.value.price && meal.value.price > 0;
+
             return inputIsValid;
         };
-
         const onMealSave = () => {
             if (validateForm()) {
                 const payload = {
@@ -125,25 +130,23 @@ export default defineComponent({
                     body: JSON.stringify(payload),
                 })
                     .then(resp => resp.json())
+
                     .then(resp => {
+                        emit("openPopup")
                         if (!resp.error) {
                             emit("add-to-list", {
                                 ...payload,
                                 id: resp.data.insertId
-                            }
-                            );
+                            });
                             meal.value = {
                                 name: "",
                                 description: "",
                                 allergens: "",
                                 price: null
                             };
-
                         }
 
                     });
-                // document.querySelector('.offcanvas').classList.add("close-slideout")
-                // console.log("Closing",onClose())
             }
             if (meal.value.name.trim() === "" || meal.value.name.length <= 3) {
                 document.querySelector(".name-error").innerHTML = "Please enter at least 4 characters";
@@ -172,19 +175,17 @@ export default defineComponent({
         };
         // }
         // }
-
         //         document.querySelector(".btn-save").addEventListener("keypress", function (event) {
         //     if (event.keyCode === 13) {
         //       onMealSave();
         //     }
         //   });
-
-
         return {
             isChecked,
             onMealSave,
             meal,
             validateForm,
+            onClose,
         };
     },
 })
@@ -254,6 +255,11 @@ textarea {
 }
 
 .close-slideout {
-    display: none;
+    visibility: hidden;
+}
+
+.input-description{
+    height: 150px;
+    resize: none;
 }
 </style>

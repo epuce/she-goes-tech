@@ -14,6 +14,8 @@ router.get('', (request, response)=>{
     PRIMARY KEY(id)
     )`
 
+    var sql = `ALTER TABLE \`VaidaLinkuviene-meals\` MODIFY COLUMN price DOUBLE NOT NULL`
+
     
     app.db.query(sql, (error, data) =>{
         var responseData ={}
