@@ -8,12 +8,12 @@
   </head>
   <link rel="stylesheet" href="./Final-task.css" />
   <body>
-    <div class="page-wrapper">
+      <div class="page-wrapper">
       <button type="button" class="btn-open">Open form</button>
 
       <div id="form-wrapper">
         <form class="registration-form">
-          <h1 class="reg-form-header">Registration form</h1>
+          <h1 class="reg-form-header">Registration form for the event</h1>
 
           <label class="input-name">
             Name
@@ -34,6 +34,7 @@
 
           <label class="js-guest-number-list">
             <select class="js-guest-number">
+              <option>0</option>
               <option>1</option>
               <option>2</option>
               <option>3</option> 
@@ -57,9 +58,10 @@
       </table>
     </div>
 
-    <div class="submit-popup-wrapper">
-      <p>Thank you</p>
-      <button type="button">Close</button>
+    <div class="js-popup submit-popup-wrapper">
+      <p class="popup-message">Thank you, we received your enquiry!</p>
+      <button type="button" class="js-close-popup">Close</button>
+      </table>
     </div>
 
    

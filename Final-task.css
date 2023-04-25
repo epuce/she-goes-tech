@@ -1,5 +1,9 @@
+.page-wrapper {
+  
+}
+
 #form-wrapper {
-  display: none;
+  display: block;
   width: 50%;
   background-color: white;
   border: 2px solid rgb(247, 219, 106);
@@ -15,13 +19,13 @@
 .register-form {
   display: none;
   width: 250px;
-  display: flex;
+  display: block;
   justify-content: center;
   flex-direction: column;
 }
 
 .btn-open {
-  align-items: center;
+  /* align-items: center; */
   width: 250px;
   margin-bottom: 10px;
   background-color: rgb(235, 176, 45);
@@ -38,6 +42,7 @@
 .reg-form-header {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  text-align: center;
   font-size: 30px;
   color: rgba(9, 37, 5, 0.8);
   margin-bottom: 10px;
@@ -86,10 +91,41 @@
   font-size: 16px;
 }
 
+.js-popup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: o;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
 .submit-popup-wrapper {
-  width: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  background-color: rgba(9, 37, 5, 0.3);
+}
+
+.popup-message {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 14px;
+}
+
+.js-close-popup {
+  background-color: white;
+  color: rgb(216, 100, 169);
+  font-weight: bold;
+  border: 1px solid rgb(216, 100, 169);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.popup-window {
+  border: 1px solid black
 }
 
 .js-name,

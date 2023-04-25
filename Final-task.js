@@ -69,6 +69,13 @@ function saveForm() {
 
     renderTable();
   }
+  let popup = document.querySelector(".submit-popup-wrapper");
+    popup.style.display = 'flex';
+
+    document.querySelector('.js-close-popup').addEventListener('click', () => {
+      popup.style.display = 'none'
+    })
+
 }
 
 function getGuestList() {
