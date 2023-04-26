@@ -13,7 +13,7 @@
 
             <div class=" form-group">
                 <label for="email">E-mail</label>
-                <input type="email" />
+                <input type="email" v-model="email" />
             </div>
 
             <div class="checkbox-container">
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group" v-if="isChecked">
                 <label for="address">Address</label>
-                <input type="text" />
+                <input type="text" id="address" v-model="address" />
             </div>
 
 
@@ -38,6 +38,8 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import Popup from './Popup.vue';
+
+var localStorage = window.localStorage;
 
 export default defineComponent({
     components: {
@@ -59,6 +61,7 @@ export default defineComponent({
                 isPopupVisible.value = true;
                 nameInput.classList.remove('invalid');
                 surnameInput.classList.remove('invalid');
+                save()
             } else {
                 if (name.value.length < 3) {
                     nameInput.classList.add('invalid');
@@ -75,6 +78,15 @@ export default defineComponent({
         }
 
         function save() {
+            var user = {
+                name: name.value,
+                surname: surname.value,
+                email: email.value,
+                address: address.value,
+            };
+            var users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
 
         }
 

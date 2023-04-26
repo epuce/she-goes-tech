@@ -14,7 +14,8 @@ import RegistrationForm from './RegistrationForm.vue';
 export default {
     name: 'LandingPage',
     components: {
-        RegistrationForm
+        RegistrationForm,
+
     },
     data() {
         return {
