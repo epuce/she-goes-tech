@@ -1,7 +1,11 @@
 <template>
   <div class="page-wrapper">
     <Transition>
-      <OpenForm v-if="isOpenForm" @open-popup="addUsername($event)" />
+      <OpenForm
+        v-if="isOpenForm"
+        @open-popup="addUsername($event)"
+        :userId="selectedUserId"
+      />
     </Transition>
     <OpenBtn
       name="open"
@@ -14,7 +18,7 @@
       @close-popup="(isOpenPopup = false), (isOpenForm = false)"
       :text="userName"
     />
-    <DataTable @open-user="amendUser($event)" />
+    <DataTable :testProp="trigger" @open-user="amendUser($event)" />
   </div>
 </template>
 <script>
@@ -37,15 +41,18 @@ export default defineComponent({
     const isOpenPopup = ref(false);
     const userName = ref("");
     const selectedUserId = ref("");
+    const trigger = ref(false);
 
     const addUsername = function (name) {
       userName.value = name;
       isOpenPopup.value = !isOpenPopup.value;
+      trigger.value = !trigger.value;
     };
     const amendUser = function (userId) {
       selectedUserId.value = userId;
+      isOpenForm.value = true;
     };
-    // var buttonText = ref("Open form");
+
     return {
       isOpenForm,
       isOpenPopup,
@@ -53,6 +60,7 @@ export default defineComponent({
       addUsername,
       selectedUserId,
       amendUser,
+      trigger,
     };
   },
 });

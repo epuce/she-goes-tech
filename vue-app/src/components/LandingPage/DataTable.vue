@@ -13,10 +13,10 @@
         <tr
           v-for="item in userList"
           :key="item.id"
-          @click="onUserSelect(item.id)"
           :class="{
-            'user-table__user--active': item.id === user.id,
+            'user-list__active': user.id === item.id,
           }"
+          @click="onUserSelect(item.id)"
         >
           <td>{{ item.id }}</td>
           <td>{{ item.user_name }}</td>
@@ -30,6 +30,8 @@
               class="user-list__delete"
             />
           </td>
+          <!-- @mouseover="hover = true"
+          @mouseleave="hover = false" -->
         </tr>
       </tbody>
     </table>
@@ -38,8 +40,21 @@
 <script>
 import {defineComponent, ref} from "vue";
 export default defineComponent({
+  watch: {
+    testProp: function () {
+      this.displayData();
+    },
+  },
+  props: {
+    testProp: {
+      type: Boolean,
+      required: true,
+    },
+  },
+
   setup(props, {emit}) {
     // const clickedUser = ref(false);
+    const hover = ref(false);
     const userList = ref([]);
     const user = ref({
       user_name: "",
@@ -55,6 +70,14 @@ export default defineComponent({
         userList.value = resp.data;
       });
 
+    const displayData = function () {
+      fetch("http://localhost:8002/api/landingPage")
+        .then((resp) => resp.json())
+        .then((resp) => {
+          userList.value = resp.data;
+        });
+    };
+
     const onUserDelete = (userId) => {
       fetch(`http://localhost:8002/api/landingPage/${userId}`, {
         method: "DELETE",
@@ -66,14 +89,15 @@ export default defineComponent({
     };
 
     const onUserSelect = (userId) => {
-      emit("open-user", `${userId}`);
+      // hover.value = true;
+      console.log(userId);
+      emit("open-user", userId);
 
-      // comment.value.user_id = userId;
-      fetch(`http://localhost:8002/api/landingPage/${userId}`)
-        .then((resp) => resp.json())
-        .then((resp) => {
-          console.log(resp);
-        });
+      // fetch(`http://localhost:8002/api/landingPage/${userId}`)
+      //   .then((resp) => resp.json())
+      //   .then(() => {
+      //     userList.value = userList.value.filter((user) => user.id === userId);
+      //   });
     };
 
     return {
@@ -81,6 +105,8 @@ export default defineComponent({
       user,
       onUserDelete,
       onUserSelect,
+      displayData,
+      hover,
       // clickedUser,
     };
   },
@@ -130,8 +156,8 @@ export default defineComponent({
   margin-right: 2px;
   cursor: pointer;
 }
-
-.user-table__user--active {
+.user-list__active {
+  cursor: pointer;
   background: rgba(0, 0, 100, 0.2);
 }
 </style>

@@ -53,17 +53,10 @@
 import {defineComponent, ref} from "vue";
 
 export default defineComponent({
-  // watch: {
-  //   userName(value) {
-  //     this.user.value.user_name = value;
-  //     this.validateUsername(value);
-  //   },
-  //   userEmail(value) {
-  //     this.user.value.email = value;
-  //     this.validateEmail(value);
-  //   },
-  // },
   watch: {
+    userId: function (value) {
+      this.displaySelectedUser(value);
+    },
     "user.user_name": function (value) {
       this.user.user_name = value;
       this.validateUsername(value);
@@ -73,7 +66,12 @@ export default defineComponent({
       this.validateEmail(value);
     },
   },
-
+  props: {
+    userId: {
+      type: Number,
+      required: true,
+    },
+  },
   setup(props, {emit}) {
     const checkboxClicked = ref(false);
     const errorMessageUser = ref("");
@@ -119,11 +117,11 @@ export default defineComponent({
       }
     };
 
-    // fetch("http://localhost:8002/api/landingPage")
-    //   .then((resp) => resp.json())
-    //   .then((resp) => {
-    //     userList.value = resp.data;
-    //   });
+    fetch("http://localhost:8002/api/landingPage")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        userList.value = resp.data;
+      });
 
     const onSubmit = function () {
       validateUsername();
@@ -139,55 +137,72 @@ export default defineComponent({
           offer_cycle: user.value.cycle,
         };
 
-        if (user.value.id) {
-          fetch(`http://localhost:8002/api/landingPage/${user.value.id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-          })
-            .then((resp) => resp.json())
-            .then((resp) => {
-              if (!resp.error) {
-                const userIndex = userList.value.findIndex(
-                  (item) => item.id === user.value.id
-                );
-                userList.value[userIndex] = {
-                  ...userList.value[userIndex],
-                  ...payload,
-                };
-                user.value = {
-                  first_name: "",
-                  last_name: "",
-                  id: null,
-                };
-              }
-            });
-        } else {
-          fetch("http://localhost:8002/api/landingPage", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "http://localhost:8002",
-            },
-            body: JSON.stringify(payload),
-          })
-            .then((resp) => resp.json())
-            .then((resp) => {
-              console.log(resp);
-              if (!resp.error) {
-                userList.value.push({
-                  ...payload,
-                  id: resp.data.insertId,
-                });
-                // user.value = user.value;
-              }
-            });
-        }
+        fetch("http://localhost:8002/api/landingPage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "http://localhost:8002",
+          },
+          body: JSON.stringify(payload),
+        })
+          .then((resp) => resp.json())
+          .then((resp) => {
+            if (!resp.error) {
+              userList.value.push({
+                ...payload,
+                id: resp.data.insertId,
+              });
+            }
+          });
       }
     };
 
+    const displaySelectedUser = function (userId) {
+      console.log(userId);
+
+      fetch(`http://localhost:8002/api/landingPage/${userId}`)
+        .then((resp) => resp.json())
+        .then((resp) => {
+          user.value = resp.data[0];
+        });
+
+      displaySelectedUser();
+    };
+
+    const updateSelectedUser = function () {
+      const payload = {
+        user_name: user.value.user_name,
+        email: user.value.email,
+        special_offers: user.value.offers,
+        offer_cycle: user.value.cycle,
+      };
+
+      fetch(`http://localhost:8002/api/landingPage/${user.value.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((resp) => resp.json())
+        .then(() => {
+          console.log("SENT TO THE SERVER");
+          // if (!resp.error) {
+          //   const userIndex = userList.value.findIndex(
+          //     (item) => item.id === user.value.id
+          //   );
+          //   // userList.value[userIndex] = {
+          //   //   ...userList.value[userIndex],
+          //   //   ...payload,
+          //   // };
+          //   // user.value = {
+          //   //   first_name: "",
+          //   //   last_name: "",
+          //   //   id: null,
+          //   // };
+          // }
+        });
+    };
     return {
       // userName,
       // userEmail,
@@ -201,6 +216,8 @@ export default defineComponent({
       isValidEmail,
       userList,
       user,
+      updateSelectedUser,
+      displaySelectedUser,
     };
   },
 });
