@@ -45,7 +45,7 @@ exports.update = function (request, response) {
     special_offers +
     `", offer_cycle="` +
     offer_cycle +
-    `", 
+    `"
     WHERE id=` +
     request.params.id;
 
