@@ -1,7 +1,7 @@
 <template>
     <div class="landing-page">
         <h1 class="cta">Spice up your week with our weekly flower delivery!</h1>
-        <button class="subscribe-button" @click="showRegistrationForm = true">Subscribe</button>
+        <button class="subscribeBtn" @click="showRegistrationForm = true">Subscribe</button>
         <RegistrationForm v-if="showRegistrationForm" @close="closeRegistrationForm = false" />
 
     </div>
@@ -10,12 +10,10 @@
 <script>
 import { defineComponent } from 'vue';
 import RegistrationForm from './RegistrationForm.vue';
-
 export default {
     name: 'LandingPage',
     components: {
         RegistrationForm,
-
     },
     data() {
         return {
@@ -39,11 +37,12 @@ export default {
     text-align: center;
     width: 500px;
     margin-bottom: 20px;
-    font-family: sans-serif;
-    color: #333
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    line-height: 1.5;
 }
 
-.subscribe-button {
+.subscribeBtn {
     width: 200px;
     height: 50px;
     border-radius: 10px;
@@ -55,9 +54,11 @@ export default {
     color: white;
     transition: all 0.3s ease-in-out;
     font-size: medium;
+    box-shadow: 5px 5px 5px #c3c2c2;
+
 }
 
-.subscribe-button:hover {
+.subscribeBtn:hover {
     background-color: #6f5336;
 }
 </style >

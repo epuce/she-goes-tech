@@ -4,7 +4,7 @@
             <div class="popup">
                 Thank you, {{ name }}, for subscribing!
 
-                <button class="btn-close" @click="onClose()">Close</button>
+                <button class="btn-close" @click="$emit('close')">Close</button>
             </div>
         </div>
     </div>

@@ -4,16 +4,18 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" v-model="name" ref="nameInput" />
+                <div v-if="nameInvalid" class="error-message">Please enter a valid name (at least 3 characters)</div>
             </div>
 
             <div class=" form-group">
                 <label for="surname">Surname</label>
                 <input type="text" id="surname" v-model="surname" ref="surnameInput" />
+                <div v-if="surnameInvalid" class="error-message">Please enter a valid surname (at least 3 characters)</div>
             </div>
 
             <div class=" form-group">
                 <label for="email">E-mail</label>
-                <input type="email" v-model="email" />
+                <input type="email" id="email" v-model="email" />
             </div>
 
             <div class="checkbox-container">
@@ -27,7 +29,7 @@
 
 
             <button class="saveBtn" type="submit" @click.prevent="validateForm">Save</button>
-            <Popup v-if="isPopupVisible" @close-popup="closePopup" :name="name" />
+            <Popup v-if="isPopupVisible" @close="clearForm" :name="name" />
 
 
         </form>
@@ -38,7 +40,6 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import Popup from './Popup.vue';
-
 var localStorage = window.localStorage;
 
 export default defineComponent({
@@ -52,11 +53,12 @@ export default defineComponent({
         var address = ref('');
         var isChecked = ref(false);
         var isPopupVisible = ref(false);
+        var nameInvalid = ref(false);
+        var surnameInvalid = ref(false);
 
         function validateForm() {
             var nameInput = document.getElementById('name');
             var surnameInput = document.getElementById('surname');
-
             if (name.value.length >= 3 && surname.value.length >= 3) {
                 isPopupVisible.value = true;
                 nameInput.classList.remove('invalid');
@@ -65,18 +67,20 @@ export default defineComponent({
             } else {
                 if (name.value.length < 3) {
                     nameInput.classList.add('invalid');
+                    nameInvalid.value = true;
                 } else {
                     nameInput.classList.remove('invalid');
+                    nameInvalid.value = false;
                 }
-
                 if (surname.value.length < 3) {
                     surnameInput.classList.add('invalid');
+                    surnameInvalid.value = true;
                 } else {
                     surnameInput.classList.remove('invalid');
+                    surnameInvalid.value = false;
                 }
             }
         }
-
         function save() {
             var user = {
                 name: name.value,
@@ -89,10 +93,14 @@ export default defineComponent({
             localStorage.setItem('users', JSON.stringify(users));
 
         }
-
-
-        function closePopup() {
-            isPopupVisible.value = false;
+        function clearForm() {
+            name.value = '';
+            surname.value = '';
+            email.value = '';
+            address.value = '';
+            isChecked.value = false;
+            nameInvalid.value = false;
+            surnameInvalid.value = false;
         }
 
         return {
@@ -104,11 +112,13 @@ export default defineComponent({
             isPopupVisible,
             validateForm,
             save,
-            closePopup,
+            clearForm,
+            nameInvalid,
+            surnameInvalid,
+
         };
     }
-},
-);
+});
 </script>
 
 
@@ -135,6 +145,7 @@ label {
 .form-group {
     display: flex;
     flex-direction: column;
+
 }
 
 
@@ -161,7 +172,29 @@ label {
     background-color: #222;
 }
 
-.invalid {
+
+#name,
+#surname,
+#email,
+#address {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#name.invalid,
+#surname.invalid,
+#email.invalid,
+#address.invalid {
     border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
 }
 </style>

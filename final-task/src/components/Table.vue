@@ -30,9 +30,15 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
-export default {
+export default defineComponent({
+    // props: {
+    //     users: {
+    //         type: Array,
+    //         required: true,
+    //     },
+    // },
     data() {
         return {
             users: JSON.parse(localStorage.getItem('users')) || [],
@@ -47,7 +53,8 @@ export default {
             this.users = JSON.parse(localStorage.getItem('users')) || [];
         },
     },
-};
+
+});
 
 </script>
 
