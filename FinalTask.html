@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      .main {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-family: sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      .main {
+        display: flex;
+      }
+      .side-panel-container {
+        display: flex;
+      }
+      .side-panel {
+        background-color: #222;
+        color: aliceblue;
+        display: none;
+      }
+      .side-panel-toogle-button {
+        background-color: #8c2222;
+        border: #8c2222;
+      }
+      .side-panel > form {
+        display: flex;
+        flex-direction: column;
+        padding: 0 8px;
+      }
+      .side-panel > form > div {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+      }
+      .side-panel input {
+        border-radius: 3px;
+      }
+      .validation-error {
+        border: 1px solid #ff0000;
+      }
+      .popup {
+        border: 1px solid #222;
+        border-radius: 4px;
+        padding: 20px;
+        background-color: white;
+      }
+      .popup-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+        display: none;
+      }
+      .hidden {
+        display: none;
+      }
+      .popup-header {
+        text-align: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="side-panel-container">
+        <div class="side-panel">
+          <form>
+            <div>
+              <label>User name</label>
+              <input type="text" class="side-panel-user-name" />
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email" class="side-panel-email" />
+            </div>
+            <div>
+              <label> <input type="checkbox" /> Send me special deals </label>
+            </div>
+            <div>
+              <label>Send me notification every:</label>
+              <select>
+                <option>Hour</option>
+                <option>Day</option>
+                <option>Week</option>
+                <option>Month</option>
+                <option>Year</option>
+              </select>
+            </div>
+            <div><button class="side-panel-subscribe">Subscribe</button></div>
+          </form>
+        </div>
+        <div class="side-panel-button-container">
+          <button class="side-panel-toogle-button">Toogle Form</button>
+        </div>
+      </div>
+      <div class="main-container">
+        <table class="user-table js-user-table-wrapper">
+          <thead>
+            <th>ID</th>
+            <th>Name Surname</th>
+            <th>Users Email</th>
+            <th>Delete User</th>
+          </thead>
+          <tbody class="js-user-table"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="popup-backdrop">
+      <div class="popup">
+        <div class="popup-header">
+          <button class="popup-close-button">close</button>
+        </div>
+        <div class="popup-body"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var nameInput = document.querySelector(".side-panel-user-name");
+    var emailInput = document.querySelector(".side-panel-email");
+
+    function validateInput() {
+      var isFormValid = true;
+      if (nameInput.value.length < 3) {
+        nameInput.classList.add("validation-error");
+        isFormValid = false;
+      } else {
+        nameInput.classList.remove("validation-error");
+      }
+
+      var emailRegEx =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!emailRegEx.test(emailInput.value)) {
+        emailInput.classList.add("validation-error");
+        isFormValid = false;
+      } else {
+        emailInput.classList.remove("validation-error");
+      }
+      return isFormValid;
+    }
+    var saveBtn = document.querySelector(".side-panel-subscribe");
+
+    let id = 0;
+    saveBtn.addEventListener("click", (event) => {
+      if (validateInput()) {
+        popupContainer.style.display = "flex";
+        popupBody.innerHTML = `Thank you, ${nameInput.value}, we have received your request`;
+        addUser({
+          id,
+          email: emailInput.value,
+          name: nameInput.value,
+        });
+        addTableRow({
+          id,
+          email: emailInput.value,
+          name: nameInput.value,
+        });
+        id++;
+      }
+      event.preventDefault();
+    });
+
+    const showFormBtn = document.querySelector(".side-panel-toogle-button");
+    const formWrapper = document.querySelector(".side-panel");
+    const popupContainer = document.querySelector(".popup-backdrop");
+    const popupBody = document.querySelector(".popup-body");
+    const popupCloseButton = document.querySelector(".popup-close-button");
+    const tableBody = document.querySelector(".js-user-table");
+
+    showFormBtn.addEventListener("click", () => {
+      if (formWrapper.style.display === "block") {
+        formWrapper.style.display = "none";
+      } else {
+        formWrapper.style.display = "block";
+      }
+    });
+    popupCloseButton.addEventListener("click", () => {
+      popupContainer.style.display = "none";
+    });
+    function addTableRow({ id, name, email }) {
+      var row = document.createElement("tr");
+
+      row.innerHTML = `
+  
+  <td>
+    ${id}
+      </td>
+      <td>
+    ${name}
+      </td>
+  <td>
+      ${email}
+      </td>
+      <td> 
+  <button class="js-delete" data-index="">Delete</button></td>
+
+  `;
+      tableBody.appendChild(row);
+      row.querySelector(`.js-delete`).addEventListener("click", () => {
+        // console.log("delete button clicked");
+        row.remove();
+        removeUser(id);
+      });
+    }
+
+    let users = {};
+    function addUser(user) {
+      users[user.id] = user;
+      updateLocalStorage();
+    }
+
+    function removeUser(userId) {
+      delete users[userId];
+      updateLocalStorage();
+    }
+
+    function updateLocalStorage() {
+      localStorage.users = JSON.stringify(users);
+    }
+
+    function loadFromLocalStorage() {
+      const localStorageUsers = localStorage.users;
+      if (localStorageUsers != null) {
+        users = JSON.parse(localStorage.users);
+        Object.values(users).forEach(addTableRow);
+        id =
+          Math.max.apply(
+            null,
+            Object.values(users).map((user) => user.id)
+          ) + 1;
+        console.log({ id });
+      }
+    }
+
+    loadFromLocalStorage();
+  </script>
+</html>
