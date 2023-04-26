@@ -5,6 +5,7 @@
         v-if="isOpenForm"
         @open-popup="addUsername($event)"
         :userId="selectedUserId"
+        @update-data="updateTable($event)"
       />
     </Transition>
     <OpenBtn
@@ -18,7 +19,11 @@
       @close-popup="(isOpenPopup = false), (isOpenForm = false)"
       :text="userName"
     />
-    <DataTable :testProp="trigger" @open-user="amendUser($event)" />
+    <DataTable
+      :testProp="trigger"
+      @open-user="amendUser($event)"
+      :update="updateUser"
+    />
   </div>
 </template>
 <script>
@@ -40,17 +45,21 @@ export default defineComponent({
     const isOpenForm = ref(false);
     const isOpenPopup = ref(false);
     const userName = ref("");
-    const selectedUserId = ref("");
+    const selectedUserId = ref(0);
     const trigger = ref(false);
+    const updateUser = ref(false);
 
     const addUsername = function (name) {
       userName.value = name;
       isOpenPopup.value = !isOpenPopup.value;
       trigger.value = !trigger.value;
     };
-    const amendUser = function (userId) {
-      selectedUserId.value = userId;
+    const amendUser = function (id) {
       isOpenForm.value = true;
+      selectedUserId.value = id;
+    };
+    const updateTable = function () {
+      updateUser.value = !updateUser.value;
     };
 
     return {
@@ -61,11 +70,23 @@ export default defineComponent({
       selectedUserId,
       amendUser,
       trigger,
+      updateTable,
+      updateUser,
     };
   },
 });
 </script>
 <style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  color: #45260a;
+  font-size: 62.5%;
+}
+
 .page-wrapper {
   display: flex;
   align-items: center;
@@ -80,12 +101,4 @@ export default defineComponent({
 .v-leave-to {
   opacity: 0;
 }
-/* .form {
-  position: relative;
-} */
-/* .button {
-  position: sticky;
-  top: 20px;
-  right: 30px;
-} */
 </style>

@@ -1,21 +1,21 @@
 <template>
   <div class="form-container">
-    <form class="login-form">
-      <div class="input-wrapper">
+    <form class="form">
+      <div class="form-wrapper">
         <label for="username">Username </label>
         <input id="username" v-model="user.user_name" type="text" required />
         <p>
           {{ errorMessageUser }}
         </p>
       </div>
-      <div class="input-wrapper">
+      <div class="form-wrapper">
         <label for="email">E-mail </label>
         <input id="email" type="email" required v-model="user.email" />
         <p>
           {{ errorMessageEmail }}
         </p>
       </div>
-      <div class="special-deals-wrapper">
+      <div class="form-wrapper__deals">
         <input
           id="checkbox"
           type="checkbox"
@@ -25,7 +25,7 @@
         <label for="checkbox">Send me special deals</label>
       </div>
       <div v-if="checkboxClicked">
-        <div class="select-wrapper">
+        <div class="form-wrapper__select">
           <label for="select-time">I'm willing to received them every:</label>
           <select
             id="select-time"
@@ -79,7 +79,7 @@ export default defineComponent({
     const emailRegEx = new RegExp("[^@]+@[^@]+\\.[^@]+");
     const isValidUser = ref(null);
     const isValidEmail = ref(null);
-    const userList = ref([]);
+
     const user = ref({
       user_name: "",
       email: "",
@@ -117,95 +117,68 @@ export default defineComponent({
       }
     };
 
-    fetch("http://localhost:8002/api/landingPage")
-      .then((resp) => resp.json())
-      .then((resp) => {
-        userList.value = resp.data;
-      });
-
     const onSubmit = function () {
       validateUsername();
       validateEmail();
 
       if (isValidUser.value && isValidEmail.value) {
-        emit("open-popup", user.value.user_name);
-
         const payload = {
           user_name: user.value.user_name,
           email: user.value.email,
-          special_offers: user.value.offers,
-          offer_cycle: user.value.cycle,
+          special_offers: user.value.offers ?? "",
+          offer_cycle: user.value.cycle ?? "",
         };
 
-        fetch("http://localhost:8002/api/landingPage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:8002",
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((resp) => resp.json())
-          .then((resp) => {
-            if (!resp.error) {
-              userList.value.push({
-                ...payload,
-                id: resp.data.insertId,
-              });
-            }
-          });
+        if (!user.value.id) {
+          fetch("http://localhost:8002/api/landingPage", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:8002",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((resp) => resp.json())
+            .then((resp) => {
+              if (!resp.error) {
+                emit("open-popup", user.value.user_name);
+              }
+              user.value = {
+                user_name: "",
+                email: "",
+                offers: "",
+                cycle: "",
+              };
+            });
+        } else {
+          fetch(`http://localhost:8002/api/landingPage/${user.value.id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:8002",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((resp) => resp.json())
+            .then((resp) => {
+              if (!resp.error) {
+                emit("update-data");
+              }
+            });
+        }
       }
     };
 
     const displaySelectedUser = function (userId) {
-      console.log(userId);
-
       fetch(`http://localhost:8002/api/landingPage/${userId}`)
         .then((resp) => resp.json())
         .then((resp) => {
           user.value = resp.data[0];
-        });
-
-      displaySelectedUser();
-    };
-
-    const updateSelectedUser = function () {
-      const payload = {
-        user_name: user.value.user_name,
-        email: user.value.email,
-        special_offers: user.value.offers,
-        offer_cycle: user.value.cycle,
-      };
-
-      fetch(`http://localhost:8002/api/landingPage/${user.value.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-        .then((resp) => resp.json())
-        .then(() => {
-          console.log("SENT TO THE SERVER");
-          // if (!resp.error) {
-          //   const userIndex = userList.value.findIndex(
-          //     (item) => item.id === user.value.id
-          //   );
-          //   // userList.value[userIndex] = {
-          //   //   ...userList.value[userIndex],
-          //   //   ...payload,
-          //   // };
-          //   // user.value = {
-          //   //   first_name: "",
-          //   //   last_name: "",
-          //   //   id: null,
-          //   // };
-          // }
+          checkboxClicked.value = false;
         });
     };
+
     return {
-      // userName,
-      // userEmail,
       checkboxClicked,
       validateUsername,
       validateEmail,
@@ -214,9 +187,7 @@ export default defineComponent({
       onSubmit,
       isValidUser,
       isValidEmail,
-      userList,
       user,
-      updateSelectedUser,
       displaySelectedUser,
     };
   },
@@ -241,19 +212,22 @@ export default defineComponent({
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
   background-color: #fdf2e9;
   background-image: linear-gradient(
-    to right bottom,
-    rgba(242, 179, 128, 0.919),
-    #e67e22
-  );
+      to right bottom,
+      rgba(235, 151, 78, 0.8),
+      rgba(230, 125, 34, 0.8)
+    ),
+    url(../../assets/pexels-helena-lopes-1861784.jpg);
+  background-size: cover;
+  background-position: center;
   transition: all 0.5s ease-in;
 }
-.input-wrapper,
-.select-wrapper,
-.special-deals-wrapper,
+.form-wrapper,
+.form-wrapper__select,
+.form-wrapper__deals,
 .button-wrapper {
   padding: 0.8rem;
 }
-.login-form {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -261,7 +235,7 @@ export default defineComponent({
 }
 label {
   display: block;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.8rem;
 }
@@ -283,16 +257,14 @@ select {
 #email:focus,
 select:focus {
   outline: none;
-  box-shadow: 0 0 0 0.8rem rgb(253, 241, 232, 0.5);
+  box-shadow: 0 0 0 8px rgb(253, 241, 232, 0.5);
 }
-.special-deals-wrapper {
+.form-wrapper__deals {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 1.2rem;
-  margin-left: 1.2rem; */
 }
-.special-deals-wrapper label {
+.form-wrapper__deals label {
   margin: 0;
 }
 input[type="checkbox"]:focus {

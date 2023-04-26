@@ -1,5 +1,6 @@
 <template>
   <div class="table-container">
+    <h1>Get first meal for free!</h1>
     <table class="user-table">
       <thead>
         <th>#</th>
@@ -7,17 +8,10 @@
         <th>E-mail</th>
         <th>Special offers</th>
         <th>Offer cycle</th>
-        <th></th>
+        <th class="user-table__delete"></th>
       </thead>
       <tbody class="user-table__body">
-        <tr
-          v-for="item in userList"
-          :key="item.id"
-          :class="{
-            'user-list__active': user.id === item.id,
-          }"
-          @click="onUserSelect(item.id)"
-        >
+        <tr v-for="item in userList" :key="item.id" @click="onUserSelect(item)">
           <td>{{ item.id }}</td>
           <td>{{ item.user_name }}</td>
           <td>{{ item.email }}</td>
@@ -30,8 +24,6 @@
               class="user-list__delete"
             />
           </td>
-          <!-- @mouseover="hover = true"
-          @mouseleave="hover = false" -->
         </tr>
       </tbody>
     </table>
@@ -44,25 +36,24 @@ export default defineComponent({
     testProp: function () {
       this.displayData();
     },
+    update: function () {
+      this.displayData();
+    },
   },
   props: {
     testProp: {
       type: Boolean,
       required: true,
     },
+    update: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   setup(props, {emit}) {
-    // const clickedUser = ref(false);
     const hover = ref(false);
     const userList = ref([]);
-    const user = ref({
-      user_name: "",
-      email: "",
-      offers: false,
-      cycle: "",
-      id: null,
-    });
 
     fetch("http://localhost:8002/api/landingPage")
       .then((resp) => resp.json())
@@ -88,26 +79,16 @@ export default defineComponent({
         });
     };
 
-    const onUserSelect = (userId) => {
-      // hover.value = true;
-      console.log(userId);
-      emit("open-user", userId);
-
-      // fetch(`http://localhost:8002/api/landingPage/${userId}`)
-      //   .then((resp) => resp.json())
-      //   .then(() => {
-      //     userList.value = userList.value.filter((user) => user.id === userId);
-      //   });
+    const onUserSelect = (selectedUser) => {
+      emit("open-user", selectedUser.id);
     };
 
     return {
       userList,
-      user,
       onUserDelete,
       onUserSelect,
       displayData,
       hover,
-      // clickedUser,
     };
   },
 });
@@ -117,47 +98,50 @@ export default defineComponent({
   height: 100vh;
   width: 100%;
   display: flex;
-  align-items: start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10rem;
 }
-
+h1 {
+  margin-top: 4rem;
+  font-size: 3.6rem;
+  text-align: center;
+}
 .user-table {
-  /* display: inline-table; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   min-width: 70%;
   margin-top: 80px;
-  /* max-width: 80%; */
   border-spacing: 0;
   border-collapse: collapse;
   height: auto;
 }
 .user-table td,
 .user-table th {
-  padding: 10px;
+  padding: 1rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
   color: #45260a;
-  border: 1px solid rgb(153, 153, 153, 0.3);
+  border: 1px solid rgb(153, 153, 153, 0.2);
   font-size: 1.6rem;
 }
 .user-table th {
-  background-color: rgb(69, 38, 10, 0.9);
+  background-color: #45260a;
   color: #fff;
   border: 1px solid #999999;
-  text-align: left;
 }
-
+.user-table__delete {
+  text-align: center;
+}
 .user-list__delete path {
   fill: rgba(0, 0, 0, 0.8);
 }
 .user-list__delete {
-  /* display: none; */
-  /* float: right; */
-  margin-right: 2px;
+  margin-right: 0.2rem;
   cursor: pointer;
 }
-.user-list__active {
+
+tr:hover {
   cursor: pointer;
-  background: rgba(0, 0, 100, 0.2);
+  background: #fdf2e9;
 }
 </style>

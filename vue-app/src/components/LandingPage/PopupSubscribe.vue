@@ -1,5 +1,5 @@
 <template>
-  <div class="popup__wrapper">
+  <div class="popup-wrapper">
     <div class="popup">
       Thank you for subscribing, {{ text }}!
       <button class="btn__close" @click="($event) => onClose()">CLOSE</button>
@@ -27,7 +27,7 @@ export default defineComponent({
 });
 </script>
 <style>
-.popup__wrapper {
+.popup-wrapper {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -40,8 +40,7 @@ export default defineComponent({
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(3px);
-  transition: all 0.5s ease-in;
-  /* transform: translateX(0); */
+  /* transition: all 0.5s ease-in;transition: all 0.5s ease-in; */
 }
 .popup {
   width: 40rem !important;

@@ -3,7 +3,6 @@
     <button
       :class="{
         'open-button': name === 'open',
-        'subscribe-button': name === 'subscribe',
       }"
       type="type"
     >
@@ -36,12 +35,10 @@ export default defineComponent({
 .button-container {
   height: 100vh;
   position: relative;
-  display: flex;
-  /* align-items: center; */
 }
 .open-button {
   position: absolute;
-  top: 220px;
+  top: 22rem;
   display: inline-block;
   height: 4.5rem;
   width: 18rem;
@@ -61,7 +58,5 @@ export default defineComponent({
 
 .open-button:hover {
   background-color: #cf711f;
-}
-.subscribe-button {
 }
 </style>
