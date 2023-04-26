@@ -32,6 +32,47 @@ exports.delete = function(request, response){
     runSql(sql, response)
 }
 
+exports.update = async function(request, response) {
+    var {username, email, special_offers, offer_cycle} = request.body;
+
+   
+    await app.db.query("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'IevaZR-users-final-task'", function(error, data) {
+        var columns = data.map((column) => column.COLUMN_NAME)
+        var changeValues = [];
+        var errors = [];
+
+        Object.keys(request.body).forEach((val) => {
+            if (!columns.includes(val)) {
+                errors.push("Column: '" +  val + "' does not exist on entity you are trying to modify")
+            }
+        })
+
+        if (errors.length > 0) {
+            response.send(JSON.stringify(errors))
+        }
+    
+        if (username) {
+            changeValues.push(`username="${username}"`)
+        }
+        if (email) {
+            changeValues.push(`email="${email}"`)
+        }
+        if (special_offers) {
+            changeValues.push(`special_offers="${special_offers}"`)
+        }
+        if (offer_cycle) {
+            changeValues.push(`offer_cycle="${offer_cycle}"`)
+        }
+    
+        var sql = `UPDATE \`IevaZR-users-final-task\` 
+        SET ${changeValues.join(',')}
+        WHERE id=`+request.params.id;
+    
+        runSql(sql, response)
+    })
+}
+
+
 exports.save = function(request, response){
 
     var username = request.body.username
