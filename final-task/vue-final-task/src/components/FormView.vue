@@ -5,6 +5,7 @@
         <label class="user-name">
           Username
           <input v-model="userName" required />
+          <!-- {{ isNameValid }} -->
         </label>
         <label class="e-mail">
           E-mail
@@ -52,8 +53,12 @@ export default defineComponent({
     var userOffer = ref("");
     var userIsChecked = ref(false);
     var userCycle = ref("");
+    // var isNameValid = ref("");
+    // var isValidUserName = ref(null)
     var onSubscribe = function () {
-      var subscriber = {
+      // validateUserName();
+      // if (isValidUserName.value) {
+        var subscriber = {
         name: userName.value,
         email: userEmail.value,
         offer: userIsChecked.value,
@@ -69,7 +74,22 @@ export default defineComponent({
       // userEmail.value = "";
       // userIsChecked.value = "";
       // userCycle.value = "";
+      // }
+    
     };
+
+    // var validateUserName = function () {
+    //   if (
+    //     userName.value.length < 4
+    //   ) {
+    //     this.isNameValid.value = "Your name should be longer";
+    //     isValidUserName.value = false;
+    //   } else {
+    //     this.isNameValid.value = "";
+    //     isValidUserName.value = false;
+    //   }
+    //   return isNameValid
+    // };
 
     return {
       userName,
@@ -79,6 +99,9 @@ export default defineComponent({
       userOffer,
       onSubscribe,
       userCycle,
+      // validateUserName,
+      // isNameValid,
+      // isValidUserName
     };
   },
 });

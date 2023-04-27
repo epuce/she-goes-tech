@@ -19,7 +19,7 @@
           <td>{{ user.offer }}</td>
           <td>{{ user.cycle }}</td>
           <td>
-            <button @click="onClick()">Delete</button>
+            <button @click="onClick(index)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -36,10 +36,14 @@ export default defineComponent({
       required: true,
     },
   },
+  
+
   setup(props, {emit}) {
-    var onClick = function () {
-        emit('deleteUser')
+    var onClick = function(index) {
+        emit('deleteUser', index)
     };
+
+    
     return {
       onClick,
     };
