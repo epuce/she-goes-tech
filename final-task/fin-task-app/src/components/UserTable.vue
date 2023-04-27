@@ -79,6 +79,7 @@ export default defineComponent({
 .user-table td, .user-table tr {
     border: 1px solid grey;
     padding: 8px;
+    font-size: 13px;
 }
 
 .user-table tr:nth-child(even) {
@@ -93,8 +94,12 @@ export default defineComponent({
     text-align: left;
 }
 
-.user-table td:nth-child(7) {
+.user-table td:first-child,
+.user-table td:last-child {
     text-align: center;
+}
+
+.user-table td:last-child {
     cursor: pointer;
 }
 

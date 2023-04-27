@@ -8,23 +8,38 @@
                 please fill in the form.
             </h3>
       </div>
-      <ButtonDefault
-            text="Open Form"
-            @click="isOpen = true"
-            class="btn__open-form"
-        />
+      <div class="btn__container">
+            <ButtonDefault
+                text="Open Form"
+                @click="isOpen = true"
+                class="btn--open-form"
+            />
+            <ButtonDefault
+                :text="!userTableIsOpen ? 'Open User Table' : 'Close User Table'"
+                @click="userTableIsOpen = !userTableIsOpen"
+                class="btn--open-user-table"
+            />
+        </div>
+        <div 
+            v-if="!userTableIsOpen"
+            class="heading-wrapper reflection">
+            <img src="../assets/img/Hauska_img.jpg" alt="">
+        </div>
       <UserTable 
+            v-if="userTableIsOpen"
             :user-list="userList"
-            @remove-user="removeUser"/>
+            @remove-user="removeUser"
+        />
+        
       <FormPopup 
-        v-if="isOpen" 
-        :is-form-valid="isFormValid"
-        :is-name-valid="isNameValid"
-        :is-surname-valid="isSurnameValid"
-        :is-email-valid="isEmailValid"
-        @close-popup="isOpen = false"
-        @add-new-user="addNewUser"
-      />
+            v-if="isOpen" 
+            :is-form-valid="isFormValid"
+            :is-name-valid="isNameValid"
+            :is-surname-valid="isSurnameValid"
+            :is-email-valid="isEmailValid"
+            @close-popup="isOpen = false"
+            @add-new-user="addNewUser"
+        />
     </main> 
   </template>
   
@@ -42,6 +57,7 @@
     },
     setup () {
       var isOpen = ref(false)
+      var userTableIsOpen = ref(false)
       var onClose = function () {
             isOpen.value = false;
         }
@@ -106,28 +122,27 @@
                             id: resp.data.insertId
                         })
 
-                        // user.value = {
-                        //     first_name: '',
-                        //     last_name: '',
-                        //     email: '',
-                        //     sample_option: '',
-                        //     sample_product: ''
-                        // }
+                        payload.value = {
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            sample_option: '',
+                            sample_product: ''
+                        }
                     }
                 })
             } else {
                 showMessage.value = false
             }
-           
         }
           
       var removeUser = function (userId) {
             userList.value = userList.value.filter((user) => user.id !== userId)
         }
 
-        
       return {
             isOpen,
+            userTableIsOpen,
             onClose,
             userList,
             addNewUser,
@@ -159,14 +174,24 @@
     object-fit: cover;
   }
 
+  .heading-wrapper.reflection img {
+    transform: scaleY(-1);
+    }
+
   .heading-wrapper .heading-main {
     position: absolute;
     top: 20px;
     left: 20px;
   }
 
-  .btn__open-form {
-    margin-bottom: 50px;
+  .btn__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 50px 0;
+  }
+  .btn--open-form {
+    margin-right: 50px;
   }
  
   </style>

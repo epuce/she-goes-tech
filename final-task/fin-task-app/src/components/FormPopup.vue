@@ -9,28 +9,42 @@
             <h3>Please fill in the form to subscribe for Dr. Hauschka Face Care Tips and Tricks</h3>
             <form>
                 <label >
-                    First name
+                    <span>First name</span>
                     <input 
                         v-model="user.first_name"
                         :class="{'validation-error': !isNameValid }"
                     >
+                    <span 
+                        v-if="!isNameValid"
+                        class="error-message">
+                         Please check your first name 
+                    </span>
                 </label>
     
                 <label >
-                    Last name
+                    <span>Last name</span>
                     <input 
                         v-model="user.last_name"
                         :class="{'validation-error': !isSurnameValid }"
                     >
+                    <span 
+                        v-if="!isSurnameValid"
+                        class="error-message">
+                         Please check your last name 
+                    </span>
                 </label>
 
                 <label >
-                    Email
-                    {{ "isEmailValid value is: " + isEmailValid }}
+                    <span>Email</span>
                     <input 
                         v-model="user.email"
                         :class="{'validation-error': !isEmailValid }"
                     >
+                    <span 
+                        v-if="!isEmailValid"
+                        class="error-message">
+                         Please check your email 
+                    </span>
                 </label>
 
                 <label class="input-type__checkbox" >
@@ -78,10 +92,11 @@
                         text="Subscribe"
                         @click="onFormSubmit"
                         :type="btnType"
+                        :class="{'btn--inactive': !isFormValid }"
+                        
                     />
                 </div>
             </form>
-            {{ "This is: "+ user.first_name }}
             <MessagePopup
                 v-if="showMessage" 
                 @close-popup="showMessage = false, onClose()"
@@ -122,7 +137,6 @@ export default defineComponent ({
 
     },
     setup(props, {emit}) {
-        //var userList = ref([])
         var user = ref({
             id: null,
             first_name: '',
@@ -132,7 +146,6 @@ export default defineComponent ({
             sample_product:''
         })
         var showMessage = ref(false)
-        //var greetingName
         var onClose = function() {
             emit ('close-popup')
         }
@@ -156,10 +169,8 @@ export default defineComponent ({
         }
         
         return {
-            //userList,
             user,
             showMessage,
-            //greetingName,
             onClose,
             checkboxSelected,
             onFormSubmit,
@@ -186,7 +197,6 @@ export default defineComponent ({
 .popup__body {
     padding: 32px;
     width: 70%;
-    
     background: #fff;
     display: flex;
     flex-direction: column;
@@ -206,6 +216,16 @@ form label {
     display: flex;
     flex-direction: column;
     padding: 8px;
+}
+
+form label span {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+form label span.error-message {
+    color: red;
+    font-size: 11px;
 }
 
 form label.input-type__checkbox {

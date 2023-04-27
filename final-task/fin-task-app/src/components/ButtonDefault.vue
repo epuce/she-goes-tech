@@ -3,7 +3,7 @@
         type="button" 
         :class="{
             'btn--primary' : type === 'primary',
-            'btn--warning' : type === 'warning'
+            'btn--inactive' : type === 'inactive'
         }" 
         @click="onClick()"
         
@@ -64,4 +64,10 @@ export default defineComponent ({
     box-shadow: 3px 2px 10px 1px rgba(0, 0, 0, 0.24);
 }
 
+.btn--primary:disabled,
+.btn--inactive {
+    background: rgb(183, 181, 181);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 </style>
