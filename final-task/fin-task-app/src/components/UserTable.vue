@@ -24,7 +24,6 @@
                     <td>
                         <font-awesome-icon 
                             icon="fa-trash-can" 
-                            style="color:red;"
                             class="icon-delete"
                             @click="handleDelete(user.id)"
                         />
@@ -41,8 +40,7 @@ import {defineComponent, ref} from 'vue';
 export default defineComponent({
     props: {
         userList:{
-            type: Array,
-
+            Type: Array,
         }
     },
     setup(props, {emit}) {
@@ -53,7 +51,6 @@ export default defineComponent({
             })
             .then(resp => resp.json())
             .then(() => {
-                
                 emit('remove-user', userId )
             })
             console.log(userId)
@@ -99,6 +96,14 @@ export default defineComponent({
 .user-table td:nth-child(7) {
     text-align: center;
     cursor: pointer;
+}
+
+.icon-delete {
+    color:rgb(73, 72, 72);
+}
+
+.icon-delete:hover {
+    color: red;
 }
 
 .icon-delete:active {

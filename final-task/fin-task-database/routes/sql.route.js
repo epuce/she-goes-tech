@@ -13,15 +13,6 @@ router.get('', function(request, response) {
             sample_option VARCHAR(255),
             sample_product VARCHAR(255)
         )`
-    //--> logic is not created yet -->
-    //var sql = `ALTER TABLE \`kristiana.tatarcuka-final-task-users\` MODIFY COLUMN comment TEXT`
-
-    // var sql = 'INSERT INTO `kristiana.tatarcuka-comments` (comment, user_id) 
-    //     VALUES
-    //     (" This is one comment ", 1),
-    //     (" This is one another comment ", 2),
-    //     (" This is the last one comment ", 3)
-    // '
 
     app.db.query('sql', function(error, data) {
         var responseData = {}

@@ -81,10 +81,11 @@
                     <!-- <button type="button" class="btn-subscribe" @click="onFormSubmit()">Subscribe</button> -->
                 </div>
             </form>
+            {{ "This is: "+ user.first_name }}
             <MessagePopup
                 v-if="showMessage" 
                 @close-popup="showMessage = false, onClose()"
-                :text="user.first_name"
+                :text="greetingName = user.first_name"
             />
         </div>
     </div>
@@ -106,9 +107,12 @@ export default defineComponent ({
             required: false,
             default: undefined,
         },
+        // userList:{
+        //     type: Array,
+        // }
     },
     setup(props, {emit}) {
-        var userList = ref([])
+        //var userList = ref([])
         var user = ref({
             id: null,
             first_name: '',
@@ -118,6 +122,7 @@ export default defineComponent ({
             sample_product:''
         })
         var showMessage = ref(false)
+        var greetingName
         var onClose = function() {
             emit ('close-popup')
         }
@@ -127,10 +132,9 @@ export default defineComponent ({
         var isNameValid = ref(true)
         var isSurnameValid = ref(true)
         var isEmailValid = ref(true)
-        
+
         var onFormSubmit = function() {
-            //emit ('form-submit')
-            //emit ('close-popup')
+            
             var payload = {
                 id: user.value.id,
                 first_name: user.value.first_name,
@@ -138,60 +142,38 @@ export default defineComponent ({
                 email: user.value.email,
                 sample_option: user.value.sample_option,
                 sample_product:user.value.sample_product,
-
             }
+
             console.log(payload)
             //validation for input
             var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
+            
             if (payload.first_name.length < 3) {
-                    isNameValid.value = false
-                    console.log(isNameValid.value)
-                    isFormValid.value = false
-                }
-            else if (payload.last_name.length < 3) {
-                    isSurnameValid.value = false
-                    console.log(isFormValid.value)
-                    isFormValid.value = false
-                    console.log(isFormValid.value)
-                }
-            else if (!emailRegEx.test(payload.email)) {
-                    isEmailValid.value = false
-                    isFormValid.value = false
-                    console.log(isFormValid.value)
-            } else {
-                isFormValid.value = true
-            }  
+                isNameValid.value = false
+                console.log(isNameValid.value)
+            }
+            if (payload.last_name.length < 3) {
+                isSurnameValid.value = false
+                console.log(isSurnameValid.value)
+            }
+            if (!emailRegEx.test(payload.email)) {
+                isEmailValid.value = false
+                console.log(isEmailValid.value)
+            } 
 
-            if (isFormValid) {
+            if (payload.first_name.length < 3 || 
+                payload.last_name.length < 3 || 
+                !emailRegEx.test(payload.email)) {
+                isFormValid.value = false
+
+                console.log(isFormValid.value)
+            }
+            
+            if (isFormValid.value = true) {
                 showMessage.value = true
                 
                 //saving part -> DATABASE LOGIC
-                if(user.value.id) {
-                fetch(`http://localhost:8003/api/users/${user.value.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(resp => resp.json())
-                .then(resp => {
-                    if (!resp.error) {
-                        
-
-                        user.value = {
-                            id: null,
-                            first_name: '',
-                            last_name: '',
-                            email: '',
-                            sample_option: '',
-                            sample_product: ''
-                        }
-                    }
-                })
-            } else {
-                fetch ('http://localhost:8003/api/users', {
+                fetch('http://localhost:8003/api/users', {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -201,29 +183,26 @@ export default defineComponent ({
                 })
                 .then(resp => resp.json())
                 .then(resp => {
-                    if (!resp.error) {
+                    if(!resp.error && isFormValid.value) {
+                        emit ('add-new-user', payload, resp)
 
-                        emit ('add-new-user', user.value)
-                        
-
-                        user.value = {
-                            first_name: '',
-                            last_name: '',
-                            email: '',
-                            sample_option: '',
-                            sample_product: ''
-                        }
+                        // user.value = {
+                        //     first_name: '',
+                        //     last_name: '',
+                        //     email: '',
+                        //     sample_option: '',
+                        //     sample_product: ''
+                        // }
                     }
                 })
-
-            }
             } 
         }
         
         return {
-            userList,
+            //userList,
             user,
             showMessage,
+            greetingName,
             onClose,
             checkboxSelected,
             isFormValid,
