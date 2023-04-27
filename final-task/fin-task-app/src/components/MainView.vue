@@ -18,6 +18,10 @@
             @remove-user="removeUser"/>
       <FormPopup 
         v-if="isOpen" 
+        :is-form-valid="isFormValid"
+        :is-name-valid="isNameValid"
+        :is-surname-valid="isSurnameValid"
+        :is-email-valid="isEmailValid"
         @close-popup="isOpen = false"
         @add-new-user="addNewUser"
       />
@@ -48,12 +52,72 @@
         .then(resp => resp.json())
         .then(resp => {userList.value = resp.data})
   
-      var addNewUser = function (payload, resp) {
-          userList.value.push({
-              ...payload,
-              id: resp.data.insertId
-          })
-          console.log(userList.value)
+        var isFormValid = ref(true)
+        var isNameValid = ref(true)
+        var isSurnameValid = ref(true)
+        var isEmailValid = ref(true)
+
+      var addNewUser = function (payload, showMessage) {
+            //validation for input
+            var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            
+            if (payload.first_name.length < 3) {
+                isNameValid.value = false
+                console.log(isNameValid.value)
+            }
+            if (payload.last_name.length < 3) {
+                isSurnameValid.value = false
+                console.log(isSurnameValid.value)
+            }
+            if (!emailRegEx.test(payload.email)) {
+                isEmailValid.value = false
+                console.log(isEmailValid.value)
+            } 
+
+            if (payload.first_name.length < 3 || 
+                payload.last_name.length < 3 || 
+                !emailRegEx.test(payload.email)) {
+                isFormValid.value = false
+
+                console.log(isFormValid.value)
+            } else {
+                showMessage.value = true
+                console.log(showMessage.value)
+            }
+        
+            if (isFormValid.value === true) {
+                showMessage.value = true
+                console.log(showMessage.value)
+
+                //saving part -> DATABASE LOGIC
+                fetch('http://localhost:8003/api/users', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': 'http://localhost:8003/api/users'
+                    },
+                    body: JSON.stringify(payload),
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    if(!resp.error && isFormValid.value) {
+                        userList.value.push({
+                            ...payload,
+                            id: resp.data.insertId
+                        })
+
+                        // user.value = {
+                        //     first_name: '',
+                        //     last_name: '',
+                        //     email: '',
+                        //     sample_option: '',
+                        //     sample_product: ''
+                        // }
+                    }
+                })
+            } else {
+                showMessage.value = false
+            }
            
         }
           
@@ -67,7 +131,11 @@
             onClose,
             userList,
             addNewUser,
-            removeUser
+            removeUser,
+            isFormValid,
+            isNameValid,
+            isSurnameValid,
+            isEmailValid,
         }
     }
   })

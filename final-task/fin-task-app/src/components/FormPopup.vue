@@ -26,6 +26,7 @@
 
                 <label >
                     Email
+                    {{ "isEmailValid value is: " + isEmailValid }}
                     <input 
                         v-model="user.email"
                         :class="{'validation-error': !isEmailValid }"
@@ -78,14 +79,13 @@
                         @click="onFormSubmit"
                         :type="btnType"
                     />
-                    <!-- <button type="button" class="btn-subscribe" @click="onFormSubmit()">Subscribe</button> -->
                 </div>
             </form>
             {{ "This is: "+ user.first_name }}
             <MessagePopup
                 v-if="showMessage" 
                 @close-popup="showMessage = false, onClose()"
-                :text="greetingName = user.first_name"
+                :text="user.first_name"
             />
         </div>
     </div>
@@ -107,9 +107,19 @@ export default defineComponent ({
             required: false,
             default: undefined,
         },
-        // userList:{
-        //     type: Array,
-        // }
+        isFormValid: {
+            type: Boolean,
+        },
+        isNameValid: {
+            type: Boolean,
+        },
+        isSurnameValid: {
+            type: Boolean,
+        },
+        isEmailValid: {
+            type: Boolean,
+        },
+
     },
     setup(props, {emit}) {
         //var userList = ref([])
@@ -122,16 +132,11 @@ export default defineComponent ({
             sample_product:''
         })
         var showMessage = ref(false)
-        var greetingName
+        //var greetingName
         var onClose = function() {
             emit ('close-popup')
         }
-
         var checkboxSelected = ref(false)
-        var isFormValid = ref(true)
-        var isNameValid = ref(true)
-        var isSurnameValid = ref(true)
-        var isEmailValid = ref(true)
 
         var onFormSubmit = function() {
             
@@ -145,70 +150,18 @@ export default defineComponent ({
             }
 
             console.log(payload)
-            //validation for input
-            var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             
-            if (payload.first_name.length < 3) {
-                isNameValid.value = false
-                console.log(isNameValid.value)
-            }
-            if (payload.last_name.length < 3) {
-                isSurnameValid.value = false
-                console.log(isSurnameValid.value)
-            }
-            if (!emailRegEx.test(payload.email)) {
-                isEmailValid.value = false
-                console.log(isEmailValid.value)
-            } 
-
-            if (payload.first_name.length < 3 || 
-                payload.last_name.length < 3 || 
-                !emailRegEx.test(payload.email)) {
-                isFormValid.value = false
-
-                console.log(isFormValid.value)
-            }
+            emit ('add-new-user', payload, showMessage)
             
-            if (isFormValid.value = true) {
-                showMessage.value = true
-                
-                //saving part -> DATABASE LOGIC
-                fetch('http://localhost:8003/api/users', {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': 'http://localhost:8003/api/users'
-                    },
-                    body: JSON.stringify(payload),
-                })
-                .then(resp => resp.json())
-                .then(resp => {
-                    if(!resp.error && isFormValid.value) {
-                        emit ('add-new-user', payload, resp)
-
-                        // user.value = {
-                        //     first_name: '',
-                        //     last_name: '',
-                        //     email: '',
-                        //     sample_option: '',
-                        //     sample_product: ''
-                        // }
-                    }
-                })
-            } 
         }
         
         return {
             //userList,
             user,
             showMessage,
-            greetingName,
+            //greetingName,
             onClose,
             checkboxSelected,
-            isFormValid,
-            isNameValid,
-            isSurnameValid,
-            isEmailValid,
             onFormSubmit,
         }
     }
