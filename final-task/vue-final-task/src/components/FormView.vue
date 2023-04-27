@@ -4,33 +4,37 @@
       <div class="input--wrapper">
         <label class="user-name">
           Username
-          <input v-model="user.name" required/>
+          <input v-model="userName" required />
         </label>
         <label class="e-mail">
           E-mail
-          <input type="email" v-model="user.email" required/>
+          <input type="email" v-model="userEmail" required />
         </label>
         <label class="check-box">
           <input
-            v-model="user.offer"
+            v-model="userIsChecked"
             @click="isChecked = !isChecked"
             type="checkbox"
           />
           Send me special deals
         </label>
-        <label class="option--box" v-if="isChecked">
+        <label class="option--box" v-if="userIsChecked">
           I am wiiling to recive them every:
-          <select name="cycle" v-model="user.cycle">
+          <select name="cycle" v-model="userCycle">
             <option value="hour">Hour</option>
             <option value="day">Day</option>
             <option value="week">Week</option>
             <option value="month">Month</option>
           </select>
         </label>
-        <MyBtn name="subscribe" text="Subscribe" @click="isOpenPopup = true"/>
+        <MyBtn name="subscribe" text="Subscribe" @click="onSubscribe()" />
       </div>
     </form>
-    <SubscribePopup v-if="isOpenPopup" :popUpText="userName" @close-popup="isOpenPopup = false"/>
+    <SubscribePopup
+      v-if="isOpenPopup"
+      :popUpText="userName"
+      @close-popup="isOpenPopup = false"
+    />
   </div>
 </template>
 <script>
@@ -41,30 +45,40 @@ import MyBtn from "./MyBtn.vue";
 export default defineComponent({
   components: { MyBtn, SubscribePopup },
 
-  setup() {
+  setup(props, { emit }) {
     var isOpenPopup = ref(false);
-    var userName = ("fixed value");
-    var isChecked = ref(false);
-    var inputUser = ref([]);
-    var user = ref({
-      index: 0,
-      name: "",
-      email: "",
-      offer: Boolean,
-      cycle: "",
-    });
+    var userName = ref("");
+    var userEmail = ref("");
+    var userOffer = ref("");
+    var userIsChecked = ref(false);
+    var userCycle = ref("");
+    var onSubscribe = function () {
+      var subscriber = {
+        name: userName.value,
+        email: userEmail.value,
+        offer: userIsChecked.value,
+        cycle: userCycle.value,
+      };
 
-    var updateUser = function (input, value) {
-      this.user[input] = value
-    }
+      localStorage.subscriber = JSON.stringify(subscriber);
+
+      emit("save-form", subscriber)
+      this.isOpenPopup = true;
+
+      // userName.value = "";
+      // userEmail.value = "";
+      // userIsChecked.value = "";
+      // userCycle.value = "";
+    };
 
     return {
       userName,
-      isChecked,
-      user,
-      inputUser,
+      userIsChecked,
       isOpenPopup,
-      updateUser
+      userEmail,
+      userOffer,
+      onSubscribe,
+      userCycle,
     };
   },
 });

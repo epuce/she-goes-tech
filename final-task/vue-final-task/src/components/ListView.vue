@@ -12,14 +12,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in userList" :key="index">
-          <td>{{ user.id }}></td>
+        <tr v-for="(user, index) in users" :key="index">
+          <td>{{ index + 1 }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.offer }}</td>
           <td>{{ user.cycle }}</td>
           <td>
-            <button @click="deleteUser(index)">Delete</button>
+            <button @click="onClick()">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
@@ -36,23 +36,15 @@ export default defineComponent({
       required: true,
     },
   },
-
-  setup() {
-    var userList = ref([]);
-    var user = ref({
-      id: 0,
-      name: "",
-      email: "",
-      offer: false,
-      cycle: "",
-    });
-
+  setup(props, {emit}) {
+    var onClick = function () {
+        emit('deleteUser')
+    };
     return {
-      user,
-      userList,
+      onClick,
     };
   },
-});
+  });
 </script>
 <style>
 .table-wrapper {
