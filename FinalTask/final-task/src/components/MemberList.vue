@@ -3,18 +3,18 @@
     <div class="tableMembers">
       <table>
         <thead>
-          <th>ID</th>
+          <th class="leftColumn">ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Offer cycle</th>
-          <th>Delete</th>
+          <th class="rightColumn">Delete</th>
         </thead>
         <tbody v-for="user in userList" :key="user.id" class="user-list__user">
-          <td>{{ user.id }}</td>
+          <td class="leftColumn">{{ user.id }}</td>
           <td>{{ user.first_name }} {{ user.last_name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.cycle }}</td>
-          <td>
+          <td class="rightColumn">
             <img
               src="../assets/Trash-Icon.svg"
               @click="onUserDelete(user.id)"
@@ -67,14 +67,15 @@ export default defineComponent({
 <style>
 .tableMembers {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 15%;
   right: 15%;
+  padding-bottom: 60px;
 }
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+  border-collapse: separate;
+  border-spacing: 0 5px;
   color: white;
   width: 100%;
 }
@@ -84,6 +85,7 @@ table th {
   font-weight: bold;
   border-bottom: 1px solid #fca26e;
   padding-top: 5px;
+  background-color: rgba(24, 37, 37, 0.5);
 }
 
 table td {
@@ -91,6 +93,15 @@ table td {
   font-weight: 500;
   border-bottom: 1px solid #fca26e;
   padding-top: 5px;
+  background-color: rgba(24, 37, 37, 0.5);
+}
+
+.leftColumn {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.rightColumn {
+  border-radius: 0px 5px 5px 0px;
 }
 
 .user-list__delete path {

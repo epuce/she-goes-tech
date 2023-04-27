@@ -47,19 +47,19 @@
           <input v-model="user.first_name" id="nameThx" />
           <label>Surname</label>
           <input v-model="user.last_name" />
-          <label>Email</label>
+          <label id="userEmail">Email</label>
           <input v-model="user.email" />
           <div class="checkboxRow">
-            <CheckBox label="Subscribe" @update-checkbox="toggleDropdown()" />
+            <CheckBox label="Subscribe" @update-checkbox="toggleDropdown()"/>
           </div>
-          <div class="VueDropdown" :style="{ display: displayDropdown }">
+          <div class="VueDropdown" :style="{ display: displayDropdown }" >
             <VueDropdown
               class="my-dropdown-toggle"
               :options="arrayOfObjects"
               :selected="user.cycle"
               @update-option="user.cycle = $event"
               v-on:updateOption="methodToRunOnSelect"
-              :placeholder="'Select an Item'"
+              :placeholder="'How often do you want to receive news?'"
               :closeOnOutsideClick="boolean"
             ></VueDropdown>
           </div>
@@ -96,6 +96,7 @@ export default defineComponent({
   },
 
   setup() {
+    var isChecked = ref(false);
     const user = ref({
       first_name: "",
       last_name: "",
@@ -103,6 +104,7 @@ export default defineComponent({
       cycle: "",
       id: null,
     });
+    
 
     const userList = ref([]);
     fetch("http://localhost:8002/api/users")
@@ -113,6 +115,9 @@ export default defineComponent({
 
     const onUserSave = () => {
       //var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      //var email = document.getElementById("userEmail");
+      //email.classList.add("inputInvalid")
+      //if() {};
 
       const payload = {
         first_name: user.value.first_name,
@@ -157,6 +162,7 @@ export default defineComponent({
     return {
       onUserSave,
       updateText,
+      isChecked,
       user,
       email: "",
     };

@@ -1,4 +1,5 @@
 <template>
+  <div class="background"></div>
   <div class="pageHeader">
     <router-link to="/">
       <img class="buttonHome" src="./assets/HomeIcon.png" />
@@ -19,6 +20,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+.background {
   margin: 0;
   background-image: url(./assets/hero-img.png);
   position: fixed;
@@ -31,6 +35,8 @@
 
 .pageHeader {
   height: 80px;
+  position: fixed;
+  width: 100vw;
 }
 
 .buttonMembers {
