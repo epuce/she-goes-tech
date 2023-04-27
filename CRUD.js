@@ -35,7 +35,7 @@ function User(name, email) {
     }
   }
 
-  this.setName(name);
+  this.setName(name); 
   this.setEmail(email);
 }
 

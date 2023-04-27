@@ -1,31 +1,20 @@
-.page-wrapper {
-  
+#form-wrapper {
+  display: none;
+  width: 300px;
+  background-color: white;
+  margin-bottom: 15px;
+  align-items: center;
 }
 
-#form-wrapper {
-  display: block;
-  width: 50%;
-  background-color: white;
+.registration-form {
   border: 2px solid rgb(247, 219, 106);
   padding: 15px;
   border-radius: 5px;
-  margin-bottom: 15px;
-}
-
-/* .page-wrapper {
-    display: block;
-} */
-
-.register-form {
-  display: none;
   width: 250px;
-  display: block;
-  justify-content: center;
   flex-direction: column;
 }
 
 .btn-open {
-  /* align-items: center; */
   width: 250px;
   margin-bottom: 10px;
   background-color: rgb(235, 176, 45);
@@ -125,7 +114,7 @@
 }
 
 .popup-window {
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 .js-name,
@@ -159,6 +148,8 @@ table {
 }
 
 .guest-table {
+  width: 500px;
+  margin: auto;
   display: none;
   border-spacing: 0px;
   border-collapse: collapse;

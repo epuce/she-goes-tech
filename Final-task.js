@@ -7,7 +7,7 @@ btnOpenForm.addEventListener("click", () => {
   const openForm = document.getElementById("form-wrapper");
   active = !active;
   if (active) {
-    openForm.style.display = "block";
+    openForm.style.display = "block"
     btnOpenForm.classList.add("active");
     btnOpenForm.innerHTML = "Close form";
   } else {
@@ -17,7 +17,7 @@ btnOpenForm.addEventListener("click", () => {
   }
 });
 
-guestsTrue.addEventListener("change", function () {
+guestsTrue.addEventListener("change", () => {
   if (this.checked) {
     guestNumberList.style.display = "inline-table";
   } else {
@@ -34,19 +34,20 @@ function saveForm() {
   if (nameInput.value.length < 3) {
     nameInput.classList.add("validation-error");
     isFormValid = false;
-    alert("The name should be at least 3 letters!")
+    alert("The name should be at least 3 letters!");
   } else {
-    nameInput.classList.remove("validation-error")
+    nameInput.classList.remove("validation-error");
   }
 
-  var emailRegEx = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  var emailRegEx =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  if (!emailRegEx.test(emailInput.value) ) {
+  if (!emailRegEx.test(emailInput.value)) {
     emailInput.classList.add("validation-error");
     isFormValid = false;
-    // alert("The name should be at least 3 letters!")
+    alert("Email is not valid!")
   } else {
-    emailInput.classList.remove("validation-error")
+    emailInput.classList.remove("validation-error");
   }
 
   if (isFormValid) {
@@ -62,6 +63,8 @@ function saveForm() {
 
     localStorage.guestList = JSON.stringify(list);
 
+    showPopup();
+
     nameInput.value = "";
     emailInput.value = "";
     document.querySelector(".js-checkbox").checked = false;
@@ -69,13 +72,16 @@ function saveForm() {
 
     renderTable();
   }
-  let popup = document.querySelector(".submit-popup-wrapper");
-    popup.style.display = 'flex';
 
-    document.querySelector('.js-close-popup').addEventListener('click', () => {
-      popup.style.display = 'none'
-    })
-
+  function showPopup() {
+    document.querySelector(".popup-message").textContent =
+      "Thank you " + nameInput.value + "!" + " We received your equiry!";
+    let popup = document.querySelector(".submit-popup-wrapper");
+    popup.style.display = "flex";
+    document.querySelector(".js-close-popup").addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+  }
 }
 
 function getGuestList() {
@@ -88,7 +94,7 @@ function getGuestList() {
   return list;
 }
 
-document.querySelector(".js-submit").addEventListener("click", function () {
+document.querySelector(".js-submit").addEventListener("click", () => {
   saveForm();
 });
 
@@ -97,10 +103,11 @@ function renderTable() {
   let tableContent = "";
 
   if (list.length > 0) {
-    document.querySelector('.js-guest-table-wrapper').style.display = 'inline-table'
+    document.querySelector(".js-guest-table-wrapper").style.display =
+      "inline-table";
   }
 
-  list.forEach(function (user, index) {  
+  list.forEach(function (user, index) {
     var row =
       `
         <tr>
@@ -117,7 +124,9 @@ function renderTable() {
       user.guestNumber +
       `</td>
             <td>
-      <button class='js-delete' data-index='`+index+`'>Delete</button>
+      <button class='js-delete' data-index='` +
+      index +
+      `'>Delete</button>
         </td>
         </tr>
     `;
@@ -126,8 +135,10 @@ function renderTable() {
 
   document.querySelector(".js-guest-table").innerHTML = tableContent;
 
-  document.querySelectorAll('.js-guest-table .js-delete').forEach(function(button) {
-    button.addEventListener('click', function() {
+  document
+    .querySelectorAll(".js-guest-table .js-delete")
+    .forEach(function (button) {
+      button.addEventListener("click", () => {
         var list = getGuestList();
 
         list.splice(button.dataset.index, 1);
@@ -135,8 +146,9 @@ function renderTable() {
         localStorage.guestList = JSON.stringify(list);
 
         renderTable();
-    })
-  })
+      });
+    });
 }
 
+// getElementById('.registration-form').style.display = 'none';
 renderTable();
