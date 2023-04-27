@@ -3,6 +3,8 @@
         <FormMeal :food="meal" @fill-form="fillForm" :meal-list="mealList" @add-to-list="addToList" v-if="showSlideout"
             @openPopup="closeOpen" />
         <TableMeal :meal-list="mealList" @on-meal-delete="onMealDelete" />
+
+        {{  isOpen }}
         <MyPopup v-if="isOpen" @close-component="isOpen = false" />
     </div>
 </template>
@@ -12,6 +14,8 @@
 import { defineComponent, ref } from 'vue';
 import TableMeal from './TableMeal.vue';
 import FormMeal from './FormMeal.vue';
+import MyPopup from './MyPopup.vue';
+
 export default defineComponent({
     setup() {
 
@@ -23,8 +27,9 @@ export default defineComponent({
                 mealList.value = resp.data;
             });        
             
-            const addToList = (data) => {
+        const addToList = (data) => {
             mealList.value.push(data)
+            isOpen.value = true;
         }
 
         var showSlideout = ref(true);
@@ -57,6 +62,7 @@ export default defineComponent({
     components: {
         TableMeal,
         FormMeal,
+        MyPopup,
     },
 })
 </script>
