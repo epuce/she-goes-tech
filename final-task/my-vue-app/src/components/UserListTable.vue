@@ -46,9 +46,9 @@ export default defineComponent({
 .table-wrapper {
   position: relative;
   top: 100px;
-  left: 150px;
+  left: 35%;
   width: 600px;
-  background: #fff;
+  background: #f4eaea;
   border-radius: 20px;
   padding: 20px;
   margin-top: 50px;

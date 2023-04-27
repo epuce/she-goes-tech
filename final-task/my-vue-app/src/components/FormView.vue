@@ -4,17 +4,19 @@
       <form class="form-wrapper" action="">
         <Label>
           Username <br />
-          <input v-model="user.userName" type="text" />
+          <input v-model="user.userName" type="text" id="userName" ref="userNameIput"/>
+          <div v-if="userNameValidation" class="errorMessage">Username must be at leats 3 charecters</div>
         </Label>
         <Label>
           E-mail <br />
-          <input v-model="user.userEmail" type="email" />
+          <input v-model="user.userEmail" type="email" id="userEmail" ref="userEmailInput" />
+          <div v-if="userEmailValidation" class="errorMessage">Email must be at leats 3 charecters</div>
         </Label>
 
         <Label>
           City <br />
-          <input type="text" v-model="user.userCity"/> <br />
-          <select name="" id="">
+          <select  type="text" v-model="user.userCity">
+            <option ></option>
             <option value="Vilnius">Vilnius</option>
             <option value="Riga">Riga</option>
             <option value="Tallin">Tallin</option>
@@ -24,10 +26,12 @@
         <br />
 
         <Label class="checkbox-wrapper">
-          <input type="checkbox" v-model="isChecked"/>
+          <input type="checkbox" v-model="isChecked" />
           <p>Check the box to confirm your choices</p>
         </Label>
-        <button type="button" v-if="isChecked" @click="isOpenPopup = true">Submit</button>
+        <button type="button" v-if="isChecked" @click="isOpenPopup = true;" >
+          Submit
+        </button>
       </form>
     </div>
 
@@ -47,11 +51,42 @@ import MyPopup from "./MyPopup.vue";
 var localStorage = window.localStorage;
 
 export default defineComponent({
-  components: { 
-    MyPopup 
+  components: {
+    MyPopup,
   },
 
   setup(props, { emit }) {
+
+
+    var validationForm = function () {
+      var userNameInput = document.getElementById('userName');
+      var userEmailInput = document.getElementById('userEmail');
+      if(userName.value.length >=3 && userEmail.value.length>=3){
+        isOpenPopup.value = true;
+        userNameInput.classList.remove('invalid');
+        userEmailInput.classList.remove('invalid');
+        onSubmit()
+        var userName = ref('')
+        var userEmail = ref('')
+      }else{
+        if (userName.value.length < 3){
+            userNameInput.classList.add('invalid');
+            userNameValidation.value = true;
+        }else{
+          userNameInput.classList.remove('invalid');
+          userNameValidation.value=false;
+        }
+        if (userEmail.value.length < 3){
+            userEmailInput.classList.add('invalid');
+            userEmailValidation.value = true;
+        }else{
+          userEmailInput.classList.remove('invalid');
+          userEmailValidation.value=false;
+        }
+
+      }
+    };
+
     var onSubmit = function () {
       var newUser = {
         userName: user.value.userName,
@@ -74,7 +109,8 @@ export default defineComponent({
 
       emit("close-form");
     };
-
+    var userNameValidation = ref(false);
+    var userEmailValidation = ref(false);
     var userList = ref([]);
     var user = ref({
       id: null,
@@ -83,14 +119,17 @@ export default defineComponent({
       userCity: "",
     });
     var isOpenPopup = ref(false);
-      var isChecked = ref(false);
+    var isChecked = ref(false);
 
     return {
       user,
       userList,
       onSubmit,
       isOpenPopup,
-      isChecked
+      isChecked,
+      userNameValidation,
+      userEmailValidation,
+      validationForm,
       
     };
   },
@@ -98,14 +137,15 @@ export default defineComponent({
 </script>
 <style>
 .form-container {
-  display: flex;
+  /* display: flex; */
 
   position: relative;
   top: 100px;
+  left: 40%;
   height: 500px;
   width: 400px;
   background: #514b4c;
-  justify-content: center;
+  /* justify-content: center; */
   padding-top: 50px;
   border-radius: 40px;
   margin: 10px;
@@ -132,7 +172,7 @@ export default defineComponent({
   padding: none;
 }
 
-form input {
+form input, select {
   border: none;
   border-radius: 12px;
   margin-bottom: 15px;
@@ -165,5 +205,14 @@ label {
   text-align: start;
   color: white;
   margin-bottom: 5px;
+}
+
+#userName.invalid,
+#userEmail.invalid{
+  border: #f68084 1px solid;
+}
+
+.errorMessage {
+  color: #f68084;
 }
 </style>
