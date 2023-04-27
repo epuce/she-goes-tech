@@ -1,6 +1,7 @@
 <template>
     <div>
         <form class="registration-form" @submit.prevent>
+
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" v-model="name" ref="nameInput" />
@@ -22,21 +23,17 @@
                 <input type="checkbox" id="checkbox" v-model="isChecked" />
                 <label for="checkbox">I want to receive a free catalog</label>
             </div>
+
             <div class="form-group" v-if="isChecked">
                 <label for="address">Address</label>
                 <input type="text" id="address" v-model="address" />
             </div>
 
-
             <button class="saveBtn" type="submit" @click.prevent="validateForm">Save</button>
-            <!-- <Popup v-if="isPopupVisible" @close="clearForm" :name="name" /> -->
+
             <Popup v-if="isPopupVisible" @close="isPopupVisible = false; clearForm()" :name="name" />
 
-
-
-
         </form>
-
     </div>
 </template>
 
@@ -84,6 +81,7 @@ export default defineComponent({
                 }
             }
         }
+
         function save() {
             var user = {
                 name: name.value,
@@ -94,8 +92,8 @@ export default defineComponent({
             var users = JSON.parse(localStorage.getItem('users')) || [];
             users.push(user);
             localStorage.setItem('users', JSON.stringify(users));
-
         }
+
         function clearForm() {
             name.value = '';
             surname.value = '';
@@ -148,9 +146,7 @@ label {
 .form-group {
     display: flex;
     flex-direction: column;
-
 }
-
 
 .checkbox-container {
     display: block;
@@ -168,13 +164,11 @@ label {
     font-size: 16px;
     margin-top: 20px;
     transition: all 0.3s ease-in-out;
-
 }
 
 .saveBtn:hover {
     background-color: #222;
 }
-
 
 #name,
 #surname,
@@ -199,5 +193,4 @@ label {
 .error-message {
     color: red;
     font-size: 12px;
-}
-</style>
+}</style>

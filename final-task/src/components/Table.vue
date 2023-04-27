@@ -25,7 +25,6 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
 </template>
 
@@ -33,16 +32,10 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-    // props: {
-    //     users: {
-    //         type: Array,
-    //         required: true,
-    //     },
-    // },
+
     data() {
         return {
             users: JSON.parse(localStorage.getItem('users')) || [],
-
         };
     },
     methods: {
@@ -53,7 +46,6 @@ export default defineComponent({
             this.users = JSON.parse(localStorage.getItem('users')) || [];
         },
     },
-
 });
 
 </script>
@@ -95,6 +87,4 @@ export default defineComponent({
 
 .userTable button:hover {
     background-color: #c62828;
-}
-</style>
-
+}</style>

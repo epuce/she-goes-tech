@@ -14,6 +14,7 @@
 <script>
 import LandingPage from './components/LandingPage.vue';
 import Table from './components/Table.vue';
+
 export default {
     name: 'App',
     components: {
@@ -34,7 +35,6 @@ body {
     height: 100vh;
     float: left;
     padding-left: 20px;
-    /* background-image: url('../assets/images/flowers.jpg'); */
 }
 
 .right {

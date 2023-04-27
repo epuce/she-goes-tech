@@ -1,24 +1,35 @@
 <template>
     <div class="landing-page">
+
         <h1 class="cta">Spice up your week with our weekly flower delivery!</h1>
+
         <button class="subscribeBtn" @click="showRegistrationForm = true">Subscribe</button>
-        <RegistrationForm v-if="showRegistrationForm" @close="closeRegistrationForm = false" />
+
+        <RegistrationForm v-if="showRegistrationForm" @close="closeRegistrationForm = false" :add-user="addUser" />
 
     </div>
-</template>
-  
+</template >
+
 <script>
 import { defineComponent } from 'vue';
 import RegistrationForm from './RegistrationForm.vue';
+
 export default {
     name: 'LandingPage',
     components: {
         RegistrationForm,
     },
+
     data() {
         return {
             showRegistrationForm: false,
         };
+    },
+
+    methods: {
+        addUser(user) {
+            this.$emit('user-added', user);
+        },
     },
 };
 </script>
@@ -55,10 +66,8 @@ export default {
     transition: all 0.3s ease-in-out;
     font-size: medium;
     box-shadow: 5px 5px 5px #c3c2c2;
-
 }
 
 .subscribeBtn:hover {
     background-color: #6f5336;
-}
-</style >
+}</style >
