@@ -29,7 +29,10 @@
 
 
             <button class="saveBtn" type="submit" @click.prevent="validateForm">Save</button>
-            <Popup v-if="isPopupVisible" @close="clearForm" :name="name" />
+            <!-- <Popup v-if="isPopupVisible" @close="clearForm" :name="name" /> -->
+            <Popup v-if="isPopupVisible" @close="isPopupVisible = false; clearForm()" :name="name" />
+
+
 
 
         </form>

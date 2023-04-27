@@ -4,7 +4,8 @@
             <div class="popup">
                 Thank you, {{ name }}, for subscribing!
 
-                <button class="btn-close" @click="$emit('close')">Close</button>
+                <button class="closeBtn" @click="$emit('close')">Close</button>
+
             </div>
         </div>
     </div>
@@ -21,10 +22,29 @@ export default defineComponent({
         },
     },
     setup(props, { emit }) {
+
         var onClose = function () {
             emit("close-popup");
 
         };
+        function save() {
+            var user = {
+
+                name: name.value,
+                surname: surname.value,
+                email: email.value,
+                address: address.value,
+
+            };
+            var users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+
+        }
+        function onClose() {
+            save();
+            emit("close-popup");
+        }
 
 
         return {
@@ -54,7 +74,7 @@ export default defineComponent({
     background: #ffffff;
 }
 
-.btn-close {
+.closeBtn {
     float: right;
 }
 </style>
