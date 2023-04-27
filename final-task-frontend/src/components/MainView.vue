@@ -12,6 +12,8 @@
 import { defineComponent, ref } from 'vue';
 import TableMeal from './TableMeal.vue';
 import FormMeal from './FormMeal.vue';
+import MyPopup from './MyPopup.vue';
+
 export default defineComponent({
     setup() {
 
@@ -23,8 +25,9 @@ export default defineComponent({
                 mealList.value = resp.data;
             });        
             
-            const addToList = (data) => {
+        const addToList = (data) => {
             mealList.value.push(data)
+            isOpen.value = true;
         }
 
         var showSlideout = ref(true);
@@ -57,6 +60,7 @@ export default defineComponent({
     components: {
         TableMeal,
         FormMeal,
+        MyPopup,
     },
 })
 </script>
