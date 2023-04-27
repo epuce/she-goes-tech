@@ -132,7 +132,7 @@ export default defineComponent({
                     .then(resp => resp.json())
 
                     .then(resp => {
-                        emit("openPopup")
+                        emit("open-popup")
                         if (!resp.error) {
                             emit("add-to-list", {
                                 ...payload,
