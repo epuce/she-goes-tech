@@ -13,50 +13,42 @@ function runSql(sql, response) {
     })
 }
 
-
+// /api/subscribers GET
 exports.list = function(request, response) {
     var sql = 'SELECT * FROM `moharso-subscribers`'
 
     runSql(sql, response)
 }
 
-// /api/users/ -> :id -> GET
+// /api/subscribers/ -> :id -> GET
 exports.findUser = function(request, response) {
     var sql = 'SELECT * FROM `moharso-subscribers` WHERE id='+request.params.id
 
     runSql(sql, response)
 }
 
-// /api/users/ -> :id -> DELETE
+// /api/subscribers/ -> :id -> DELETE
 exports.delete = function(request, response) {
     var sql = 'DELETE FROM `moharso-subscribers` WHERE id='+request.params.id
 
     runSql(sql, response)
 }
 
-// /api/users/ -> :id -> PUT
+// /api/subscribers/ -> :id -> PUT
 exports.update = function(request, response) {
-    var {username, email} = request.body
+    var {username, email, subscribe, cycle} = request.body
 
-    var sql = `UPDATE \`moharso-subscribers\` SET username="`+username+`", email="`+email+`" WHERE id=`+request.params.id
+    var sql = `UPDATE \`moharso-subscribers\` SET username="`+username+`", email="`+email+`", subscribe="`+subscribe+`", cycle="`+cycle+`" WHERE id=`+request.params.id
 
     runSql(sql, response)
 }
 
-// /api/users/ -> POST
+// /api/subscribers -> POST
 exports.save = function(request, response) {
-    // the same as var {first_name, last_name, email} = request.body;
-    //var first_name = request.body.first_name
-    //var last_name = request.body.last_name
-    //var email = request.body.email
+    var {username, email, subscribe, cycle} = request.body;
 
-    var {username, email} = request.body;
-
-    //response.send(request.body)
-
-    var sql = 'INSERT INTO `moharso-subscribers` (username, email) VALUES("'+username+'","'+email+'")'
+    var sql = 'INSERT INTO `moharso-subscribers` (username, email, subscribe, cycle) VALUES("'+username+'","'+email+'", "'+subscribe+'", "'+cycle+'")'
 
     runSql(sql, response)
-
-    }
+}
     

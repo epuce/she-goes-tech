@@ -10,7 +10,10 @@ router.get('', function(request, response) {
         PRIMARY KEY (id)
         )`
 
-    
+    var sql = `ALTER TABLE \`moharso-subscribers\` ADD (
+        subscribe TINYINT(1),
+        cycle VARCHAR(255)
+    )`
 
     app.db.query(sql, function(error, data) {
         var responseData = {}
