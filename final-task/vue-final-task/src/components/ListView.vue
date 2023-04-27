@@ -18,8 +18,8 @@
           <td>{{ user.email }}</td>
           <td>{{ user.offer }}</td>
           <td>{{ user.cycle }}</td>
-          <td>
-            <button @click="onClick(index)">Delete</button>
+          <td class="delete--button--box">
+            <button class="delete--button" @click="onClick(index)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -36,14 +36,12 @@ export default defineComponent({
       required: true,
     },
   },
-  
 
   setup(props, {emit}) {
     var onClick = function(index) {
         emit('deleteUser', index)
     };
-
-    
+ 
     return {
       onClick,
     };
@@ -68,11 +66,22 @@ table {
 
 td,
 th {
-  padding: 5px;
+  padding: 3px;
   border: 1px solid;
 }
 
 th {
   background-color: lightgray;
+}
+
+.delete--button {
+  color: brown;
+  padding: 2px 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.delete--button--box {
+  text-align: center;
 }
 </style>

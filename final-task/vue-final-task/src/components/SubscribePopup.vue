@@ -38,11 +38,17 @@ export default defineComponent({
   background: rgba(0, 0, 0, 0.4);
 }
 .popup {
+  text-align: center;
   padding: 32px;
-  width: 50%;
+  width: 40%;
   background: #fff;
 }
 .btn__close {
   float: right;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: #fff;
+  background-color: brown;
+  cursor: pointer;
 }
 </style>
