@@ -4,6 +4,7 @@
       @show-popup="showPopup()"
       ref="UserFormContainer"
       @save-subscriber="saveSubscriber"
+      :username-input="selectedUser"
     />
     <div class="subscriber-table-wrapper">
       <table class="subscriber-table">
@@ -15,6 +16,7 @@
             <th>Special offers</th>
             <th>Offer cycle</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +26,14 @@
             <td>{{ user.email }}</td>
             <td>{{ user.specialDeals }}</td>
             <td>{{ user.offerCycle }}</td>
+            <td>
+              <button
+                class="subscriber-table__update-btn"
+                @click="fillUserform(user)"
+              >
+                Update
+              </button>
+            </td>
             <td>
               <button
                 class="subscriber-table__delete-btn"
@@ -58,6 +68,7 @@ export default defineComponent({
     const isSubscribed = ref(false);
     const UserFormContainer = ref();
     const list = ref(getUserList());
+    var selectedUser = ref({})
 
     const showPopup = () => {
       isSubscribed.value = !isSubscribed.value;
@@ -90,6 +101,13 @@ export default defineComponent({
       localStorage.list = JSON.stringify(list.value);
     };
 
+    function fillUserform (tmpUser) {
+      selectedUser.value = { ...tmpUser };
+      UserFormContainer.value.openForm();
+
+      console.log(selectedUser)
+    }
+
     return {
       isSubscribed,
       showPopup,
@@ -99,6 +117,8 @@ export default defineComponent({
       getUserList,
       list,
       deleteUser,
+      fillUserform,
+      selectedUser
     };
   },
 });

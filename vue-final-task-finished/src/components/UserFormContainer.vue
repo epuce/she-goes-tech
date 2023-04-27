@@ -91,6 +91,7 @@ export default defineComponent({
     user: {
       type: Object,
       default: () => ({
+        id: "",
         username: "",
         email: "",
         special_offers: false,
@@ -181,6 +182,7 @@ export default defineComponent({
       offerFrequency,
       isNameValid,
       isEmailValid,
+      id,
     };
   },
 });

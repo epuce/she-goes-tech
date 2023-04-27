@@ -6,48 +6,11 @@
       @save-subscriber="saveSubscriber"
       :user="user"
     />
-    <div class="subscriber-table-wrapper">
-      <table class="subscriber-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Username</th>
-            <th>E-mail</th>
-            <th>Special offers</th>
-            <th>Offer cycle</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in userList" :key="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.special_offers }}</td>
-            <td>{{ user.offer_cycle }}</td>
-            <td>
-              <button
-                class="subscriber-table__update-btn"
-                @click="fillUserForm(user)"
-              >
-                <font-awesome-icon 
-                  :icon="['far', 'pen-to-square']" />
-              </button>
-            </td>
-            <td>
-              <button
-                class="subscriber-table__delete-btn"
-                @click="deleteUser(user.id)"
-              >
-                <font-awesome-icon 
-                  :icon="['fa', 'trash']" />
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <UserTable
+      :user-list="userList"
+      @delete-user="deleteUser"
+      @fill-user-form="fillUserForm"
+    />
     <ThankyouPopup
       v-if="isSubscribed"
       @close-popup="closePopup()"
@@ -59,23 +22,25 @@
 import { defineComponent, ref } from "vue";
 import UserFormContainer from "./UserFormContainer.vue";
 import ThankyouPopup from "./ThankyouPopup.vue";
+import UserTable from "./UserTable.vue";
 
 export default defineComponent({
   components: {
     UserFormContainer,
     ThankyouPopup,
+    UserTable,
   },
 
   setup() {
     const isSubscribed = ref(false);
     const UserFormContainer = ref();
-    const userList = ref([]);
+    var userList = ref([]);
     var user = ref({
-      id: ref(""),
-      username: ref(""),
-      email: ref(""),
+      id: "",
+      username: "",
+      email: "",
       special_offers: ref(false),
-      offer_cycle: ref(""),
+      offer_cycle: "",
     });
 
     function showPopup() {
@@ -102,7 +67,7 @@ export default defineComponent({
       };
 
       if (subscriber.id) {
-        fetch(`http://localhost:8003/api/users/${subscriber.id}`, {
+        fetch(`http://localhost:8002/api/users/${subscriber.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -157,6 +122,7 @@ export default defineComponent({
 
     function fillUserForm(tmpUser) {
       UserFormContainer.value.openForm();
+      console.log(user);
       user.value = {
         id: tmpUser.id,
         username: tmpUser.username,
@@ -171,11 +137,11 @@ export default defineComponent({
       showPopup,
       UserFormContainer,
       closePopup,
-      userList,
       saveSubscriber,
+      user,
+      userList,
       deleteUser,
       fillUserForm,
-      user,
     };
   },
 });
@@ -188,55 +154,5 @@ body {
   display: flex;
   width: 100vw;
   height: 100vh;
-}
-
-.subscriber-table-wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 30px;
-  padding-left: 45px;
-  min-width: fit-content;
-}
-
-.subscriber-table,
-.subscriber-table th,
-.subscriber-table td {
-  border: 1px solid #bcb8b8;
-  border-collapse: collapse;
-}
-
-.subscriber-table-wrapper tr {
-  height: 30px;
-}
-
-.subscriber-table-wrapper th,
-td {
-  padding: 2px 15px 2px 15px;
-  white-space: nowrap;
-}
-
-.subscriber-table thead {
-  background-color: #dfdada;
-  font-family: sans-serif;
-  font-size: small;
-}
-
-.subscriber-table {
-  box-shadow: -1px 3px 26px -7px rgba(0, 0, 0, 0.45);
-}
-
-.subscriber-table__delete-btn {
-  border: none;
-  background: none;
-  font-size: 12px;
-  cursor: pointer;
-}
-.subscriber-table__update-btn {
-  border: none;
-  background: none;
-  font-size: 12px;
-  cursor: pointer;
 }
 </style>

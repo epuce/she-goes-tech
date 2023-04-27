@@ -87,9 +87,15 @@ export default defineComponent({
     SubscribeBtn,
   },
 
+  props: {
+    usernameInput: {
+      type: Object
+    }
+  },
+
   setup(props, { emit }) {
     const isFormOpen = ref(false);
-    const nameInput = ref("");
+    const nameInput = ref(props.usernameInput.name)
     const emailInput = ref("");
     const agreeToSpecialDeals = ref(false);
     const offerFrequency = ref("Hour");
@@ -123,6 +129,10 @@ export default defineComponent({
           specialDeals: agreeToSpecialDeals.value,
           offerCycle: offerFrequency.value,
         };
+
+        if(!agreeToSpecialDeals.value) {
+          subscriber.offerCycle = ''
+        }
         emit("save-subscriber", subscriber);
         emit("show-popup");
 
@@ -138,7 +148,6 @@ export default defineComponent({
     });
 
     return {
-      nameInput,
       emailInput,
       agreeToSpecialDeals,
       saveForm,

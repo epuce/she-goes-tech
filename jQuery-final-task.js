@@ -10,41 +10,49 @@ $(function () {
     var $popupCloseBtn = $('.popup__close-btn')
     var list = []
 
+    
+
     function renderTable() {
-        fetch("http://localhost:8003/api/users/")
+        var list = getUserList();
+        var $userTable = $(".js-user-table");
+
+        list.forEach(function (user, index) {
+            var userInstance = new User(user.username, user.email);
+
+            var $row = $(
+                $(".js-row-template").html()
+            );
+
+            $row
+                .find(".js-index")
+                .text(
+                    index + 1
+                );
+            $row.find(".js-username").text(userInstance.username);
+            $row.find(".js-email").text(userInstance.email);
+
+            $row
+                .find(".js-delete")
+                .data(
+                    "index",
+                    index
+                );
+
+            $userTable.append($row);
+        });
+
+        $(".js-user-table").find(".js-delete").on("click", function (){
+            fetch(`http://localhost:8003/api/users/${userId}`, {
+            method: "DELETE",
+          })
             .then((resp) => resp.json())
-            .then((resp) => {
-                list = resp.data;
-                var $userTable = $(".js-user-table");
-
-                list.forEach(function (user, index) {
-                    var userInstance = new User(user.username, user.email);
-
-                    var $row = $(
-                        $(".js-row-template").html()
-                    );
-
-                    $row
-                        .find(".js-index")
-                        .text(
-                            index + 1
-                        );
-                    $row.find(".js-username").text(userInstance.username);
-                    $row.find(".js-email").text(userInstance.email);
-
-                    $row
-                        .find(".js-delete")
-                        .data(
-                            "index",
-                            index
-                        );
-
-                    $userTable.append($row);
-                });
-
-            })
-
+            .then(() => {
+              list = list.filter((user) => user.id !== userId);
+            });
+    
+        })
     }
+
 
     function openForm() {
         $openFormBtn.toggleClass('open-form-btn--opened')
@@ -75,33 +83,88 @@ $(function () {
 
     }
 
+    function User(name, email) {
+        this.setName = function (newName) {
+            this.name = typeof newName === "string" ? newName : "";
+        };
+
+        this.setEmail = function (newEmail) {
+            this.email = typeof newEmail === "string" ? newEmail : "";
+        };
+
+        this.isValidEmail = function () {
+            return emailRegEx.test(this.email);
+        };
+
+        this.isValidName = function () {
+            return (
+                this.name.length >= 3
+            )
+        }
+        this.isValidUser = function () {
+            return (
+                this.isValidEmail() && this.isValidName()
+            )
+        }
+
+        this.getUser = function () {
+            return {
+                name: this.name,
+                email: this.email,
+            };
+        };
+
+        this.setName(name);
+        this.setEmail(email);
+    }
+
+    function getUserList() {
+        try {
+            fetch("http://localhost:8003/api/users/")
+                .then((resp) => resp.json())
+                .then((resp) => {
+                    list = resp.data;
+                }
+                );
+        } catch {
+            list =
+                [];
+        }
+
+        return list;
+    }
+
 
     function saveForm() {
-        var isFormValid = true
+        // var isFormValid = true
 
-        if ($usernameInput.val().length < 3) {
-            $usernameInput.toggleClass("form-not-valid")
-            isFormValid = false
-            $('.error-message-username').css("display", "flex")
-        }
+        // if ($usernameInput.val().length < 3) {
+        //     $usernameInput.toggleClass("form-not-valid")
+        //     isFormValid = false
+        //     $('.error-message-username').css("display", "flex")
+        // }
 
-        if (!emailRegEx.test($emailInput.val())) {
-            $emailInput.toggleClass("form-not-valid")
-            isFormValid = false
-            $('.error-message-email').css("display", "flex")
-        }
+        // if (!emailRegEx.test($emailInput.val())) {
+        //     $emailInput.toggleClass("form-not-valid")
+        //     isFormValid = false
+        //     $('.error-message-email').css("display", "flex")
+        // }
 
         //TODO checkbox
         //TODO show popup only if form is valid
 
-        var user = {
-            username: $usernameInput.val(),
-            email: $emailInput.val(),
-            special_deals: true,
-            offer_cycle: "Week"
+        var user = new User(
+            $usernameInput.val(),
+            $emailInput.val(),
+        )
+
+        if (user.isValidUser()) {
+            var list = getUserList();
         }
 
-        return user
+        list.push(user.getUser());
+
+        renderTable()
     }
 
     $openFormBtn.on('click', function () {
@@ -119,6 +182,8 @@ $(function () {
         $openFormBtn.toggleClass('open-form-btn--opened')
         $userFormContainer.toggleClass('user-form--opened')
     })
+
+    
 
     renderTable()
 })
