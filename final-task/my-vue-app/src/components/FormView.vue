@@ -15,7 +15,7 @@
 
         <Label>
           City <br />
-          <select  type="text" v-model="user.userCity">
+          <select  v-model="user.userCity">
             <option ></option>
             <option value="Vilnius">Vilnius</option>
             <option value="Riga">Riga</option>

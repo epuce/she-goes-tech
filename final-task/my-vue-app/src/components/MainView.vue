@@ -6,17 +6,20 @@
         @click="
           isOpenForm = true;
           isOpenFormBtn = false;
+          isUserListTable = false;
+          
         "
       />
       <FormView
         v-if="isOpenForm"
         @close-form="
           isOpenForm = false;
-          isOpenFormBtn = true;
+          isOpenFormBtn = false;
+          isUserListTable = true
         "
       />
 
-      <UserListTable />
+      <UserListTable v-if="isUserListTable" :isOpenFormBtn="false"/>
     </div>
 
     <div></div>
@@ -37,12 +40,14 @@ export default defineComponent({
   setup() {
     var isOpenFormBtn = ref(true);
     var isOpenForm = ref(false);
-    var userListTableUpdate = ref(true);
+    var userListTableUpdate = ref(false);
+    var isUserListTable = ref(false)
 
     return {
       isOpenFormBtn,
       isOpenForm,
       userListTableUpdate,
+      isUserListTable
     };
   },
 });
