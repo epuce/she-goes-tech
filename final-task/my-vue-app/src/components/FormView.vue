@@ -1,22 +1,19 @@
 <template>
-
-
-
   <div>
     <div class="form-container">
       <form class="form-wrapper" action="">
         <Label>
           Username <br />
-          <input v-model="userNameText" type="text" />
+          <input v-model="user.userName" type="text" />
         </Label>
         <Label>
           E-mail <br />
-          <input type="email" />
+          <input v-model="user.userEmail" type="email" />
         </Label>
 
         <Label>
           City <br />
-          <input type="text" /> <br />
+          <input type="text" v-model="user.userCity"/> <br />
           <select name="" id="">
             <option value="Vilnius">Vilnius</option>
             <option value="Riga">Riga</option>
@@ -27,40 +24,74 @@
         <br />
 
         <Label class="checkbox-wrapper">
-          <input type="checkbox" />
+          <input type="checkbox" v-model="isChecked"/>
           <p>Check the box to confirm your choices</p>
         </Label>
-        <button type="button" @click="isOpenPopup = true">Submit</button>
+        <button type="button" v-if="isChecked" @click="isOpenPopup = true">Submit</button>
       </form>
     </div>
 
     <MyPopup
-      :text="userNameText"
+      :text="user.userName"
       v-if="isOpenPopup"
       @close-popup="
         isOpenPopup = false;
         onSubmit();
-      " 
+      "
     />
   </div>
 </template>
 <script>
 import { defineComponent, ref } from "vue";
 import MyPopup from "./MyPopup.vue";
+var localStorage = window.localStorage;
 
 export default defineComponent({
-  components: { MyPopup },
-  props: {},
+  components: { 
+    MyPopup 
+  },
+
   setup(props, { emit }) {
     var onSubmit = function () {
+      var newUser = {
+        userName: user.value.userName,
+        userEmail: user.value.userEmail,
+        userCity: user.value.userCity,
+      };
+
+      var userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+      userList.push(newUser);
+      localStorage.setItem("userList", JSON.stringify(userList));
+      userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+      isOpenPopup.value = false;
+      user.value.userName = "";
+      user.value.userEmail = "";
+      user.value.userCity = "";
+
+      userList.push(newUser);
+
       emit("close-form");
     };
+
+    var userList = ref([]);
+    var user = ref({
+      id: null,
+      userName: "",
+      userEmail: "",
+      userCity: "",
+    });
     var isOpenPopup = ref(false);
-    var userNameText = ref('')
+      var isChecked = ref(false);
+
     return {
+      user,
+      userList,
       onSubmit,
       isOpenPopup,
-      userNameText
+      isChecked
+      
     };
   },
 });
@@ -68,6 +99,7 @@ export default defineComponent({
 <style>
 .form-container {
   display: flex;
+
   position: relative;
   top: 100px;
   height: 500px;

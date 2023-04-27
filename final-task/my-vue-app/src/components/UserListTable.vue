@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div>
-      <input type="text" />
-      <input type="text" />
-    </div>
-
     <table class="table-wrapper">
       <thead>
         <tr>
@@ -16,8 +11,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in users" :key="index">
-          <td></td>
+        <tr v-for="(user, index) in userList" :key="index">
+          <td>{{ index + 1 }}</td>
           <td>{{ user.userName }}</td>
           <td>{{ user.userEmail }}</td>
           <td>{{ user.userCity }}</td>
@@ -28,20 +23,22 @@
   </div>
 </template>
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
-  setup() {
-    var users = ref([]);
-    var user = ref({
-      userName: "",
-      userEmail: "",
-      userCity:"",
-      userId: null,
-    });
+  data() {
     return {
-      user,
-      users,
+      userList: JSON.parse(localStorage.getItem("userList")) || [],
     };
+  },
+  methods: {
+    deleteUser(index) {
+      var userList = JSON.parse(localStorage.getItem("userList")) || [];
+      if (Array.isArray(userList)) {
+        userList.splice(index, 1);
+        localStorage.setItem("userList", JSON.stringify(userList));
+        this.userList = JSON.parse(localStorage.getItem("userList")) || [];
+      }
+    },
   },
 });
 </script>
@@ -49,10 +46,12 @@ export default defineComponent({
 .table-wrapper {
   position: relative;
   top: 100px;
-  width: 70%;
+  left: 150px;
+  width: 600px;
   background: #fff;
   border-radius: 20px;
   padding: 20px;
+  margin-top: 50px;
 }
 
 button {

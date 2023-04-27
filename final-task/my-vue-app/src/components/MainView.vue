@@ -1,16 +1,25 @@
 <template>
   <div class="main-container">
     <div>
-      <OpenButton v-if="isOpenFormBtn" @click="isOpenForm = true; isOpenFormBtn=false" />
-      <FormView v-if="isOpenForm" 
-      @close-form="isOpenForm = false"
-      
+      <OpenButton
+        v-if="isOpenFormBtn"
+        @click="
+          isOpenForm = true;
+          isOpenFormBtn = false;
+        "
       />
-    </div>
+      <FormView
+        v-if="isOpenForm"
+        @close-form="
+          isOpenForm = false;
+          isOpenFormBtn = true;
+        "
+      />
 
-    <div>
       <UserListTable />
     </div>
+
+    <div></div>
   </div>
 </template>
 <script>
@@ -25,17 +34,17 @@ export default defineComponent({
     UserListTable,
     OpenButton,
   },
-  setup (){
-    var isOpenFormBtn = ref (true);
-    var isOpenForm = ref (false)
+  setup() {
+    var isOpenFormBtn = ref(true);
+    var isOpenForm = ref(false);
+    var userListTableUpdate = ref(true);
 
     return {
       isOpenFormBtn,
-      isOpenForm
-
-    }
-  }
-
+      isOpenForm,
+      userListTableUpdate,
+    };
+  },
 });
 </script>
 <style>
@@ -44,6 +53,7 @@ export default defineComponent({
   background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
   display: grid;
   min-height: 100vh;
-  grid-template-columns: 50% 50%;
+
+  /* grid-template-columns: 50% 50%; */
 }
 </style>
