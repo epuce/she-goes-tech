@@ -42,3 +42,17 @@
 5. clean and easy to read JavaScript functions (logically structured)
 6. Visual appearance (good background/text contrast, readable content, no overlapping)
 7. Any additional functionality and implementations will be treated as **bonus** 
+
+# How to get the final task into your private github repository
+* Login github.com and on the home screen click `New`
+
+![github new repo btn](./img/github-new-repo-btn.png)
+* Add the repository (folder name) and click `Create repository`
+
+![github repo name](./img/github-repo-name.png)
+* In the terminal navigate to your final task folder
+* Perform the steps starting from `git init`
+
+![git init](./img/git-init.png)
+
+* *NOTE: when this action has been done we can't push to the branch we were working till now*
